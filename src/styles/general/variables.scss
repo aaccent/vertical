@@ -19,14 +19,20 @@
   }
 }
 
-$z-index-bg: 2;
-$z-index-darken: 1;
-$z-index-menu: 3;
+$z-1: 1;
+$z-2: 2;
+$z-3: 3;
+$z-4: 4;
+$z-5: 5;
+
 
 $white: #FFF;
 $black: #2E2E2E;
-$gray: rgba(51, 51, 51, 0.45);
-$orange: #F7A707;
-$gray_1: #F6F6F6;
+$blue: #0E2448;
+$gray: #EEE;  
 
 $transition-duration: 150ms;
+
+$parent-padding-1400: 80px;
+$parent-padding-1200: 50px;
+$parent-padding-mobile: 20px;

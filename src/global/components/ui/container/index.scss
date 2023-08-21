@@ -1,4 +1,16 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/media' as *;
+
+
 @mixin container-x(){
-  padding-right: 80px;
-  padding-left: 80px;
+  padding-right: $parent-padding-mobile;
+  padding-left: $parent-padding-mobile;
+  @media screen and (min-width: $tablet1200){
+    padding-right: $parent-padding-1200;
+    padding-left: $parent-padding-1200;
+  }
+  @media screen and (min-width: $desktop1460){
+    padding-right: $parent-padding-1400;
+    padding-left: $parent-padding-1400;
+  }
 }

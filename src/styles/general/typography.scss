@@ -1,44 +1,39 @@
 @mixin manrope-14(){
-  font-family: "manrope" "sans-serif";
+  font-family: "manrope";
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
-  letter-spacing: 4%;
 }
 
 @mixin manrope-17(){
-  font-family: "manrope" "sans-serif";
+  font-family: "manrope";
   font-weight: 400;
   font-size: 14px;
   line-height: 145%;
 }
 
 @mixin manrope-24(){
-  font-family: "manrope" "sans-serif";
+  font-family: "manrope";
   font-weight: 500;
   font-size: 24px;
   line-height: 130%;
-  letter-spacing: 4%;
 }
 
-@mixin manrope-24(){
-  font-family: "manrope" "sans-serif";
+@mixin manrope-38(){
+  font-family: "manrope";
   font-weight: 500;
-  font-size: 24px;
-  line-height: 130%;
-  letter-spacing: 4%;
+  font-size: 38px;
+  line-height: 115%;
 }
 
 @mixin tenor-61(){
   font-family: "tenor-sans";
   font-size: 61px;
-  letter-spacing: -0.5%;
 }
 @mixin tenor-90(){
   font-family: "tenor-sans";
   font-size: 90px;
   line-height: 110%;
-  letter-spacing: 1%;
 }
 @mixin tenor-248(){
   font-family: "tenor-sans";

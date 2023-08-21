@@ -8,6 +8,7 @@
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: $z-2;
   &__container{
     position: relative;
   }
