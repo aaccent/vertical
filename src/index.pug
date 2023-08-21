@@ -18,14 +18,15 @@ block append main
           p 2
       img(src=require("media/static/icons/arrow/arrow_small.svg")).page-viewer__right
     .lead-section__swiper.swiper: .swiper-wrapper 
-      .swiper-slide.lead-section__slide
-        .lead-section__slide__image
-          img(src=require("media/static/lead_image.webp"))
-        .lead-section__slide__content 
-          .lead-section__slide__text Строим для людей с 2005 года
-          .lead-section__slide__title ИНВЕСТИции В НЕДВИЖИМОСТЬ С ГК ВЕРТИКАЛЬ
-          .lead-section__slide__button.button.button_white Подробнее о компании
-            img(src=require("media/static/icons/arrow/arrow_short.svg"))
+      each i, index in Array(4)
+        .swiper-slide.lead-section__slide
+          .lead-section__slide__image
+            img(src=require("media/static/lead_image.webp"))
+          .lead-section__slide__content 
+            .lead-section__slide__text= `Строим для людей с 200${index} года`
+            .lead-section__slide__title ИНВЕСТИции В НЕДВИЖИМОСТЬ С ГК ВЕРТИКАЛЬ
+            .lead-section__slide__button.button.button_white Подробнее о компании
+              img(src=require("media/static/icons/arrow/arrow_short.svg"))
   include global/components/pageBlocks/aboutCompany/template
   include global/components/pageBlocks/filter/template
   

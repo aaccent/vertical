@@ -29,5 +29,8 @@
   },
   "engines": {
     "node": ">=17"
+  },
+  "dependencies": {
+    "animejs": "^3.2.1"
   }
 }
