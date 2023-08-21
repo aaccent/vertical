@@ -1,3 +1,45 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/mixins' as *;
+@use 'src/styles/general/typography' as *;
+@use "global/components/ui/dropdown";
+@use "components/ui/container" as *;
 
+.header{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  &__container{
+    position: relative;
+  }
+  &__logo{
+    display: none;
+  }
+  &__content{
+    @include container-x();
+    padding-top: 46px;
+    padding-bottom: 46px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__nav{
+    &__list{
+      display: flex;
+      gap: 40px;
+    }
+    &__item{
+      @include manrope-14();
+      color: $white;
+    }
+  }
+  &__phone{
+    display: flex;
+    gap: 32px;
+    &__link{
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      @include manrope-14();
+      color: $white;
+    }
+  }
+}

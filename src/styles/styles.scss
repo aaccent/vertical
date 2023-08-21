@@ -7,3 +7,9 @@
 // Popup
 @use 'features/popup/index';
 
+@use "layout/general/header";
+@use "layout/general/footer";
+
+@use "components/ui/buttons";
+@use "components/ui/container";
+@use "components/ui/dropdown";

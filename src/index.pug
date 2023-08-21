@@ -4,6 +4,8 @@ block append head
   link(href=require('pages/index/index.scss'), rel='stylesheet')
 
 block append main
+  include global/layout/general/header/template
+
   include global/components/pageBlocks/aboutCompany/template
   include global/components/pageBlocks/filter/template
   

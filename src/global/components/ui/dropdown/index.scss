@@ -1,0 +1,15 @@
+@use 'src/styles/general/typography' as *;
+@use 'src/styles/general/variables' as *;
+
+.dropdown{
+  &__content{
+    display: none;
+  }
+  &__title{
+    @include manrope-14();
+    color: $white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
