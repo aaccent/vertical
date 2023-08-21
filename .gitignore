@@ -1,0 +1,13 @@
+# Dist
+dist
+
+# env
+.env
+.idea
+.vscode
+
+# npm
+node_modules
+
+# Tests
+test.*

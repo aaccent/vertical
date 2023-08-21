@@ -1,0 +1,52 @@
+@use 'styles/utils';
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+
+.popup {
+  padding: 15px;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  visibility: hidden;
+  transition: opacity, visibility;
+  transition-timing-function: ease-in-out;
+  transition-duration: 0.3s;
+  opacity: 0;
+  background-color: rgba(30, 30, 30, 0.45);
+
+  &.opened {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &__inner {
+    margin: auto;
+    position: relative;
+    padding: 15px;
+  }
+  .close-btn {
+    z-index: 30;
+    top: -30px;
+    right: 0;
+    position: absolute;
+  }
+  @media screen and (min-width: $tablet1200) {
+    &__inner {
+      margin: auto;
+      position: relative;
+      padding: 60px;
+    }
+    .close-btn {
+      top: -30px;
+      right: -30px;
+    }
+    
+  }
+}

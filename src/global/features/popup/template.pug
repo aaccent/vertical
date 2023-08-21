@@ -1,0 +1,7 @@
+
+mixin popup(name, className)
+    .popup(class=className data-popup=name)&attributes(attributes)
+        - var bodyClass = className ? ` ${ className }__inner` : ''
+        div(class=`popup__inner` + bodyClass)
+            img(src=require("media/static/icons/close.svg") data-action="close-popup").close-btn
+            block

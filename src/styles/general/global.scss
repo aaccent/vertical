@@ -1,0 +1,48 @@
+html {
+  overflow-x: clip;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+.hidden {
+  display: none;
+}
+
+button{
+  font-family: "onest" sans-serif;
+}
+
+body {
+  overflow-x: clip;
+  font-weight: 400;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  font-family: "onest", sans-serif;
+}
+
+html.disable-scroll {
+  overflow: clip;
+
+  body {
+    overflow: clip;
+  }
+}
+
+.swiper,
+.swiper-wrapper,
+.swiper-slide {
+  box-sizing: border-box !important;
+}
+
+// a {
+//   color: #004677;
+// }
+
+@media only screen and (max-width: 750px) {
+  .disable-scroll {
+    body {
+      padding-right: 0;
+    }
+  }
+}
