@@ -31,11 +31,11 @@ const blockDrag = (swiperAnim: any, elementsLength: number, animeEl: any[]) => {
     })
 }
 
-const setupAnimation = (swiper: any, currentIndex: number, swiperAnim: any, animationType = 'appear', pos = null) => {
+const setupAnimation = (swiper: any, currentIndex: number, swiperAnim: any, animationType = 'appear') => {
   const elements = getAnimationElements(swiper, currentIndex, swiperAnim)
   const animeEl = swiperAnim.el.map((el: any) => {
     if (typeof el.animations[animationType] === 'function') {
-      const animation = el.animations[animationType](pos)
+      const animation = el.animations[animationType](elements[el.name].dataset.pos)
       return setRelativeAnimation(elements[el.name], animation)
     } else {
       return setRelativeAnimation(elements[el.name], el.animations[animationType])
@@ -52,4 +52,28 @@ const playAnimation = (animation: any[]) => {
   })
 }
 
-export { playAnimation, blockDrag, setRelativeAnimation, setupAnimation, checkAnimating, getAnimationElements }
+const showAnimation = (swiperAnim: any, callback: any) => {
+  const animeEl = setupAnimation(swiperAnim.swiper, swiperAnim.swiper.activeIndex, swiperAnim, 'disappear')
+  playAnimation(animeEl)
+  Array(swiperAnim.el.length)
+    .fill('')
+    .forEach((_: any, index: number) => {
+      if (animeEl[index] === undefined) return
+      animeEl[index].finished.then(() => {
+        if (checkAnimating(swiperAnim.isAnimating)) return
+        callback()
+      })
+    })
+}
+const resetAnimElements = (_elements: any, swiperAnim: any) => {
+  _elements.slides.forEach((_: any, index: any) => {
+    const elements = Object.values(getAnimationElements(_elements, index, swiperAnim))
+
+    elements.forEach((el: any) => {
+      el.style.opacity = (0).toString()
+      el.dataset.pos = null
+      el.style.transform = `translateY(0px)`
+    })
+  })
+}
+export { playAnimation, blockDrag, setRelativeAnimation, setupAnimation, checkAnimating, getAnimationElements, showAnimation, resetAnimElements }

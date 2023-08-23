@@ -1,5 +1,6 @@
 import Swiper from 'swiper'
 import * as animation from './animation'
+import * as navigation from './nav'
 
 const setRelativeStyle = (target: HTMLElement, percent: number, translate = 'translateX', opacity = 0.7) => {
   target.style.transform = `${translate}(${150 * percent}px)`
@@ -36,6 +37,7 @@ const swiperAnimEvents = (swiperAnim: any) => {
 
     const progressEvent = new CustomEvent('progress', { detail: { progress: percent } })
     swiperAnim.parent.dispatchEvent(progressEvent)
+
     if (percent * 100 > 30) {
       setRelativeStyle(elements.text, percent - 20 / 100)
     } else if (percent * 100 < -30) {
@@ -49,6 +51,12 @@ const swiperAnimEvents = (swiperAnim: any) => {
 
   window.addEventListener('mouseup', (e) => {
     if (animation.checkAnimating(swiperAnim.isAnimating)) return
+
+    const resetPos = () => {
+      Object.values(elements).forEach((x: any) => {
+        x.dataset.pos = ''
+      })
+    }
 
     const diff = e.clientX - swiperAnim.startX
 
@@ -75,8 +83,9 @@ const swiperAnimEvents = (swiperAnim: any) => {
 
     if (percent < 30) {
       animation.playAnimation(
-        animation.setupAnimation(swiperAnim.swiper, swiperAnim.swiper.activeIndex, swiperAnim, 'return', firstPosEl),
+        animation.setupAnimation(swiperAnim.swiper, swiperAnim.swiper.activeIndex, swiperAnim, 'return'),
       )
+      resetPos()
       return
     } else {
       if (
@@ -84,8 +93,10 @@ const swiperAnimEvents = (swiperAnim: any) => {
         (swiperAnim.swiper.activeIndex === swiperAnim.swiper.slides.length - 1 && firstPosEl < 0)
       ) {
         animation.playAnimation(
-          animation.setupAnimation(swiperAnim.swiper, swiperAnim.swiper.activeIndex, swiperAnim, 'return', firstPosEl),
+          animation.setupAnimation(swiperAnim.swiper, swiperAnim.swiper.activeIndex, swiperAnim, 'return'),
         )
+        resetPos()
+
         return
       }
       const animeEl = animation.setupAnimation(
@@ -93,7 +104,6 @@ const swiperAnimEvents = (swiperAnim: any) => {
         swiperAnim.swiper.activeIndex,
         swiperAnim,
         'disappear',
-        firstPosEl,
       )
       animation.playAnimation(animeEl)
 
@@ -107,125 +117,39 @@ const swiperAnimEvents = (swiperAnim: any) => {
           } else if (firstPosEl < 0) {
             swiperAnim.swiper.slideNext(0)
           }
+          resetPos()
         })
       })
     }
   })
-}
-
-function polarToCartesian(centerX: number, centerY: number, radius: number, angleInDegrees: number) {
-  var angleInRadians = ((angleInDegrees - 90) * Math.PI) / 180.0
-
-  return {
-    x: centerX + radius * Math.cos(angleInRadians),
-    y: centerY + radius * Math.sin(angleInRadians),
-  }
-}
-
-function describeArc(x: number, y: number, radius: number, startAngle: number, endAngle: number) {
-  var start = polarToCartesian(x, y, radius, endAngle - 0.0001)
-  var end = polarToCartesian(x, y, radius, startAngle)
-
-  var largeArcFlag = endAngle - startAngle <= 180 ? '0' : '1'
-
-  var d = ['M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y].join(' ')
-
-  return d
-}
-
-const swiperNavEvents = (swiperAnim: any) => {
-  const el = swiperAnim.navEl.el
-  const swiper = swiperAnim.swiper
-
-  const showAnimation = (callback: any) => {
-    const animeEl = animation.setupAnimation(swiper, swiper.activeIndex, swiperAnim, 'disappear')
-    animation.playAnimation(animeEl)
-    Array(swiperAnim.el.length)
-      .fill('')
-      .forEach((_: any, index: number) => {
-        if (animeEl[index] === undefined) return
-        animeEl[index].finished.then(() => {
-          if (animation.checkAnimating(swiperAnim.isAnimating)) return
-          callback()
-        })
-      })
-  }
-
-  const renderArc = (angle: number) => {
-    document.querySelector('#progress')?.setAttribute('d', describeArc(65, 65, 63, 360 - angle, 360))
-  }
-
-  el.querySelector('.page-viewer__left').addEventListener('click', () => {
-    if (swiper.activeIndex === 0) return
-    showAnimation(() => swiper.slidePrev(0))
-  })
-  el.querySelector('.page-viewer__right').addEventListener('click', () => {
-    if (swiper.activeIndex >= swiper.slides.length - 1) return
-    showAnimation(() => swiper.slideNext(0))
-  })
-
-  swiper.on('slideChange', (e: any) => {
-    el.querySelector('.page-viewer__page p').textContent = e.activeIndex + 1
-
-    swiperAnim.nav.currentAngle = swiperAnim.nav.stepAngle * (e.activeIndex + 1)
-    renderArc(swiperAnim.nav.currentAngle)
-  })
-
-  renderArc(swiperAnim.nav.currentAngle)
-
-  swiperAnim.parent.addEventListener('progress', (e: any) => {
-    let progress = e.detail.progress
-    const angle = swiperAnim.nav.currentAngle - swiperAnim.nav.stepAngle * progress
-    if (swiper.activeIndex >= swiper.slides.length - 1 && angle > 360) {
-      return
-    }
-    if (swiper.activeIndex === 0 && angle < swiperAnim.nav.stepAngle) {
-      return
-    }
-    renderArc(angle)
-  })
-
-  window.addEventListener('mouseup', () => {
-    if (swiperAnim.swiper.activeIndex === 0) {
-      renderArc(swiperAnim.nav.stepAngle)
-    }
-  })
-}
-
-const swiperNavInit = (swiperAnim: any) => {
-  const el = swiperAnim.navEl.el
-  const swiper = swiperAnim.swiper
-  el.querySelector('.page-viewer__page p').textContent = swiper.activeIndex + 1
-  el.querySelector('.page-viewer__page span').textContent = swiper.slides.length
 }
 
 const initFancySwiper = (swiperBaseClass: string, options: any) => {
   const swiperAnim = {
     ...options.swiperAnim,
   }
+
   swiperAnim.swiper = new Swiper(`.${swiperBaseClass}__swiper`, {
     ...options.swiper,
     on: {
       init: (e) => {
-        e.slides.forEach((_, index) => {
-          const elements = Object.values(animation.getAnimationElements(e, index, swiperAnim))
-
-          elements.forEach((el: any) => {
-            el.style.opacity = (0).toString()
-            el.style.transform = `translateY(0px)`
-          })
-        })
+        animation.resetAnimElements(e, swiperAnim)
       },
     },
   })
-  ;(swiperAnim.navEl = options.navigation),
-    (swiperAnim.nav = {
-      stepAngle: 360 / swiperAnim.swiper.slides.length,
-      currentAngle: 360 / swiperAnim.swiper.slides.length,
-    })
+
+  swiperAnim.navEl = options.navigation
+
+  swiperAnim.nav = {
+    stepAngle: 360 / swiperAnim.swiper.slides.length,
+    currentAngle: 360 / swiperAnim.swiper.slides.length,
+    angle: 0,
+  }
+
   swiperAnimEvents(swiperAnim)
-  swiperNavEvents(swiperAnim)
-  swiperNavInit(swiperAnim)
+
+  navigation.swiperNavEvents(swiperAnim)
+  navigation.swiperNavInit(swiperAnim)
 }
 
 export default initFancySwiper
