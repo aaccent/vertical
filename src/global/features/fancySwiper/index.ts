@@ -1,4 +1,4 @@
-import Swiper from 'swiper'
+import { Swiper, Autoplay } from 'swiper'
 import * as animation from './animation'
 import * as navigation from './nav'
 
@@ -131,12 +131,19 @@ const initFancySwiper = (swiperBaseClass: string, options: any) => {
 
   swiperAnim.swiper = new Swiper(`.${swiperBaseClass}__swiper`, {
     ...options.swiper,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    modules: [Autoplay],
     on: {
       init: (e) => {
         animation.resetAnimElements(e, swiperAnim)
       },
     },
   })
+
+
 
   swiperAnim.navEl = options.navigation
 

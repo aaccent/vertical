@@ -52,7 +52,7 @@ initFancySwiper('lead-section', {
         name: 'image',
         class: 'lead-section__slide__image',
         animations: {
-          appear: { translateY: [50, 0], opacity: 1, easing: 'easeOutQuad' },
+          appear: { translateY: [50, 0], opacity: 1, easing: 'easeOutQuad', duration: 500},
           disappear: (currentPos: number) => {
             currentPos = Math.abs(currentPos)
 

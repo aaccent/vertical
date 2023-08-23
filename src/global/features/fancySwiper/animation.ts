@@ -12,7 +12,7 @@ const getAnimationElements = (swiper: any, index: number, swiperAnim: any): any 
 
 const setRelativeAnimation = (target: HTMLElement, animeProps: object) => {
   target.style.transform = ''
-  const animation = anime({ targets: target, duration: 250, autoplay: false, easing: 'easeOutQuad', ...animeProps })
+  const animation = anime({ targets: target, duration: 350, autoplay: false, easing: 'easeOutQuad', ...animeProps })
   return animation
 }
 
