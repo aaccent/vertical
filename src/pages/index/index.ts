@@ -1,5 +1,7 @@
 import Swiper from 'swiper'
 import {Navigation, Autoplay} from "swiper/modules"
+import { initOfferSwiper } from 'global/components/pageBlocks/offerSwiper'
+
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation:{nextEl: ".page-viewer__right", prevEl: ".page-viewer__left"},
   autoplay: {
@@ -87,3 +89,5 @@ const circleNavInit = () => {
 
 circleNav()
 circleNavInit()
+
+initOfferSwiper(".offer__swiper")

@@ -30,11 +30,20 @@ block append main
               img(src=require("media/static/icons/arrow/arrow_short.svg"))
   include global/components/pageBlocks/aboutCompany/template
 
-  .offer__swiper
-    .swiper: .swiper-wrapper
-      .swiper-slide.offer__slide
+  .offer
+    .swiper.offer__swiper: .swiper-wrapper
+      each i in Array(3)
+        .swiper-slide.offer__slide
+          .offer__title почувствуйте удобство
+          .offer__text очень любим нашу работу, подходим к ней творчески и делаем её с удовольствием! Вы обязательно это почувствуете, доверив нам обстановку вашего дома
+          .offer__image 
+            img(src=require("media/content/index_slider_1.webp"))
     .offer__pagination 
-      
+      //- .offer__pagination__item 1
+      //- .offer__pagination__progress 
+      //-   .offer__pagination__progress__indicator
+      //-   .offer__pagination__progress__bg
+      //- .offer__pagination__item 2
 
   include global/components/pageBlocks/filter/template
   
