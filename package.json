@@ -20,7 +20,6 @@
     "pug-plugin": "^4.5.0",
     "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
-    "swiper": "^8.4.2",
     "ts-loader": "^9.4.1",
     "typescript": "^4.9.4",
     "webpack": "^5.74.0",
@@ -31,6 +30,7 @@
     "node": ">=17"
   },
   "dependencies": {
-    "animejs": "^3.2.1"
+    "animejs": "^3.2.1",
+    "swiper": "^10.2.0"
   }
 }

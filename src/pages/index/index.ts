@@ -1,8 +1,12 @@
-import Swiper, { Navigation } from 'swiper'
-
+import Swiper from 'swiper'
+import {Navigation, Autoplay} from "swiper/modules"
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation:{nextEl: ".page-viewer__right", prevEl: ".page-viewer__left"},
-  modules: [Navigation]
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false
+  },
+  modules: [Navigation, Autoplay]
 })
 
 let angle = 0
@@ -35,7 +39,10 @@ const renderArc = (angle: number) => {
   document.querySelector('#progress')?.setAttribute('d', describeArc(65, 65, 63, 360 - angle, 360))
 }
 
+
+
 const circleNav = () => {
+  let startX = 0
   renderArc(angle)
 
   leadSwiper.on('slideChange', (e: any) => {
@@ -44,11 +51,10 @@ const circleNav = () => {
     currentAngle = stepAngle * (e.activeIndex + 1)
     renderArc(currentAngle)
   })
-  let startX = 0
-  leadSwiper.on('touchStart', (e) => {
+  leadSwiper.on('touchStart', (e: any) => {
     startX = e.touches.startX
   })
-  leadSwiper.on('progress', (e) => {
+  leadSwiper.on('progress', (e: any) => {
     const diff = e.touches.currentX - startX
     const progress = diff / window.innerWidth
     angle = currentAngle - stepAngle * progress
@@ -58,6 +64,14 @@ const circleNav = () => {
 
     renderArc(angle)
   })
+
+  leadSwiper.on("autoplayTimeLeft", (e: any, _: any, progress: number) => {
+    angle = currentAngle - stepAngle * progress
+    renderArc(angle)
+
+    
+  })
+
   window.addEventListener('mouseup', () => {
     if (leadSwiper.activeIndex === 0 && angle < stepAngle) {
       renderArc(stepAngle)

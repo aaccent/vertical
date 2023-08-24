@@ -28,8 +28,14 @@ block append main
             .lead-section__slide__title ИНВЕСТИции В НЕДВИЖИМОСТЬ С ГК ВЕРТИКАЛЬ
             .lead-section__slide__button.button.button_white Подробнее о компании
               img(src=require("media/static/icons/arrow/arrow_short.svg"))
-  
   include global/components/pageBlocks/aboutCompany/template
+
+  .offer__swiper
+    .swiper: .swiper-wrapper
+      .swiper-slide.offer__slide
+    .offer__pagination 
+      
+
   include global/components/pageBlocks/filter/template
   
 
