@@ -1,7 +1,10 @@
+@use 'src/styles/general/variables' as *;
+
 html {
   overflow-x: clip;
   font-size: 62.5%;
   scroll-behavior: smooth;
+  color: $black;
 }
 
 .hidden {

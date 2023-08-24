@@ -22,7 +22,11 @@
     }
   }
   &_gray{
-
+    color: $black;
+    background-color: $gray;
+    &:hover{
+      background-color: rgba($black, 0.1);
+    }
   }
 
   &_white{

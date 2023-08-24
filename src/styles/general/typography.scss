@@ -1,41 +1,70 @@
-@mixin manrope-14(){
-  font-family: "manrope";
+@mixin manrope-14() {
+  font-family: 'manrope';
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
 }
 
-@mixin manrope-17(){
-  font-family: "manrope";
+@mixin manrope-17() {
+  font-family: 'manrope';
   font-weight: 400;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 145%;
 }
 
-@mixin manrope-24(){
-  font-family: "manrope";
+@mixin manrope-24() {
+  font-family: 'manrope';
   font-weight: 500;
   font-size: 24px;
   line-height: 130%;
 }
 
-@mixin manrope-38(){
-  font-family: "manrope";
+@mixin manrope-38() {
+  font-family: 'manrope';
   font-weight: 500;
   font-size: 38px;
   line-height: 115%;
 }
-
-@mixin tenor-61(){
-  font-family: "tenor-sans";
+@mixin tenor-48() {
+  font-family: 'tenor-sans';
+  font-size: 48px;
+}
+@mixin tenor-61() {
+  font-family: 'tenor-sans';
   font-size: 61px;
 }
-@mixin tenor-90(){
-  font-family: "tenor-sans";
+@mixin tenor-90() {
+  font-family: 'tenor-sans';
   font-size: 90px;
   line-height: 110%;
 }
-@mixin tenor-248(){
-  font-family: "tenor-sans";
+@mixin tenor-248() {
+  font-family: 'tenor-sans';
   font-size: 248px;
+}
+
+.title {
+  @include manrope-17();
+  display: flex;
+  gap: 20px;
+  height: min-content;
+  *{
+    align-self: center;
+  }
+  &_white {
+    &::before {
+      content: '';
+      width: 50px;
+      height: 50px;
+      background-image: url('media/static/icons/vertical/vertical_small_white_logo.svg');
+      display: block;
+    }
+  }
+  &::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    background-image: url('media/static/icons/vertical/vertical_small_gray_logo.svg');
+    display: block;
+  }
 }

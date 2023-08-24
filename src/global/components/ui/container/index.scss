@@ -14,3 +14,20 @@
     padding-left: $parent-padding-1400;
   }
 }
+
+.container{
+  &_left{
+    display: grid;
+    grid-template-columns: auto auto;
+    &__side{
+      margin-right: 35px;
+    }
+  }
+  @media screen and (min-width: $desktop1460) {
+    &_left{
+      &__side{
+        margin-right: 130px;
+      }
+    }
+  }
+}
