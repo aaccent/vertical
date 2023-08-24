@@ -4,6 +4,7 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/global/components/pageBlocks/aboutCompany';
 @use 'src/global/components/pageBlocks/offerSwiper';
+@use 'src/global/components/pageBlocks/filter';
 @use 'components/ui/container' as *;
 @use '~swiper/scss';
 
