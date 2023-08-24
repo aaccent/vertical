@@ -39,12 +39,21 @@ block append main
           .offer__image 
             img(src=require("media/content/index_slider_1.webp"))
     .offer__pagination 
-      //- .offer__pagination__item 1
-      //- .offer__pagination__progress 
-      //-   .offer__pagination__progress__indicator
-      //-   .offer__pagination__progress__bg
-      //- .offer__pagination__item 2
 
+  .our-projects 
+    .title.title_white 
+      span чем мы гордимся
+    .our-projects__body
+      .our-projects__title НАШИ ПРОЕКТЫ
+      .our-projects__content 
+        .our-projects__text-block
+          .our-projects__text Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей
+          .our-projects__button.button.button_white Подробнее о компании
+            img(src=require("media/static/icons/arrow/arrow_short.svg"))
+        .our-projects__middle-image 
+          img(src=require("media/static/our_projects_1.webp"))
+        .our-projects__right 
+          img(src=require("media/static/our_projects_2.webp"))
   include global/components/pageBlocks/filter/template
   
 

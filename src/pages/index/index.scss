@@ -2,8 +2,9 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'src/styles/utils/media' as *;
 @use 'src/styles/general/typography' as *;
-@use "src/global/components/pageBlocks/aboutCompany";
-@use "src/global/components/pageBlocks/offerSwiper";
+@use 'src/global/components/pageBlocks/aboutCompany';
+@use 'src/global/components/pageBlocks/offerSwiper';
+@use 'components/ui/container' as *;
 @use '~swiper/scss';
 
 .lead-section {
@@ -19,7 +20,6 @@
     transform: translateX(-50%);
     z-index: $z-2;
     pointer-events: none;
-
   }
   &__page {
     position: absolute;
@@ -31,7 +31,6 @@
     gap: 30px;
     right: $parent-padding-1200;
     margin-bottom: 60px;
-
   }
   &__slide {
     position: relative;
@@ -124,11 +123,107 @@
       color: rgba($color: $white, $alpha: 0.6);
     }
   }
-  &__right{
+  &__right {
     transform: rotate(180deg);
   }
   @media screen and (min-width: $desktop1460) {
     width: 130px;
     height: 130px;
+  }
+}
+
+.offer {
+  margin-top: 130px;
+}
+
+.our-projects {
+  background-color: $blue;
+  padding-top: 80px;
+  @include container-x();
+  &__body {
+    position: relative;
+    margin-top: 30px;
+  }
+  &__title {
+    // @include tenor-248();
+    font-size: 148px;
+    font-family: "tenor-sans";
+    text-align: center;
+    color: $white;
+  }
+  &__middle-image {
+    height: 720px;
+    width: 610px;
+    overflow: hidden;
+    border-top-left-radius: 330px;
+    border-top-right-radius: 330px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__text-block {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 240px;
+  }
+  &__text{
+    color: $white;
+    @include manrope-17();
+  }
+  &__right {
+    width: 468px;
+    height: 534px;
+    flex-shrink: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__button{
+    margin-top: 25px;
+  }
+  &__content {
+    position: relative;
+    margin-top: -70px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  @media screen and (min-width: $desktop1650) {
+    &__content{
+      margin-top: -140px;
+    }
+    &__text-block {
+      left : 80px;
+    }
+    &__title{
+      @include tenor-248();
+    }
+    &__text-block{
+      width: 468px;
+    }
+    &__text{
+      @include manrope-24();
+    }
+    &__right {
+      right: 80px;
+      width: 468px;
+      height: 534px;
+    }
+    &__middle-image {
+      height: 819px;
+      width: 709px;
+      border-top-left-radius: 330px;
+      border-top-right-radius: 330px;
+    }
   }
 }

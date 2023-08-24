@@ -50,7 +50,7 @@ const initOfferSwiper = (className: string) => {
     const pages = document.querySelectorAll('.offer__pagination__item')
 
     pages.forEach((page: any, index: number) => {
-      page.style.opacity = '0.6'
+      page.style.opacity = ''
 
       if (index !== e.activeIndex) return
       page.style.opacity = '1'
