@@ -2,6 +2,7 @@ import Swiper from 'swiper'
 import {Navigation, Autoplay} from "swiper/modules"
 import { initOfferSwiper } from 'global/components/pageBlocks/offerSwiper'
 import "components/ui/quickFilter"
+import "components/pageBlocks/filter"
 
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation:{nextEl: ".page-viewer__right", prevEl: ".page-viewer__left"},

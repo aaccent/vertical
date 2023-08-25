@@ -1,33 +1,39 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/media' as *;
 
-
-@mixin container-x(){
+@mixin container-x() {
   padding-right: $parent-padding-mobile;
   padding-left: $parent-padding-mobile;
-  @media screen and (min-width: $tablet1200){
+  @media screen and (min-width: $tablet1200) {
     padding-right: $parent-padding-1200;
     padding-left: $parent-padding-1200;
   }
-  @media screen and (min-width: $desktop1460){
+  @media screen and (min-width: $desktop1460) {
     padding-right: $parent-padding-1400;
     padding-left: $parent-padding-1400;
   }
 }
 
-.container{
-  &_left{
+.container {
+  &_left {
     display: grid;
     grid-template-columns: auto auto;
-    &__side{
+    &__side {
       margin-right: 35px;
     }
   }
   @media screen and (min-width: $desktop1460) {
-    &_left{
-      &__side{
+    &_left {
+      &__side {
         margin-right: 130px;
       }
     }
   }
+}
+
+@mixin basic-card() {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 10px;
+  background-color: $white;
 }

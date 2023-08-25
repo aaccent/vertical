@@ -3,4 +3,5 @@ mixin dropdown(name="")
     .dropdown__title= name
       img(src=require("media/static/icons/triangle/triangle_white_down.svg"))
     .dropdown__content 
-      block
+      .dropdown__content__wrapper
+        block
