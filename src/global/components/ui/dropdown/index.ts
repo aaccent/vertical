@@ -27,7 +27,7 @@ dropdownList.forEach((dropdown) => {
     const toScreenEnd = document.documentElement.clientHeight - dropdownBottom
 
     if (toScreenEnd < dropdownHeight) {
-      dropdownContent.style.top = `-${dropdownHeight + dropdown?.getBoundingClientRect().height}px`
+      dropdownContent.style.top = `-${dropdownHeight + 20}px`
     }
 
     dropdownContent.style.height = `${dropdownHeight}px`

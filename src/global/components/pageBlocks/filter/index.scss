@@ -2,9 +2,39 @@
 @use "components/ui/dropdown";
 @use "components/ui/quickFilter";
 @use "components/ui/container";
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/general/typography' as *;
 
 .filter{
   display: flex;
-  gap: 20px;
-  align-items: center;
+  justify-content: space-between;
+  &__dropdown{
+    padding: 16px 20px;
+    border-radius: 50px;
+    border: 1px solid $white;
+  }
+  &__left{
+    align-items: center;
+    display: flex;
+    gap: 20px;
+  }
+  &__right{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    span{
+      @include manrope-14();
+      color: $white;
+      transition: opacity 250ms ease;
+      opacity: 0.5;
+      cursor: pointer;
+      text-transform: uppercase;
+      &:hover{
+        opacity: 1;
+      }
+    }
+    .active{
+      opacity: 1;
+    }
+  }
 }

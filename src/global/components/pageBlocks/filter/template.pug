@@ -1,11 +1,22 @@
 include global/components/ui/dropdown/template
 
 .filter
-  include global/components/ui/quickFilter/template
-  +dropdown("Тип недвижимости")
-    ul.dropdown__list
-      li.dropdown__list__item ТРК
-      li.dropdown__list__item Жилищные комплексы
-      li.dropdown__list__item Промышленные объекты
-      li.dropdown__list__item Склады
-  +dropdown("Стадия постройки")
+  .filter__left
+    include global/components/ui/quickFilter/template
+    +dropdown("Тип недвижимости")().filter__dropdown
+      ul.dropdown__list
+        li.dropdown__list__item ТРК
+        li.dropdown__list__item Жилищные комплексы
+        li.dropdown__list__item Промышленные объекты
+        li.dropdown__list__item Склады
+    +dropdown("Стадия постройки").filter__dropdown
+      ul.dropdown__list
+        li.dropdown__list__item ТРК
+        li.dropdown__list__item Жилищные комплексы
+        li.dropdown__list__item Промышленные объекты
+        li.dropdown__list__item Склады
+  .filter__right
+    span.active плиткой
+    .button-switch 
+      .button-switch__mark
+    span на карте
