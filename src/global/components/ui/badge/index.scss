@@ -1,0 +1,48 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/general/typography' as *;
+
+.badge {
+  text-transform: uppercase;
+  font-family: 'manrope';
+  font-weight: 500;
+  font-size: 12px;
+  color: $black;
+  background-color: $white;
+  border-radius: 50px;
+  padding: 0 20px;
+  height: 28px  ;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: max-content;
+  &_dark {
+    color: $white;
+    background-color: $black;
+  }
+}
+
+.price-badge {
+  color: $black;
+  @include manrope-17-m();
+  line-height: 90%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  &::before{
+    content: "";
+    background-image: url("media/static/icons/coins/coins_white.svg");
+    display: flex;
+    width: 36px;
+    height: 36px;
+    background-size: 18px;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid $black;
+    border-radius: 50%;
+  }
+  &_dark {
+    &::before{
+      background-image: url("media/static/icons/coins/coins_black.svg");
+    }
+  }
+}
