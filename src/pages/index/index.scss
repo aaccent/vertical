@@ -5,6 +5,7 @@
 @use 'src/global/components/pageBlocks/aboutCompany';
 @use 'src/global/components/pageBlocks/offerSwiper';
 @use 'src/global/components/pageBlocks/filter';
+@use 'src/global/components/pageBlocks/map';
 @use 'components/ui/container' as *;
 @use '~swiper/scss';
 
@@ -227,4 +228,8 @@
       border-top-right-radius: 330px;
     }
   }
+}
+
+.building-filter{
+  margin-top: 200px;
 }

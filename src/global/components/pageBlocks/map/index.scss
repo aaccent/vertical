@@ -1,0 +1,109 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'components/ui/container' as *;
+@use 'src/styles/general/typography' as *;
+
+
+.map{
+  position: relative;
+  &__content{
+    position: absolute;
+    height: calc(100% - 80px);
+    width: 450px;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &__view{
+    width: 100%;
+    height: 700px;
+    background-color: black
+  }
+}
+
+.project-list{
+  @include basic-card();
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__title{
+    @include manrope-14();
+    padding-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    color: rgba($color: $black, $alpha: 0.5);
+    text-transform: uppercase;
+  }
+  &__content{
+    margin-top: 26px;
+    margin-left: 12px;
+    margin-right: 12px;
+    padding-left: 18px;
+    padding-right: 18px;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  &__item{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    &__content{
+      position: relative;
+      &::before{
+        position: absolute;
+        content: "";
+        bottom: -15px;
+        width: 100%;
+        height: 1px;
+        background-color: rgba($color: $black, $alpha: 0.2);
+      }
+    }
+    &__image{
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      overflow: hidden;
+      img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    &__title{
+      @include manrope-17-m();
+      text-transform: uppercase
+    }
+    &__text{
+      @include manrope-17-m();
+      margin-top: 8px;
+      color: rgba($color: $black, $alpha: 0.6);
+      text-transform: uppercase
+    }
+  }
+  &__item:last-child{
+    .project-list__item__content{
+      &::before{
+        display: none;
+      }
+    }
+  }
+  &__bottom{
+    margin-top: 26px;
+    margin-bottom: 26px;
+    display: flex;
+    justify-content: center;
+    @include manrope-17-m();
+    color: $blue;
+    text-transform: uppercase;
+    a{
+      display: flex;
+      gap: 10px;
+    }
+  }
+}

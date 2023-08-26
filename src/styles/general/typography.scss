@@ -13,7 +13,12 @@
   font-size: 17px;
   line-height: 145%;
 }
-
+@mixin manrope-17-m() {
+  font-family: 'manrope';
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 145%;
+}
 @mixin manrope-24() {
   font-family: 'manrope';
   font-weight: 500;

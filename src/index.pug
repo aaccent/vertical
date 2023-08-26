@@ -54,8 +54,14 @@ block append main
           img(src=require("media/static/our_projects_1.webp"))
         .our-projects__right 
           img(src=require("media/static/our_projects_2.webp"))
-    include global/components/pageBlocks/filter/template
-  
+    .building-filter: include global/components/pageBlocks/filter/template
+    .map 
+      .map__content 
+        //- include global/components/pageBlocks/map/projectList
+        include global/components/pageBlocks/map/projectCard
+        //- include global/components/pageBlocks/map/infrastructureList
+      .map__view 
+    
 
 block append scripts
   script(src=require('pages/index/index.ts'))
