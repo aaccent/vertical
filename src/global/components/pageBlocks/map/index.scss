@@ -10,7 +10,7 @@
   padding-bottom: 26px;
   display: flex;
   justify-content: center;
-  @include manrope-17-m();
+  @include manrope-14();
   color: $blue;
   text-transform: uppercase;
   border-top: 1px solid rgba($color: $black, $alpha: 0.1);
@@ -171,5 +171,80 @@
   }
   &__bottom {
     @include bottom-card();
+  }
+}
+
+.infrastructure-list {
+  &__content {
+    gap: 0;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .infrastructure-list__item_active {
+    background-color: #f7f7f7;
+    padding-bottom: 12px;
+    .infrastructure-list__item__content {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &_disable-border {
+    .infrastructure-list__item__content {
+      &::before {
+        display: none;
+      }
+    }
+  }
+  &__item {
+    transition: background-color 250ms ease;
+
+    &:hover {
+      background-color: #f7f7f7;
+      .infrastructure-list__item__content {
+        &::before {
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+    }
+    @include manrope-17-m();
+    padding: 12px 30px;
+    cursor: pointer;
+    &__content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      &::before {
+        opacity: 1;
+        transition: opacity 250ms ease;
+        bottom: -12px;
+      }
+    }
+  }
+  &__bottom {
+    opacity: 0.3;
+    color: $black;
+    .white {
+      display: block;
+    }
+    .blue {
+      display: none;
+    }
+    &_active {
+      opacity: 1;
+      color: $blue;
+      .white {
+        display: none;
+      }
+      .blue {
+        display: block;
+      }
+    }
   }
 }
