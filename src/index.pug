@@ -5,29 +5,29 @@ block append head
 
 block append main
   include global/layout/general/header/template
-  .lead-section 
+  .lead-section
     .lead-section__title ВЕРТИКАЛЬ
-    .lead-section__page 
-      img(src=require("media/static/icons/arrow/arrow_small.svg")).page-viewer__left
+    .lead-section__page
+      img.page-viewer__left(src=require('media/static/icons/arrow/arrow_small.svg'))
       .page-viewer
         svg.page-viewer__progress
           <path id="progress" fill="none" stroke="#fff" stroke-width="2" />
-        svg.page-viewer__progress-bg 
+        svg.page-viewer__progress-bg
           <circle cx="65" cy="65" r="63" fill="none" stroke-width="2" stroke="rgba(255, 255, 255, 0.2)"/>
-        .page-viewer__page 
+        .page-viewer__page
           span 6
           p 2
-      img(src=require("media/static/icons/arrow/arrow_small.svg")).page-viewer__right
-    .lead-section__swiper.swiper: .swiper-wrapper 
+      img.page-viewer__right(src=require('media/static/icons/arrow/arrow_small.svg'))
+    .lead-section__swiper.swiper: .swiper-wrapper
       each i, index in Array(4)
         .swiper-slide.lead-section__slide
           .lead-section__slide__image
-            img(src=require("media/static/lead_image.webp"))
-          .lead-section__slide__content 
+            img(src=require('media/static/lead_image.webp'))
+          .lead-section__slide__content
             .lead-section__slide__text= `Строим для людей с 200${index} года`
             .lead-section__slide__title ИНВЕСТИции В НЕДВИЖИМОСТЬ С ГК ВЕРТИКАЛЬ
             .lead-section__slide__button.button.button_white Подробнее о компании
-              img(src=require("media/static/icons/arrow/arrow_short.svg"))
+              img(src=require('media/static/icons/arrow/arrow_short.svg'))
   include global/components/pageBlocks/aboutCompany/template
 
   .offer
@@ -36,32 +36,57 @@ block append main
         .swiper-slide.offer__slide
           .offer__title почувствуйте удобство
           .offer__text очень любим нашу работу, подходим к ней творчески и делаем её с удовольствием! Вы обязательно это почувствуете, доверив нам обстановку вашего дома
-          .offer__image 
-            img(src=require("media/content/index_slider_1.webp"))
-    .offer__pagination 
+          .offer__image
+            img(src=require('media/content/index_slider_1.webp'))
+    .offer__pagination
 
-  .our-projects 
-    .title.title_white 
+  .our-projects
+    .title.title_white
       span чем мы гордимся
     .our-projects__body
       .our-projects__title НАШИ ПРОЕКТЫ
-      .our-projects__content 
+      .our-projects__content
         .our-projects__text-block
           .our-projects__text Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей
           .our-projects__button.button.button_white Подробнее о компании
-            img(src=require("media/static/icons/arrow/arrow_short.svg"))
-        .our-projects__middle-image 
-          img(src=require("media/static/our_projects_1.webp"))
-        .our-projects__right 
-          img(src=require("media/static/our_projects_2.webp"))
+            img(src=require('media/static/icons/arrow/arrow_short.svg'))
+        .our-projects__middle-image
+          img(src=require('media/static/our_projects_1.webp'))
+        .our-projects__right
+          img(src=require('media/static/our_projects_2.webp'))
     .building-filter: include global/components/pageBlocks/filter/template
-    .map 
-      .map__content 
-        //- include global/components/pageBlocks/map/projectList
+    .map
+      .map__content
+        include global/components/pageBlocks/map/projectList
         //- include global/components/pageBlocks/map/projectCard
-        include global/components/pageBlocks/map/infrastructureList
-      .map__view 
-    
+        //- include global/components/pageBlocks/map/infrastructureList
+      .map__view
 
+    .partners
+      .container_left
+        .title.title_white.container_left__side
+          span партнеры
+        .div
+          .partners__title Наши партнеры имеют многолетний опыт работы и авторитет на рынке недвижимости
+      .partners__row 
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/donstroy.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/sberbank.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/fsk.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/gazprombank.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/megafon.svg"))
+      .partners__row 
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/akbars.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/vtb.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/sdek.svg"))
+        .partners__row__image
+          img(src = require("media/static/icons/partners_logo/mir.svg"))
 block append scripts
   script(src=require('pages/index/index.ts'))

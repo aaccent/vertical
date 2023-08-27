@@ -141,7 +141,11 @@
 .our-projects {
   background-color: $blue;
   padding-top: 80px;
+  padding-bottom: 170px;
   @include container-x();
+  .map {
+    margin-top: 35px;
+  }
   &__body {
     position: relative;
     margin-top: 30px;
@@ -149,7 +153,7 @@
   &__title {
     // @include tenor-248();
     font-size: 148px;
-    font-family: "tenor-sans";
+    font-family: 'tenor-sans';
     text-align: center;
     color: $white;
   }
@@ -172,7 +176,7 @@
     transform: translateY(-50%);
     width: 240px;
   }
-  &__text{
+  &__text {
     color: $white;
     @include manrope-17();
   }
@@ -190,7 +194,7 @@
       object-fit: cover;
     }
   }
-  &__button{
+  &__button {
     margin-top: 25px;
   }
   &__content {
@@ -201,19 +205,19 @@
     width: 100%;
   }
   @media screen and (min-width: $desktop1650) {
-    &__content{
+    &__content {
       margin-top: -140px;
     }
     &__text-block {
-      left : 80px;
+      left: 80px;
     }
-    &__title{
+    &__title {
       @include tenor-248();
     }
-    &__text-block{
+    &__text-block {
       width: 468px;
     }
-    &__text{
+    &__text {
       @include manrope-24();
     }
     &__right {
@@ -230,6 +234,57 @@
   }
 }
 
-.building-filter{
+.building-filter {
   margin-top: 200px;
+}
+
+.partners {
+  margin-top: 200px;
+  &__title {
+    @include tenor-61;
+    color: $white;
+  }
+  .container_left {
+    margin-bottom: 134px;
+  }
+  &__row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+
+    border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
+    &:last-child {
+      border-bottom: none;
+    }
+    &__image {
+      position: relative;
+      padding-bottom: 25px;
+      padding-top: 25px;
+      width: 100%;
+      &::before {
+        content: '';
+        display: block;
+        height: 34px;
+        position: absolute;
+        width: 1px;
+        background-color: rgba($color: $white, $alpha: 0.2);
+        right: 25%;
+        bottom: 0;
+      }
+      img {
+        width: 186px;
+        height: 45px;
+        object-fit: contain;
+      }
+      &:nth-child(5) {
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+  &__row:nth-child(odd) {
+    .partners__row__image::before {
+      top: 0;
+    }
+  }
 }

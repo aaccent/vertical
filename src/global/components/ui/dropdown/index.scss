@@ -3,40 +3,39 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'components/ui/container' as *;
 
-.dropdown{
+.dropdown {
   position: relative;
-  &__content{
+  z-index: $z-2;
+  &__content {
     visibility: hidden;
     height: 0;
     position: absolute;
     transition: height 250ms ease;
     overflow: hidden;
-    top: 20px;
+    top: calc(100% + 20px);
     left: 0;
-    &__wrapper{
+    &__wrapper {
       width: 310px;
     }
   }
-  &__list{
+  &__list {
     @include reset-list();
     @include basic-card();
-    &__item{
+    &__item {
       cursor: pointer;
       padding: 15px 25px;
       @include manrope-14();
-      border-bottom: 1px solid #EEEEEE;
-      
+      border-bottom: 1px solid #eeeeee;
     }
-    &__item:first-child{
+    &__item:first-child {
       padding-top: 0;
     }
-    &__item:last-child{
+    &__item:last-child {
       padding-bottom: 0;
       border-bottom: none;
-
     }
   }
-  &__title{
+  &__title {
     @include manrope-14();
     color: $white;
     display: flex;
@@ -44,8 +43,8 @@
     gap: 8px;
     cursor: pointer;
   }
-  &_shown{
-    .dropdown__content{
+  &_shown {
+    .dropdown__content {
       visibility: visible;
     }
   }
