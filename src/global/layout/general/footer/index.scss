@@ -56,3 +56,60 @@
     }
   }
 }
+
+.footer{
+  background-color: $blue;
+  @include container-x();   
+  &__title{
+    @include tenor-248();
+    color: $white;
+    padding-top: 40px;
+    font-size: 14vmax;
+  }
+  &__content{
+    display: flex;
+    margin-top: 38px;
+    padding-top: 60px;
+    justify-content: space-between;
+    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
+    &__middle{
+      color: $white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      p{
+        @include manrope-38();
+        font-size: 52px;
+        margin-bottom: 25px;
+      }
+      span{
+        @include manrope-14();
+        opacity: 0.7;
+      }
+      span + span{
+        margin-top: 12px;
+      }
+    }
+  }
+  &__link{
+    @include reset-list();
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: $white;
+    @include manrope-14();
+    opacity: 0.7;
+  }
+  &__bottom{
+    @include manrope-14();
+    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
+
+    margin-top: 60px;
+    display: flex;
+    color: $white;
+    opacity: 0.6;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+}
