@@ -1,0 +1,14 @@
+.contact-form
+  .contact-form__content
+    .contact-form__title Оставьте заявку на консультацию
+    form(action='')
+      .contact-form__list
+        input.contact-form__input(name='customer_name' placeholder="Ваше имя*") 
+        input.contact-form__input(name='customer_phome' placeholder="телефон*") 
+        input.contact-form__input(name='customer_mail' placeholder="почта") 
+        input.contact-form__input(name='customer_comment' placeholder="комментарий") 
+      .contact-form__bottom
+        button.button.button_white(type='submit') отправить
+        .contact-form__bottom__text
+          p Нажимая кнопку «Отправить», вы соглашаетесь с
+          a(href) политикой конфиденциальности

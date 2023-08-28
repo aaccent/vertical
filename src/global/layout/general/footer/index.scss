@@ -1,3 +1,58 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/mixins' as *;
+@use 'components/ui/container' as *;
+@use 'src/styles/general/typography' as *;
 
+.contact-form {
+  @include container-x();
+  display: flex;
+  padding-top: 100px;
+  padding-bottom: 204px;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%), url('media/static/footer_bg.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  &__content {
+    margin-left: auto;
+    width: 549px;
+  }
+  &__title {
+    @include tenor-61();
+    color: $white;
+  }
+  &__list {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
+  }
+  &__input {
+    width: 100%;
+    height: 30px;
+    color: $white;
+    text-transform: uppercase;
+    @include manrope-17-m();
+    border-bottom: 1px solid $white;
+    &::placeholder {
+      color: $white;
+      text-transform: uppercase;
+      @include manrope-17-m();
+    }
+  }
+  &__bottom{
+    display: flex;
+    align-items: center;
+    margin-top: 40px;
+    gap: 20px;
+    .button{
+      height: min-content
+    }
+    &__text{
+      @include manrope-17();
+      color: $white;
+      opacity: 0.8;
+      a{
+        text-decoration: underline;
+      }
+    }
+  }
+}
