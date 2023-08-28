@@ -289,3 +289,53 @@
     }
   }
 }
+
+.seo-block{
+  margin-top: 130px;
+  &__title{
+    @include manrope-24();
+  }
+  &__text{
+    @include manrope-17();
+    transition: height 250ms ease;
+    height: min-content;
+    margin-top: 20px;
+    color: #6D6D6D;
+    overflow: hidden;
+    p{
+      position: absolute;
+      visibility: hidden;
+    }
+    p:first-child{
+      position: static;
+      visibility: visible;
+    }
+    p+p{
+      padding-top: 20px;
+    }
+  }
+  &__expand{
+    margin-top: 24px;
+    @include manrope-17-m();
+    cursor: pointer;
+    color: $blue;
+    display: flex;
+    text-transform: uppercase;
+    gap: 6px;
+    align-items: center;
+    img{
+      transition: transform 250ms ease;
+    }
+  }
+  &_open{
+    p{
+      position: static;
+      visibility: visible;
+    }
+    .seo-block__expand{
+      img{
+        transform: rotate(-180deg);
+      }
+    }
+  }
+}
