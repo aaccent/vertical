@@ -1,0 +1,51 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+
+.news-card {
+  display: flex;
+  margin-top: 35px;
+  padding-bottom: 35px;
+  border-bottom: 1px solid #d9d9d9;
+  gap: 42px;
+  &__image {
+    width: 368px;
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  }
+  &__content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    &__text {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+  &__text {
+    @include manrope-17();
+    color: #6d6d6d;
+    line-height: 125%;
+  }
+  &__title {
+    text-transform: uppercase;
+    @include manrope-24();
+  }
+  &__date {
+    display: flex;
+    gap: 12px;
+    p {
+      font-family: 'vetrino';
+      font-size: 52px;
+      line-height: 90%;
+    }
+    span{
+      @include manrope-14();
+    }
+  }
+}

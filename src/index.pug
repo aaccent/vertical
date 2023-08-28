@@ -68,25 +68,63 @@ block append main
           span партнеры
         .div
           .partners__title Наши партнеры имеют многолетний опыт работы и авторитет на рынке недвижимости
-      .partners__row 
+      .partners__row
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/donstroy.svg"))
+          img(src=require('media/static/icons/partners_logo/donstroy.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/sberbank.svg"))
+          img(src=require('media/static/icons/partners_logo/sberbank.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/fsk.svg"))
+          img(src=require('media/static/icons/partners_logo/fsk.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/gazprombank.svg"))
+          img(src=require('media/static/icons/partners_logo/gazprombank.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/megafon.svg"))
-      .partners__row 
+          img(src=require('media/static/icons/partners_logo/megafon.svg'))
+      .partners__row
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/akbars.svg"))
+          img(src=require('media/static/icons/partners_logo/akbars.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/vtb.svg"))
+          img(src=require('media/static/icons/partners_logo/vtb.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/sdek.svg"))
+          img(src=require('media/static/icons/partners_logo/sdek.svg'))
         .partners__row__image
-          img(src = require("media/static/icons/partners_logo/mir.svg"))
+          img(src=require('media/static/icons/partners_logo/mir.svg'))
+
+  .blog
+    .container_left
+      .title.title_gray.container_left__side
+        span блог
+      div
+        .blog__header
+          .blog__title дельные статьи и новости
+          .blog__button.button.button_gray смотреть все
+            img(src=require('media/static/icons/arrow/arrow_short.svg'))
+        .blog__content
+          .news-card
+            .news-card__image
+              img(src=require('media/content/content_2.webp'))
+            .news-card__content
+              .news-card__content__text
+                .news-card__title Использование материнского капитала для квартиры
+                .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+              .news-card__date
+                p 17
+                span июня
+          .news-card
+            .news-card__image
+              img(src=require('media/content/content_2.webp'))
+            .news-card__content
+              .news-card__content__text
+                .news-card__title Использование материнского капитала для квартиры
+                .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+              .news-card__date
+                p 15
+                span июня
+        .seo-block
+          .seo-block__title SEO TEXT
+          .seo-block__text
+            p Одной из важнейших характеристик деятельности ГК является социальная ответственность. Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей, а расположенные на первых этажах коммерческие объекты — предоставить место для работы сотрудникам десятков организаций. Главная цель компании — сделать возможность купить квартиру от застройщика доступной максимальному количеству людей. Сорбция, несмотря на внешние воздействия, поступательно возникает лесной
+            p Одной из важнейших характеристик деятельности ГК является социальная ответственность. Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей, а расположенные на первых этажах коммерческие объекты — предоставить место для работы сотрудникам десятков организаций. Главная цель компании — сделать возможность купить квартиру от застройщика доступной максимальному количеству людей. Сорбция, несмотря на внешние воздействия, поступательно возникает лесной
+          .seo-block__expand развернуть
+            img(src=require('media/static/icons/arrow/arrow_small_blue_down.svg'))
 block append scripts
   script(src=require('pages/index/index.ts'))

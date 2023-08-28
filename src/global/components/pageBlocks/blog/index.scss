@@ -1,0 +1,31 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+@use 'components/ui/container' as *;
+@use 'src/global/components/pageBlocks/newsCard';
+
+.blog{
+  @include container-x();
+  padding-top: 125px;
+  &__button{
+    height: max-content;
+    flex-shrink: 0;
+  }
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #D9D9D9;
+    gap: 60px;
+  }
+  &__title{
+    text-transform: uppercase;
+    @include tenor-61();
+  }
+  @media screen and (min-width: $desktop1460) {
+    &__title{
+      @include tenor-90();
+    }
+  }
+}
