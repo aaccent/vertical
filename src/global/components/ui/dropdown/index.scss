@@ -42,10 +42,18 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    img{
+      transition: transform 250ms ease;
+    }
   }
   &_shown {
     .dropdown__content {
       visibility: visible;
+    }
+    .dropdown__title{
+      img{
+        transform: rotate(-180deg);
+      }
     }
   }
 }

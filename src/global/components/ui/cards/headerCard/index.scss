@@ -1,1 +1,22 @@
-@use "components/ui/container";
+@use "components/ui/container" as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/general/typography' as *;
+@use 'src/styles/general/variables' as *;
+
+
+.header-card{
+  @include basic-card();
+  @include reset-list();
+  &__view-more{
+    color: $blue;
+  }
+  &__item{
+    padding: 15px 25px;
+    border-bottom: 1px solid #EEEEEE;
+    @include manrope-14();
+    text-transform: uppercase;
+    &:last-child{
+      border-bottom: none;
+    }
+  }
+}

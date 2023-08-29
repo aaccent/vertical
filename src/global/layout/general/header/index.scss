@@ -3,6 +3,7 @@
 @use 'src/styles/general/typography' as *;
 @use "global/components/ui/dropdown";
 @use "components/ui/container" as *;
+@use "components/ui/cards/headerCard" ;
 
 .header{
   position: absolute;
@@ -21,7 +22,7 @@
     top: 0;
   }
   &_scrolled{
-    overflow: hidden;
+    // overflow: hidden;
     position: fixed;
     .header__content{
       padding-top: 20px;
