@@ -36,7 +36,17 @@
       background-color: $gray;
     }
   }
-
+  &_circle{
+    width: 194px;
+    height: 194px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #D9D9D9;
+    @include manrope-14();
+    color: $white;
+  }
   &_dark{
 
   }
@@ -68,6 +78,7 @@
     background-color: $white;
     border-radius: 50%;
   }
+
 }
 
 .button-close{

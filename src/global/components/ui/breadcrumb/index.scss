@@ -10,10 +10,15 @@
   color: $white;
   &__item{
     @include manrope-14();
+    opacity: 0.5;
+    text-transform: uppercase;
     display: flex;
     align-items: center;
     position: relative;
     margin-right: 2rem;
+    &_active{
+      opacity: 1;
+    }
     &::after{
       content: ".";
       position: absolute;

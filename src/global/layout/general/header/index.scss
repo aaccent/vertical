@@ -24,7 +24,6 @@
   .header__bg{
     width: 100%;
     height: 100%;
-    background-color: $blue;
     display: block;
     position: absolute;
     visibility: hidden;
@@ -34,6 +33,7 @@
   &_scrolled{
     // overflow: hidden;
     position: fixed;
+    z-index: $z-4;
     border: none;
     .header__content{
       padding-top: 20px;

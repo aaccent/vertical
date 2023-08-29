@@ -5,8 +5,8 @@
 
 .dropdown {
   position: relative;
-  z-index: $z-2;
   &__content {
+    z-index: $z-3;
     visibility: hidden;
     height: 0;
     position: absolute;
