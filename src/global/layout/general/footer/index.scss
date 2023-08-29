@@ -2,6 +2,7 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'components/ui/container' as *;
 @use 'src/styles/general/typography' as *;
+@use 'src/styles/utils/media' as *;
 
 .contact-form {
   @include container-x();
@@ -111,5 +112,47 @@
     justify-content: space-between;
     padding-top: 30px;
     padding-bottom: 30px;
+  }
+}
+.request-accept{
+  .close-btn{
+    right: 20px;top: 20px;
+  }
+  &__inner{
+    width: 100%;
+    background-image: url("media/static/request_popup_bg.webp");
+    background-size: cover;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 170px;
+    padding-bottom: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title{
+    @include tenor-61();  
+    text-align: center;
+    color: $white;
+    width: 656px;
+  }
+  &__text{
+    margin-top: 12px;
+    @include manrope-17();
+    color: $white;
+    width: 382px;
+    text-align: center;
+  }
+  .button{
+    margin-top: 30px;
+    padding-left: 86px;
+    padding-right: 86px;
+  }
+  @media screen and (min-width: $tablet1200) {
+    &__inner{
+    width: 1008px;
+    background-position: 0 -270px;
+
+    }
   }
 }

@@ -8,7 +8,7 @@
         input.contact-form__input(name='customer_mail', placeholder='почта') 
         input.contact-form__input(name='customer_comment', placeholder='комментарий') 
       .contact-form__bottom
-        button.button.button_white(type='submit') отправить
+        .button.button_white( data-popup='request-accept', data-action='popup') отправить
         .contact-form__bottom__text
           p Нажимая кнопку «Отправить», вы соглашаетесь с
           a(href) политикой конфиденциальности
@@ -16,7 +16,7 @@ footer.footer
   .footer__title ВЕРТИКАЛЬ
   .footer__content
     img.footer__logo(src=require('media/static/icons/vertical/vertical_logo_column.svg'))
-    .footer__content__middle 
+    .footer__content__middle
       p 8 (800) 580-98-59
       span Ростов-на-Дону, проспект Сиверса, 1
       span Пн-Пт, 09:00-18:00
@@ -25,7 +25,13 @@ footer.footer
       li.footer__link__item О компании
       li.footer__link__item Блог
       li.footer__link__item Контакты
-  .footer__bottom 
+  .footer__bottom
     p © OOO «ВЕРТИКАЛЬ», 2023
     p Политика конфиденциальности
     p Сайт разработан: Акцент на результат
+include global/features/popup/template
++popup('request-accept', "request-accept")
+  .button-close.close-btn(data-action="close-popup")
+  .request-accept__title Заявка успешно отправлена!
+  .request-accept__text Мы получили ваш запрос, менеджер свяжется с вами в течение 2-х рабочих дней
+  .button.button_white отлично
