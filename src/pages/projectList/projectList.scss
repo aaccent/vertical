@@ -1,0 +1,13 @@
+@use 'src/global/components/pageBlocks/filter';
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+@use 'components/ui/container' as *;
+@use 'components/ui/breadcrumb';
+
+.project{
+  padding-top: 128px;
+  background-color: $blue;
+  @include container-x();
+}

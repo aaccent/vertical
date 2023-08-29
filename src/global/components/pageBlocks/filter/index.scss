@@ -6,8 +6,10 @@
 @use 'src/styles/general/typography' as *;
 
 .filter{
-  display: flex;
-  justify-content: space-between;
+  &__content{
+    display: flex;
+    justify-content: space-between;
+  }
   &__dropdown{
     padding: 16px 20px;
     border-radius: 50px;

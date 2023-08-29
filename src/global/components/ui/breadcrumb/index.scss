@@ -1,0 +1,31 @@
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/general/typography' as *;
+@use 'src/styles/general/variables' as *;
+
+
+.breadcrumb{
+  display: flex;
+  align-items: center;
+  @include reset-list();
+  color: $white;
+  &__item{
+    @include manrope-14();
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-right: 2rem;
+    &::after{
+      content: ".";
+      position: absolute;
+      display: block;
+      right: -1rem;
+      // top: 50%;
+      transform: translate(50%, -25%);
+    }
+  }
+}
+.breadcrumb__item:last-child{
+    &::after{
+      display: none;
+    }
+}

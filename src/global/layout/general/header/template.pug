@@ -1,17 +1,18 @@
-header.header
-  .header__container
-    .header__content
-      .header__nav__list
-        include global/components/ui/dropdown/template
-        +dropdown("Наши проекты")
-          include global/components/ui/cards/headerCard/template
-        +dropdown("О компании")
-          include global/components/ui/cards/headerCard/template
-        .header__nav__item Контакты
-      .header__phone 
-        .header__phone__link 
-          img(src=require("media/static/icons/phone.svg"))
-          span 8 800 580-98-59
-        .header__phone__button.button.button_transparent заказать звонок
-    img(src=require("media/static/icons/vertical/vertical_logo.svg")).header__logo
-    .header__bg
+mixin header()
+  header.header&attributes(attributes)
+    .header__container
+      .header__content
+        .header__nav__list
+          include global/components/ui/dropdown/template
+          +dropdown("Наши проекты")
+            include global/components/ui/cards/headerCard/template
+          +dropdown("О компании")
+            include global/components/ui/cards/headerCard/template
+          .header__nav__item Контакты
+        .header__phone 
+          .header__phone__link 
+            img(src=require("media/static/icons/phone.svg"))
+            span 8 800 580-98-59
+          .header__phone__button.button.button_transparent заказать звонок
+      img(src=require("media/static/icons/vertical/vertical_logo.svg")).header__logo
+      .header__bg

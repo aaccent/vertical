@@ -5,6 +5,7 @@ block append head
 
 block append main
   include global/layout/general/header/template
+  +header()
   .lead-section
     .lead-section__title ВЕРТИКАЛЬ
     .lead-section__page
@@ -54,7 +55,29 @@ block append main
           img(src=require('media/static/our_projects_1.webp'))
         .our-projects__right
           img(src=require('media/static/our_projects_2.webp'))
-    .building-filter: include global/components/pageBlocks/filter/template
+    include global/components/pageBlocks/filter/template
+    .filter.building-filter
+      .filter__content
+        .filter__left
+          include global/components/ui/quickFilter/template
+          +dropdown("Тип недвижимости")().filter__dropdown
+            ul.dropdown__list
+              li.dropdown__list__item ТРК
+              li.dropdown__list__item Жилищные комплексы
+              li.dropdown__list__item Промышленные объекты
+              li.dropdown__list__item Склады
+          +dropdown("Стадия постройки").filter__dropdown
+            ul.dropdown__list
+              li.dropdown__list__item ТРК
+              li.dropdown__list__item Жилищные комплексы
+              li.dropdown__list__item Промышленные объекты
+              li.dropdown__list__item Склады
+        .filter__right
+          span.active плиткой
+          .button-switch 
+            .button-switch__mark
+          span на карте
+
     .map
       .map__content
         include global/components/pageBlocks/map/projectList
