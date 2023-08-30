@@ -176,10 +176,10 @@
       left: 0;
       width: 710px;
     }
-    &__title{
+    &__title {
       font-size: 248px;
     }
-    &__content{
+    &__content {
       margin-top: -134px;
     }
     &__left {
@@ -267,7 +267,7 @@
     margin-top: 10px;
     text-transform: uppercase;
   }
-  &__content{
+  &__content {
     margin-top: -80px;
     display: grid;
     align-items: center;
@@ -275,32 +275,32 @@
     gap: 10px;
     height: 536px;
   }
-  &__status{
+  &__status {
     height: 240px;
     position: relative;
   }
-  &__image{
+  &__image {
     position: absolute;
     top: 0;
     height: 100%;
     width: 100%;
-    img{
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
-  &__progress{
+  &__progress {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    p{
+    p {
       @include manrope-38();
       text-align: center;
     }
-    span{
-      font-family: "manrope";
+    span {
+      font-family: 'manrope';
       font-size: 12px;
       font-weight: 500;
       line-height: 120%;
@@ -310,12 +310,12 @@
       width: max-content;
       display: block;
     }
-    &-indicator{
+    &-indicator {
       position: absolute;
       top: 0;
       width: 100%;
       height: 100%;
-      &-bg{
+      &-bg {
         position: absolute;
         top: 0;
         width: 100%;
@@ -324,10 +324,10 @@
       }
     }
   }
-  &__gallery{
+  &__gallery {
     position: relative;
     height: 100%;
-    &__content{
+    &__content {
       position: relative;
       z-index: $z-2;
       padding: 30px;
@@ -335,7 +335,7 @@
       display: flex;
       flex-direction: column;
     }
-    &__view{
+    &__view {
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -345,14 +345,14 @@
       background-color: $white;
       margin-left: auto;
     }
-    &__title{
+    &__title {
       margin-top: auto;
       text-align: center;
       color: $white;
       text-transform: uppercase;
       @include tenor-61();
     }
-    &__text{
+    &__text {
       text-align: center;
       margin-top: 10px;
       text-transform: uppercase;
@@ -360,37 +360,85 @@
       @include manrope-17-m();
     }
   }
-  &__month-list{
+  &__month-list {
     @include reset-list();
-    &__item{
+    &__item {
       display: flex;
       justify-content: space-between;
       @include manrope-14();
       padding-bottom: 16px;
-      border-bottom: 1px solid #D9D9D9;
+      border-bottom: 1px solid #d9d9d9;
       padding-top: 16px;
       text-transform: uppercase;
-      &:first-child{
+      &:first-child {
         padding-top: 0;
       }
-      &:last-child{
+      &:last-child {
         border-bottom: none;
         padding-bottom: 0;
       }
     }
-    &_more{
+    &_more {
       color: $blue;
     }
   }
   @media screen and (min-width: $desktop1650) {
-    &__title{
+    &__title {
       font-size: 248px;
     }
-    &__content{
+    &__content {
       gap: 80px;
     }
-    &__gallery__title{
+    &__gallery__title {
       @include tenor-90();
+    }
+  }
+}
+
+.docs {
+  margin-top: 166px;
+  &__list {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+    @include reset-list();
+  }
+  &__item {
+    padding: 20px;
+    background-color: #f7f7f7;
+    height: 267px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 27px;
+      height: 27px;
+      display: block;
+      background-image: url('media/static/icons/triangle.svg');
+    }
+    &__title {
+      @include manrope-17();
+      padding-right: 7px;
+    }
+    &__bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+    }
+    span {
+      opacity: 0.6;
+      @include manrope-14();
+    }
+  }
+  @media screen and (min-width: $desktop1650) {
+    &__list {
+
+      grid-template-columns: repeat(5, 1fr);
     }
   }
 }

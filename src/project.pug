@@ -17,59 +17,59 @@ block append main
         .project-header__actions
           .button.button_white сайт проекта
             img(src=require('media/static/icons/arrow/arrow_short.svg'))
-          .project-header__actions__item 
-            img(src = require("media/static/icons/location.svg"))
+          .project-header__actions__item
+            img(src=require('media/static/icons/location.svg'))
             span смотреть на карте
         ul.project-header__list
           li.project-header_address.project-header__list__item краснодар, мкр. Северный, ул. Волкова, 39
           li.project-header_date.project-header__list__item дата сдачи объекта, сентябрь 2023 год
           li.project-header_type.project-header__list__item Жилищный комплекс
           li.project-header_.project-header__list__item.price-badge От 4 600 000 ₽
-    .project-header__image 
-      img(src = require('media/content/content_4.webp'))
-    
-  .idea 
+    .project-header__image
+      img(src=require('media/content/content_4.webp'))
+
+  .idea
     .title.title_gray.idea__subtitle о проекте
     .idea__title ИДЕЯ ПРОЕКТА
-    .idea__content 
-      .idea__left 
-        img(src = require("media/static/project_1.webp"))
+    .idea__content
+      .idea__left
+        img(src=require('media/static/project_1.webp'))
       .idea__middle
-        img(src = require("media/static/project_2.webp"))
-      .idea__right 
-        ul.idea__list 
-          li.idea__list__item 
+        img(src=require('media/static/project_2.webp'))
+      .idea__right
+        ul.idea__list
+          li.idea__list__item
             span Стандарт качества
             p Комфорт
-          li.idea__list__item 
+          li.idea__list__item
             span Высота домов
             p 17 этажей
-          li.idea__list__item 
+          li.idea__list__item
             span Количество домов
             p 5 домов
-          li.idea__list__item 
+          li.idea__list__item
             span Количество квартир
             p 852 квартиры
-          li.idea__list__item 
+          li.idea__list__item
             span Площадь квартир
             p 21.59 – 96.76 м²
-          li.idea__list__item 
+          li.idea__list__item
             span Стоимость квартир
             p 2,5 МЛН - 4,5 МЛН ₽
-          li.idea__list__item 
+          li.idea__list__item
             span Доходность жилья
             p 9% годовых
     .container_left.quote
-      img(src = require("media/static/icons/quote.svg")).idea__quote
+      img.idea__quote(src=require('media/static/icons/quote.svg'))
       div
         .quote__title Вдохновляться закатами из окна, дышать чистым воздухом и не терять время на дорогу — это ваша жизнь в ЖК Волкова
   .gallery
     .gallery__title.title.title_white галерея
     .gallery__swiper.swiper: .swiper-wrapper
       each i in Array(5)
-        .swiper-slide.gallery__slide 
-          img(src = require("media/content/content_9.webp"))
-          
+        .swiper-slide.gallery__slide
+          img(src=require('media/content/content_9.webp'))
+
     .gallery__page-viewer.page-viewer
       img.page-viewer__left(src=require('media/static/icons/arrow/arrow_small.svg'))
       .page-viewer__content
@@ -81,7 +81,7 @@ block append main
           span 6
           p 2
       img.page-viewer__right(src=require('media/static/icons/arrow/arrow_small.svg'))
-  .location 
+  .location
     .container_left
       .title.title_white
         span локация
@@ -134,35 +134,48 @@ block append main
         .building-summary__progress
           p 68%
           span ход строительства
-      .building-summary__gallery 
+      .building-summary__gallery
         .building-summary__gallery__content
-          .building-summary__gallery__view 
-            img(src = require("media/static/icons/eye.svg"))
+          .building-summary__gallery__view
+            img(src=require('media/static/icons/eye.svg'))
           .building-summary__gallery__title ДЕКАБРЬ
-          .building-summary__gallery__text 1 квартал 2023 / 12 фото 
-        .building-summary__image 
-          img(src = require("media/static/builders.webp"))
+          .building-summary__gallery__text 1 квартал 2023 / 12 фото
+        .building-summary__image
+          img(src=require('media/static/builders.webp'))
       ul.building-summary__month-list
         li.building-summary__month-list__item
           span Ноябрь, 2023
-          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+          img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item
           span октябрь, 2023
-          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+          img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item
           span сентябрь, 2023
-          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+          img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item
           span август, 2023
-          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+          img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item
           span июль, 2023
-          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+          img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item
           span июль, 2023
-          img(src = require("media/static/icons/arrow/arrow_short.svg"))  
+          img(src=require('media/static/icons/arrow/arrow_short.svg')) 
         li.building-summary__month-list__item.building-summary__month-list_more
           span показать ещё
-          img(src = require("media/static/icons/plus/plus_blue.svg"))    
+          img(src=require('media/static/icons/plus/plus_blue.svg')) 
+
+    .docs.container_left
+      .title.title_gray
+        span документы
+      div
+        ul.docs__list
+          each i in Array(8)
+            li.docs__item
+              .docs__item__title Градостроительный план земельного участка
+              .docs__item__bottom
+                span PDF / 15 Мб
+                .docs__item__download-button
+                  img(src=require('media/static/icons/download.svg')) 
 block append scripts
   script(src=require('pages/project/project.ts'))
