@@ -122,5 +122,47 @@ block append main
           .offer__image
             img(src=require('media/content/content_10.webp'))
     .offer__pagination
+  .building-summary
+    .title.title_gray.building-summary__subtitle ход строительства
+    .building-summary__title ОТЧЁТ СТРОЙКИ
+    .building-summary__content
+      .building-summary__status
+        svg.building-summary__progress-indicator
+          <path id="progress" fill="none" stroke="#2E2E2E" stroke-width="2" />
+        svg.building-summary__progress-indicator-bg
+          <circle cx="120" cy="120" r="118" fill="none" stroke-width="2" stroke="#2E2E2E"/>
+        .building-summary__progress
+          p 68%
+          span ход строительства
+      .building-summary__gallery 
+        .building-summary__gallery__content
+          .building-summary__gallery__view 
+            img(src = require("media/static/icons/eye.svg"))
+          .building-summary__gallery__title ДЕКАБРЬ
+          .building-summary__gallery__text 1 квартал 2023 / 12 фото 
+        .building-summary__image 
+          img(src = require("media/static/builders.webp"))
+      ul.building-summary__month-list
+        li.building-summary__month-list__item
+          span Ноябрь, 2023
+          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+        li.building-summary__month-list__item
+          span октябрь, 2023
+          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+        li.building-summary__month-list__item
+          span сентябрь, 2023
+          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+        li.building-summary__month-list__item
+          span август, 2023
+          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+        li.building-summary__month-list__item
+          span июль, 2023
+          img(src = require("media/static/icons/arrow/arrow_short.svg"))
+        li.building-summary__month-list__item
+          span июль, 2023
+          img(src = require("media/static/icons/arrow/arrow_short.svg"))  
+        li.building-summary__month-list__item.building-summary__month-list_more
+          span показать ещё
+          img(src = require("media/static/icons/plus/plus_blue.svg"))    
 block append scripts
   script(src=require('pages/project/project.ts'))
