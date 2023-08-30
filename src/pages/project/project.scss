@@ -6,6 +6,10 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'src/styles/utils/media' as *;
 @use 'components/ui/pageViewer' as *;
+@use 'components/pageBlocks/map' as *;
+@use 'components/pageBlocks/numbers' as *;
+@use 'src/global/components/pageBlocks/offerSwiper';
+
 @use '~swiper/scss';
 
 .project-header {
@@ -220,6 +224,26 @@
   @media screen and (min-width: $desktop1460) {
     &__title{
       left: 80px;
+    }
+  }
+}
+
+.location{
+  @include container-x();
+  background-color: $blue;
+  padding-top: 110px;
+  padding-bottom: 160px;
+  .map{
+    margin-top: 80px;
+  }
+  &__title{
+    @include tenor-61();
+    color: $white;
+    text-transform: uppercase;
+  }
+  @media screen and (min-width: $desktop1460) {
+    &__title{
+      @include tenor-90();
     }
   }
 }

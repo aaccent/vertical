@@ -81,6 +81,46 @@ block append main
           span 6
           p 2
       img.page-viewer__right(src=require('media/static/icons/arrow/arrow_small.svg'))
-  
+  .location 
+    .container_left
+      .title.title_white
+        span локация
+      .div
+        .location__title удобная и развитая инфраструктура
+    .map
+      .map__content
+        include global/components/pageBlocks/map/infrastructureList
+      .map__view
+    .benefits.benefits_white
+      .benefits__item
+        .benefits__number
+          p 2,5
+          span тыс. м2
+        .benefits__text общая площадь благоустройства комплекса
+
+      .benefits__border
+
+      .benefits__item
+        .benefits__number
+          p 5
+          span домов
+        .benefits__text уже сдано в эксплуатацию
+
+      .benefits__border
+
+      .benefits__item
+        .benefits__number
+          p 79
+          span тыс. м2
+        .benefits__text общая площадь жилого комплекса
+  .offer
+    .swiper.offer__swiper: .swiper-wrapper
+      each i in Array(4)
+        .swiper-slide.offer__slide
+          .offer__title почувствуйте удобство
+          .offer__text очень любим нашу работу, подходим к ней творчески и делаем её с удовольствием! Вы обязательно это почувствуете, доверив нам обстановку вашего дома
+          .offer__image
+            img(src=require('media/content/content_10.webp'))
+    .offer__pagination
 block append scripts
   script(src=require('pages/project/project.ts'))

@@ -3,6 +3,7 @@
 @use 'src/styles/utils/media' as *;
 @use 'src/styles/general/typography' as *;
 @use 'components/ui/container' as *;
+@use 'components/pageBlocks/numbers' as *;
 
 .about-company {
   @include container-x();
