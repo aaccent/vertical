@@ -27,5 +27,42 @@ block append main
           li.project-header_.project-header__list__item.price-badge От 4 600 000 ₽
     .project-header__image 
       img(src = require('media/content/content_4.webp'))
+    
+  .idea 
+    .title.title_gray.idea__subtitle о проекте
+    .idea__title ИДЕЯ ПРОЕКТА
+    .idea__content 
+      .idea__left 
+        img(src = require("media/static/project_1.webp"))
+      .idea__middle
+        img(src = require("media/static/project_2.webp"))
+      .idea__right 
+        ul.idea__list 
+          li.idea__list__item 
+            span Стандарт качества
+            p Комфорт
+          li.idea__list__item 
+            span Высота домов
+            p 17 этажей
+          li.idea__list__item 
+            span Количество домов
+            p 5 домов
+          li.idea__list__item 
+            span Количество квартир
+            p 852 квартиры
+          li.idea__list__item 
+            span Площадь квартир
+            p 21.59 – 96.76 м²
+          li.idea__list__item 
+            span Стоимость квартир
+            p 2,5 МЛН - 4,5 МЛН ₽
+          li.idea__list__item 
+            span Доходность жилья
+            p 9% годовых
+    .container_left.quote
+      img(src = require("media/static/icons/quote.svg")).idea__quote
+      div
+        .quote__title Вдохновляться закатами из окна, дышать чистым воздухом и не терять время на дорогу — это ваша жизнь в ЖК Волкова
+
 block append scripts
   script(src=require('pages/project/project.ts'))

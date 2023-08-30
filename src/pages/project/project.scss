@@ -4,6 +4,7 @@
 @use 'components/ui/container' as *;
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
 
 .project-header {
   height: 810px;
@@ -98,5 +99,88 @@
         border-right: none;
       }
     }
+  }
+}
+
+.idea {
+  @include container-x();
+  padding-bottom: 160px;
+  &__subtitle {
+    margin-top: 96px;
+  }
+  &__title {
+    @include tenor-248();
+    margin-top: 14px;
+    text-align: center;
+  }
+  &__content {
+    position: relative;
+    margin-top: -134px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &__left,
+  &__right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &__left {
+    width: 408px;
+    height: 504px;
+    left: 0;
+    z-index: $z-2;
+  }
+  &__right {
+    right: 0;
+  }
+  &__list {
+    @include reset-list();
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      @include manrope-14();
+      padding-top: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #d9d9d9;
+      text-transform: uppercase;
+      gap: 45px;
+      span {
+        opacity: 0.6;
+      }
+    }
+  }
+  &__middle {
+    height: 820px;
+    width: 560px;
+    border-top-left-radius: 330px;
+    border-top-right-radius: 330px;
+    position: relative;
+    left: -100px;
+    overflow: hidden;
+  }
+  @media screen and (min-width: $desktop1650) {
+    &__middle {
+      left: 0;
+      width: 710px;
+    }
+    &__left {
+      width: 468px;
+      height: 534px;
+      left: 120px;
+      z-index: $z-2;
+    }
+  }
+}
+
+.quote{
+  margin-top: 160px;
+  &__title{
+    @include tenor-61();
   }
 }
