@@ -13,9 +13,7 @@
   z-index: $z-3;
   &_border{
     border-bottom: 1px solid rgba($color: $white, $alpha: 0.15);
-    .header__container{
-      background-color: $blue;
-    }
+
     .header__logo{
       visibility: visible;
       opacity: 1;
@@ -38,6 +36,7 @@
     .header__content{
       padding-top: 20px;
       padding-bottom: 20px;
+      background-color: $blue;
     }
     .header__bg{
       visibility: visible;

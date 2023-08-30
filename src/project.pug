@@ -4,7 +4,28 @@ block append head
   link(href=require('pages/project/project.scss'), rel='stylesheet')
 
 block append main
-  
-
+  include global/layout/general/header/template
+  +header.header_border
+  .project-header
+    .project-header__content
+      ul.breadcrumb
+        li.breadcrumb__item главная
+        li.breadcrumb__item проекты
+        li.breadcrumb__item.breadcrumb__item_active жк волково
+      .project-header__bottom
+        .project-header__title жк волково
+        .project-header__actions
+          .button.button_white сайт проекта
+            img(src=require('media/static/icons/arrow/arrow_short.svg'))
+          .project-header__actions__item 
+            img(src = require("media/static/icons/location.svg"))
+            span смотреть на карте
+        ul.project-header__list
+          li.project-header_address.project-header__list__item краснодар, мкр. Северный, ул. Волкова, 39
+          li.project-header_date.project-header__list__item дата сдачи объекта, сентябрь 2023 год
+          li.project-header_type.project-header__list__item Жилищный комплекс
+          li.project-header_.project-header__list__item.price-badge От 4 600 000 ₽
+    .project-header__image 
+      img(src = require('media/content/content_4.webp'))
 block append scripts
   script(src=require('pages/project/project.ts'))
