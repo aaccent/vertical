@@ -1,36 +1,38 @@
-.about-company
-  .container_left
-    .title.title_gray.container_left__side
-      span О компании
-    .about-company__content
-      .about-company__title Специализируемся на инвестировании, строительстве и реализации жилой и коммерческой недвижимости
-      .about-company__card
-        .about-company__image
-          img(src=require('media/static/about_company.webp')) 
-        .about-company__text-block
-          .about-company__text Группа основана в 2005 году. В качестве сектора жилищного строительства в группе выделен строительный сектор, который представлен компанией «ДСК» («Донская строительная компания»). Группа «ДСК» сегодня объединяет современные разнопрофильные компании строительного комплекса в Московской, Волгоградской, Ростовской областях, Краснодарском крае. «Вертикаль» реализует направления строительства жилых зданий и продажи квартир новостройки способны обеспечить жильем сотни семей
-          .about-company__button.button.button_gray о компании
-            img(src=require('media/static/icons/arrow/arrow_short.svg'))
+mixin about-company()
+  .about-company
+    .container_left
+      .title.title_gray.container_left__side
+        span О компании
+      .about-company__content
+        .about-company__title Специализируемся на инвестировании, строительстве и реализации жилой и коммерческой недвижимости
+        .about-company__card
+          .about-company__image
+            img(src=require('media/static/about_company.webp')) 
+          .about-company__text-block
+            .about-company__text Группа основана в 2005 году. В качестве сектора жилищного строительства в группе выделен строительный сектор, который представлен компанией «ДСК» («Донская строительная компания»). Группа «ДСК» сегодня объединяет современные разнопрофильные компании строительного комплекса в Московской, Волгоградской, Ростовской областях, Краснодарском крае. «Вертикаль» реализует направления строительства жилых зданий и продажи квартир новостройки способны обеспечить жильем сотни семей
+            
+            .about-company__button
+              block
 
-  .benefits
-    .benefits__item
-      .benefits__number
-        p 20
-        span лет
-      .benefits__text Успешной работы нашей компании
+    .benefits
+      .benefits__item
+        .benefits__number
+          p 20
+          span лет
+        .benefits__text Успешной работы нашей компании
 
-    .benefits__border
+      .benefits__border
 
-    .benefits__item
-      .benefits__number
-        p 150
-        span тыс. м2
-      .benefits__text общий объем недвижимости под нашим управлением
+      .benefits__item
+        .benefits__number
+          p 150
+          span тыс. м2
+        .benefits__text общий объем недвижимости под нашим управлением
 
-    .benefits__border
+      .benefits__border
 
-    .benefits__item
-      .benefits__number
-        p 8
-        span %
-      .benefits__text Средняя доходность наших объектов
+      .benefits__item
+        .benefits__number
+          p 8
+          span %
+        .benefits__text Средняя доходность наших объектов

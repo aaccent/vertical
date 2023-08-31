@@ -17,6 +17,27 @@ block append main
         .arrow-button.arrow-button_down.arrow-button_gray
     .about-header__image
       img(src=require('media/static/about_company_lead.webp'))
-
+  include global/components/pageBlocks/aboutCompany/template
+  +about-company()
+    .button.button_gray строительство жилых зданий
+    .button.button_gray продажа квартир
+  .company-worth 
+    .company-worth__content 
+      .company-worth__title ценности нашей компании
+      .company-worth__list
+        .company-worth__item 
+          .company-worth__item__title Миссия компании
+          img(src = require("media/static/icons/company_worth/circles.svg")).company-worth__item__image 
+          .company-worth__item__text Мы улучшаем качество жизни. Создаем пространство для комфорта детей и взрослых.
+        .company-worth__item 
+          .company-worth__item__title клиентский сервис
+          img(src = require("media/static/icons/company_worth/triangles.svg")).company-worth__item__image 
+          .company-worth__item__text В нашей компании работают люди, которые ценят комфорт и высокий сервис обслуживания. Мы заботимся о том, чтобы вам было легко с нами на каждом этапе сотрудничества.
+        .company-worth__item 
+          .company-worth__item__title креативный подход
+          img(src = require("media/static/icons/company_worth/polygons.svg")).company-worth__item__image 
+          .company-worth__item__text Наша компания - один из лидеров на рынке городской и загородной недвижимости. Сегодня у нас в стадии проектирования - несколько многоэтажных жилых комплексов.
+    .company-worth__image 
+      img(src = require("media/static/company_value_bg.webp"))
 block append scripts
   script(src=require('pages/about/about.ts'))

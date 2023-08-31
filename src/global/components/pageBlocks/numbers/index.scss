@@ -14,14 +14,14 @@
     flex-direction: column;
     align-items: center;
   }
-  &_white{
-    .benefits__number{
+  &_white {
+    .benefits__number {
       color: $white;
     }
-    .benefits__text{
+    .benefits__text {
       color: $white;
     }
-    .benefits__border::before{
+    .benefits__border::before {
       background-color: $white;
     }
   }
@@ -52,6 +52,7 @@
     @include manrope-14();
     text-align: center;
     color: #6d6d6d;
+    text-transform: uppercase;
   }
   @media screen and (min-width: $desktop1460) {
     &__number {
@@ -59,7 +60,6 @@
         font-size: 200px;
       }
       span {
-
         @include manrope-24();
       }
     }
@@ -67,14 +67,12 @@
       @include manrope-17();
     }
   }
-  
+
   @media screen and (min-width: $desktop1650) {
-      &__border {
-        &::before {
-          width: 90px;
-        }
+    &__border {
+      &::before {
+        width: 90px;
       }
-    
+    }
   }
 }
-

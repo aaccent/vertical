@@ -30,7 +30,9 @@ block append main
             .lead-section__slide__button.button.button_white Подробнее о компании
               img(src=require('media/static/icons/arrow/arrow_short.svg'))
   include global/components/pageBlocks/aboutCompany/template
-
+  +about-company()
+    .button.button_gray о компании
+      img(src=require('media/static/icons/arrow/arrow_short.svg'))
   .offer
     .swiper.offer__swiper: .swiper-wrapper
       each i in Array(3)
