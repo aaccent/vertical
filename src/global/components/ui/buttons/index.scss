@@ -99,3 +99,29 @@
     height: 9px;
   }
 }
+
+.arrow-button{
+  width: 86px;
+  height: 86px;
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid $white;
+  &::before{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    transform: translate(-50%, -50%);
+    height: 8px;
+    width: 41px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url("media/static/icons/arrow/arrow_long_white.svg");
+  }
+  &_down{
+    &::before{
+      transform:translate(-50%, -50%) rotate(90deg);
+    }
+  }
+}

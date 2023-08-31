@@ -4,7 +4,19 @@ block append head
   link(href=require('pages/about/about.scss'), rel='stylesheet')
 
 block append main
-
+  include global/layout/general/header/template
+  +header.header_border
+  .about-header
+    .about-header__content
+      ul.breadcrumb
+        li.breadcrumb__item главная
+        li.breadcrumb__item.breadcrumb__item_active  о компании
+      .about-header__title ВЕРТИКАЛЬ
+      .about-header__bottom
+        .about-header__text ГК Вертикаль успешно работает с 2005 года и является одним из лидеров в девелопменте жилой и коммерческой недвижимости
+        .arrow-button.arrow-button_down.arrow-button_gray
+    .about-header__image
+      img(src=require('media/static/about_company_lead.webp'))
 
 block append scripts
   script(src=require('pages/about/about.ts'))
