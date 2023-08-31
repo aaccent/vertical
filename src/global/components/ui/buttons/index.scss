@@ -119,9 +119,18 @@
     background-repeat: no-repeat;
     background-image: url("media/static/icons/arrow/arrow_long_white.svg");
   }
+  &_left{
+    &::before{
+      transform:translate(-50%, -50%) rotate(-180deg);
+    }
+  }
   &_down{
     &::before{
       transform:translate(-50%, -50%) rotate(90deg);
     }
+  }
+  &_large{
+    width: 194px;
+    height: 194px;
   }
 }

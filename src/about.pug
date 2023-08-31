@@ -10,7 +10,7 @@ block append main
     .about-header__content
       ul.breadcrumb
         li.breadcrumb__item главная
-        li.breadcrumb__item.breadcrumb__item_active  о компании
+        li.breadcrumb__item.breadcrumb__item_active о компании
       .about-header__title ВЕРТИКАЛЬ
       .about-header__bottom
         .about-header__text ГК Вертикаль успешно работает с 2005 года и является одним из лидеров в девелопменте жилой и коммерческой недвижимости
@@ -18,26 +18,53 @@ block append main
     .about-header__image
       img(src=require('media/static/about_company_lead.webp'))
   include global/components/pageBlocks/aboutCompany/template
-  +about-company()
+  +about-company
     .button.button_gray строительство жилых зданий
     .button.button_gray продажа квартир
-  .company-worth 
-    .company-worth__content 
+  .company-worth
+    .company-worth__content
       .company-worth__title ценности нашей компании
       .company-worth__list
-        .company-worth__item 
+        .company-worth__item
           .company-worth__item__title Миссия компании
-          img(src = require("media/static/icons/company_worth/circles.svg")).company-worth__item__image 
+          img.company-worth__item__image(src=require('media/static/icons/company_worth/circles.svg'))
           .company-worth__item__text Мы улучшаем качество жизни. Создаем пространство для комфорта детей и взрослых.
-        .company-worth__item 
+        .company-worth__item
           .company-worth__item__title клиентский сервис
-          img(src = require("media/static/icons/company_worth/triangles.svg")).company-worth__item__image 
+          img.company-worth__item__image(src=require('media/static/icons/company_worth/triangles.svg'))
           .company-worth__item__text В нашей компании работают люди, которые ценят комфорт и высокий сервис обслуживания. Мы заботимся о том, чтобы вам было легко с нами на каждом этапе сотрудничества.
-        .company-worth__item 
+        .company-worth__item
           .company-worth__item__title креативный подход
-          img(src = require("media/static/icons/company_worth/polygons.svg")).company-worth__item__image 
+          img.company-worth__item__image(src=require('media/static/icons/company_worth/polygons.svg'))
           .company-worth__item__text Наша компания - один из лидеров на рынке городской и загородной недвижимости. Сегодня у нас в стадии проектирования - несколько многоэтажных жилых комплексов.
-    .company-worth__image 
-      img(src = require("media/static/company_value_bg.webp"))
+    .company-worth__image
+      img(src=require('media/static/company_value_bg.webp'))
+  .company-main
+    .history
+      .container_left
+        .title.title_white
+          span история
+        div
+          .history__title Торжественное открытие нашего первого офиса
+          .history__content
+            .history__swiper.swiper: .swiper-wrapper
+              .swiper-slide.history__slide
+                img(src=require('media/content/content_12.webp'))
+              .swiper-slide.history__slide
+                img(src=require('media/content/content_11.webp'))
+              .swiper-slide.history__slide
+                img(src=require('media/content/content_12.webp'))
+      .arrow-button.arrow-button_left.arrow-button_large
+      .arrow-button.arrow-button_right.arrow-button_large
+    .container_left
+      div 
+      div
+        .history__year-view
+          .history__year-view__year 2008
+          .history__year-view__scale
+            .history__year-view__scale__edge
+              p 2005
+              p 2023
+            img.history__year-view__scale__image(src=require('media/static/icons/scale.svg'))
 block append scripts
   script(src=require('pages/about/about.ts'))
