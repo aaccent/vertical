@@ -66,5 +66,41 @@ block append main
               p 2005
               p 2023
             img.history__year-view__scale__image(src=require('media/static/icons/scale.svg'))
+    include global/components/pageBlocks/ourProject/template
+    .about-project-list
+      include global/components/pageBlocks/projectsList/template
+    
+      .project__wrapper-button
+        .button.button_circle.project__button показать ещё
+  .awards 
+    .container_left
+      .title.title_gray
+        span награды
+      .awards__content  
+        .awards__title достижения, награды и премии
+        .awards__table__header
+          .awards__table__header__item награда
+          .awards__table__header__item проект
+          .awards__table__header__item площадка
+        .awards__table__row 
+          .awards__table__item Move Realty Awards 2023
+          .awards__table__item ЖК Волково
+          .awards__table__item 
+            img(src = require("media/content/icons/urban_awards.svg"))
+        .awards__table__row 
+          .awards__table__item Move Realty Awards 2023
+          .awards__table__item ЖК Волково
+          .awards__table__item 
+            img(src = require("media/content/icons/urban_awards.svg"))
+        .awards__table__row 
+          .awards__table__item Move Realty Awards 2023
+          .awards__table__item ЖК Волково
+          .awards__table__item 
+            img(src = require("media/content/icons/urban_awards.svg"))
+        .awards__table__row 
+          .awards__table__item Move Realty Awards 2023
+          .awards__table__item ЖК Волково
+          .awards__table__item 
+            img(src = require("media/content/icons/urban_awards.svg"))
 block append scripts
   script(src=require('pages/about/about.ts'))

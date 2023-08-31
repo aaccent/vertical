@@ -7,6 +7,8 @@
 @use 'src/styles/utils/media' as *;
 @use 'src/global/components/pageBlocks/aboutCompany';
 @use '~swiper/scss';
+@use 'src/global/components/pageBlocks/ourProject';
+@use 'src/global/components/pageBlocks/projectsList';
 
 .about-header {
   position: relative;
@@ -70,7 +72,7 @@
       height: 100%;
       width: 100%;
       object-fit: cover;
-      object-position: center
+      object-position: center;
     }
   }
   &__content {
@@ -93,7 +95,7 @@
     display: flex;
     margin-top: 220px;
   }
-  
+
   &__item {
     &__title {
       @include manrope-24();
@@ -109,64 +111,64 @@
       margin-top: 40px;
       opacity: 0.8;
     }
-    &__image{
+    &__image {
       margin-top: 20px;
     }
-    &:last-child{
-    border-left: 1px solid rgba($color: $white, $alpha: 0.2);
-    border-right: none;
-
+    &:last-child {
+      border-left: 1px solid rgba($color: $white, $alpha: 0.2);
+      border-right: none;
     }
   }
 }
 
-.company-main{
+.company-main {
   @include container-x();
   background-color: $blue;
   padding-top: 90px;
+  padding-bottom: 130px;
 }
 
-.history{
-  &__title{
+.history {
+  &__title {
     @include tenor-90();
     color: $white;
   }
-  .swiper-slide-prev{
+  .swiper-slide-prev {
     opacity: 0.3;
     filter: blur(2px);
   }
-  .swiper-slide-next{
+  .swiper-slide-next {
     opacity: 0.3;
     filter: blur(2px);
   }
-  .arrow-button{
+  .arrow-button {
     position: absolute;
     z-index: $z-2;
     bottom: 146px;
   }
-  .arrow-button_left{
+  .arrow-button_left {
     left: 80px;
   }
 
-  .arrow-button_right{
+  .arrow-button_right {
     right: 80px;
   }
-  &__year-view{
+  &__year-view {
     width: min-content;
     margin-top: -112px;
     z-index: $z-2;
     position: relative;
-    &__year{
+    &__year {
       text-align: center;
-      font-family: "vetrino";
+      font-family: 'vetrino';
       font-size: 200px;
       line-height: 90%;
       font-weight: 400;
       color: $white;
     }
-    &__scale{
+    &__scale {
       position: relative;
-      &__edge{
+      &__edge {
         position: absolute;
         display: flex;
         color: $white;
@@ -176,7 +178,7 @@
       }
     }
   }
-  &__swiper{
+  &__swiper {
     width: 854px;
     height: 486px;
     margin-left: 0;
@@ -185,11 +187,56 @@
     margin-top: 60px;
   }
   position: relative;
-  &__slide{
-    img{
+  &__slide {
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+  }
+}
+.about-project-list {
+  margin-top: 200px;
+}
+
+.awards {
+  @include container-x();
+  padding-top: 120px;
+  padding-bottom: 130px;
+  &__title {
+    @include tenor-90();
+  }
+
+  &__table {
+    &__header {
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: 3fr 2fr 1fr;
+      &__item {
+        @include manrope-14();
+        opacity: 0.6;
+        text-transform: uppercase;
+        &:last-child {
+          justify-self: end;
+        }
+      }
+      padding-bottom: 10px;
+      border-bottom: 1px solid #d9d9d9;
+    }
+    &__row {
+      display: grid;
+      grid-template-columns: 3fr 2fr 1fr;
+    }
+    &__item {
+      @include manrope-24();
+      padding-top: 35px;
+      padding-bottom: 35px;
+      border-bottom: 1px solid #d9d9d9;
+      &:last-child {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+      }
     }
   }
 }
