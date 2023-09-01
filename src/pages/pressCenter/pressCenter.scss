@@ -1,0 +1,48 @@
+@use 'components/ui/breadcrumb';
+@use 'components/ui/container' as *;
+@use "components/ui/quickFilter";
+@use 'src/global/components/pageBlocks/newsCard';
+@use 'src/styles/general/variables' as *;
+@use 'components/ui/container' as *;
+@use 'src/styles/general/typography' as *;
+@use 'src/styles/utils/mixins' as *;
+
+.blue-section{
+  @include container-x();
+  background-color: $blue;
+  padding-top: 130px;
+  padding-bottom: 130px;
+}
+
+.press-center{
+  &__title{
+    @include tenor-90();
+    color: $white;
+  }
+  &__header{
+    margin-top: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__month-divider{
+    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
+    margin-top: 40px;
+    .title{
+      margin-top: 35px;
+    }
+    .news-card:last-child{
+      border-bottom: none;
+    }
+  }
+  &__month-divider:last-child{
+    .news-card:last-child{
+      border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);;
+    }
+  }
+  &__wrapper-button{
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+  }
+}

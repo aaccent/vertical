@@ -29,13 +29,13 @@ const toggleQuickFilter = (item: HTMLElement, index: number) => {
   }
 }
 
-quickFilterItem.forEach((item, index) => {
+quickFilterItem.forEach((item, _) => {
   toggleQuickFilter(item, 0)
 })
 
+
 quickFilterItem.forEach((item, index) => {
   item.addEventListener('click', () => {
-    toggleQuickFilter(item, index);
-
+    toggleQuickFilter(item, index);    
   })
 })

@@ -9,6 +9,7 @@
   color: white;
   gap: 8px;
   @include manrope-14();
+  height: min-content;
   width: max-content;
   &_border-right, &_border-left{
     position: relative;

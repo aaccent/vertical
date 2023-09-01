@@ -2,5 +2,79 @@ extends layout/page
 
 block append head
   link(href=require('pages/pressCenter/pressCenter.scss'), rel='stylesheet')
-
 block append main
+  include global/layout/general/header/template
+  +header().header_border
+  .blue-section
+    ul.breadcrumb
+      li.breadcrumb__item главная
+      li.breadcrumb__item.breadcrumb__item_active проекты
+    .press-center__header 
+      .press-center__title пресс-центр  
+      .quick-filter 
+        .quick-filter__item.quick-filter_active Интересные статьи
+        .quick-filter__item Новости компании
+
+    .container_left.press-center__month-divider
+      .title.title_white
+        span июнь 2023
+      div
+        .news-card.news-card_white
+          .news-card__image
+            img(src=require('media/content/content_2.webp'))
+          .news-card__content
+            .news-card__content__text
+              .news-card__title Использование материнского капитала для квартиры
+              .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+            .news-card__date
+              p 17
+              span июня
+        .news-card.news-card_white
+          .news-card__image
+            img(src=require('media/content/content_14.webp'))
+          .news-card__content
+            .news-card__content__text
+              .news-card__title Использование материнского капитала для квартиры
+              .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+            .news-card__date
+              p 17
+              span июня
+    .container_left.press-center__month-divider
+      .title.title_white
+        span май 2023
+      div
+        .news-card.news-card_white
+          .news-card__image
+            img(src=require('media/content/content_21.png'))
+          .news-card__content
+            .news-card__content__text
+              .news-card__title Использование материнского капитала для квартиры
+              .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+            .news-card__date
+              p 17
+              span июня
+        .news-card.news-card_white
+          .news-card__image
+            img(src=require('media/content/content_15.webp'))
+          .news-card__content
+            .news-card__content__text
+              .news-card__title Использование материнского капитала для квартиры
+              .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+            .news-card__date
+              p 17
+              span июня
+        .news-card.news-card_white
+          .news-card__image
+            img(src=require('media/content/content_16.webp'))
+          .news-card__content
+            .news-card__content__text
+              .news-card__title Использование материнского капитала для квартиры
+              .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+            .news-card__date
+              p 17
+              span июня
+     
+        .press-center__wrapper-button
+          .button.button_circle показать ещё
+block append scripts
+  script(src=require('pages/pressCenter/pressCenter.ts'))
