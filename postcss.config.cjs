@@ -7,6 +7,10 @@ module.exports = {
       dodgeSelectors: [
         { type: 'startsWith', value: '.swiper' },
         { type: 'startsWith', value: '.carousel' },
+        { type: 'startsWith', value: '.title' },
+        { type: 'startsWith', value: '.page-viewer' },
+        { type: 'startsWith', value: '.building-summary__status' },
+        { type: 'startsWith', value: '.building-summary__content' },
         { type: 'includes', value: 'fancybox' },
         { type: 'includes', value: 'aos' },
       ],

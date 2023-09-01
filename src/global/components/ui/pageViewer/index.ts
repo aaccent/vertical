@@ -1,6 +1,6 @@
-import { describeArc } from "global/features/arcProgress"
+import { renderArc } from 'global/features/arcProgress'
 
-const initPageViewer = (swiper: any, ) => {
+const initPageViewer = (swiper: any) => {
   const pageViewer = document.querySelector('.page-viewer') as any
 
   pageViewer.querySelector('.page-viewer__page p').textContent = swiper.activeIndex + 1
@@ -10,21 +10,20 @@ const initPageViewer = (swiper: any, ) => {
   let stepAngle = 360 / swiper.slides.length
   let currentAngle = 360 / swiper.slides.length
 
+  const arcRender = (angle: number) => {
+    renderArc(document.querySelector('#progress') as HTMLElement, angle, 65)
 
-
-  const renderArc = (angle: number) => {
-    document.querySelector('#progress')?.setAttribute('d', describeArc(65, 65, 63, 360 - angle, 360))
   }
 
   const circleNav = () => {
     let startX = 0
-    renderArc(angle)
+    arcRender(angle)
 
     swiper.on('slideChange', (e: any) => {
       pageViewer.querySelector('p').textContent = e.activeIndex + 1
 
       currentAngle = stepAngle * (e.activeIndex + 1)
-      renderArc(currentAngle)
+      arcRender( currentAngle)
     })
     swiper.on('touchStart', (e: any) => {
       startX = e.touches.startX
@@ -37,17 +36,17 @@ const initPageViewer = (swiper: any, ) => {
       if (swiper.activeIndex >= swiper.slides.length - 1 && angle > 360) return
       if (swiper.activeIndex === 0 && angle < stepAngle) return
 
-      renderArc(angle)
+      arcRender(angle)
     })
 
     swiper.on('autoplayTimeLeft', (e: any, _: any, progress: number) => {
       angle = currentAngle - stepAngle * progress
-      renderArc(angle)
+      arcRender(angle)
     })
 
     window.addEventListener('mouseup', () => {
       if (swiper.activeIndex === 0 && angle < stepAngle) {
-        renderArc(stepAngle)
+        arcRender(stepAngle)
       }
       startX = 0
     })
@@ -55,4 +54,4 @@ const initPageViewer = (swiper: any, ) => {
   circleNav()
 }
 
-export {initPageViewer}
+export { initPageViewer }

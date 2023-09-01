@@ -17,5 +17,7 @@ function describeArc(x: number, y: number, radius: number, startAngle: number, e
 
   return d
 }
-
-export {describeArc}
+const renderArc = (el: HTMLElement, angle: number, radius: number) => {
+  el.setAttribute('d', describeArc(radius, radius, radius - 2, 360 - angle, 360))
+}
+export { renderArc }
