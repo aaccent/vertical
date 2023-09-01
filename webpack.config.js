@@ -54,8 +54,8 @@ module.exports = async (env) => {
 		module: {
 			rules: [
 				{ test: /\.pug$/, loader: PugPlugin.loader },
-				{ test: /\.(css|scss|sass)$/, use: [ 'css-loader', 'sass-loader' ] },
-				{ test: /\.([cm]?ts|tsx)$/, loader: 'ts-loader' },
+        { test: /\.(css|scss|sass)$/, use: [ 'css-loader', 'postcss-loader', 'sass-loader' ] },
+        { test: /\.([cm]?ts|tsx)$/, loader: 'ts-loader' },
 				{
 					test: /\.(png|jpg|jpeg|ico|svg|webp)/,
 					type: 'asset/resource',
@@ -81,7 +81,7 @@ module.exports = async (env) => {
 				},
 			}),
 		],
-		
+
 
 	}
 }
