@@ -43,3 +43,23 @@ document.querySelector('.seo-block__expand')?.addEventListener('click', () => {
   text.style.height = `${height}px`
   seoBlock.classList.add('seo-block_open')
 })
+const mobilePageList = document.querySelector('.lead-section__mobile__page-list') as HTMLElement
+const slideText = document.querySelector('.lead-section__slide__text') as HTMLElement
+
+const moveMobilePage = (width: number) => {
+  if (width > 1200) return
+  if (width > 800) {
+    mobilePageList.style.top = `${slideText.getBoundingClientRect().y - 20}px`
+    mobilePageList.style.left = `${slideText.getBoundingClientRect().x}px`
+  } else if (width < 800) {
+    const middle = slideText.getBoundingClientRect().height / 2 - mobilePageList.getBoundingClientRect().height / 2
+    mobilePageList.style.top = `${slideText.getBoundingClientRect().top + middle}px`
+    mobilePageList.style.left = `${slideText.getBoundingClientRect().right}px`
+  }
+}
+moveMobilePage(window.innerWidth)
+
+window.addEventListener('resize', (e) => {
+  const windowWidth = (e.currentTarget as any).innerWidth
+  moveMobilePage(windowWidth)
+})

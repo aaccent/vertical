@@ -74,6 +74,7 @@
       position: absolute;
       display: flex;
       visibility: hidden;
+    z-index: $z-2;
     }
     &__page {
       width: 7px;
