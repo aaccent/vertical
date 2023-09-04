@@ -8,6 +8,7 @@
 @use 'src/global/components/pageBlocks/map';
 @use 'src/global/components/pageBlocks/blog';
 @use 'src/global/components/pageBlocks/ourProject';
+@use 'src/global/components/pageBlocks/companyName';
 @use 'components/ui/container' as *;
 @use 'components/ui/pageViewer' as *;
 @use '~swiper/scss';
@@ -16,10 +17,7 @@
   position: relative;
   background-color: $blue;
   &__title {
-    @include tenor-90();
-    font-size: 14vmax;
     position: absolute;
-    color: $white;
     top: 108px;
     left: 50%;
     transform: translateX(-50%);

@@ -5,10 +5,12 @@ block append head
 
 block append main
   include global/layout/general/header/template
+  include global/components/pageBlocks/companyName/template
+
   +header
   .lead-section
-    .lead-section__title 
-      span ВЕРТИКАЛЬ
+    +company-name.lead-section__title 
+    
     .page-viewer
       img.page-viewer__left(src=require('media/static/icons/arrow/arrow_small.svg'))
       .page-viewer__content

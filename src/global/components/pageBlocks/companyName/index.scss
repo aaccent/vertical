@@ -1,0 +1,13 @@
+@use 'src/styles/general/typography' as *;
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/media' as *;
+
+.company-name {
+  display: flex;
+  @include tenor-90();
+  color: $white;
+  font-size: calc(100vw * 0.147);
+  @media screen  and (max-width: $tablet800) {
+    
+  }
+}
