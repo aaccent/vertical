@@ -21,12 +21,11 @@ block append main
           p 2
       img.page-viewer__right(src=require('media/static/icons/arrow/arrow_small.svg'))
     .lead-section__mobile__page-list
-      svg.lead-section__mobile__page.lead-section__mobile_opaque.lead-section__mobile_small
-        //- <path id="progress" fill="none" stroke="#fff" stroke-width="7" />
-        <circle cx="3.5" cy="3.5" r="3.5" fill="white"/>
+      svg.lead-section__mobile__page
+        <path id="progress" fill="none" stroke="#fff" stroke-width="3.5" />
 
     .lead-section__swiper.swiper: .swiper-wrapper
-      each i, index in Array(4)
+      each i, index in Array(3)
         .swiper-slide.lead-section__slide
           .lead-section__slide__image
             img(src=require('media/static/lead_image.webp'))

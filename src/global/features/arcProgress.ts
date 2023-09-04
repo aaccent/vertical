@@ -17,7 +17,11 @@ function describeArc(x: number, y: number, radius: number, startAngle: number, e
 
   return d
 }
-const renderArc = (el: HTMLElement, angle: number, radius: number) => {
-  el.setAttribute('d', describeArc(radius, radius, radius - 2, 360 - angle, 360))
+const renderArc = (el: HTMLElement, angle: number, radius: number, strokeWidth = 2) => {
+  el.setAttribute('d', describeArc(radius, radius, radius - strokeWidth, 360 - angle, 360))
 }
-export { renderArc }
+const renderFilledArc = (el: HTMLElement, angle: number, radius: number) => {
+  el.setAttribute('d', describeArc(radius * 2, radius * 2, radius, 0,360 - angle))
+}
+
+export { renderArc, renderFilledArc }

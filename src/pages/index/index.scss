@@ -74,7 +74,8 @@
       position: absolute;
       display: flex;
       visibility: hidden;
-    z-index: $z-2;
+      gap: 4px;
+      z-index: $z-2;
     }
     &__page {
       width: 7px;
@@ -124,15 +125,19 @@
         height: 418px;
         width: 100%;
       }
-      &__text{
+      &__text {
         @include manrope-12();
       }
-      &__title{
+      &__title {
         @include manrope-24();
+        margin-right: 96px;
       }
     }
-  }
-  @media screen and (max-width: $mobile600) {
+    &__mobile {
+      &__page-list {
+        transform: translateX(-100%);
+      }
+    }
   }
   @media screen and (min-width: $desktop1460) {
     &__slide {
