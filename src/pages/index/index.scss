@@ -69,7 +69,70 @@
       margin-top: 20px;
     }
   }
-
+  &__mobile {
+    &__page-list {
+      position: absolute;
+      display: flex;
+      visibility: hidden;
+    }
+    &__page {
+      width: 7px;
+      height: 7px;
+      opacity: 0.3;
+    }
+    &_opaque {
+      opacity: 1;
+    }
+    &_small {
+      transform: scale(0.714);
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    &__slide {
+      gap: 16px;
+      @include container-x();
+      &__content {
+        position: static;
+        align-self: flex-end;
+        margin-bottom: 26px;
+      }
+      &__image {
+        position: static;
+        height: 568px;
+        width: 100%;
+      }
+    }
+    .page-viewer {
+      visibility: hidden;
+    }
+    &__mobile {
+      &__page-list {
+        visibility: visible;
+      }
+    }
+  }
+  @media screen and (max-width: $tablet800) {
+    &__slide {
+      flex-direction: column;
+      &__content {
+        position: static;
+        width: 100%;
+      }
+      &__image {
+        position: static;
+        height: 418px;
+        width: 100%;
+      }
+      &__text{
+        @include manrope-12();
+      }
+      &__title{
+        @include manrope-24();
+      }
+    }
+  }
+  @media screen and (max-width: $mobile600) {
+  }
   @media screen and (min-width: $desktop1460) {
     &__slide {
       &__image {
@@ -80,17 +143,14 @@
         left: $parent-padding-1400;
       }
     }
-
   }
 }
-
-
 
 .offer {
   margin-top: 130px;
 }
 
-.blue-section{
+.blue-section {
   @include container-x();
   background-color: $blue;
   padding-top: 80px;
@@ -99,8 +159,6 @@
     margin-top: 35px;
   }
 }
-
-
 
 .building-filter {
   margin-top: 200px;
@@ -157,31 +215,31 @@
   }
 }
 
-.seo-block{
+.seo-block {
   margin-top: 130px;
-  &__title{
+  &__title {
     @include manrope-24();
   }
-  &__text{
+  &__text {
     @include manrope-17();
     transition: height 250ms ease;
     height: min-content;
     margin-top: 20px;
-    color: #6D6D6D;
+    color: #6d6d6d;
     overflow: hidden;
-    p{
+    p {
       position: absolute;
       visibility: hidden;
     }
-    p:first-child{
+    p:first-child {
       position: static;
       visibility: visible;
     }
-    p+p{
+    p + p {
       padding-top: 20px;
     }
   }
-  &__expand{
+  &__expand {
     margin-top: 24px;
     @include manrope-17-m();
     cursor: pointer;
@@ -190,23 +248,23 @@
     text-transform: uppercase;
     gap: 6px;
     align-items: center;
-    img{
+    img {
       transition: transform 250ms ease;
     }
   }
-  &_open{
-    p{
+  &_open {
+    p {
       position: static;
       visibility: visible;
     }
-    .seo-block__expand{
-      img{
+    .seo-block__expand {
+      img {
         transform: rotate(-180deg);
       }
     }
   }
 }
 
-.seo-block{
+.seo-block {
   margin-bottom: 130px;
 }

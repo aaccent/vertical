@@ -1,25 +1,45 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/mixins' as *;
 @use 'src/styles/general/typography' as *;
-@use "global/components/ui/dropdown";
-@use "components/ui/container" as *;
-@use "components/ui/cards/headerCard" ;
+@use 'global/components/ui/dropdown';
+@use 'components/ui/container' as *;
+@use 'components/ui/cards/headerCard';
 
-.header{
+.header {
   position: absolute;
   top: 0;
   width: 100%;
   transition: height 250ms ease;
   z-index: $z-3;
-  &_border{
-    border-bottom: 1px solid rgba($color: $white, $alpha: 0.15);
+  &_dark {
+    border-bottom: 1px solid rgba($color: $black, $alpha: 0.15);
+    .header__nav__item {
+      color: $black;
+    }
+    .header__phone__link {
+      color: $black;
+    }
 
-    .header__logo{
+    div.header__content {
+      background-color: $white;
+    }
+    .header_scrolled {
+      border: noen;
+    }
+    .header__logo {
       visibility: visible;
       opacity: 1;
     }
   }
-  .header__bg{
+  &_border {
+    border-bottom: 1px solid rgba($color: $white, $alpha: 0.15);
+
+    .header__logo {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+  .header__bg {
     width: 100%;
     height: 100%;
     display: block;
@@ -28,28 +48,28 @@
     transition: transform 250ms ease;
     top: 0;
   }
-  &_scrolled{
+  &_scrolled {
     // overflow: hidden;
     position: fixed;
     z-index: $z-4;
     border: none;
-    .header__content{
+    .header__content {
       padding-top: 20px;
       padding-bottom: 20px;
       background-color: $blue;
     }
-    .header__bg{
+    .header__bg {
       visibility: visible;
     }
-    .header__logo{
+    .header__logo {
       opacity: 1;
       visibility: visible;
     }
   }
-  &__container{
+  &__container {
     position: relative;
   }
-  &__logo{
+  &__logo {
     visibility: hidden;
     position: absolute;
     z-index: 3;
@@ -59,7 +79,7 @@
     opacity: 0;
     transition: opacity 250ms ease;
   }
-  &__content{
+  &__content {
     @include container-x();
     padding-top: 36px;
     padding-bottom: 36px;
@@ -68,21 +88,21 @@
     position: relative;
     z-index: $z-3;
   }
-  &__nav{
-    &__list{
+  &__nav {
+    &__list {
       display: flex;
       align-items: center;
       gap: 40px;
     }
-    &__item{
+    &__item {
       @include manrope-14();
       color: $white;
     }
   }
-  &__phone{
+  &__phone {
     display: flex;
     gap: 32px;
-    &__link{
+    &__link {
       display: flex;
       gap: 10px;
       align-items: center;

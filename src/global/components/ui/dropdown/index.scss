@@ -18,6 +18,17 @@
       width: 310px;
     }
   }
+  &_dark{
+    .dropdown__title{
+      color: $black;
+      .black{
+        display: block;
+      }
+      .white{
+        display: none;
+      }
+    }
+  }
   &__list {
     @include reset-list();
     @include basic-card();
@@ -42,8 +53,15 @@
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    .black{
+      display: none;
+    }
     img{
       transition: transform 250ms ease;
+    }
+
+    .white{
+      display: block;
     }
   }
   &_shown {

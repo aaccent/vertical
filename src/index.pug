@@ -5,9 +5,10 @@ block append head
 
 block append main
   include global/layout/general/header/template
-  +header()
+  +header
   .lead-section
-    .lead-section__title ВЕРТИКАЛЬ
+    .lead-section__title 
+      span ВЕРТИКАЛЬ
     .page-viewer
       img.page-viewer__left(src=require('media/static/icons/arrow/arrow_small.svg'))
       .page-viewer__content
@@ -19,18 +20,24 @@ block append main
           span 6
           p 2
       img.page-viewer__right(src=require('media/static/icons/arrow/arrow_small.svg'))
+    .lead-section__mobile__page-list
+      svg.lead-section__mobile__page.lead-section__mobile_opaque.lead-section__mobile_small
+        //- <path id="progress" fill="none" stroke="#fff" stroke-width="7" />
+        <circle cx="3.5" cy="3.5" r="3.5" fill="white"/>
+
     .lead-section__swiper.swiper: .swiper-wrapper
       each i, index in Array(4)
         .swiper-slide.lead-section__slide
           .lead-section__slide__image
             img(src=require('media/static/lead_image.webp'))
           .lead-section__slide__content
-            .lead-section__slide__text= `Строим для людей с 200${index} года`
+            .lead-section__slide__text
+              span= `Строим для людей с 200${index} года`
             .lead-section__slide__title ИНВЕСТИции В НЕДВИЖИМОСТЬ С ГК ВЕРТИКАЛЬ
             .lead-section__slide__button.button.button_white Подробнее о компании
               img(src=require('media/static/icons/arrow/arrow_short.svg'))
   include global/components/pageBlocks/aboutCompany/template
-  +about-company()
+  +about-company
     .button.button_gray о компании
       img(src=require('media/static/icons/arrow/arrow_short.svg'))
   .offer
@@ -51,7 +58,7 @@ block append main
       .filter__content
         .filter__left
           include global/components/ui/quickFilter/template
-          +dropdown("Тип недвижимости")().filter__dropdown
+          +dropdown("Тип недвижимости").filter__dropdown
             ul.dropdown__list
               li.dropdown__list__item ТРК
               li.dropdown__list__item Жилищные комплексы
@@ -65,7 +72,7 @@ block append main
               li.dropdown__list__item Склады
         .filter__right
           span.active плиткой
-          .button-switch 
+          .button-switch
             .button-switch__mark
           span на карте
 

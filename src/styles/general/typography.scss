@@ -1,5 +1,13 @@
 @use 'src/styles/general/variables' as *;
 
+@mixin manrope-12() {
+  font-family: 'manrope';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 130%;
+}
+
+
 @mixin manrope-14() {
   font-family: 'manrope';
   font-weight: 500;

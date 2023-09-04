@@ -8,10 +8,10 @@ import { initPageViewer } from 'global/components/ui/pageViewer'
 
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation: { nextEl: '.page-viewer__right', prevEl: '.page-viewer__left' },
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
+  // autoplay: {
+  //   delay: 3000,
+  //   disableOnInteraction: false,
+  // },
   modules: [Navigation, Autoplay],
 })
 

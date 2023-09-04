@@ -1,7 +1,8 @@
 mixin dropdown(name="")
   .dropdown&attributes(attributes)
     .dropdown__title= name
-      img(src=require("media/static/icons/triangle/triangle_white_down.svg"))
+      img(src=require("media/static/icons/triangle/triangle_white_down.svg")).white
+      img(src=require("media/static/icons/triangle/triangle_black_down.svg")).black
     .dropdown__content 
       .dropdown__content__wrapper
         block

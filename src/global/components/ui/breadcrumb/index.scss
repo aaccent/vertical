@@ -8,6 +8,11 @@
   align-items: center;
   @include reset-list();
   color: $white;
+  &_black{
+    .breadcrumb__item{
+      color: $black;
+    }
+  }
   &__item{
     @include manrope-14();
     opacity: 0.5;
@@ -24,7 +29,6 @@
       position: absolute;
       display: block;
       right: -1rem;
-      // top: 50%;
       transform: translate(50%, -25%);
     }
   }
