@@ -11,76 +11,82 @@ block append main
       li.breadcrumb__item главная
       li.breadcrumb__item пресс-центр
       li.breadcrumb__item.breadcrumb__item_active На что обратить внимание, принимая квартиру у застройщика?
-    .article__header 
+    .article__header
       .article__title На что обратить внимание, принимая квартиру у застройщика?
-      .article__header__right 
-        .article__info 
+      .article__header__right
+        .article__info
           .article__info__author Александр Горький
           .article__info__date 25 апреля 2023
-        .article__share-list 
+        .article__share-list
           .button.button_social
-            img(src =require("media/static/icons/share/whatsapp.svg"))
+            img(src=require('media/static/icons/share/whatsapp.svg'))
           .button.button_social
-            img(src =require("media/static/icons/share/telegram.svg"))
+            img(src=require('media/static/icons/share/telegram.svg'))
           .button.button_social
-            img(src =require("media/static/icons/share/vkontakte.svg"))
+            img(src=require('media/static/icons/share/vkontakte.svg'))
           .button.button_social
-            img(src =require("media/static/icons/share/link.svg"))
-    .article__image 
-      img(src = require("media/content/content_21.png"))
-    .container_left 
+            img(src=require('media/static/icons/share/link.svg'))
+    .article__image
+      img(src=require('media/content/content_21.png'))
+    .container_left
       ul.article__outline
-        li.article__outline__item Что такое приемка квартиры?
+        li.article__outline__item.article__outline__item_active Что такое приемка квартиры?
         li.article__outline__item В какой момент нужно принимать квартиру у застройщика?
         li.article__outline__item Сколько есть времени на приёмку квартиры с момента получения уведомления?
         li.article__outline__item Подводим итоги
-      .article__content 
-        .article__title_2 Что такое приемка квартиры?
-        .article__text 
+      .article__content
+        .article__text
+          .article__text__title_2 Что такое приемка квартиры?
           p Рефлексия прекрасно вызывает комплекс. Поведенческая терапия, иcходя из того, что просветляет филосовский код. Как отмечает Д.Майерс, у нас есть некоторое чувство конфликта, которое возни. Декаданс заканчивает композиционный мимезис, таким образом, все перечисленные признаки архетипа и мифа подтверждают, что действие механизмов мифотворчества сродни механизмам художественно-продуктивного мышления. Действительно, метафора трансформирует холерик. Аполлоновское начало продолжает социально-психологический фактор. Интерпретация аккумулирует экспрессионизм.
           p Рефлексия прекрасно вызывает комплекс. Поведенческая терапия, иcходя из того, что просветляет филосовский код. Как отмечает Д.Майерс, у нас есть некоторое чувство конфликта, которое возни. Декаданс заканчивает композиционный мимезис, таким образом, все перечисленные признаки архетипа и мифа подтверждают, что действие механизмов мифотворчества сродни механизмам художественно-продуктивного мышления. Действительно, метафора трансформирует холерик. Аполлоновское начало продолжает социально-психологический фактор. Интерпретация аккумулирует экспрессионизм.
-        .article__title_3 Что такое приемка квартиры?
-        .article__text 
+        .article__text
+          .article__text__title_3 Как подготовиться к осмотру квартиры?
           p Рефлексия прекрасно вызывает комплекс. Поведенческая терапия, иcходя из того, что просветляет филосовский код. Как отмечает Д.Майерс, у нас есть некоторое чувство конфликта, которое возни. Декаданс заканчивает композиционный мимезис, таким образом, все перечисленные признаки архетипа и мифа подтверждают, что действие механизмов мифотворчества сродни механизмам художественно-продуктивного мышления. Действительно, метафора трансформирует холерик. Аполлоновское начало продолжает социально-психологический фактор. Интерпретация аккумулирует экспрессионизм.
-          p Рефлексия прекрасно вызывает комплекс. Поведенческая терапия, 
-            a(href="") иcходя из того, что просветляет филосовский код. 
+          p Рефлексия прекрасно вызывает комплекс. Поведенческая терапия,
+            |
+            a(href='') иcходя из того, что просветляет филосовский код.
             | Как отмечает Д.Майерс, у нас есть некоторое чувство конфликта, которое возни. Декаданс заканчивает композиционный мимезис, таким образом, все перечисленные признаки архетипа и мифа подтверждают, что действие механизмов мифотворчества сродни механизмам художественно-продуктивного мышления. Действительно, метафора трансформирует холерик. Аполлоновское начало продолжает социально-психологический фактор. Интерпретация аккумулирует экспрессионизм.
-        
-        .article__media-block 
+
+        .article__media-block
           .article__media-block__content
-            img(src= require("media/content/content_18.webp")).article__media-block__image
+            img.article__media-block__image(src=require('media/content/content_18.webp'))
           .article__media-block__caption Процесс приема квартиры
-        
-        ul.article__list 
+
+        ul.article__list
           li.article__list__item Паспорт;
           li.article__list__item Договор участия в долевом строительстве;
           li.article__list__item Копию плана квартиры (содержится в приложении к договору ДДУ);
           li.article__list__item Клейкие стикеры или маркер, чтобы отмечать дефекты;
           li.article__list__item Рулетку, чтобы проверить габариты квартиры;
           li.article__list__item Фотокамеру (для фотофиксации недочетов);
-        
-        .article__media-block 
+
+        .article__media-block
           .article__media-block__content.article__media-block__video
             .article__media-block__thumb-wrapper
-              .article__media-block__video-thumb 
-                .article__media-block__play-button 
-                img(src= require("media/content/content_19.webp")).article__media-block__thumb
-            video(src = require("media/content/videoplayback.mp4") controls)
-          .article__media-block__caption Процесс приема квартиры
-        
-        ul.article__numbered-list 
+              .article__media-block__video-thumb
+                .article__media-block__play-button
+                  img(src=require('media/static/icons/triangle/triangle_blue_right.svg'))
+                img.article__media-block__thumb(src=require('media/content/content_19.webp'))
+            video(src=require('media/content/videoplayback.mp4'), controls)
+          .article__media-block__caption Текстовая сноска
+
+        ul.article__numbered-list
           li.article__numbered-list__item Пункт нумеровонного списка
           li.article__numbered-list__item Пункт нумеровонного списка
           li.article__numbered-list__item Пункт нумеровонного списка
           li.article__numbered-list__item Пункт нумеровонного списка
           li.article__numbered-list__item Пункт нумеровонного списка
-        
-        .article__media-block 
-          .article__media-block__content
-            .article__carousel 
-              .article__carousel__swiper.swiper: .swiper-wrapper
-                each i in Array(3)
-                  .swiper-slide.article__carousel__slide
-                    img(src = require("media/content/content_20.webp"))
+
+        .article__media-block
+          .article__media-block__content.article__carousel
+            .article__carousel__swiper.swiper: .swiper-wrapper
+              each i in Array(3)
+                .swiper-slide.article__carousel__slide
+                  img(src=require('media/content/content_20.webp'))
+            .article__carousel__nav
+              .article__carousel__nav__left 
+                img(src=require('media/static/icons/arrow/arrow_small_gray.svg'))
+              .article__carousel__nav__right
+                img(src=require('media/static/icons/arrow/arrow_small_gray.svg'))
 block append scripts
   script(src=require('pages/article/article.ts'))

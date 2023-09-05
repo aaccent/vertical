@@ -10,6 +10,7 @@ module.exports = {
         { type: 'startsWith', value: '.title' },
         { type: 'startsWith', value: '.page-viewer' },
         { type: 'startsWith', value: '.building-summary__status' },
+        { type: 'startsWith', value: '.article__list' },
         { type: 'startsWith', value: '.building-summary__content' },
         { type: 'includes', value: '.lead-section__mobile' },
         { type: 'startsWith', value: '.button_social' },
