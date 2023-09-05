@@ -4,4 +4,34 @@ block append head
   link(href=require('pages/contacts/contacts.scss'), rel='stylesheet')
 
 block append main
-  
+  include global/layout/general/header/template
+  +header.header_border
+  .blue-section
+    ul.breadcrumb
+      li.breadcrumb__item главная
+      li.breadcrumb__item.breadcrumb__item_active контакты
+    .contacts
+      .contacts__title контакты
+      .contacts__info
+        .contacts__position
+          .contacts__position__title Ростов-на-Дону, проспект Сиверса, 1
+          .contacts__position__hours
+            img(src=require('media/static/icons/timer.svg'))
+            span Пн-Пт, 09:00-18:00
+          .contacts__position__button.button.button_white проложить маршрут
+            img(src=require('media/static/icons/arrow/arrow_short.svg'))
+        ul.contacts__legal
+          li ИНН 6168059630
+          li КПП 616101001
+          li ОГРН 1126194006410
+      .contacts__call
+        .contacts__call__phone 8 (800) 580-98-59
+        .contacts__call__email
+          img(src=require('media/static/icons/email.svg'))
+          span vertikal@vrkdon.ru
+      .contacts__arrow-button.arrow-button.arrow-button_down
+      .contacts__image
+        img(src=require('media/static/contacts_image.webp'))
+    .map
+      .map__content
+      .map__view
