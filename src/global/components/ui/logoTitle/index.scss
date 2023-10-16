@@ -1,0 +1,10 @@
+@use 'components/ui/container' as *;
+@use 'src/styles/general/variables' as *;
+
+.logo-title {
+  pointer-events: none;
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}

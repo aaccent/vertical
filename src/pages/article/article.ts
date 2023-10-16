@@ -15,6 +15,7 @@ document.querySelectorAll('.article__carousel').forEach((carousel) => {
       nextEl: carousel.querySelector('.article__carousel__nav__right') as HTMLElement,
       prevEl: carousel.querySelector('.article__carousel__nav__left') as HTMLElement,
     },
+    spaceBetween: 12,
     modules: [Navigation],
   })
 })

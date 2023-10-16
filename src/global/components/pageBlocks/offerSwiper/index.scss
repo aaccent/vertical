@@ -30,6 +30,7 @@
     color: $white;
     left: 80px;
     top: 80px;
+
     z-index: $z-2;
     width: min-content;
     text-transform: uppercase;
@@ -42,6 +43,8 @@
     transform: translateX(100%);
     top: 498px;
     z-index: $z-2;
+    letter-spacing: 0.96px;
+
     @include manrope-24();
     text-transform: uppercase;
   }
@@ -67,6 +70,7 @@
     &__item{
       @include manrope-24();
       display: flex;
+      align-items: center;
       opacity: .6;
       transition: opacity 250ms ease;
       gap: 15px;
@@ -108,6 +112,61 @@
         height: 100%;
         background-color: $white;
       }
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    height: 668px;
+    &__title{
+      top: 20px;
+      font-size: 48px;
+      left: 20px;
+      line-height: 110%;
+      letter-spacing: 0.35px;
+
+    }
+    &__text{
+      bottom: 92px;
+      left: 20px;
+      transform: none;
+      top: auto;
+      right: 20px;
+      line-height: 130%;
+      width: 80%;
+      height: max-content;
+      letter-spacing: 0.72px;
+
+    }
+    &__pagination{
+      left: 20px;
+      right: 20px;
+      bottom: 40px;
+      gap: 16px;
+      transform: none;
+      &__progress{
+        width: 20px;
+      }
+      &__item{
+        font-size: 18px;
+        line-height: 90%;
+        align-items: center;
+        gap: 8px;
+        
+        &::before, &::after{
+          height: 32px;
+          width: 9px;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: $tablet800) {
+    &__title{
+      font-size: 35px;
+    }
+    &__text{
+      @include manrope-17-m();
+      line-height: 130%;
+      width: auto;
+
     }
   }
 }

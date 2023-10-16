@@ -1,0 +1,80 @@
+include global/features/popup/template
++popup('filter-popup', "filter-popup")
+  .filter-popup__header 
+    .button-close.button-close_gray.close-btn(data-action="close-popup")
+      img(src = require("media/static/icons/close/close_black.svg"))
+    .filter-popup__title Фильтр
+    .filter-popup__reset сбросить
+  .filter-popup__body
+    .accordion.filter-popup__accordion.accordion_active
+      .accordion__header.filter-popup__accordion__header
+        span Тип проекта
+        img(src = require("media/static/icons/triangle/triangle_black_down.svg"))
+      .accordion__body
+        .accordion__body__wrapper
+          .radio__list
+            .radio.radio_active(data-name="project_type" data-value="test") 
+              .radio__mark
+              span Все проекты (16)
+              input(hidden)
+            .radio(data-name="project_type" data-value="test") 
+              .radio__mark
+              span Аренда (10)
+              input(hidden)
+            .radio(data-name="project_type" data-value="test") 
+              .radio__mark 
+              span Продажа (6)
+              input(hidden)
+    .accordion.filter-popup__accordion.accordion_active
+      .accordion__header.filter-popup__accordion__header
+        span Тип недвижимости
+        img(src = require("media/static/icons/triangle/triangle_black_down.svg"))
+      .accordion__body
+        .accordion__body__wrapper
+          .checkbox__list
+            .checkbox(data-name="project_type" data-value="fasdfasd") 
+              .checkbox__mark 
+              span Гостиницы (4)
+              input(hidden)
+            .checkbox.checkbox_active(data-name="project_type" data-value="fasdfasd")
+              .checkbox__mark 
+              span Жилищные комплексы (3)
+              input(hidden)
+            .checkbox.checkbox_active(data-name="project_type" data-value="fasdfasd") 
+              .checkbox__mark 
+              span Промышленные объекты (1)
+              input(hidden)
+            .checkbox(data-name="project_type" data-value="fasdfasd")  
+              .checkbox__mark
+              span Склады (3)
+              input(hidden)
+            .checkbox.checkbox_active(data-name="project_type" data-value="fasdfasd")  
+              .checkbox__mark
+              span Торговые комплексы (5)
+              input(hidden)
+            .checkbox(data-name="project_type" data-value="fasdfasd") 
+              .checkbox__mark 
+              span ТРК (1)
+              input(hidden)
+            .checkbox(data-name="project_type" data-value="fasdfasd")
+              .checkbox__mark 
+              span Помещения общего назначения (6)
+              input(hidden)
+
+    .accordion.filter-popup__accordion.accordion_active
+      .accordion__header.filter-popup__accordion__header
+        span Стадия постройки
+        img(src = require("media/static/icons/triangle/triangle_black_down.svg"))
+      .accordion__body
+        .accordion__body__wrapper
+          .radio__list
+            .radio 
+              .radio__mark(data-name="project_type") 
+              span Объект сдан (12)
+              input(hidden)
+            .radio 
+              .radio__mark(data-name="project_type") 
+              span Идёт строительство (4)
+              input(hidden)
+  .filter-popup__bottom 
+    .button.button_blue показать 16 проектов

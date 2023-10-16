@@ -4,11 +4,15 @@
 @use "components/ui/container";
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/general/typography' as *;
+@use 'src/styles/utils/media' as *;
 
 .filter{
   &__content{
     display: flex;
     justify-content: space-between;
+    &__mobile{
+      display: none;
+    }
   }
   &_border{
     border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
@@ -31,6 +35,14 @@
       display: flex;
       gap: 12px;
     }
+    .badge{
+      padding-right: 10px;
+      padding-left: 15px;
+      img{
+        width: 9px;
+        height: 9px;
+      }
+    }
     &__reset{
       display: flex;
       gap: 8px;
@@ -44,11 +56,29 @@
     color: $white;
     @include manrope-14();
     opacity: 0.5;
+    text-transform: uppercase;
   }
   &__dropdown{
     padding: 16px 20px;
     border-radius: 50px;
     border: 1px solid $white;
+    &_active{
+      display: flex;
+      justify-content: space-between;
+      color: #0B3882;
+      flex-direction: row-reverse;
+      &::before{
+        content: "";
+        width: 17px;
+        height: 17px;
+        display: block;
+        background-image: url('media/static/icons/checkmark/checkmark_blue.svg');
+        background-size: contain;
+      }
+    }
+    &_reset{
+      opacity: 0.6;
+    }
   }
   &__left{
     align-items: center;
@@ -72,6 +102,46 @@
     }
     .active{
       opacity: 1;
+    }
+  }
+
+  @media screen and (min-width: $desktop1650){
+    &__dropdown{
+
+      .dropdown__title{
+        gap: 46px;
+      }
+    }
+  }
+
+  @media screen and (max-width: $desktop1460) {
+    .filter__founded{
+      display: none;
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    &__content{
+      display: none;
+      &__mobile{
+        display: flex;
+        gap: 10px;
+        border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
+        padding-bottom: 20px;
+      }
+    }
+    &__button{
+      @include manrope-12();
+      height: 42px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 50px;
+      border: 1px solid $white;
+      color: $white;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0 20px;
     }
   }
 }

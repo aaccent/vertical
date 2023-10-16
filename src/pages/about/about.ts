@@ -1,6 +1,6 @@
 import Swiper from 'swiper'
 import { Navigation, Autoplay } from 'swiper/modules'
-
+import 'components/ui/buttons'
 
 const leadSwiper = new Swiper('.history__swiper', {
   navigation: { nextEl: '.arrow-button_right', prevEl: '.arrow-button_left' },

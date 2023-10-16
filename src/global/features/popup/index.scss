@@ -4,7 +4,6 @@
 @use 'src/styles/utils/media' as *;
 
 .popup {
-  padding: 15px;
   position: fixed;
   z-index: 100;
   top: 0;
@@ -15,7 +14,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   visibility: hidden;
-  transition: opacity, visibility;
+  transition: opacity, visibility, transform;
   transition-timing-function: ease-in-out;
   transition-duration: 0.3s;
   opacity: 0;
@@ -29,12 +28,12 @@
   &__inner {
     margin: auto;
     position: relative;
-    padding: 15px;
+    
   }
   .close-btn {
     z-index: 30;
-    top: -30px;
-    right: 0;
+    top: 20px;
+    left: 20px;
     position: absolute;
   }
   @media screen and (min-width: $tablet1200) {
@@ -47,6 +46,11 @@
       top: -30px;
       right: -30px;
     }
-    
+  }
+  @media screen and (max-width: $tablet1200) {
+    &__inner{
+      width: 100%;
+      height: 100%;
+    }
   }
 }

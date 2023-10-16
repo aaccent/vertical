@@ -1,5 +1,6 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/general/typography' as *;
+@use 'src/styles/utils/media' as *;
 
 .badge {
   text-transform: uppercase;
@@ -15,7 +16,6 @@
   align-items: center;
   gap: 5px;
   width: max-content;
-
   &_dark {
     color: $white;
     background-color: $black;
@@ -23,6 +23,11 @@
   &_blue {
     color: $white;
     background-color: #0b3882;
+  }
+  @media screen and (max-width: $tablet800) {
+    font-size: 10px;
+    padding: 0 10px;
+    height: 22px;
   }
 }
 
@@ -39,7 +44,7 @@
     display: flex;
     width: 36px;
     height: 36px;
-    background-size: 18px;
+    background-size: 55%;
     background-position: center;
     background-repeat: no-repeat;
     border: 1px solid $white;

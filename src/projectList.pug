@@ -11,10 +11,51 @@ block append main
     ul.breadcrumb
       li.breadcrumb__item главная
       li.breadcrumb__item.breadcrumb__item_active проекты
-    .project__title ПРОЕКТЫ
+    .project__title 
+      span ПРОЕКТЫ
+      .filter__founded 15 проектов найдено
+    .filter.project__filter
+      .filter__content.filter_border
+        .filter__left
+          include global/components/ui/quickFilter/template
+          +dropdown("Тип недвижимости").filter__dropdown
+            ul.dropdown__list
+              li.dropdown__list__item ТРК
+              li.dropdown__list__item Жилищные комплексы
+              li.dropdown__list__item Промышленные объекты
+              li.dropdown__list__item Склады
+          +dropdown("Стадия постройки").filter__dropdown
+            ul.dropdown__list
+              li.dropdown__list__item ТРК
+              li.dropdown__list__item Жилищные комплексы
+              li.dropdown__list__item Промышленные объекты
+              li.dropdown__list__item Склады
+          .filter__founded 15 проектов найдено
+        .filter__right
+          span.active плиткой
+          .button-switch
+            .button-switch__mark
+          span на карте
+      .filter__content__mobile
+        .filter__button
+          span фильтр
+          img(src=require('media/static/icons/filter/filter_white.svg'))
+        .filter__button(data-popup='project-popup', data-action='popup')
+          span на карте
+          img(src=require('media/static/icons/location.svg'))
+    .filter__selected
+      .filter__selected__right
+        .badge.badge_blue Жилищный комплекс
+          img(src=require('media/static/icons/close/close_white.svg'))
+        .badge.badge_blue коммерческая недвижимость
+          img(src=require('media/static/icons/close/close_white.svg'))
+      .filter__selected__reset Сбросить фильтры
+        img(src=require('media/static/icons/update/update_white.svg'))
     include global/components/pageBlocks/projectsList/template
    
     .project__wrapper-button
-      .button.button_circle.project__button показать ещё
+      .button.button_circle.project__button 
+        span показать ещё
+        span ещё
 block append scripts
   script(src=require('pages/projectList/projectList.ts'))

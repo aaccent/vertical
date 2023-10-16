@@ -11,7 +11,8 @@ block append main
       ul.breadcrumb
         li.breadcrumb__item главная
         li.breadcrumb__item.breadcrumb__item_active о компании
-      .about-header__title ВЕРТИКАЛЬ
+      .about-header__title 
+        img(src=require('media/static/icons/vertical_text.svg'))
       .about-header__bottom
         .about-header__text ГК Вертикаль успешно работает с 2005 года и является одним из лидеров в девелопменте жилой и коммерческой недвижимости
         .arrow-button.arrow-button_down.arrow-button_gray
@@ -19,7 +20,9 @@ block append main
       img(src=require('media/static/about_company_lead.webp'))
   include global/components/pageBlocks/aboutCompany/template
   +about-company
-    .button.button_gray строительство жилых зданий
+    .button.button_gray 
+      span строительство жилых зданий
+      span строительство
     .button.button_gray продажа квартир
   .company-worth
     .company-worth__content
@@ -46,32 +49,65 @@ block append main
           span история
         div
           .history__title Торжественное открытие нашего первого офиса
-          .history__content
-            .history__swiper.swiper: .swiper-wrapper
-              .swiper-slide.history__slide
-                img(src=require('media/content/content_12.webp'))
-              .swiper-slide.history__slide
-                img(src=require('media/content/content_11.webp'))
-              .swiper-slide.history__slide
-                img(src=require('media/content/content_12.webp'))
-      .arrow-button.arrow-button_left.arrow-button_large
-      .arrow-button.arrow-button_right.arrow-button_large
-    .container_left
-      div 
-      div
-        .history__year-view
-          .history__year-view__year 2008
-          .history__year-view__scale
-            .history__year-view__scale__edge
-              p 2005
-              p 2023
-            img.history__year-view__scale__image(src=require('media/static/icons/scale.svg'))
+    .container_left.history__content__wrapper
+      div.history__left-btn
+        .arrow-button.arrow-button_left.arrow-button_large.history__nav
+      div.history__content
+        .history__view
+          .history__swiper.swiper: .swiper-wrapper
+            .swiper-slide.history__slide
+              img(src=require('media/content/content_12.webp'))
+            .swiper-slide.history__slide
+              img(src=require('media/content/content_11.webp'))
+            .swiper-slide.history__slide
+              img(src=require('media/content/content_12.webp'))
+          .arrow-button.arrow-button_right.arrow-button_large.history__nav
+        .history__year-view__wrapper
+          .history__year-view
+            .history__year-view__year 2008
+            .history__year-view__scale
+              .history__year-view__scale__edge
+                p 2005
+                p 2023
+              img.history__year-view__scale__image(src=require('media/static/icons/scale.svg'))
+
     include global/components/pageBlocks/ourProject/template
     .about-project-list
+      .filter.filter_border
+        .filter__content
+          .filter__left
+            include global/components/ui/quickFilter/template
+            +dropdown("Тип недвижимости").filter__dropdown
+              ul.dropdown__list
+                li.dropdown__list__item ТРК
+                li.dropdown__list__item Жилищные комплексы
+                li.dropdown__list__item Промышленные объекты
+                li.dropdown__list__item Склады
+            +dropdown("Стадия постройки").filter__dropdown
+              ul.dropdown__list
+                li.dropdown__list__item ТРК
+                li.dropdown__list__item Жилищные комплексы
+                li.dropdown__list__item Промышленные объекты
+                li.dropdown__list__item Склады
+          .filter__right
+            span.active плиткой
+            .button-switch
+              .button-switch__mark
+            span на карте
+        .filter__content__mobile
+          .filter__button
+            span фильтр
+            img(src=require('media/static/icons/filter/filter_white.svg'))
+          .filter__button(data-popup='project-popup', data-action='popup')
+            span на карте
+            img(src=require('media/static/icons/location.svg'))
+          
       include global/components/pageBlocks/projectsList/template
     
       .project__wrapper-button
-        .button.button_circle.project__button показать ещё
+        .button.button_circle.project__button 
+          span показать ещё
+          span ещё
   .awards 
     .container_left
       .title.title_gray

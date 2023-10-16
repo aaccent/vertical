@@ -1,16 +1,16 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/media' as *;
 
-@mixin container-x() {
-  padding-right: $parent-padding-mobile;
-  padding-left: $parent-padding-mobile;
+@mixin container-x($type: "padding") {
+  #{$type}-right: $parent-padding-mobile;
+  #{$type}-left: $parent-padding-mobile;
   @media screen and (min-width: $tablet1200) {
-    padding-right: $parent-padding-1200;
-    padding-left: $parent-padding-1200;
+    #{$type}-right: $parent-padding-1200;
+    #{$type}-left: $parent-padding-1200;
   }
   @media screen and (min-width: $desktop1460) {
-    padding-right: $parent-padding-1400;
-    padding-left: $parent-padding-1400;
+    #{$type}-right: $parent-padding-1400;
+    #{$type}-left: $parent-padding-1400;
   }
 }
 
@@ -18,6 +18,12 @@
   &_left {
     display: grid;
     grid-template-columns: 20% 80%;
+  }
+  @media screen and (max-width: $tablet1200) {
+    &_left{
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
   }
 }
 

@@ -5,27 +5,59 @@
 @use 'components/ui/container' as *;
 @use 'src/global/components/pageBlocks/newsCard';
 
-.blog{
+.blog {
   @include container-x();
   padding-top: 125px;
-  &__button{
+  &__button {
     height: max-content;
     flex-shrink: 0;
   }
-  &__header{
+  &__more{
+    display: none;
+  }
+  &__header {
     display: flex;
     justify-content: space-between;
     padding-bottom: 60px;
-    border-bottom: 1px solid #D9D9D9;
+    border-bottom: 1px solid #d9d9d9;
     gap: 60px;
   }
-  &__title{
+  &__content{
+    display: flex;
+    flex-direction: column;
+  }
+  &__title {
     text-transform: uppercase;
     @include tenor-61();
+    margin-top: -6px;
   }
   @media screen and (min-width: $desktop1460) {
-    &__title{
+    &__title {
       @include tenor-90();
+    }
+  }
+  @media screen and (max-width: $tablet800) {
+    &__title {
+      font-size: 35px;
+      letter-spacing: 0.35px;
+      margin-top: 0;
+    }
+    &__more{
+      display: flex;
+      align-self: center;
+      margin-top: 32px;
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    padding-top: 40px;
+    &__title {
+      line-height: 110%;
+    }
+    &__button {
+      display: none;
+    }
+    &__header {
+      padding-bottom: 24px;
     }
   }
 }

@@ -1,48 +1,109 @@
 @use 'components/ui/breadcrumb';
 @use 'components/ui/container' as *;
-@use "components/ui/quickFilter";
+@use 'components/ui/quickFilter';
 @use 'src/global/components/pageBlocks/newsCard';
 @use 'src/styles/general/variables' as *;
 @use 'components/ui/container' as *;
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
 
-.blue-section{
+.blue-section {
   @include container-x();
   background-color: $blue;
   padding-top: 130px;
   padding-bottom: 130px;
+  @media screen and (max-width: $tablet1200) {
+    padding-bottom: 80px;
+    padding-top: 95px;
+  }
 }
 
-.press-center{
-  &__title{
+.button_circle{
+  span:last-child{
+    display: none;
+  }
+  @media screen and (max-width: $tablet1200) {
+    span:last-child{
+      display: block;
+    }
+    span:first-child{
+      display: none;
+    }
+  }
+}
+
+.press-center {
+  &__title {
     @include tenor-90();
+    font-size: 61px;
     color: $white;
   }
-  &__header{
+  &__header {
     margin-top: 66px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  &__month-divider{
+  &__month-divider {
     border-top: 1px solid rgba($color: $white, $alpha: 0.2);
     margin-top: 40px;
-    .title{
+    .title {
       margin-top: 35px;
     }
-    .news-card:last-child{
+    .news-card:last-child {
       border-bottom: none;
     }
   }
-  &__month-divider:last-child{
-    .news-card:last-child{
-      border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);;
+  &__month-divider:last-child {
+    .news-card:last-child {
+      border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
     }
   }
-  &__wrapper-button{
+  &__wrapper-button {
     margin-top: 80px;
     display: flex;
     justify-content: center;
+  }
+
+  &__quick-filter__mobile {
+    display: none;
+  }
+
+  @media screen and (min-width: $desktop1460) {
+    &__title {
+      font-size: 90px;
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    &__header {
+      align-items: start;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    &__quick-filter__desktop {
+      display: none;
+    }
+    &__quick-filter__mobile {
+      width: 100%;
+      display: flex;
+      .quick-filter__item {
+        width: 100%;
+      }
+    }
+    &__month-divider {
+      margin-top: 0;
+      .title {
+        display: none;
+      }
+    }
+  }
+  @media screen and (max-width: $tablet800) {
+    &__month-divider {
+      .news-card {
+        flex-direction: column;
+      }
+    }
   }
 }

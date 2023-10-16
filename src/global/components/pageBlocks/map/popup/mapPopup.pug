@@ -1,0 +1,12 @@
+include global/features/popup/template
++popup('map-popup', "map-popup")
+  .button-close.close-btn(data-action="close-popup")
+    img(src = require("media/static/icons/close/close_white.svg"))
+  .map-popup__map-view 
+  .map-popup__bottom 
+    .button.button_white 
+      span фильтр
+      img(src = require("media/static/icons/filter/filter_gray.svg"))
+    .button.button_white 
+      span списком
+      img(src = require("media/static/icons/filter/filter_gray.svg"))

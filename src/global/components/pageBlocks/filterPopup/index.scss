@@ -1,0 +1,59 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+@use 'src/global/components/ui/accordion';
+@use 'src/global/components/ui/checkbox';
+
+.filter-popup {
+  &__inner {
+    height: 100%;
+    width: 100%;
+    background-color: $white;
+    padding: 20px;
+    padding-bottom: 30px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 32px;
+    padding-top: 12px;
+    border-bottom: 1px solid rgba($color: #d9d9d9, $alpha: 0.4);
+    .close-btn {
+      position: static;
+    }
+  }
+  &__title {
+    @include manrope-24();
+    text-transform: uppercase;
+  }
+  &__reset {
+    color: rgba($color: $black, $alpha: 0.5);
+    @include manrope-12();
+    text-transform: uppercase;
+  }
+  &__bottom {
+    padding-top: 34px;
+    border-top: 1px solid rgba($color: #d9d9d9, $alpha: 0.4);
+    .button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  &__body{
+    overflow: auto;
+  }
+  &__accordion {
+    .accordion__header {
+      border-top: 1px solid rgba($color: #d9d9d9, $alpha: 0.4);
+    }
+    &:first-child {
+      .accordion__header {
+        border-top: none;
+      }
+    }
+  }
+}

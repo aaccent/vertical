@@ -27,25 +27,26 @@
   }
   &_border-right{
     &::before{
-      right: 0;
+      right: -4px;
     }
   }
   &_border-left{
     &::before{
-      left: 0;
+      left: -4px;
     }
   }
   &__item {
     transition: background-color 250ms ease;
     border-radius: 50px;
     padding: 10px 20px;
+    text-transform: uppercase;
+    align-items: center;
+    display: flex;
     cursor: pointer;
     &:hover {
       color: $blue;
       background-color: $white;
-      &::before{
-        display: none;
-      }
+
     }
   }
   &_active {

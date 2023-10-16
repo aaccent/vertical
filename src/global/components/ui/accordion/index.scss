@@ -1,0 +1,28 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+
+.accordion {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+    span {
+      line-height: 90%;
+      font-family: 'manrope';
+      font-size: 18px;
+    }
+  }
+  
+  &__body {
+    overflow: hidden;
+    height: 0;
+    transition: height 250ms ease;
+    &__wrapper{
+      padding-bottom: 20px;
+    }
+  }
+}

@@ -1,11 +1,14 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/media' as *;
 
 
 .breadcrumb{
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  row-gap: 10px;
   @include reset-list();
   color: $white;
   &_black{
@@ -30,6 +33,11 @@
       display: block;
       right: -1rem;
       transform: translate(50%, -25%);
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    &__item{
+      font-size: 10px;
     }
   }
 }

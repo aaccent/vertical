@@ -1,4 +1,4 @@
-.contact-form
+.contact-form#contact-form
   .contact-form__content
     .contact-form__title Оставьте заявку на консультацию
     form(action='')
@@ -13,7 +13,8 @@
           p Нажимая кнопку «Отправить», вы соглашаетесь с
           a(href) политикой конфиденциальности
 footer.footer
-  .footer__title ВЕРТИКАЛЬ
+  .footer__title 
+    img(src=require("media/static/icons/vertical_text.svg"))
   .footer__content
     img.footer__logo(src=require('media/static/icons/vertical/vertical_logo_column.svg'))
     .footer__content__middle
@@ -32,6 +33,8 @@ footer.footer
 include global/features/popup/template
 +popup('request-accept', "request-accept")
   .button-close.close-btn(data-action="close-popup")
-  .request-accept__title Заявка успешно отправлена!
-  .request-accept__text Мы получили ваш запрос, менеджер свяжется с вами в течение 2-х рабочих дней
+    img(src = require("media/static/icons/close/close_white.svg"))
+  .request-accept__text-block
+    .request-accept__title Заявка успешно отправлена!
+    .request-accept__text Мы получили ваш запрос, менеджер свяжется с вами в течение 2-х рабочих дней
   .button.button_white отлично

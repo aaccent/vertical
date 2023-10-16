@@ -4,6 +4,7 @@ import { initOfferSwiper } from 'global/components/pageBlocks/offerSwiper'
 import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
+import "features/popup"
 import { initPageViewer } from 'global/components/ui/pageViewer'
 import { renderFilledArc } from 'global/features/arcProgress'
 
@@ -37,10 +38,10 @@ const renderMobilePages = (swiper: Swiper, pages = null) => {
 
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation: { nextEl: '.page-viewer__right', prevEl: '.page-viewer__left' },
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
+  // autoplay: {
+  //   delay: 3000,
+  //   disableOnInteraction: false,
+  // },
   on: {
     init: renderMobilePages,
     slideChange: (swiper: Swiper) => {
@@ -93,8 +94,16 @@ initPageViewer(leadSwiper)
 initOfferSwiper('.offer__swiper')
 
 const seoBlock = document.querySelector('.seo-block') as HTMLElement
-const seoBlockParagraph = (seoBlock.querySelector('.seo-block__text') as HTMLElement).getBoundingClientRect().height
-;(seoBlock.querySelector('.seo-block__text') as HTMLElement).style.height = `${seoBlockParagraph}px`
+const text = seoBlock.querySelector('.seo-block__text') as HTMLElement
+let seoBlockParagraph = (seoBlock.querySelector('.seo-block__text p') as HTMLElement)
+
+text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
+
+window.addEventListener("resize", () => {
+  text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
+  seoBlock.classList.remove('seo-block_open')
+
+})
 
 const calcSeoBlockTextHeight = (seoBlock: any) => {
   let height = 0
@@ -104,15 +113,15 @@ const calcSeoBlockTextHeight = (seoBlock: any) => {
   return height
 }
 
+
 document.querySelector('.seo-block__expand')?.addEventListener('click', () => {
-  const text = seoBlock.querySelector('.seo-block__text') as HTMLElement
   if (seoBlock.classList.contains('seo-block_open')) {
     seoBlock.classList.remove('seo-block_open')
-    text.style.height = `${seoBlockParagraph}px`
-
+    text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
     return
   }
   const height = calcSeoBlockTextHeight(seoBlock)
+  
   text.style.height = `${height}px`
   seoBlock.classList.add('seo-block_open')
 })
@@ -126,10 +135,10 @@ const moveMobilePage = (width: number) => {
   const mobile = window.matchMedia('(max-width: 800px)')
 
   if (table.matches) {
-    top = slideText.getBoundingClientRect().y - 20
+    top = slideText.getBoundingClientRect().top - 20
     left = slideText.getBoundingClientRect().x
   } else if (mobile.matches) {
-    top = slideText.getBoundingClientRect().y + 7.5
+    top = slideText.getBoundingClientRect().top + 7.5
     left = slideText.getBoundingClientRect().right
   }
   top += window.scrollY

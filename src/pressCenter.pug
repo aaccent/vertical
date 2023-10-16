@@ -11,10 +11,14 @@ block append main
       li.breadcrumb__item.breadcrumb__item_active проекты
     .press-center__header 
       .press-center__title пресс-центр  
-      .quick-filter 
+      .quick-filter.press-center__quick-filter__desktop
         .quick-filter__item.quick-filter_active Интересные статьи
         .quick-filter__item Новости компании
-
+        
+      .quick-filter.press-center__quick-filter__mobile
+        .quick-filter__item.quick-filter_active статьи
+        .quick-filter__item Новости
+        
     .container_left.press-center__month-divider
       .title.title_white
         span июнь 2023
@@ -75,6 +79,8 @@ block append main
               span июня
      
         .press-center__wrapper-button
-          .button.button_circle показать ещё
+          .button.button_circle 
+            span показать ещё
+            span ещё
 block append scripts
   script(src=require('pages/pressCenter/pressCenter.ts'))

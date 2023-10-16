@@ -5,12 +5,12 @@ block append head
 
 block append main
   include global/layout/general/header/template
-  include global/components/pageBlocks/companyName/template
 
   +header
+
   .lead-section
-    +company-name.lead-section__title 
-    
+    .lead-section__title.logo-title
+      img(src=require('media/static/icons/vertical_text.svg'))
     .page-viewer
       img.page-viewer__left(src=require('media/static/icons/arrow/arrow_small.svg'))
       .page-viewer__content
@@ -54,7 +54,6 @@ block append main
   .blue-section
     include global/components/pageBlocks/ourProject/template
 
-    include global/components/pageBlocks/filter/template
     .filter.building-filter
       .filter__content
         .filter__left
@@ -62,54 +61,67 @@ block append main
           +dropdown("Тип недвижимости").filter__dropdown
             ul.dropdown__list
               li.dropdown__list__item ТРК
-              li.dropdown__list__item Жилищные комплексы
+              li.dropdown__list__item.filter__dropdown_active Жилищные комплексы
               li.dropdown__list__item Промышленные объекты
               li.dropdown__list__item Склады
+              li.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
           +dropdown("Стадия постройки").filter__dropdown
             ul.dropdown__list
               li.dropdown__list__item ТРК
               li.dropdown__list__item Жилищные комплексы
               li.dropdown__list__item Промышленные объекты
-              li.dropdown__list__item Склады
+              li.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
         .filter__right
           span.active плиткой
           .button-switch
             .button-switch__mark
           span на карте
-
-    .map
-      .map__content
-        include global/components/pageBlocks/map/projectList
-        //- include global/components/pageBlocks/map/projectCard
-        //- include global/components/pageBlocks/map/infrastructureList
-      .map__view
-
+      .filter__content__mobile
+        .filter__button
+          span фильтр
+          img(src=require('media/static/icons/filter/filter_white.svg'))
+        .filter__button(data-popup='project-popup', data-action='popup')
+          span на карте
+          img(src=require('media/static/icons/location.svg'))
+    .map-block
+      .map
+        .map__content
+          include global/components/pageBlocks/map/projectList
+          //- include global/components/pageBlocks/map/projectCard
+          //- include global/components/pageBlocks/map/infrastructureList
+        .map__view
+      .map-block__project-list
+        include global/components/pageBlocks/projectsList/template
+        .project__wrapper-button
+          .button.button_circle.project__button ещё
     .partners
       .container_left
-        .title.title_white.container_left__side
+        .title.title_white
           span партнеры
-        .div
+        div
           .partners__title Наши партнеры имеют многолетний опыт работы и авторитет на рынке недвижимости
-      .partners__row
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/donstroy.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/sberbank.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/fsk.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/gazprombank.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/megafon.svg'))
-      .partners__row
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/akbars.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/vtb.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/sdek.svg'))
-        .partners__row__image
-          img(src=require('media/static/icons/partners_logo/mir.svg'))
+      .partners__list
+        .partners__desktop 
+          img(src = require('media/static/icons/partners_section.svg'))
+        .partners__row
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/donstroy.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/sberbank.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/fsk.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/gazprombank.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/megafon.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/akbars.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/vtb.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/sdek.svg'))
+          .partners__row__image
+            img(src=require('media/static/icons/partners_logo/mir.svg'))
 
   .blog
     .container_left
@@ -141,6 +153,7 @@ block append main
               .news-card__date
                 p 15
                 span июня
+          .button.button_circle.blog__more.button_circle_black ещё
         .seo-block
           .seo-block__title SEO TEXT
           .seo-block__text
@@ -148,5 +161,8 @@ block append main
             p Одной из важнейших характеристик деятельности ГК является социальная ответственность. Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей, а расположенные на первых этажах коммерческие объекты — предоставить место для работы сотрудникам десятков организаций. Главная цель компании — сделать возможность купить квартиру от застройщика доступной максимальному количеству людей. Сорбция, несмотря на внешние воздействия, поступательно возникает лесной
           .seo-block__expand развернуть
             img(src=require('media/static/icons/arrow/arrow_small_blue_down.svg'))
+            img(src=require('media/static/icons/triangle/triangle_blue_right.svg'))
+  include global/components/pageBlocks/map/popup/mapPopup
+  include global/components/pageBlocks/map/popup/projectPopup
 block append scripts
   script(src=require('pages/index/index.ts'))

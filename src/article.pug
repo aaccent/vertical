@@ -18,14 +18,16 @@ block append main
           .article__info__author Александр Горький
           .article__info__date 25 апреля 2023
         .article__share-list
-          .button.button_social
+          .button.button_social.article__share-list_collapsible
             img(src=require('media/static/icons/share/whatsapp.svg'))
-          .button.button_social
+          .button.button_social.article__share-list_collapsible
             img(src=require('media/static/icons/share/telegram.svg'))
-          .button.button_social
+          .button.button_social.article__share-list_collapsible
             img(src=require('media/static/icons/share/vkontakte.svg'))
-          .button.button_social
+          .button.button_social.article__share-list_collapsible
             img(src=require('media/static/icons/share/link.svg'))
+          .button.button_social.article__share-list_initiator
+            img(src = require("media/static/icons/Share.svg"))
     .article__image
       img(src=require('media/content/content_21.png'))
     .container_left
@@ -67,7 +69,7 @@ block append main
                 .article__media-block__play-button
                   img(src=require('media/static/icons/triangle/triangle_blue_right.svg'))
                 img.article__media-block__thumb(src=require('media/content/content_19.webp'))
-            video(src=require('media/content/videoplayback.mp4'), controls)
+            video( controls)
           .article__media-block__caption Текстовая сноска
 
         ul.article__numbered-list
@@ -88,5 +90,37 @@ block append main
                 img(src=require('media/static/icons/arrow/arrow_small_gray.svg'))
               .article__carousel__nav__right
                 img(src=require('media/static/icons/arrow/arrow_small_gray.svg'))
+    .blog
+      .container_left
+        .title.title_gray.container_left__side
+          span похожие статьи
+        .blog-container
+          .blog__header
+            .blog__title также может понравиться
+            .blog__button.button.button_gray смотреть все
+              img(src=require('media/static/icons/arrow/arrow_short.svg'))
+          .blog__content
+            .news-card
+              .news-card__image
+                img(src=require('media/content/content_2.webp'))
+              .news-card__content
+                .news-card__content__text
+                  .news-card__title Использование материнского капитала для квартиры
+                  .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+                .news-card__date
+                  p 17
+                  span июня
+            .news-card
+              .news-card__image
+                img(src=require('media/content/content_2.webp'))
+              .news-card__content
+                .news-card__content__text
+                  .news-card__title Использование материнского капитала для квартиры
+                  .news-card__text Одной из важнейших характеристик деятельности ГК является социальная ответственность...
+                .news-card__date
+                  p 15
+                  span июня
+            .button.button_circle.blog__more.button_circle_black ещё
+
 block append scripts
   script(src=require('pages/article/article.ts'))

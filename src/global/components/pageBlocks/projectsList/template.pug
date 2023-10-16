@@ -1,33 +1,3 @@
-.filter.project__filter
-  .filter__content.filter_border
-    .filter__left
-      include global/components/ui/quickFilter/template
-      +dropdown("Тип недвижимости").filter__dropdown
-        ul.dropdown__list
-          li.dropdown__list__item ТРК
-          li.dropdown__list__item Жилищные комплексы
-          li.dropdown__list__item Промышленные объекты
-          li.dropdown__list__item Склады
-      +dropdown("Стадия постройки").filter__dropdown
-        ul.dropdown__list
-          li.dropdown__list__item ТРК
-          li.dropdown__list__item Жилищные комплексы
-          li.dropdown__list__item Промышленные объекты
-          li.dropdown__list__item Склады
-      .filter__founded 15 проектов найдено
-    .filter__right
-      span.active плиткой
-      .button-switch
-        .button-switch__mark
-      span на карте
-  .filter__selected
-    .filter__selected__right
-      .badge.badge_blue Жилищный комплекс
-        img(src=require('media/static/icons/close/close_white.svg'))
-      .badge.badge_blue коммерческая недвижимость
-        img(src=require('media/static/icons/close/close_white.svg'))
-    .filter__selected__reset Сбросить фильтры
-      img(src=require('media/static/icons/update/update_white.svg'))
 .project__list
   .project__list__row
     .project__list__item
@@ -47,7 +17,7 @@
         .project__list__item__header
           .project__list__item__badges
             .badge.badge_dark
-              img(src=require('media/static/icons/timer.svg'))
+              img(src=require('media/static/icons/timer_second.svg'))
               span март 2023
             .badge.badge_white Жилищный комплекс
           .price-badge От 6 600 000 ₽
@@ -62,7 +32,7 @@
         .project__list__item__header
           .project__list__item__badges
             .badge.badge_dark
-              img(src=require('media/static/icons/timer.svg'))
+              img(src=require('media/static/icons/timer_second.svg'))
               span март 2023
             .badge.badge_white Жилищный комплекс
           .price-badge От 4 200 000 ₽
@@ -76,7 +46,7 @@
         .project__list__item__header
           .project__list__item__badges
             .badge.badge_dark
-              img(src=require('media/static/icons/timer.svg'))
+              img(src=require('media/static/icons/timer_second.svg'))
               span март 2023
             .badge.badge_white коммерция
           .price-badge ООт 5 000 000 ₽

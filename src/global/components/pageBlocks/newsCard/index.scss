@@ -11,7 +11,8 @@
   gap: 42px;
   &__image {
     flex-shrink: 0;
-    width: 368px;
+    width: 265px;
+
     height: 215px;
     img {
       object-fit: cover;
@@ -23,7 +24,7 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    gap: 182px;
+    gap: 0;
     &__text {
       display: flex;
       flex-direction: column;
@@ -63,6 +64,62 @@
     }
     .news-card__date {
       color: $white;
+    }
+  }
+
+  @media screen and (min-width: $desktop1460) {
+    &__image {
+      width: 368px;
+    }
+    &__content{
+      gap: 182px;
+    }
+  }
+
+  @media screen and (max-width: $tablet1200) {
+    &__content{
+      gap: 10px;
+    }
+    &__image{
+      width: 40%;
+    }
+
+  }
+
+  @media screen and (max-width: $tablet800) {
+    margin-top: 20px;
+    flex-direction: column;
+    padding-bottom: 20px;
+    position: relative;
+    gap: 14px;
+    &__image{
+      width: 60%;
+      height: 118px;
+    }
+    &__date{
+      position: absolute;
+      right: 0;
+      top: 0;
+      span{
+        font-size: 10px;
+      }
+      p{
+        font-size: 28px;
+        line-height: 90%;
+      }
+    }
+    &__content{
+      flex-direction: column;
+      gap: 0;
+      &__text{
+        gap: 4px;
+      }
+    }
+    &__title{
+      font-size: 18px;
+    }
+    &__text{
+      font-size: 15px;
     }
   }
 }

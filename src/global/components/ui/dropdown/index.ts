@@ -6,16 +6,16 @@ const hideDropdown = (dropdown: HTMLElement) => {
   setTimeout(() => {
     dropdown.classList.remove('dropdown_shown')
     dropdownContent.style.top = ''
+    delete dropdownContent.dataset.onMouse 
   }, 250)
   dropdownContent.style.height = ''
-  delete dropdownContent.dataset.onMouse 
 }
 
 dropdownList.forEach((dropdown) => {
   const dropdownContent = dropdown.querySelector('.dropdown__content') as HTMLElement
   const dropdownWrapper = dropdown.querySelector('.dropdown__content__wrapper') as HTMLElement
 
-  dropdown.querySelector('.dropdown__title')?.addEventListener('click', () => {
+  dropdown?.addEventListener('click', () => {
     const dropdownBottom = dropdown?.getBoundingClientRect().bottom as number
     const dropdownHeight = dropdownWrapper.getBoundingClientRect().height as number
 
@@ -51,7 +51,6 @@ dropdownList.forEach((dropdown) => {
 document.body.addEventListener('click', () => {
   document.querySelectorAll<HTMLElement>('.dropdown__content[data-on-mouse = false]').forEach((shownDropdown) => {
     hideDropdown(shownDropdown.parentElement as HTMLElement)
-    console.log(shownDropdown.parentElement);
     
   })
 })

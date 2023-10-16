@@ -5,6 +5,7 @@
 
 .dropdown {
   position: relative;
+  cursor: pointer;
   &__content {
     z-index: $z-3;
     visibility: hidden;
@@ -12,7 +13,7 @@
     position: absolute;
     transition: height 250ms ease;
     overflow: hidden;
-    top: calc(100% + 20px);
+    top: calc(100% + 30px);
     left: 0;
     &__wrapper {
       width: 310px;
@@ -35,6 +36,7 @@
     &__item {
       cursor: pointer;
       padding: 15px 25px;
+      text-transform: uppercase;
       @include manrope-14();
       border-bottom: 1px solid #eeeeee;
     }
@@ -52,7 +54,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    cursor: pointer;
+    text-transform: uppercase;
     .black{
       display: none;
     }

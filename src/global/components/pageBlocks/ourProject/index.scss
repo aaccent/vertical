@@ -3,21 +3,19 @@
 @use 'src/styles/general/typography' as *;
 
 .our-projects {
-
   &__body {
     position: relative;
     margin-top: 30px;
   }
   &__title {
-    // @include tenor-248();
     font-size: 148px;
     font-family: 'tenor-sans';
     text-align: center;
     color: $white;
   }
   &__middle-image {
-    height: 720px;
-    width: 610px;
+    height: 620px;
+    width: 510px;
     overflow: hidden;
     border-top-left-radius: 330px;
     border-top-right-radius: 330px;
@@ -32,15 +30,18 @@
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 240px;
+    width: 25%;
   }
   &__text {
     color: $white;
     @include manrope-17();
+    letter-spacing: 0.96px;
+
+    text-transform: uppercase;
   }
   &__right {
-    width: 468px;
-    height: 534px;
+    width: 368px;
+    height: 434px;
     flex-shrink: 0;
     position: absolute;
     right: 0;
@@ -62,32 +63,93 @@
     justify-content: center;
     width: 100%;
   }
-  @media screen and (min-width: $desktop1650) {
-    &__content {
-      margin-top: -140px;
-    }
-    &__text-block {
-      left: 80px;
-    }
+
+  @media screen and (max-width: $tablet1200) {
     &__title {
-      @include tenor-248();
+      font-size: 54px;
+      line-height: 100%;
+      width: 40%;
+      text-align: start;
+    }
+    &__text{
+      letter-spacing: 0.72px;
+
+    }
+    &__body {
+      margin-top: 38px;
+    }
+    &__middle-image {
+      height: 368px;
+      width: 316px;
+    }
+    &__content {
+      margin-top:10px;
+      justify-content: space-between;
+    }
+    &__images {
+      position: relative;
+      height: 368px;
+      display: flex;
     }
     &__text-block {
-      width: 468px;
-    }
-    &__text {
-      @include manrope-24();
+      margin-top: 16px;
+      position: static;
+      transform: none;
+      align-self: center;
+      width: 50%;
     }
     &__right {
-      right: 80px;
+      height: 180px;
+      width: 160px;
+      right: -10px;
+    }
+    &__button {
+      margin-top: 32px;
+    }
+  }
+
+  @media screen and (max-width: $tablet800) {
+    &__content {
+      flex-direction: column-reverse;
+      margin-top: -35px;
+    }
+    &__title{
+      width: 100%;
+      text-align: center;
+    }
+    &__text-block{
+      width: 100%;
+    }
+  }
+
+  @media screen and (min-width: $desktop1460) {
+    &__right {
+      right: 0;
       width: 468px;
       height: 534px;
+      // transform: translate(100%, -50%);
     }
     &__middle-image {
       height: 819px;
       width: 709px;
       border-top-left-radius: 330px;
       border-top-right-radius: 330px;
+    }
+    &__text-block{
+      // width: 372px;
+    }
+  }
+
+  @media screen and (min-width: $desktop1650) {
+    &__content {
+      margin-top: -140px;
+    }
+
+    &__title {
+      @include tenor-248();
+    }
+    &__text {
+      @include manrope-24();
     }
   }
 }

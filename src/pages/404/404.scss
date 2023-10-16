@@ -1,0 +1,62 @@
+@use 'components/ui/breadcrumb';
+@use 'components/ui/container' as *;
+@use 'components/ui/quickFilter';
+@use 'src/global/components/pageBlocks/newsCard';
+@use 'src/styles/general/variables' as *;
+@use 'components/ui/container' as *;
+@use 'src/styles/general/typography' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+
+.blue-section{
+  @include container-x();
+  padding-top: 130px;
+  padding-bottom: 174px;
+  background-color: $blue;
+  display: flex;
+  flex-direction: column;
+  @media screen and (max-width:$tablet1200) {
+    padding-top: 95px;
+  }
+}
+
+.not-found{
+  &__title{
+    @include tenor-90();
+    color: $white;
+    width: 47%;
+    margin-top: 66px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  &__button{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40px;
+    span:last-child{
+      display: none;
+    }
+  }
+  @media screen and (max-width: $tablet1200){
+    &__title{
+      font-size: 35px;
+      width: 100%;
+      padding-right: 30px;
+      padding-left: 30px;
+      margin-top: 186px;
+    }
+    &__button{
+      margin-top: 134px;
+      span:first-child{
+        display: none;
+      }
+      span:last-child{
+        display: block;
+      }
+    }
+  }
+  @media screen and (max-width: $tablet800) {
+    
+  }
+}

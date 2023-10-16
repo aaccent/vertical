@@ -10,10 +10,16 @@
   padding-top: 94px;
   &__title {
     @include tenor-48();
-    
+    letter-spacing: -0.15px;
+    margin-top: -6px;
   }
   &__text {
     @include manrope-17();
+    opacity: 0.8;
+    margin-top: -6px;
+    p+p{
+      margin-top: 0;
+    }
   }
   &__card {
     display: grid;
@@ -48,21 +54,37 @@
     }
 
   }
-
-}
-$benefit-item:"about-company__benefits__item";
-.#{$benefit-item}:nth-child(1), .#{$benefit-item}:nth-child(3) {
-  .about-company__benefits__number {
-    span {
-      transform: translate(100%, 100%);
+  @media screen and (max-width: $tablet1200) {
+    padding-top: 40px;
+    &__title{
+      @include tenor-30();
+      margin-top: 0;
+      letter-spacing: -0.15px;
     }
-  }
-}
+    .benefits{
+      margin-top: 64px;
+    }
 
-.#{$benefit-item}:nth-child(5) {
-  .about-company__benefits__number {
-    span {
-      transform: translate(0, 100%);
+  }
+  @media screen and (max-width: $tablet800) {
+    &__card{
+      display: flex;
+      flex-direction: column;
+      margin-top: 24px;
+      gap: 24px;
+    }
+    &__image{
+      height: 230px;
+    }
+    &__button{
+      margin-top: 24px;
+    }
+    &__text{
+      @include manrope-15();
+      margin-top: 0;
+      p+p{
+        margin-top: 10px;
+      }
     }
   }
 }

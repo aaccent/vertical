@@ -20,11 +20,13 @@ block append main
           .project-header__actions__item
             img(src=require('media/static/icons/location.svg'))
             span смотреть на карте
-        ul.project-header__list
-          li.project-header_address.project-header__list__item краснодар, мкр. Северный, ул. Волкова, 39
-          li.project-header_date.project-header__list__item дата сдачи объекта, сентябрь 2023 год
-          li.project-header_type.project-header__list__item Жилищный комплекс
-          li.project-header_.project-header__list__item.price-badge От 4 600 000 ₽
+            span на карте
+        .project-header__list__wrapper
+          ul.project-header__list
+            li.project-header_address.project-header__list__item краснодар, мкр. Северный, ул. Волкова, 39
+            li.project-header_date.project-header__list__item дата сдачи объекта, сентябрь 2023 год
+            li.project-header_type.project-header__list__item Жилищный комплекс
+            li.project-header_.project-header__list__item.price-badge От 4 600 000 ₽
     .project-header__image
       img(src=require('media/content/content_4.webp'))
 
@@ -32,10 +34,11 @@ block append main
     .title.title_gray.idea__subtitle о проекте
     .idea__title ИДЕЯ ПРОЕКТА
     .idea__content
-      .idea__left
-        img(src=require('media/static/project_1.webp'))
-      .idea__middle
-        img(src=require('media/static/project_2.webp'))
+      .idea__content__image
+        .idea__left
+          img(src=require('media/static/project_1.webp'))
+        .idea__middle
+          img(src=require('media/static/project_2.webp'))
       .idea__right
         ul.idea__list
           li.idea__list__item
@@ -60,7 +63,7 @@ block append main
             span Доходность жилья
             p 9% годовых
     .container_left.quote
-      img.idea__quote(src=require('media/static/icons/quote.svg'))
+      img.quote__quotation(src=require('media/static/icons/quote.svg'))
       div
         .quote__title Вдохновляться закатами из окна, дышать чистым воздухом и не терять время на дорогу — это ваша жизнь в ЖК Волкова
   .gallery
@@ -85,12 +88,17 @@ block append main
     .container_left
       .title.title_white
         span локация
-      .div
-        .location__title удобная и развитая инфраструктура
+      div
+        .location__title 
+          span удобная и развитая инфраструктура
+          span всё нужное рядом
     .map
       .map__content
         include global/components/pageBlocks/map/infrastructureList
       .map__view
+      .button.button_white.map__button(data-action="popup" data-popup="filter-popup") 
+        span фильтр
+        img(src = require("media/static/icons/filter/filter_gray.svg"))
     .benefits.benefits_white
       .benefits__item
         .benefits__number
@@ -134,7 +142,7 @@ block append main
         .building-summary__progress
           p 68%
           span ход строительства
-      .building-summary__gallery
+      .building-summary__gallery(data-action="popup" data-popup="gallery-popup")
         .building-summary__gallery__content
           .building-summary__gallery__view
             img(src=require('media/static/icons/eye.svg'))
@@ -168,7 +176,7 @@ block append main
     .docs.container_left
       .title.title_gray
         span документы
-      div
+      div.docs__list__wrapper
         ul.docs__list
           each i in Array(8)
             li.docs__item
@@ -183,5 +191,28 @@ block append main
       img(src=require('media/static/icons/arrow/arrow_very_long.svg'))
       p жк меридиан
 
+  include global/components/pageBlocks/filterPopup/template
+  include global/features/popup/template
+  +popup('gallery-popup', "gallery-popup")
+    .button-close.close-btn(data-action="close-popup")
+      img(src = require("media/static/icons/close/close_black.svg"))
+    .gallery-popup__body 
+      .gallery-popup__desktop
+        .button.arrow-button.arrow-button_left.gallery-popup__left
+        .gallery-popup__swiper.swiper: .swiper-wrapper
+          each i in Array(4)
+            .swiper-slide.gallery-popup__slide
+              img(src = require("media/static/builders.webp"))
+        .button.arrow-button.gallery-popup__right
+      .gallery-popup__mobile
+        .gallery-popup__mobile-swiper.swiper: .swiper-wrapper
+          each i in Array(4)
+            .swiper-slide.gallery-popup__mobile-slide
+              img(src = require("media/static/builders.webp")).gallery-popup__mobile-slide-image
+              .gallery-popup__mobile-slide-bg
+                img(src = require("media/static/builders.webp"))
+    .gallery-popup__bottom 
+      .gallery-popup__title Декабрь
+      .gallery-popup__text 1 квартал 2023 / 12 фото 
 block append scripts
   script(src=require('pages/project/project.ts'))

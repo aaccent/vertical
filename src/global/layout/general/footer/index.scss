@@ -9,9 +9,13 @@
   display: flex;
   padding-top: 100px;
   padding-bottom: 204px;
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.10) 0%, rgba(0, 0, 0, 0.10) 100%), url('media/static/footer_bg.webp');
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%),
+    url('media/static/footer_bg.webp') no-repeat;
   background-size: cover;
   background-repeat: no-repeat;
+  .button {
+    padding: 16px 40px;
+  }
   &__content {
     margin-left: auto;
     width: 549px;
@@ -32,6 +36,8 @@
     color: $white;
     text-transform: uppercase;
     @include manrope-17-m();
+    line-height: 90%;
+    padding-bottom: 15px;
     border-bottom: 1px solid $white;
     &::placeholder {
       color: $white;
@@ -39,60 +45,99 @@
       @include manrope-17-m();
     }
   }
-  &__bottom{
+  &__bottom {
     display: flex;
     align-items: center;
     margin-top: 40px;
     gap: 20px;
-    .button{
-      height: min-content
+    .button {
+      height: min-content;
     }
-    &__text{
-      @include manrope-17();
+    &__text {
+      @include manrope-14();
       color: $white;
       opacity: 0.8;
-      a{
+      a {
         text-decoration: underline;
       }
     }
   }
+  @media screen and (max-width: $tablet1200) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-size: auto;
+    background-position: 77% 0;
+    .button {
+      width: 100%;
+      justify-content: center;
+    }
+    &__title {
+      font-size: 30px;
+    }
+    &__content {
+      width: 100%;
+    }
+    &__list {
+      margin-top: 36px;
+      gap: 32px;
+    }
+    &__input,
+    &__input::placeholder {
+      font-size: 15px;
+    }
+    &__bottom {
+      margin-top: 36px;
+      flex-direction: column;
+      &__text {
+        font-size: 12px;
+        text-align: center;
+      }
+    }
+  }
+  @media screen and (max-width: $tablet800) {
+    &__bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
 }
 
-.footer{
+.footer {
+  @include container-x();
   background-color: $blue;
-  @include container-x();   
-  &__title{
-    @include tenor-248();
-    color: $white;
+  &__title {
+    width: 100%;
     padding-top: 40px;
-    font-size: 14vmax;
+    padding-bottom: 30px;
+    border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
+    img {
+      width: 100%;
+    }
   }
-  &__content{
+  &__content {
     display: flex;
-    margin-top: 38px;
     padding-top: 60px;
     justify-content: space-between;
-    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
-    &__middle{
+    &__middle {
       color: $white;
       display: flex;
       flex-direction: column;
       align-items: center;
-      p{
+      p {
         @include manrope-38();
         font-size: 52px;
         margin-bottom: 25px;
       }
-      span{
+      span {
         @include manrope-14();
         opacity: 0.7;
       }
-      span + span{
+      span + span {
         margin-top: 12px;
       }
     }
   }
-  &__link{
+  &__link {
     @include reset-list();
     display: flex;
     flex-direction: column;
@@ -101,10 +146,9 @@
     @include manrope-14();
     opacity: 0.7;
   }
-  &__bottom{
+  &__bottom {
     @include manrope-14();
     border-top: 1px solid rgba($color: $white, $alpha: 0.2);
-
     margin-top: 60px;
     display: flex;
     color: $white;
@@ -113,14 +157,100 @@
     padding-top: 30px;
     padding-bottom: 30px;
   }
-}
-.request-accept{
-  .close-btn{
-    right: 20px;top: 20px;
+
+  @media screen and (min-width: $tablet1200) {
+    &__content {
+      position: relative;
+      &__middle {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+    }
+    &__bottom {
+      position: relative;
+      p:nth-child(2) {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
   }
-  &__inner{
+
+  @media screen and (max-width: $tablet1200) {
+    &__title {
+      padding-bottom: 16px;
+      padding-top: 24px;
+    }
+    &__content {
+      padding-top: 24px;
+      flex-direction: column;
+      &__middle {
+        order: 1;
+        p {
+          font-size: 30px;
+          margin-bottom: 16px;
+        }
+        span {
+          font-size: 12px;
+          text-transform: uppercase;
+          line-height: 130%;
+        }
+        span + span {
+          margin-top: 4px;
+        }
+      }
+    }
+    &__logo {
+      width: 58px;
+      height: 38px;
+      margin-top: 24px;
+      align-self: center;
+      order: 2;
+    }
+    &__link {
+      order: 3;
+      margin-top: 24px;
+      align-items: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      gap: 8px;
+    }
+    &__bottom {
+      margin-top: 24px;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding-top: 16px;
+      padding-bottom: 16px;
+      p {
+        font-size: 12px;
+      }
+      p + p {
+        margin-top: 0;
+      }
+    }
+  }
+}
+.request-accept {
+  .close-btn {
+    right: 20px;
+    top: 20px;
+    left: auto;
+    img{
+      width: 9px;
+      height: 9px;
+    }
+  }
+  &__text-block{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__inner {
     width: 100%;
-    background-image: url("media/static/request_popup_bg.webp");
+    background-image: url('media/static/request_popup_bg.webp');
     background-size: cover;
     padding-right: 0;
     padding-left: 0;
@@ -130,29 +260,70 @@
     flex-direction: column;
     align-items: center;
   }
-  &__title{
-    @include tenor-61();  
+  &__title {
+    @include tenor-61();
     text-align: center;
     color: $white;
     width: 656px;
   }
-  &__text{
+  &__text {
     margin-top: 12px;
     @include manrope-17();
     color: $white;
     width: 382px;
     text-align: center;
   }
-  .button{
+  .button {
     margin-top: 30px;
     padding-left: 86px;
     padding-right: 86px;
   }
   @media screen and (min-width: $tablet1200) {
-    &__inner{
-    width: 1008px;
-    background-position: 0 -270px;
+    &__inner {
+      width: 1008px;
+      background-position: 0 -270px;
+    }
+  }
+  @media screen and (max-width: $tablet1200) {
+    &__inner {
+      position: relative;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .close-btn {
+      left: 20px;
+      top: 20px;
+    }
+    &__text-block {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .button {
+      position: absolute;
+      bottom: 30px;
+    }
+  }
 
+  @media screen and (max-width: $tablet800) {
+    &__title {
+      font-size: 30px;
+      width: 100%;
+    }
+    &__text {
+      font-size: 15px;
+      width: 100%;
+    }
+    &__text-block {
+      width: calc(100% - 40px);
+    }
+    .button {
+      width: calc(100% - 30px);
+      justify-content: center;
     }
   }
 }

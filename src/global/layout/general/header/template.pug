@@ -1,26 +1,88 @@
+include global/features/popup/template
+mixin mobile-header
+  +popup('mobile-menu-popup', "mobile-header")
+    .mobile-header__content
+      .mobile-header__top
+        .mobile-header__close.close-btn(data-action='close-popup')
+          img(src=require('media/static/icons/close/close_white.svg'))
+
+        .mobile-header__title меню
+      .mobile-header__body
+        .accordion.mobile-header__accordion.accordion_active
+          .accordion__header.mobile-header__accordion__header
+            span Каталог объектов
+            img(src=require('media/static/icons/triangle/triangle_white_down.svg'))
+          .accordion__body
+            .accordion__body__wrapper
+              ul.mobile-header__accordion__list
+                li.mobile-header__accordion__list__item Смотреть все
+                  img(src=require('media/static/icons/arrow/arrow_short_white.svg'))
+                li.mobile-header__accordion__list__item Гостиницы
+                li.mobile-header__accordion__list__item Жилищные комплексы
+                li.mobile-header__accordion__list__item Промышленные объекты
+                li.mobile-header__accordion__list__item Склады
+                li.mobile-header__accordion__list__item Торговые комплексы
+                li.mobile-header__accordion__list__item ТРК
+                li.mobile-header__accordion__list__item Помещения общего назначения
+        .accordion.mobile-header__accordion
+          .accordion__header.mobile-header__accordion__header
+            span Каталог объектов
+            img(src=require('media/static/icons/triangle/triangle_white_down.svg'))
+          .accordion__body
+            .accordion__body__wrapper
+              ul.mobile-header__accordion__list
+                li.mobile-header__accordion__list__item Смотреть все
+                  img(src=require('media/static/icons/arrow/arrow_short_white.svg'))
+                li.mobile-header__accordion__list__item Гостиницы
+                li.mobile-header__accordion__list__item Жилищные комплексы
+        .mobile-header__item Контакты
+      .mobile-header__bottom
+        span 8 800 580-98-59
+        .mobile-header__button.button.button_transparent заказать звонок
 mixin header
-  header.header&attributes(attributes)
-    .header__container
-      .header__content
-        .header__nav__list
-          include global/components/ui/dropdown/template
-          +dropdown("Наши проекты")
-            include global/components/ui/cards/headerCard/template
-          +dropdown("О компании")
-            include global/components/ui/cards/headerCard/template
-          .header__nav__item Контакты
-        .header__phone
-          .header__phone__link
-            img(src=require('media/static/icons/phone/phone_white.svg'))
-            span 8 800 580-98-59
-          .header__phone__button.button.button_transparent заказать звонок
-      img.header__logo(src=require('media/static/icons/vertical/vertical_logo.svg'))
-      .header__bg
+  .header_white
+    header.header&attributes(attributes)
+      .header__container
+        .header__content
+          .header__mobile__open(data-popup='mobile-menu-popup', data-action='popup')
+            img(src=require('media/static/icons/menu/menu_white.svg'))
+          .header__nav__list
+            include global/components/ui/dropdown/template
+            +dropdown("Наши проекты")
+              include global/components/ui/cards/headerCard/template
+            +dropdown("О компании")
+              include global/components/ui/cards/headerCard/template
+            .header__nav__item Контакты
+          .header__phone
+            .header__phone__link
+              img(src=require('media/static/icons/phone/phone_white.svg'))
+              span 8 800 580-98-59
+            a(href="#contact-form").header__phone__button.button.button_transparent заказать звонок
+          .header__mobile__phone
+            img(src=require('media/static/icons/phone/phone_white_no_border.svg'))
+        img.header__logo(src=require('media/static/icons/vertical/vertical_logo.svg'))
+        .header__bg
+  +mobile-header
+  .link-list
+    .link-list__wrapper
+      span страницы:
+      a(href='index.html') главная
+
+      a(href='about.html') о компании
+      a(href='article.html') статья
+      a(href='contacts.html') контакты
+      a(href='pressCenter.html') пресс-центр
+      a(href='project.html') проект
+      a(href='projectList.html') список проектов
+      a(href='404.html') 404
 
 mixin header-dark
   header.header.header_dark&attributes(attributes)
     .header__container
       .header__content
+        .header__mobile__open(data-popup='mobile-menu-popup', data-action='popup')
+          img(src=require('media/static/icons/menu/menu_black.svg'))
+
         .header__nav__list
           include global/components/ui/dropdown/template
           +dropdown("Наши проекты").dropdown_dark
@@ -32,6 +94,22 @@ mixin header-dark
           .header__phone__link
             img(src=require('media/static/icons/phone/phone_black.svg'))
             span 8 800 580-98-59
-          .header__phone__button.button.button_dark заказать звонок
+          a(href="#contact-form").header__phone__button.button.button_dark заказать звонок
+
+        .header__mobile__phone
+          img(src=require('media/static/icons/phone/phone_black_no_border.svg'))
+
       img.header__logo(src=require('media/static/icons/vertical/vertical_logo_black.svg'))
       .header__bg
+  +mobile-header
+  .link-list
+    .link-list__wrapper
+      span страницы:
+      a(href='index.html') главная
+      a(href='about.html') о компании
+      a(href='article.html') статья
+      a(href='contacts.html') контакты
+      a(href='pressCenter.html') пресс-центр
+      a(href='project.html') проект
+      a(href='projectList.html') список проектов
+      a(href='404.html') 404
