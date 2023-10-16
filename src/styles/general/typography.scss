@@ -1,8 +1,12 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/media' as *;
 
+$sans-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+$manrope-font: 'manrope', $sans-font;
+$tenor-font: 'tenor-sans', $sans-font;
+
 @mixin manrope-12() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 500;
   font-size: 12px;
   line-height: 130%;
@@ -10,36 +14,35 @@
 
 
 @mixin manrope-15() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 400;
   font-size: 15px;
   line-height: 145%;
 }
 
-
 @mixin manrope-14() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 500;
   font-size: 14px;
   line-height: 120%;
 }
 
 @mixin manrope-17() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 400;
   font-size: 17px;
   line-height: 145%;
 
 }
 @mixin manrope-17-m() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 500;
   font-size: 17px;
   line-height: 145%;
 
 }
 @mixin manrope-24() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 500;
   font-size: 24px;
   line-height: 130%;
@@ -48,30 +51,30 @@
 }
 
 @mixin manrope-38() {
-  font-family: 'manrope';
+  font-family: $manrope-font;
   font-weight: 500;
   font-size: 38px;
   line-height: 115%;
 }
 
 @mixin tenor-30() {
-  font-family: 'tenor-sans';
+  font-family: $tenor-font;
   font-size: 30px;
 }
 
 @mixin tenor-48() {
-  font-family: 'tenor-sans';
+  font-family: $tenor-font;
   font-size: 48px;
-  letter-spacing: -0.305px; 
+  letter-spacing: -0.305px;
 
 }
 @mixin tenor-61() {
-  font-family: 'tenor-sans';
+  font-family: $tenor-font;
   font-size: 61px;
-  letter-spacing: -0.305px; 
+  letter-spacing: -0.305px;
 }
 @mixin tenor-90() {
-  font-family: 'tenor-sans';
+  font-family: $tenor-font;
   font-size: 90px;
   line-height: 110%;
   text-transform: uppercase;
@@ -79,7 +82,7 @@
 
 }
 @mixin tenor-248() {
-  font-family: 'tenor-sans';
+  font-family: $tenor-font;
   font-size: 248px;
 }
 
