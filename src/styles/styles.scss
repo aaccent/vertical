@@ -5,7 +5,7 @@
 @use 'general/global';
 
 // Popup
-@use 'features/popup/index';
+@use 'features/popup';
 
 @use "layout/general/header";
 @use "layout/general/footer";
@@ -22,4 +22,4 @@
 @use "pages/pressCenter";
 @use "pages/projectList";
 @use "pages/project";
-@use "pages/404";
+@use "pages/404" as error404;
