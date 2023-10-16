@@ -13,3 +13,13 @@
 @use "components/ui/buttons";
 @use "components/ui/container";
 @use "components/ui/dropdown";
+
+// Pages
+@use "pages/index";
+@use "pages/about";
+@use "pages/article";
+@use "pages/contacts";
+@use "pages/pressCenter";
+@use "pages/projectList";
+@use "pages/project";
+@use "pages/404";

@@ -1,8 +1,5 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/404/404.scss'), rel='stylesheet')
-
 block append main
   include global/layout/general/header/template
   +header.header_border
@@ -11,6 +8,6 @@ block append main
       li.breadcrumb__item главная
       li.breadcrumb__item.breadcrumb__item_active страница не найдена
     .not-found__title страница не найдена
-    .not-found__button.button.button_circle 
+    .not-found__button.button.button_circle
       span на главную
       span на сайт

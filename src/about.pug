@@ -1,8 +1,5 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/about/about.scss'), rel='stylesheet')
-
 block append main
   include global/layout/general/header/template
   +header.header_border
@@ -11,7 +8,7 @@ block append main
       ul.breadcrumb
         li.breadcrumb__item главная
         li.breadcrumb__item.breadcrumb__item_active о компании
-      .about-header__title 
+      .about-header__title
         img(src=require('media/static/icons/vertical_text.svg'))
       .about-header__bottom
         .about-header__text ГК Вертикаль успешно работает с 2005 года и является одним из лидеров в девелопменте жилой и коммерческой недвижимости
@@ -20,7 +17,7 @@ block append main
       img(src=require('media/static/about_company_lead.webp'))
   include global/components/pageBlocks/aboutCompany/template
   +about-company
-    .button.button_gray 
+    .button.button_gray
       span строительство жилых зданий
       span строительство
     .button.button_gray продажа квартир
@@ -101,42 +98,42 @@ block append main
           .filter__button(data-popup='project-popup', data-action='popup')
             span на карте
             img(src=require('media/static/icons/location.svg'))
-          
+
       include global/components/pageBlocks/projectsList/template
-    
+
       .project__wrapper-button
-        .button.button_circle.project__button 
+        .button.button_circle.project__button
           span показать ещё
           span ещё
-  .awards 
+  .awards
     .container_left
       .title.title_gray
         span награды
-      .awards__content  
+      .awards__content
         .awards__title достижения, награды и премии
         .awards__table__header
           .awards__table__header__item награда
           .awards__table__header__item проект
           .awards__table__header__item площадка
-        .awards__table__row 
+        .awards__table__row
           .awards__table__item Move Realty Awards 2023
           .awards__table__item ЖК Волково
-          .awards__table__item 
+          .awards__table__item
             img(src = require("media/content/icons/urban_awards.svg"))
-        .awards__table__row 
+        .awards__table__row
           .awards__table__item Move Realty Awards 2023
           .awards__table__item ЖК Волково
-          .awards__table__item 
+          .awards__table__item
             img(src = require("media/content/icons/urban_awards.svg"))
-        .awards__table__row 
+        .awards__table__row
           .awards__table__item Move Realty Awards 2023
           .awards__table__item ЖК Волково
-          .awards__table__item 
+          .awards__table__item
             img(src = require("media/content/icons/urban_awards.svg"))
-        .awards__table__row 
+        .awards__table__row
           .awards__table__item Move Realty Awards 2023
           .awards__table__item ЖК Волково
-          .awards__table__item 
+          .awards__table__item
             img(src = require("media/content/icons/urban_awards.svg"))
 block append scripts
   script(src=require('pages/about/about.ts'))
