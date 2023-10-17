@@ -1,22 +1,22 @@
 @font-face {
   font-family: "manrope";
-  src: url("src/fonts/Manrope-Medium.ttf");
+  src: url("src/fonts/Manrope/Manrope-Medium.woff2") format('woff2'), url("src/fonts/Manrope/Manrope-Medium.woff") format('woff');
   font-weight: 500;
 }
 
 @font-face {
   font-family: "manrope";
-  src: url("src/fonts/Manrope-Regular.ttf");
+  src: url("src/fonts/Manrope/Manrope-Regular.woff2") format('woff2'), url("src/fonts/Manrope/Manrope-Regular.woff") format('woff');
   font-weight: 400;
 }
 
 @font-face {
   font-family: "tenor-sans";
-  src: url("src/fonts/TenorSans-Regular.ttf");
+  src: url("src/fonts/TenorSans/TenorSans-Regular.woff2") format('woff2'), url("src/fonts/TenorSans/TenorSans-Regular.woff") format('woff');
   font-weight: 400;
 }
 
 @font-face {
   font-family: "vetrino";
-  src: url("src/fonts/Vetrino.otf");
+  src: url("src/fonts/Vetrino/Vetrino.woff2") format('woff2'), url("src/fonts/Vetrino/Vetrino.woff") format('woff');
 }

@@ -1,10 +1,6 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/article/article.scss'), rel='stylesheet')
-
 block append main
-  include global/layout/general/header/template
   +header-dark
   .article
     ul.breadcrumb.breadcrumb_black
@@ -86,7 +82,7 @@ block append main
                 .swiper-slide.article__carousel__slide
                   img(src=require('media/content/content_20.webp'))
             .article__carousel__nav
-              .article__carousel__nav__left 
+              .article__carousel__nav__left
                 img(src=require('media/static/icons/arrow/arrow_small_gray.svg'))
               .article__carousel__nav__right
                 img(src=require('media/static/icons/arrow/arrow_small_gray.svg'))
@@ -121,6 +117,3 @@ block append main
                   p 15
                   span июня
             .button.button_circle.blog__more.button_circle_black ещё
-
-block append scripts
-  script(src=require('pages/article/article.ts'))

@@ -1,24 +1,21 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/pressCenter/pressCenter.scss'), rel='stylesheet')
 block append main
-  include global/layout/general/header/template
   +header().header_border
   .blue-section
     ul.breadcrumb
       li.breadcrumb__item главная
       li.breadcrumb__item.breadcrumb__item_active проекты
-    .press-center__header 
-      .press-center__title пресс-центр  
+    .press-center__header
+      .press-center__title пресс-центр
       .quick-filter.press-center__quick-filter__desktop
         .quick-filter__item.quick-filter_active Интересные статьи
         .quick-filter__item Новости компании
-        
+
       .quick-filter.press-center__quick-filter__mobile
         .quick-filter__item.quick-filter_active статьи
         .quick-filter__item Новости
-        
+
     .container_left.press-center__month-divider
       .title.title_white
         span июнь 2023
@@ -77,10 +74,8 @@ block append main
             .news-card__date
               p 17
               span июня
-     
+
         .press-center__wrapper-button
-          .button.button_circle 
+          .button.button_circle
             span показать ещё
             span ещё
-block append scripts
-  script(src=require('pages/pressCenter/pressCenter.ts'))

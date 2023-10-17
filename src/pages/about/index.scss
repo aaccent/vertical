@@ -6,7 +6,6 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'src/styles/utils/media' as *;
 @use 'src/global/components/pageBlocks/aboutCompany';
-@use '~swiper/scss';
 @use 'src/global/components/pageBlocks/ourProject';
 @use 'src/global/components/pageBlocks/projectsList';
 @use 'components/ui/logoTitle' as *;
@@ -284,7 +283,7 @@
   }
   &__left-btn{
     width: 20%;
-    justify-content: end;   
+    justify-content: end;
     padding-right: 16px;
     height: 486px;
     margin-top: 60px;
@@ -360,7 +359,7 @@
 
     }
     &__left-btn{
-      justify-content: start;   
+      justify-content: start;
       padding-right: 0;
     }
     &__year-view{

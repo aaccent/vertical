@@ -1,10 +1,6 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/project/project.scss'), rel='stylesheet')
-
 block append main
-  include global/layout/general/header/template
   +header.header_border
   .project-header
     .project-header__content
@@ -89,14 +85,14 @@ block append main
       .title.title_white
         span локация
       div
-        .location__title 
+        .location__title
           span удобная и развитая инфраструктура
           span всё нужное рядом
     .map
       .map__content
         include global/components/pageBlocks/map/infrastructureList
       .map__view
-      .button.button_white.map__button(data-action="popup" data-popup="filter-popup") 
+      .button.button_white.map__button(data-action="popup" data-popup="filter-popup")
         span фильтр
         img(src = require("media/static/icons/filter/filter_gray.svg"))
     .benefits.benefits_white
@@ -168,10 +164,10 @@ block append main
           img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item
           span июль, 2023
-          img(src=require('media/static/icons/arrow/arrow_short.svg')) 
+          img(src=require('media/static/icons/arrow/arrow_short.svg'))
         li.building-summary__month-list__item.building-summary__month-list_more
           span показать ещё
-          img(src=require('media/static/icons/plus/plus_blue.svg')) 
+          img(src=require('media/static/icons/plus/plus_blue.svg'))
 
     .docs.container_left
       .title.title_gray
@@ -196,7 +192,7 @@ block append main
   +popup('gallery-popup', "gallery-popup")
     .button-close.close-btn(data-action="close-popup")
       img(src = require("media/static/icons/close/close_black.svg"))
-    .gallery-popup__body 
+    .gallery-popup__body
       .gallery-popup__desktop
         .button.arrow-button.arrow-button_left.gallery-popup__left
         .gallery-popup__swiper.swiper: .swiper-wrapper
@@ -211,8 +207,6 @@ block append main
               img(src = require("media/static/builders.webp")).gallery-popup__mobile-slide-image
               .gallery-popup__mobile-slide-bg
                 img(src = require("media/static/builders.webp"))
-    .gallery-popup__bottom 
+    .gallery-popup__bottom
       .gallery-popup__title Декабрь
-      .gallery-popup__text 1 квартал 2023 / 12 фото 
-block append scripts
-  script(src=require('pages/project/project.ts'))
+      .gallery-popup__text 1 квартал 2023 / 12 фото

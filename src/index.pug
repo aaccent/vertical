@@ -1,13 +1,7 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/index/index.scss'), rel='stylesheet')
-
 block append main
-  include global/layout/general/header/template
-
   +header
-
   .lead-section
     .lead-section__title.logo-title
       img(src=require('media/static/icons/vertical_text.svg'))
@@ -101,7 +95,7 @@ block append main
         div
           .partners__title Наши партнеры имеют многолетний опыт работы и авторитет на рынке недвижимости
       .partners__list
-        .partners__desktop 
+        .partners__desktop
           img(src = require('media/static/icons/partners_section.svg'))
         .partners__row
           .partners__row__image
@@ -164,5 +158,3 @@ block append main
             img(src=require('media/static/icons/triangle/triangle_blue_right.svg'))
   include global/components/pageBlocks/map/popup/mapPopup
   include global/components/pageBlocks/map/popup/projectPopup
-block append scripts
-  script(src=require('pages/index/index.ts'))

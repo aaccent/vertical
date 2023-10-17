@@ -1,17 +1,12 @@
 extends layout/page
 
-block append head
-  link(href=require('pages/projectList/projectList.scss'), rel='stylesheet')
-
 block append main
-
-  include global/layout/general/header/template
   +header().header_border
-  .project 
+  .project
     ul.breadcrumb
       li.breadcrumb__item главная
       li.breadcrumb__item.breadcrumb__item_active проекты
-    .project__title 
+    .project__title
       span ПРОЕКТЫ
       .filter__founded 15 проектов найдено
     .filter.project__filter
@@ -52,10 +47,8 @@ block append main
       .filter__selected__reset Сбросить фильтры
         img(src=require('media/static/icons/update/update_white.svg'))
     include global/components/pageBlocks/projectsList/template
-   
+
     .project__wrapper-button
-      .button.button_circle.project__button 
+      .button.button_circle.project__button
         span показать ещё
         span ещё
-block append scripts
-  script(src=require('pages/projectList/projectList.ts'))
