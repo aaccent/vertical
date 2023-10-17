@@ -4,12 +4,11 @@ import { initOfferSwiper } from 'global/components/pageBlocks/offerSwiper'
 import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
-import "features/popup"
+import 'features/popup'
 import { initPageViewer } from 'global/components/ui/pageViewer'
 import { renderFilledArc } from 'global/features/arcProgress'
 
 const shownPages = 5
-let pageOffset = 0
 
 const mobilePageList = document.querySelector('.lead-section__mobile__page-list') as HTMLElement
 let slideText = document.querySelector('.lead-section__slide__text') as HTMLElement
@@ -17,7 +16,7 @@ let slideText = document.querySelector('.lead-section__slide__text') as HTMLElem
 const renderMobilePages = (swiper: Swiper, pages = null) => {
   const pageItem = mobilePageList.children.item(0)?.cloneNode(true) as HTMLElement
   mobilePageList.innerHTML = ''
-  let pagesArray = [] as any
+  let pagesArray = []
   if (pages === null) {
     pagesArray = swiper.slides.slice(0, shownPages)
   } else {
@@ -37,11 +36,14 @@ const renderMobilePages = (swiper: Swiper, pages = null) => {
 }
 
 const leadSwiper = new Swiper('.lead-section__swiper', {
-  navigation: { nextEl: '.page-viewer__right', prevEl: '.page-viewer__left' },
-  // autoplay: {
-  //   delay: 3000,
-  //   disableOnInteraction: false,
-  // },
+  navigation: {
+    nextEl: '.page-viewer__right',
+    prevEl: '.page-viewer__left',
+  },
+  autoplay: {
+    delay: 3000,
+    disableOnInteraction: false,
+  },
   on: {
     init: renderMobilePages,
     slideChange: (swiper: Swiper) => {
@@ -52,9 +54,9 @@ const leadSwiper = new Swiper('.lead-section__swiper', {
 
       mobilePageList.childNodes.forEach((mobilePage, index: number) => {
         if (index <= swiper.activeIndex) {
-          ;(mobilePage as HTMLElement).classList.add('lead-section__mobile_opaque')
-          if (swiper.activeIndex >= shownPages - 1) return
-          ;(mobilePage as HTMLElement).classList.remove('lead-section__mobile_small')
+          (mobilePage as HTMLElement).classList.add('lead-section__mobile_opaque')
+          if (swiper.activeIndex >= shownPages - 1) return;
+          (mobilePage as HTMLElement).classList.remove('lead-section__mobile_small')
         }
       })
       if (swiper.activeIndex >= shownPages - 1) {
@@ -86,7 +88,7 @@ const leadSwiper = new Swiper('.lead-section__swiper', {
       moveMobilePage(windowWidth)
     },
   },
-  modules: [Navigation, Autoplay],
+  modules: [ Navigation, Autoplay ],
 })
 
 initPageViewer(leadSwiper)
@@ -99,7 +101,7 @@ let seoBlockParagraph = (seoBlock.querySelector('.seo-block__text p') as HTMLEle
 
 text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
   seoBlock.classList.remove('seo-block_open')
 
@@ -121,7 +123,7 @@ document.querySelector('.seo-block__expand')?.addEventListener('click', () => {
     return
   }
   const height = calcSeoBlockTextHeight(seoBlock)
-  
+
   text.style.height = `${height}px`
   seoBlock.classList.add('seo-block_open')
 })
