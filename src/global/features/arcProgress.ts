@@ -20,6 +20,6 @@ export function renderArc(el: HTMLElement, angle: number, radius: number, stroke
   el.setAttribute('d', describeArc(radius, radius, radius - strokeWidth, 360 - angle, 360))
 }
 
-export function renderFilledArc(el: HTMLElement, angle: number, radius: number) {
+export function renderFilledArc(el: HTMLElement | SVGElement, angle: number, radius: number) {
   el.setAttribute('d', describeArc(radius * 2, radius * 2, radius, 0, 360 - angle))
 }
