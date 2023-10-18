@@ -1,10 +1,11 @@
 import Swiper from 'swiper'
-import { Navigation, Autoplay } from 'swiper/modules'
+import { Navigation, Autoplay, EffectFade } from 'swiper/modules'
 import { initOfferSwiper } from 'global/components/pageBlocks/offerSwiper'
 import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
 import 'features/popup'
+import './sections/hero-index'
 import { initPageViewer } from 'global/components/ui/pageViewer'
 import { renderFilledArc } from 'global/features/arcProgress'
 
@@ -48,39 +49,101 @@ function initMobileSliderDots(swiper: Swiper) {
   })
 }
 
-let realPreviousIndex: number = 0
+function initSlidesAnimation(swiper: Swiper) {
+  swiper.slides.forEach((slide, index) => {
+    const img = slide.querySelector('.lead-section__slide__image img') as HTMLElement
+    img.dataset.maxWidth = String(img.offsetWidth) + 'px'
+    img.style.maxWidth = index < 2 ? img.dataset.maxWidth : '0px'
+  })
+}
+
+interface SwiperInfo {
+  currentIsLast: boolean
+  previousIsLast: boolean
+  currentIndex: number
+  previousIndex: number
+}
+
+function withSwiperInfo(fn: (
+  swiper: Swiper,
+  getInfo: (swiper: Swiper) => SwiperInfo,
+) => void): (swiper: Swiper) => void {
+  let realPreviousIndex: number = 0
+
+  function getInfo(swiper: Swiper) {
+    const currentIsLast = swiper.realIndex + 1 > PAGES_CIRCLES
+    const previousIsLast = realPreviousIndex + 1 > PAGES_CIRCLES
+    const currentIndex = currentIsLast ? PAGES_CIRCLES - 1 : swiper.realIndex
+    const previousIndex = previousIsLast ? PAGES_CIRCLES - 1 : realPreviousIndex
+
+    return {
+      currentIsLast,
+      previousIsLast,
+      currentIndex,
+      previousIndex,
+    }
+  }
+
+  return function (swiper: Swiper) {
+    fn(swiper, getInfo)
+    realPreviousIndex = swiper.realIndex
+  }
+}
+
+const updateMobileSliderDot = withSwiperInfo(function (swiper: Swiper, getInfo) {
+  const {
+    currentIsLast,
+    previousIsLast,
+    currentIndex,
+    previousIndex,
+  } = getInfo(swiper)
+
+  const targetItem = mobilePagination.children.item(currentIndex)
+  const prevItem = mobilePagination.children.item(previousIndex)
+
+  if (!targetItem) return
+
+  targetItem.classList.add('lead-section__mobile_opaque')
+
+  if (prevItem && targetItem !== prevItem && (!currentIsLast || !previousIsLast)) {
+    prevItem.classList.remove('lead-section__mobile_opaque')
+    renderFilledArc(prevItem.firstElementChild as HTMLElement, 0, 1.75)
+  }
+
+  renderFilledArc(targetItem.firstElementChild as HTMLElement, 0, 1.75)
+})
+
+const playSlideAnimation = withSwiperInfo(function (swiper: Swiper, getInfo) {
+  const {currentIndex, previousIndex} = getInfo(swiper)
+  const img = swiper.slides[previousIndex].querySelector('.lead-section__slide__image img') as HTMLElement
+  img.style.maxWidth = '0px'
+
+  const nextSlide = swiper.slides[currentIndex + 1].querySelector<HTMLElement>('.lead-section__slide__image img')
+  if (!nextSlide) return
+  nextSlide.style.maxWidth = nextSlide.dataset.maxWidth || '0px'
+})
+
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation: {
     nextEl: '.page-viewer__right',
     prevEl: '.page-viewer__left',
   },
-  loop: true,
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
+  loop: true, // autoplay: {
+  //   delay: 3000,
+  //   disableOnInteraction: false,
+  // },
+  effect: 'fade',
+  fadeEffect: {
+    crossFade: true,
   },
   on: {
-    init: initMobileSliderDots,
+    init: (swiper) => {
+      initMobileSliderDots(swiper)
+      initSlidesAnimation(swiper)
+    },
     slideChange: (swiper: Swiper) => {
-      const currentIsLast = swiper.realIndex + 1 > PAGES_CIRCLES
-      const previousIsLast = realPreviousIndex + 1 > PAGES_CIRCLES
-      const targetIndex = currentIsLast ? PAGES_CIRCLES - 1 : swiper.realIndex
-      const previousIndex = previousIsLast ? PAGES_CIRCLES - 1 : realPreviousIndex
-
-      const targetItem = mobilePagination.children.item(targetIndex)
-      const prevItem = mobilePagination.children.item(previousIndex)
-      realPreviousIndex = swiper.realIndex
-
-      if (!targetItem) return
-
-      targetItem.classList.add('lead-section__mobile_opaque')
-
-      if (prevItem && targetItem !== prevItem && (!currentIsLast || !previousIsLast)) {
-        prevItem.classList.remove('lead-section__mobile_opaque')
-        renderFilledArc(prevItem.firstElementChild as HTMLElement, 0, 1.75)
-      }
-
-      renderFilledArc(targetItem.firstElementChild as HTMLElement, 0, 1.75)
+      updateMobileSliderDot(swiper)
+      playSlideAnimation(swiper)
     },
     autoplayTimeLeft(swiper: Swiper, _: number, percent: number) {
       const isLast = swiper.realIndex + 1 > PAGES_CIRCLES
@@ -93,9 +156,9 @@ const leadSwiper = new Swiper('.lead-section__swiper', {
     },
     activeIndexChange: (swiper: Swiper) => {
       // slideText = swiper.slides[swiper.activeIndex].querySelector('.lead-section__slide__text') as HTMLElement
-    }
+    },
   },
-  modules: [ Navigation, Autoplay ],
+  modules: [ Navigation, Autoplay, EffectFade ],
 })
 
 initPageViewer(leadSwiper)

@@ -1,0 +1,85 @@
+@use "styles/utils";
+@use 'styles/general/variables' as *;
+@use 'styles/general/typography' as *;
+
+.hero-index {
+  background: $blue;
+  min-height: 100vh;
+  display: flex;
+
+  .container {
+    padding-top: 87px;
+    padding-bottom: 60px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    position: relative;
+    z-index: 1;
+    left: -29px;
+    @include tenor-248();
+    color: #FFFFFF;
+  }
+
+  &__images {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    translate: -50% 0;
+    --img-height: 770px;
+    --img-width: 716px;
+    height: var(--img-height);
+    width: var(--img-width);
+    border-radius: 350px 350px 0 0;
+    overflow: hidden;
+  }
+
+  &__img-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    @include utils.transition(max-width, 700ms);
+
+    img {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: var(--img-height);
+      width: var(--img-width);
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  &__body {
+    position: relative;
+    z-index: 1;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    color: #fff;
+  }
+
+  &__text-block {
+    max-width: 375px;
+  }
+
+  &__text-subtitle {
+    margin-bottom: 10px;
+    @include manrope-14;
+    opacity: .7;
+    text-transform: uppercase;
+  }
+
+  &__text-title {
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    @include manrope-38;
+  }
+}

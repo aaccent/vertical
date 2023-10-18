@@ -1,0 +1,56 @@
+include global/layout/utils
+
+-
+  var slides = [
+    {
+      subtitle: 'Строим для людей с 2005 года',
+      img: require('media/content/hero-img.jpg?as=webp')
+    },
+    {
+      subtitle: 'Строим для людей с 2006 года',
+      img: require('media/content/main-slider.png?as=webp')
+    },
+    {
+      subtitle: 'Строим и не только с 2007 года',
+      img: require('media/content/hero-img.jpg?as=webp')
+    },
+    {
+      subtitle: 'Строим для людей с 2008 года',
+      img: require('media/content/main-slider.png?as=webp')
+    },
+    {
+      subtitle: 'Строим для всех общин с 2005 года',
+      img: require('media/content/hero-img.jpg?as=webp')
+    },
+    {
+      subtitle: 'Строим для людей с 2005 года',
+      img: require('media/content/hero-img.jpg?as=webp')
+    },
+    {
+      subtitle: 'Строим с 2005 года',
+      img: require('media/content/main-slider.png?as=webp')
+    },
+  ]
+
+.hero-index: .container
+  h1.hero-index__title ВЕРТИКАЛЬ
+  .hero-index__images
+    each slide in slides
+      .hero-index__img-wrapper(
+        data-subtitle=slide.subtitle,
+        data-title="ИНВЕСТИЦИИ В НЕДВИЖИМОСТЬ<br>С ГК ВЕРТИКАЛЬ",
+        data-link="/"
+        data-link-text="подробнее о компании"
+      )
+        +img(slide.img)
+  .hero-index__body
+    .hero-index__text-block
+      .hero-index__text-subtitle
+      .hero-index__text-title
+      +anchor("").hero-index__link.button.button_white.button-arrow-right
+    .circle-pagination
+      +btn("slide-prev").circle-pagination__btn
+      .circle-pagination__inner
+        span.circle-pagination__all-pages
+        span.circle-pagination__current-num
+      +btn("slide-prev").circle-pagination__btn
