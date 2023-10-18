@@ -1,4 +1,5 @@
-@use 'src/styles/general/variables' as *;
+@use 'styles/general/variables' as *;
+@use 'components/ui/container' as *;
 
 html {
   overflow-x: clip;
@@ -9,6 +10,10 @@ html {
 
 .hidden {
   display: none;
+}
+
+.container {
+  @include container-x();
 }
 
 body {
