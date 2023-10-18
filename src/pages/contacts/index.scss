@@ -45,6 +45,7 @@
     }
     &__hours {
       @include manrope-17-m();
+      text-transform: uppercase;
       display: flex;
       margin-top: 20px;
       color: $white;
@@ -57,12 +58,13 @@
   }
   &__legal {
     @include reset-list;
+    min-width: calc(175 * 1 * var(--screen-delta) + 175px);
     opacity: 0.6;
-    gap: 10px;
     display: flex;
     flex-direction: column;
     li {
       @include manrope-17();
+      letter-spacing: .01em;
       color: $white;
     }
   }
@@ -76,6 +78,7 @@
     }
     &__email {
       @include manrope-24();
+      text-transform: uppercase;
       margin-top: 20px;
       color: $white;
       display: flex;
@@ -191,9 +194,6 @@
 }
 .map {
   margin-top: 164px;
-  &__content{
-    display: none;
-  }
   @media screen and (max-width: $tablet1200) {
     margin-top: 32px;
     &__content{

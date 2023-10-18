@@ -15,6 +15,11 @@
     margin-top: 80px;
     display: flex;
     justify-content: center;
+    &:hover {
+      background-color: white;
+      color: #2E2E2E
+
+    }
   }
   &__wrapper-button {
     display: flex;
@@ -38,6 +43,11 @@
     margin-top: 20px;
     &__item {
       position: relative;
+      overflow: hidden;
+      &:hover &__image{
+        transform: scale(1.1);
+        transition: transform .3s linear,-webkit-transform .3s linear;
+      }
       &__content {
         position: relative;
         background: linear-gradient(
@@ -79,6 +89,9 @@
         top: 0;
         height: 100%;
         width: 100%;
+        overflow: hidden;
+        transition: transform .3s linear,-webkit-transform .3s linear;
+        
         img {
           height: 100%;
           width: 100%;

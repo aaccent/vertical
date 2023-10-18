@@ -13,6 +13,7 @@
   text-transform: uppercase;
   width: max-content;
   transition: all $transition-duration ease;
+  letter-spacing: .04em;
 
   &_blue{
     background-color: #0B3882;
@@ -23,7 +24,7 @@
     color: $white;
     background-color: rgba(255, 255, 255, 0.15);
     &:hover{
-      background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgb(255, 255, 255);
       color: $black;
     }
   }
@@ -31,16 +32,32 @@
     color: $black;
     background-color: $gray;
     &:hover{
-      background-color: rgba($black, 0.1);
+      background-color: #0B3882;
+      color: white;
+        img {
+          content: url('/src/assets/media/static/icons/arrow/arrow_short_white.svg');
+        }
     }
   }
 
   &_white{
     background-color: $white;
     color: $black;
-    &:hover{
-      background-color: $gray;
+    overflow: hidden;
+    position: relative;
+    &:hover {
+      .button_animate {
+        left: 0;
+      }
     }
+  }
+
+  &_animate {
+    position: absolute;
+    left: -100%;
+    bottom: 0;
+    transition: all 150ms ease-out;
+    background-color: $gray;
   }
   &_circle{
     width: 194px;
@@ -74,6 +91,10 @@
     align-items: center;
     border-radius: 50%;
     border: 1px solid rgba(46, 46, 46, 0.2);
+    &:hover {
+      background-color: #D9D9D9;
+      border: none;
+    }
   }
   @media screen and (max-width: $tablet800) {
     @include manrope-12();

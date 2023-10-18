@@ -8,12 +8,13 @@
   margin-top: 35px;
   padding-bottom: 35px;
   border-bottom: 1px solid #d9d9d9;
+  overflow: hidden;
   gap: 42px;
   &__image {
     flex-shrink: 0;
     width: 265px;
-
     height: 215px;
+    transition: transform .3s linear,-webkit-transform .3s linear;
     img {
       object-fit: cover;
       height: 100%;
@@ -52,6 +53,16 @@
       @include manrope-14();
     }
   }
+  &:hover {
+    .news-card__text, .news-card__title, .news-card__date {
+      color: #0E2448;
+      cursor: pointer;
+    }
+    .news-card__image {
+      transform: scale(1.1);
+      transition: transform .3s linear,-webkit-transform .3s linear;
+    }
+  }
   &_white {
     border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
 
@@ -65,6 +76,12 @@
     .news-card__date {
       color: $white;
     }
+    &:hover {
+      .news-card__text, .news-card__title, .news-card__date {
+        color: white;
+      cursor: pointer;
+      }
+    }
   }
 
   @media screen and (min-width: $desktop1460) {
@@ -72,7 +89,7 @@
       width: 368px;
     }
     &__content{
-      gap: 182px;
+      gap: 35px;
     }
   }
 

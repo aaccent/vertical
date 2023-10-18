@@ -22,14 +22,18 @@ footer.footer
       span Ростов-на-Дону, проспект Сиверса, 1
       span Пн-Пт, 09:00-18:00
     ul.footer__link
-      li.footer__link__item Каталог объектов
-      li.footer__link__item О компании
-      li.footer__link__item Блог
-      li.footer__link__item Контакты
+      li.footer__link__item 
+        a(href="#") Каталог объектов
+      li.footer__link__item
+       a(href="#") О компании
+      li.footer__link__item
+       a(href="#") Блог
+      li.footer__link__item
+       a(href="#") Контакты
   .footer__bottom
-    p © OOO «ВЕРТИКАЛЬ», 2023
-    p Политика конфиденциальности
-    p Сайт разработан: Акцент на результат
+    a(href="#") © OOO «ВЕРТИКАЛЬ», 2023
+    a(href="#") Политика конфиденциальности
+    a(href="#") Сайт разработан: Акцент на результат
 include global/features/popup/template
 +popup('request-accept', "request-accept")
   .button-close.close-btn(data-action="close-popup")

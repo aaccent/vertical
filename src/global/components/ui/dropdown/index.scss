@@ -33,18 +33,24 @@
   &__list {
     @include reset-list();
     @include basic-card();
+    padding: 0;
     &__item {
       cursor: pointer;
       padding: 15px 25px;
       text-transform: uppercase;
       @include manrope-14();
       border-bottom: 1px solid #eeeeee;
+      &:hover {
+        background-color: #F2F2F2;
+      }
     }
-    &__item:first-child {
-      padding-top: 0;
+    &__item:first-child:hover {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
-    &__item:last-child {
-      padding-bottom: 0;
+    &__item:last-child:hover {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
       border-bottom: none;
     }
   }
@@ -55,6 +61,7 @@
     align-items: center;
     gap: 8px;
     text-transform: uppercase;
+    letter-spacing: .04em;
     .black{
       display: none;
     }

@@ -62,6 +62,15 @@
     padding: 16px 20px;
     border-radius: 50px;
     border: 1px solid $white;
+    &:hover {
+      background-color: white;
+      .dropdown__title {
+        color: black;
+          img {
+            content: url('/src/assets/media/static/icons/triangle/triangle_black_down.svg');
+          }
+      }
+    }
     &_active{
       display: flex;
       justify-content: space-between;
