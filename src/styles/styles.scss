@@ -5,6 +5,9 @@
 @use 'general/global';
 @use "npm/swiper/swiper";
 
+// Features
+@use "features/animations/text";
+
 // Popup
 @use 'features/popup';
 
@@ -24,3 +27,4 @@
 @use "pages/projectList";
 @use "pages/project";
 @use "pages/404" as error404;
+

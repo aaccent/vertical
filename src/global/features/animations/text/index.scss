@@ -1,0 +1,10 @@
+.text-appearing {
+  & > span {
+    overflow: hidden;
+    display: inline-block;
+
+    & > span {
+      display: inline-block;
+    }
+  }
+}

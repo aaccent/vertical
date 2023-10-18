@@ -9,3 +9,6 @@ import 'pages/article'
 import 'pages/pressCenter'
 import 'pages/project'
 import 'pages/projectList'
+
+// Features
+import 'features/animations/text'
