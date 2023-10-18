@@ -161,7 +161,7 @@ const leadSwiper = new Swiper('.lead-section__swiper', {
   modules: [ Navigation, Autoplay, EffectFade ],
 })
 
-initPageViewer(leadSwiper)
+// initPageViewer(leadSwiper)
 
 initOfferSwiper('.offer__swiper')
 

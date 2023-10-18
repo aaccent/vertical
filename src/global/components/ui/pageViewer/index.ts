@@ -2,10 +2,12 @@ import { renderArc } from 'global/features/arcProgress'
 import Swiper from 'swiper'
 
 const initPageViewer = (swiper: Swiper) => {
-  const pageViewer = document.querySelector('.page-viewer') as any
+  const pageViewer = document.querySelector<HTMLDivElement>('.page-viewer')
 
-  pageViewer.querySelector('.page-viewer__page p').textContent = swiper.activeIndex + 1
-  pageViewer.querySelector('.page-viewer__page span').textContent = swiper.slides.length
+  if (!pageViewer) return
+
+  pageViewer.querySelector('.page-viewer__page p')!.textContent = `${swiper.activeIndex + 1}`
+  pageViewer.querySelector('.page-viewer__page span')!.textContent = `${swiper.slides.length}`
 
   let angle = 0
   let stepAngle = 360 / swiper.slides.length
@@ -21,7 +23,7 @@ const initPageViewer = (swiper: Swiper) => {
     arcRender(angle)
 
     swiper.on('slideChange', (swiper) => {
-      pageViewer.querySelector('p').textContent = swiper.activeIndex + 1
+      pageViewer.querySelector('p')!.textContent = `${swiper.activeIndex + 1}`
 
       currentAngle = stepAngle * (swiper.activeIndex + 1)
       arcRender( currentAngle)
