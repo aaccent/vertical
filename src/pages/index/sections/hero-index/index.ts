@@ -1,3 +1,5 @@
+import { initTextAnimation, TextWithAnimation } from "features/animations/text";
+
 interface RawSlide extends HTMLElement {
   dataset: {
     subtitle?: string
@@ -18,8 +20,10 @@ interface Slide extends RawSlide {
   startSlideAnimation: () => void
 }
 
+const bodyContainer = document.querySelector('.hero-index__body') as HTMLElement
+
 const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
-const titleContainer = document.querySelector('.hero-index__text-title')
+const titleContainer = document.querySelector<TextWithAnimation>('.hero-index__text-title')
 const link = document.querySelector<HTMLAnchorElement>('a.hero-index__link')
 
 function setSlideText(slide: RawSlide | Slide) {
@@ -30,6 +34,9 @@ function setSlideText(slide: RawSlide | Slide) {
   }
 
   titleContainer.innerHTML = slide.dataset.title
+  initTextAnimation(titleContainer)
+  bodyContainer.classList.add('_animation-prepare')
+  bodyContainer.classList.remove('_animation-start')
 
   if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle
 
@@ -43,6 +50,11 @@ function setSlideText(slide: RawSlide | Slide) {
     link.href = slide.dataset.link
     link.innerHTML = slide.dataset.linkText
   }
+
+  setTimeout(() => {
+    titleContainer!.playAnimation()
+    bodyContainer.classList.add('_animation-start')
+  }, 25)
 }
 
 function createSlider() {
@@ -90,6 +102,9 @@ function createSlider() {
       .reverse()
       .forEach((slide, i) => slide.style.zIndex = String(i))
 
+    setTimeout(() => {
+      document.querySelector<TextWithAnimation>('.hero-index__title')?.playAnimation()
+    }, 25)
     previousSlide = slides[0]
     activeSlide = slides[0]
     setTimeout(() => {
@@ -108,16 +123,16 @@ function createSlider() {
     activeSlide = slides[index]
     previousSlide.startSlideAnimation()
     previousSlide = slides[index]
+    setSlideText(activeSlide)
 
     setTimeout(() => {
-      slides[index].img.style.scale = '1'
-      setSlideText(slides[index])
+      activeSlide.img.style.scale = '1'
       setTimeout(startAutoplay, SCALE_ANIMATION)
     }, MAX_WIDTH_ANIMATION)
 
-    const nextIndex = checkNewIndex(index + 1)
+    const nextSlide = slides[checkNewIndex(index + 1)]
 
-    slides[nextIndex].style.maxWidth = slides[nextIndex].dataset.maxWidth
+    nextSlide.style.maxWidth = nextSlide.dataset.maxWidth
   }
 
   function nextSlide() {

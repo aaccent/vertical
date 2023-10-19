@@ -25,6 +25,10 @@ body {
   font-family: "onest", sans-serif;
 }
 
+.without-animations {
+  transition: none !important;
+}
+
 html.disable-scroll {
   overflow: clip;
 

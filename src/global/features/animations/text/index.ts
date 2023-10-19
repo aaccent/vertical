@@ -1,6 +1,7 @@
 export interface TextWithAnimation extends HTMLElement {
   playAnimation: () => void
   replayAnimation: () => void
+  prepareAnimation: () => void
   dataset: {
     played: string
   } & {
@@ -8,11 +9,11 @@ export interface TextWithAnimation extends HTMLElement {
   }
 }
 
-document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
-  const innerHTML = text.innerHTML
+export function initTextAnimation(textEl: HTMLElement) {
+  const innerHTML = textEl.innerHTML
   const byWords = innerHTML
     .trim()
-    .replace('<br>', ' |')
+    .replace('<br>', ' | ')
     .replaceAll(/<\w+>(.+)<\/\w+>/g, '$1')
     .split(' ')
     .filter(Boolean)
@@ -20,13 +21,13 @@ document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => 
     .map(i => i.replace('<span>|</span>', '<br>'))
     .join(' ')
 
-  text.innerHTML = String(byWords)
+  textEl.innerHTML = String(byWords)
 
   const byLinesRaw: {
     [index: string]: string[]
   } = {}
 
-  text.querySelectorAll('span').forEach(word => {
+  textEl.querySelectorAll('span').forEach(word => {
     byLinesRaw[word.offsetTop] ?
       byLinesRaw[word.offsetTop].push(word.innerHTML) :
       byLinesRaw[word.offsetTop] = [ word.innerHTML ]
@@ -35,20 +36,37 @@ document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => 
   const byLines = Object.values(byLinesRaw)
     .map(line => line
       .map(word => {
-        const nextIsBR = new RegExp(`(?:<\\w+>(${word})<\\/\\w+> |${word} )<br>`).test(text.innerHTML)
+        const nextIsBR = new RegExp(`(?:<\\w+>(${word})<\\/\\w+> |${word} )<br>`).test(textEl.innerHTML)
         return nextIsBR ? `${word.trim()}<br>` : word.trim()
       })
       .join(' '))
     .map(line => `<span><span>${line}</span></span>`.replace('<br></span></span>', '</span></span><br>'))
     .join(' ')
 
-  text.innerHTML = String(byLines)
+  textEl.innerHTML = String(byLines)
 
-  text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
+  textEl.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
     line.style.translate = '0 100%'
-    text.dataset.played = '0'
-    setTimeout(() => line.style.transition = 'translate 800ms ease-in-out', 5)
+    textEl.dataset.played = '0'
+    setTimeout(() => line.style.transition = 'translate 1300ms ease-in-out', 5)
   })
+}
+
+document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
+  initTextAnimation(text)
+
+  text.prepareAnimation = function () {
+    text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
+      line.classList.add('without-animations')
+
+      setTimeout(() => {
+        line.style.translate = '0 100%'
+        text.dataset.played = '0'
+
+        setTimeout(() => line.classList.remove('without-animations'), 15)
+      }, 5)
+    })
+  }
 
   text.playAnimation = function () {
     text
@@ -59,22 +77,11 @@ document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => 
       })
   }
 
+
   text.replayAnimation = function () {
     if (!Boolean(+text.dataset.played)) return text.playAnimation()
 
-    text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
-      line.style.transition = ''
-      setTimeout(() => {
-        line.style.translate = '0 100%'
-
-        setTimeout(() => {
-          line.style.transition = 'translate 800ms ease-in-out'
-
-          setTimeout(text.playAnimation, 25)
-        }, 15)
-      }, 5)
-
-
-    })
+    text.prepareAnimation()
+    setTimeout(text.playAnimation, 35)
   }
 })
