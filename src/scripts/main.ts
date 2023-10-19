@@ -12,3 +12,4 @@ import 'pages/projectList'
 
 // Features
 import 'features/animations/text'
+import 'features/animations/general'
