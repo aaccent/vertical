@@ -14,7 +14,6 @@
   overflow: auto;
   color: $white;
   position: fixed;
-  overflow: auto;
   bottom: 0;
   width: 100%;
   a {
@@ -182,7 +181,6 @@
         }
       }
       &__open {
-        display: block;
         display: block;
         width: 38px;
         height: 38px;

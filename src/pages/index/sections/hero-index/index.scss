@@ -8,6 +8,7 @@
   display: flex;
 
   .container {
+    width: 100%;
     padding-top: 87px;
     padding-bottom: 60px;
     flex-grow: 1;
@@ -28,10 +29,8 @@
     bottom: 0;
     left: 50%;
     translate: -50% 0;
-    --img-height: 770px;
-    --img-width: 716px;
-    height: var(--img-height);
-    width: var(--img-width);
+    height: 770px;
+    width: 716px;
     border-radius: 350px 350px 0 0;
     overflow: hidden;
   }
@@ -49,8 +48,8 @@
       position: absolute;
       left: 0;
       top: 0;
-      height: var(--img-height);
-      width: var(--img-width);
+      height: 770px;
+      width: 716px;
       object-fit: cover;
       object-position: center;
     }
@@ -93,5 +92,41 @@
     margin-bottom: 20px;
     text-transform: uppercase;
     @include manrope-38;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .hero-index {
+    .container {
+      padding-top: 80px;
+      padding-bottom: 40px;
+    }
+
+    &__title {
+      left: 0;
+      font-size: 54px;
+      letter-spacing: 0;
+    }
+
+    &__images {
+      bottom: initial;
+      top: 20px;
+    }
+
+    &__images, &__img-wrapper img {
+      height: 418px;
+      width: 315px;
+    }
+
+    &__text-subtitle {
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    &__text-title {
+      margin-bottom: 19px;
+      font-size: 24px;
+      line-height: 1.15;
+    }
   }
 }
