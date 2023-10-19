@@ -31,5 +31,8 @@
   },
   "engines": {
     "node": ">=17"
+  },
+  "dependencies": {
+    "imask": "^7.1.3"
   }
 }

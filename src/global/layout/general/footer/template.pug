@@ -3,10 +3,22 @@
     .contact-form__title Оставьте заявку на консультацию
     form(action='')
       .contact-form__list
-        input.contact-form__input(name='customer_name', placeholder='Ваше имя*') 
-        input.contact-form__input(name='customer_phome', placeholder='телефон*') 
-        input.contact-form__input(name='customer_mail', placeholder='почта') 
-        input.contact-form__input(name='customer_comment', placeholder='комментарий') 
+        .contact-form__container
+          input.contact-form__input(name='customer_name') 
+          span(class="span") Ваше имя*
+          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+        .contact-form__container
+          input.contact-form__input(name='customer_phome', maxlength=16) 
+          span(class="span") телефон*
+          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+        .contact-form__container
+          input.contact-form__input(name='customer_mail') 
+          span(class="span") почта
+          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+        .contact-form__container
+          textarea.contact-form__input.contact-form__textarea(name='customer_comment')
+          span(class="span") комментарий
+          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
       .contact-form__bottom
         .button.button_white( data-popup='request-accept', data-action='popup') отправить
         .contact-form__bottom__text
@@ -30,8 +42,7 @@ footer.footer
        a(href="#") Блог
       li.footer__link__item
        a(href="#") Контакты
-  .footer__bottom
-    a(href="#") © OOO «ВЕРТИКАЛЬ», 2023
+  .footer__bottom © OOO «ВЕРТИКАЛЬ», 2023
     a(href="#") Политика конфиденциальности
     a(href="#") Сайт разработан: Акцент на результат
 include global/features/popup/template
