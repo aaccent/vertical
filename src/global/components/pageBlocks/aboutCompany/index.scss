@@ -8,19 +8,30 @@
 .about-company {
   @include container-x();
   padding-top: 94px;
+
+  .container_left {
+    @include fade-up('.about-company__title');
+    @include fade-up('.title', 35%);
+    @include fade-up('.about-company__text-block', 35%, 1000ms);
+    @include zoom-out('.about-company__image img', 1.3, 1000ms)
+  }
+
   &__title {
     @include tenor-48();
     letter-spacing: -0.15px;
     margin-top: -6px;
   }
+
   &__text {
     @include manrope-17();
     opacity: 0.8;
     margin-top: -6px;
-    p+p{
+
+    p + p {
       margin-top: 0;
     }
   }
+
   &__card {
     display: grid;
     gap: 35px;
@@ -28,15 +39,18 @@
     grid-auto-rows: 1fr;
     grid-template-columns: repeat(2, 1fr);
   }
+
   &__button {
     margin-top: 20px;
     display: flex;
     gap: 12px;
   }
+
   &__image {
     height: 100%;
     overflow: hidden;
     position: relative;
+
     img {
       position: absolute;
       width: 100%;
@@ -56,33 +70,34 @@
   }
   @media screen and (max-width: $tablet1200) {
     padding-top: 40px;
-    &__title{
+    &__title {
       @include tenor-30();
       margin-top: 0;
       letter-spacing: -0.15px;
     }
-    .benefits{
+    .benefits {
       margin-top: 64px;
     }
 
   }
   @media screen and (max-width: $tablet800) {
-    &__card{
+    &__card {
       display: flex;
       flex-direction: column;
       margin-top: 24px;
       gap: 24px;
     }
-    &__image{
+    &__image {
       height: 230px;
     }
-    &__button{
+    &__button {
       margin-top: 24px;
     }
-    &__text{
+    &__text {
       @include manrope-15();
       margin-top: 0;
-      p+p{
+
+      p + p {
         margin-top: 10px;
       }
     }

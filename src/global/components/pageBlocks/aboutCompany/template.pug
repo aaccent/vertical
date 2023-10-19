@@ -1,10 +1,10 @@
 mixin about-company()
   .about-company
-    .container_left
+    .container_left._with-animation
       .title.title_gray.container_left__side
         span О компании
       .about-company__content
-        .about-company__title Специализируемся на инвестировании, строительстве и реализации жилой и коммерческой недвижимости
+        .about-company__title.text-appearing Специализируемся на инвестировании, строительстве и реализации жилой и коммерческой недвижимости
         .about-company__card
           .about-company__image
             img(src=require('media/static/about_company.webp')) 
@@ -15,7 +15,7 @@ mixin about-company()
             .about-company__button
               block
 
-    .benefits
+    .benefits._with-animation
       .benefits__item
         .benefits__number
           p 20

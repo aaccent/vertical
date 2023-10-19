@@ -9,28 +9,36 @@
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
   justify-content: center;
+  @include fade-up('', 30%, 250ms);
+
   &__item {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   &_white {
     .benefits__number {
       color: $white;
     }
+
     .benefits__text {
       color: $white;
     }
+
     .benefits__border {
       &::before {
         background-color: $white;
       }
+
       background-color: $white;
     }
   }
+
   &__border {
     margin-left: 24px;
     margin-right: 24px;
+
     &::before {
       margin-right: auto;
       margin-left: auto;
@@ -41,13 +49,16 @@
       background-color: $black;
     }
   }
+
   &__number {
     display: flex;
     gap: 6px;
+
     p {
       font-family: 'vetrino';
       font-size: 150px;
     }
+
     span {
       text-transform: uppercase;
       @include manrope-17();
@@ -56,6 +67,7 @@
 
     }
   }
+
   &__text {
     @include manrope-14();
     text-align: center;
@@ -63,6 +75,7 @@
     text-transform: uppercase;
     margin-top: 22px;
   }
+
   @media screen and (max-width: $tablet1200) {
     grid-template-columns: 1fr;
     gap: 30px;
@@ -78,6 +91,7 @@
         font-size: 110px;
         line-height: 90%;
       }
+
       span {
         @include manrope-14();
         letter-spacing: 0.48px;
@@ -94,6 +108,7 @@
       p {
         font-size: 200px;
       }
+
       span {
         @include manrope-24();
       }
