@@ -1,0 +1,13 @@
+.slider {
+  .slider-slide.active-slide {
+    z-index: 2;
+  }
+
+  .slider-slide.relative-prev-slide {
+    z-index: 3;
+  }
+
+  .slider-slide.relative-next-slide {
+    z-index: 1;
+  }
+}

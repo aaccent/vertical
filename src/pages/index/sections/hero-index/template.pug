@@ -34,9 +34,9 @@ include global/layout/utils
 
 .hero-index: .container
   h1.hero-index__title.text-appearing ВЕРТИКАЛЬ
-  .hero-index__images
+  .hero-index__images.slider
     each slide in slides
-      .hero-index__img-wrapper(
+      .hero-index__img-wrapper.slider-slide(
         data-subtitle=slide.subtitle,
         data-title="ИНВЕСТИЦИИ В НЕДВИЖИМОСТЬ<br>С ГК ВЕРТИКАЛЬ",
         data-link="/"
