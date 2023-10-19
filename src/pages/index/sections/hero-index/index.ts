@@ -52,7 +52,7 @@ function setSlideText(slide: RawSlide | Slide) {
   }
 
   setTimeout(() => {
-    titleContainer!.playAnimation()
+    titleContainer!.playAnimation?.()
     bodyContainer.classList.add('_animation-start')
   }, 25)
 }

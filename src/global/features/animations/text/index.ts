@@ -10,6 +10,8 @@ export interface TextWithAnimation extends HTMLElement {
 }
 
 export function initTextAnimation(textEl: HTMLElement) {
+  if (matchMedia('(max-width: 1200px)').matches) return
+
   const innerHTML = textEl.innerHTML
   const byWords = innerHTML
     .trim()
@@ -53,6 +55,8 @@ export function initTextAnimation(textEl: HTMLElement) {
 }
 
 document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
+  if (matchMedia('(max-width: 1200px)').matches) return
+
   initTextAnimation(text)
 
   text.prepareAnimation = function () {
