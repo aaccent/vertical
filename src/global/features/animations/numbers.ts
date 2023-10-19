@@ -3,21 +3,24 @@ export interface NumbersWithAnimation extends HTMLElement {
 }
 
 document.querySelectorAll<NumbersWithAnimation>('.number-animation').forEach(el => {
+  el.style.width = `${el.offsetWidth}px`
   const num = parseInt(String(el.textContent))
+  let iterator = num < 10 ? 0 : num + 20
+  let animationPlayed = false
 
-  el.innerText = '0'
-
-  let iterator = 0
-  const timeout = num > 100 ? 15 : 100
+  el.innerText = `${iterator}`
 
   function playAnimation() {
+    if (animationPlayed) return
     const interval = setInterval(() => {
-      iterator += 1
-
-      if (iterator > num) return clearInterval(interval)
+      iterator += num < 10 ? 1 : -1
 
       el.innerText = String(iterator)
-    }, timeout)
+      if (iterator === num) {
+        clearInterval(interval)
+        animationPlayed = true
+      }
+    }, num < 10 ? 250 : 100)
   }
 
   el.playAnimation = playAnimation
