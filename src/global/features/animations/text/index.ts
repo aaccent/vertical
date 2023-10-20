@@ -50,8 +50,8 @@ export function initTextAnimation(textEl: HTMLElement) {
   textEl.querySelectorAll<HTMLSpanElement>('span > span').forEach((line, index) => {
     line.style.translate = '0 100%'
     textEl.dataset.played = '0'
-    const delay = Number(textEl.dataset.delay || 0) + 300 * index
-    setTimeout(() => line.style.transition = `translate 1300ms ease-in-out ${delay}ms`, 5)
+    const delay = Number(textEl.dataset.delay || 0) + 200 * index
+    setTimeout(() => line.style.transition = `translate 800ms ease-in-out ${delay}ms`, 5)
   })
 }
 

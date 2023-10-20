@@ -72,7 +72,7 @@
   &._animation #{$element} {
     opacity: 1;
     translate: 0;
-    @include transition((opacity, translate), 1200ms);
+    @include transition((opacity, translate), 1100ms);
     transition-delay: #{$delay};
   }
 }
