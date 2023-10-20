@@ -1,43 +1,26 @@
 import Swiper from 'swiper'
-import { Navigation, Autoplay, EffectFade } from 'swiper/modules'
-import { initOfferSwiper } from 'global/components/pageBlocks/offerSwiper'
+import { Autoplay, EffectFade, Navigation } from 'swiper/modules'
 import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
 import 'features/popup'
 import './sections/hero-index'
-import { initPageViewer } from 'global/components/ui/pageViewer'
 import { renderFilledArc } from 'global/features/arcProgress'
-import { createSlider } from 'features/slider'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { createCircleSVG } from 'pages/index/createSVGCircle'
+
 gsap.registerPlugin(ScrollTrigger)
 
 const PAGES_CIRCLES = 5
 const mobilePagination = document.querySelector('.lead-section__mobile__page-list') as HTMLDivElement
 let slideText = document.querySelector('.lead-section__slide__text') as HTMLDivElement
 
-function createPaginationDot() {
-  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
-  svg.classList.add('lead-section__mobile__page')
-
-  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
-  path.style.strokeWidth = '3.5'
-  path.style.stroke = '#fff'
-  path.style.fill = 'none'
-
-  svg.append(path)
-
-  return {
-    svg, path,
-  }
-}
-
 function initMobileSliderDots(swiper: Swiper) {
   mobilePagination.innerHTML = ''
 
   swiper.slides.slice(0, PAGES_CIRCLES).forEach((_: any, index: number) => {
-    const circle = createPaginationDot()
+    const circle = createCircleSVG()
     renderFilledArc(circle.path, 0, 1.75)
 
     if (index === 0) {
