@@ -11,8 +11,14 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (!entry.isIntersecting) return
 
-    if (/(number-animation|text-appearing)/.test(entry.target.className)) {
-      (entry.target as ElementWithAnimation).playAnimation()
+    entry.target.querySelectorAll('.text-appearing, .number-animation').forEach(item => {
+      (item as ElementWithAnimation).playAnimation()
+    })
+
+    if ((entry.target as HTMLElement).dataset.delay) {
+      const delay = Number((entry.target as HTMLElement).dataset.delay || 0)
+      setTimeout(() => entry.target.classList.add('_animation'), delay)
+      return
     }
 
     entry.target.classList.add('_animation')
@@ -21,7 +27,7 @@ const observer = new IntersectionObserver(entries => {
 
 window.addEventListener('DOMContentLoaded', () => {
   if (matchMedia('(max-width: 1200px)').matches) return
-    const animationElements = document.querySelectorAll('._with-animation, ._with-animation :is(.text-appearing, .number-animation)')
+    const animationElements = document.querySelectorAll('._with-animation')
 
   animationElements.forEach(el => {
     el.classList.add('_init-animation')

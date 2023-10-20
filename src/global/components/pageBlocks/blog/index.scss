@@ -7,6 +7,9 @@
 
 .blog {
   @include container-x();
+  @include fade-up('.title', 150%);
+  @include fade-up('.blog__button', 150%);
+
   padding-top: 125px;
   &__button {
     height: max-content;
@@ -25,11 +28,16 @@
   &__content{
     display: flex;
     flex-direction: column;
+    @include fade-up('.news-card:nth-child(1)', 35%, 500ms);
+    @include fade-up('.news-card:nth-child(2)', 35%, 800ms);
   }
   &__title {
     text-transform: uppercase;
     @include tenor-61();
     margin-top: -6px;
+  }
+  .seo-block{
+    @include fade-up('');
   }
   @media screen and (min-width: $desktop1460) {
     &__title {
