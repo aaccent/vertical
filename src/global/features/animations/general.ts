@@ -21,7 +21,7 @@ const observer = new IntersectionObserver(entries => {
 
 window.addEventListener('DOMContentLoaded', () => {
   if (matchMedia('(max-width: 1200px)').matches) return
-    const animationElements = document.querySelectorAll('._with-animation, .text-appearing, .number-animation')
+    const animationElements = document.querySelectorAll('._with-animation, ._with-animation :is(.text-appearing, .number-animation)')
 
   animationElements.forEach(el => {
     el.classList.add('_init-animation')
