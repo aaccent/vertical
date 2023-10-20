@@ -8,6 +8,10 @@ import 'features/popup'
 import './sections/hero-index'
 import { initPageViewer } from 'global/components/ui/pageViewer'
 import { renderFilledArc } from 'global/features/arcProgress'
+import { createSlider } from 'features/slider'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
 
 const PAGES_CIRCLES = 5
 const mobilePagination = document.querySelector('.lead-section__mobile__page-list') as HTMLDivElement
@@ -25,8 +29,7 @@ function createPaginationDot() {
   svg.append(path)
 
   return {
-    svg,
-    path,
+    svg, path,
   }
 }
 
@@ -64,8 +67,7 @@ interface SwiperInfo {
   previousIndex: number
 }
 
-function withSwiperInfo(fn: (
-  swiper: Swiper,
+function withSwiperInfo(fn: (swiper: Swiper,
   getInfo: (swiper: Swiper) => SwiperInfo,
 ) => void): (swiper: Swiper) => void {
   let realPreviousIndex: number = 0
@@ -77,10 +79,7 @@ function withSwiperInfo(fn: (
     const previousIndex = previousIsLast ? PAGES_CIRCLES - 1 : realPreviousIndex
 
     return {
-      currentIsLast,
-      previousIsLast,
-      currentIndex,
-      previousIndex,
+      currentIsLast, previousIsLast, currentIndex, previousIndex,
     }
   }
 
@@ -92,10 +91,7 @@ function withSwiperInfo(fn: (
 
 const updateMobileSliderDot = withSwiperInfo(function (swiper: Swiper, getInfo) {
   const {
-    currentIsLast,
-    previousIsLast,
-    currentIndex,
-    previousIndex,
+    currentIsLast, previousIsLast, currentIndex, previousIndex,
   } = getInfo(swiper)
 
   const targetItem = mobilePagination.children.item(currentIndex)
@@ -114,7 +110,7 @@ const updateMobileSliderDot = withSwiperInfo(function (swiper: Swiper, getInfo) 
 })
 
 const playSlideAnimation = withSwiperInfo(function (swiper: Swiper, getInfo) {
-  const {currentIndex, previousIndex} = getInfo(swiper)
+  const { currentIndex, previousIndex } = getInfo(swiper)
   const img = swiper.slides[previousIndex].querySelector('.lead-section__slide__image img') as HTMLElement
   img.style.maxWidth = '0px'
 
@@ -125,27 +121,21 @@ const playSlideAnimation = withSwiperInfo(function (swiper: Swiper, getInfo) {
 
 const leadSwiper = new Swiper('.lead-section__swiper', {
   navigation: {
-    nextEl: '.page-viewer__right',
-    prevEl: '.page-viewer__left',
-  },
-  loop: true, // autoplay: {
+    nextEl: '.page-viewer__right', prevEl: '.page-viewer__left',
+  }, loop: true, // autoplay: {
   //   delay: 3000,
   //   disableOnInteraction: false,
   // },
-  effect: 'fade',
-  fadeEffect: {
+  effect: 'fade', fadeEffect: {
     crossFade: true,
-  },
-  on: {
+  }, on: {
     init: (swiper) => {
       initMobileSliderDots(swiper)
       initSlidesAnimation(swiper)
-    },
-    slideChange: (swiper: Swiper) => {
+    }, slideChange: (swiper: Swiper) => {
       updateMobileSliderDot(swiper)
       playSlideAnimation(swiper)
-    },
-    autoplayTimeLeft(swiper: Swiper, _: number, percent: number) {
+    }, autoplayTimeLeft(swiper: Swiper, _: number, percent: number) {
       const isLast = swiper.realIndex + 1 > PAGES_CIRCLES
       const targetIndex = isLast ? PAGES_CIRCLES - 1 : swiper.realIndex
 
@@ -153,17 +143,31 @@ const leadSwiper = new Swiper('.lead-section__swiper', {
       if (!targetItem) return
 
       renderFilledArc(targetItem.firstElementChild as HTMLElement, 360 * percent, 1.75)
-    },
-    activeIndexChange: (swiper: Swiper) => {
+    }, activeIndexChange: (swiper: Swiper) => {
       // slideText = swiper.slides[swiper.activeIndex].querySelector('.lead-section__slide__text') as HTMLElement
     },
-  },
-  modules: [ Navigation, Autoplay, EffectFade ],
+  }, modules: [ Navigation, Autoplay, EffectFade ],
 })
 
 // initPageViewer(leadSwiper)
 
-initOfferSwiper('.offer__swiper')
+void function () {
+  if (window.matchMedia('(max-width: 1200px)').matches) return
+
+  const offerSlides = document.querySelectorAll('.offer__slide')
+
+  offerSlides.forEach((slide, index) => {
+    if (index === 0) return
+
+    // new ScrollTrigger({
+    //   trigger: '.offer',
+    //   start: 'center top',
+    //   end: `+=1500 top`,
+    //   pin: true,
+    //   markers: true
+    // })
+  })
+}()
 
 const seoBlock = document.querySelector('.seo-block') as HTMLElement
 const text = seoBlock.querySelector('.seo-block__text') as HTMLElement
@@ -218,3 +222,18 @@ const moveMobilePage = (width: number) => {
   mobilePagination.style.left = `${left}px`
 }
 moveMobilePage(window.innerWidth)
+
+void function () {
+  const animation = gsap.timeline()
+    .to('.our-projects__middle-image', { translateY: 50 })
+    .to('.our-projects__right', { translateY: 50 })
+
+  new ScrollTrigger({
+    animation,
+    trigger: '.our-projects',
+    start: 'center center',
+    end: '+=500 center',
+    scrub: 2,
+    markers: true
+  })
+}()
