@@ -16,7 +16,7 @@ function describeArc(x: number, y: number, radius: number, startAngle: number, e
   return [ 'M', start.x, start.y, 'A', radius, radius, 0, largeArcFlag, 0, end.x, end.y ].join(' ')
 }
 
-export function renderArc(el: HTMLElement, angle: number, radius: number, strokeWidth = 2) {
+export function renderArc(el: HTMLElement | SVGElement, angle: number, radius: number, strokeWidth = 2) {
   el.setAttribute('d', describeArc(radius, radius, radius - strokeWidth, 360 - angle, 360))
 }
 
