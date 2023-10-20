@@ -9,14 +9,17 @@ block append main
     .button.button_gray о компании
       img(src=require('media/static/icons/arrow/arrow_short.svg'))
   .offer
-    .swiper.offer__swiper: .swiper-wrapper
+    .offer__body._with-animation
+      .offer__title.text-appearing почувствуйте удобство
+      .offer__text-block
+        .offer__text
+          | очень любим нашу работу, подходим к ней творчески и делаем
+          | её с удовольствием! Вы обязательно это почувствуете,
+          | доверив нам обстановку вашего дома
+        .offer__pagination
+    .offer__slides._with-animation
       each i in Array(3)
-        .swiper-slide.offer__slide
-          .offer__title почувствуйте удобство
-          .offer__text очень любим нашу работу, подходим к ней творчески и делаем её с удовольствием! Вы обязательно это почувствуете, доверив нам обстановку вашего дома
-          .offer__image
-            img(src=require('media/content/index_slider_1.webp'))
-    .offer__pagination
+        .offer__slide: img(src=require('media/content/index_slider_1.webp'))
 
   .blue-section
     include global/components/pageBlocks/ourProject/template
