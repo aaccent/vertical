@@ -1,5 +1,6 @@
 import { initTextAnimation, TextWithAnimation } from 'features/animations/text'
 import { createSlider, Slide } from 'features/slider'
+import { CirclePagination, initCirclePagination } from 'components/ui/circle-pagination'
 
 interface RawImgSlide extends HTMLElement {
   dataset: {
@@ -57,6 +58,7 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
   }, 25)
 }
 
+const circle = document.querySelector('.hero-index .circle-pagination') as CirclePagination
 createSlider<RawImgSlide, ImgSlide>({
   container: '.hero-index__images',
   autoplayTime: 3000,
@@ -67,9 +69,15 @@ createSlider<RawImgSlide, ImgSlide>({
     },
     afterInit(slider) {
       setSlideText(slider.slides[0])
+      initCirclePagination(circle)
+      circle.setCount(slider.slides.length)
     },
     onSlideChange(slider) {
       setSlideText(slider.currentSlide!)
+      circle.setCurrentNum(slider.currentSlide!.position + 1)
+    },
+    onProgress(slider) {
+      circle.changeCircle(360 * slider.slideProgress)
     }
   }
 })
