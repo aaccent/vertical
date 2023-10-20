@@ -13,6 +13,12 @@
     url('media/static/footer_bg.webp') no-repeat;
   background-size: cover;
   background-repeat: no-repeat;
+  @include fade-up('.contact-form__input:nth-child(1)', 150%, 900ms);
+  @include fade-up('.contact-form__input:nth-child(2)', 150%, 1100ms);
+  @include fade-up('.contact-form__input:nth-child(3)', 150%, 1300ms);
+  @include fade-up('.contact-form__input:nth-child(4)', 150%, 1500ms);
+  @include fade-up('.contact-form__bottom', 35%, 1800ms);
+
   .button {
     padding: 16px 40px;
   }
@@ -23,6 +29,9 @@
   &__title {
     @include tenor-61();
     color: $white;
+    &.text-appearing {
+      line-height: 0.8;
+    }
   }
   &__list {
     margin-top: 50px;
@@ -105,13 +114,19 @@
 .footer {
   @include container-x();
   background-color: $blue;
+  @include fade-up('.footer__content', 30%, 900ms);
+  @include fade-up('.footer__content__middle span', 30%, 1500ms);
+  @include fade-up('.footer__bottom', 30%, 1500ms);
   &__title {
-    width: 100%;
+    @include tenor-248;
+    color: #fff;
     padding-top: 40px;
     padding-bottom: 30px;
     border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
-    img {
-      width: 100%;
+
+    & > span {
+      translate: -2% 0;
+      display: inline-block;
     }
   }
   &__content {
