@@ -5,7 +5,8 @@ export interface NumbersWithAnimation extends HTMLElement {
 document.querySelectorAll<NumbersWithAnimation>('.number-animation').forEach(el => {
   el.style.width = `${el.offsetWidth}px`
   const num = parseInt(String(el.textContent))
-  let iterator = num < 10 ? 0 : num + 20
+  const isIncr = num < 10
+  let iterator = isIncr ? 0 : num + 20
   let animationPlayed = false
 
   el.innerText = `${iterator}`
@@ -13,14 +14,14 @@ document.querySelectorAll<NumbersWithAnimation>('.number-animation').forEach(el 
   function playAnimation() {
     if (animationPlayed) return
     const interval = setInterval(() => {
-      iterator += num < 10 ? 1 : -1
+      iterator += isIncr ? 1 : -1
 
       el.innerText = String(iterator)
-      if (iterator === num) {
+      if ((isIncr && iterator >= num) || (!isIncr && iterator <= num)) {
         clearInterval(interval)
         animationPlayed = true
       }
-    }, num < 10 ? 250 : 100)
+    }, isIncr ? 250 : 100)
   }
 
   el.playAnimation = playAnimation
