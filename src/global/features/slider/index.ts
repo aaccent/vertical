@@ -23,6 +23,7 @@ export interface SliderEvents<TRawSlide extends HTMLElement = HTMLElement, TSlid
   afterInit?: (slider: Slider<TRawSlide, TSlide>) => void
   onSlideChange?: (slider: Slider<TRawSlide, TSlide>) => void
   afterSlideChange?: (slider: Slider<TRawSlide, TSlide>, relativeNextSlide: TSlide) => void
+  onProgress?: (slider: Slider<TRawSlide, TSlide>) => void
 }
 
 export interface SliderOptions<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
@@ -119,7 +120,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
 
     startAutoplay() {
       if (!this.options.autoplayTime) return
-
+      const slider = this
       const STEP = 1 / this.options.autoplayTime * 3
 
       const autoplayInterval = setInterval(() => {
@@ -129,6 +130,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
           this.slideNext()
         }
 
+        this.options.handlers?.onProgress?.(slider)
         this.slideProgress += STEP
       }, 1)
     },
