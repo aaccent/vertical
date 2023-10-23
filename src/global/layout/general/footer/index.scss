@@ -59,8 +59,9 @@
     border-bottom: 1px solid #fff;
     resize: none;
     text-transform: none;
-    padding-bottom: calc(5 * 1 * var(--screen-delta) + 5px);
+    padding-bottom: 5px;
     padding-top: 0;
+
     &:focus-visible {
       outline: none;
       line-height: 21.25px;
@@ -79,7 +80,7 @@
       text-transform: uppercase;
       font-family: "manrope";
       font-weight: 500;
-      font-size: calc(17 * 1 * var(--screen-delta) + 17px);
+      font-size: 17px;
       letter-spacing: .04em;
       transition: 0.5s;
 
@@ -97,6 +98,7 @@
       top: 0;
       display: none;
     }
+
     &__active {
       display: block;
     }
@@ -121,6 +123,20 @@
         text-decoration: underline;
       }
     }
+  }
+
+  &__error {
+    position: absolute;
+    left: 0;
+    top: 32px;
+    padding: 3px 10px;
+    color: #D60101;
+    text-transform: uppercase;
+    @include manrope-12();
+    letter-spacing: .04em;
+    background-color: #FFFFFF1A;
+    border-radius: 50px;
+    display: none;
   }
 
   @media screen and (max-width: $tablet1200) {

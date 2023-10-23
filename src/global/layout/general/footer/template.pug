@@ -4,23 +4,30 @@
     form(action='')
       .contact-form__list
         .contact-form__container
-          input.contact-form__input(name='customer_name') 
-          span(class="span") Ваше имя*
-          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+          label(for="customer_name")
+            input.contact-form__input(name='customer_name', id='customer_name')
+            span(class="contact-form__error") Введите имя
+            span(class="span") Ваше имя*
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
         .contact-form__container
-          input.contact-form__input(name='customer_phome', maxlength=16) 
-          span(class="span") телефон*
-          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+          label(for="customer_phone")
+            input.contact-form__input(name='customer_phone', id='customer_phone', maxlength=16, required)
+            span(class="contact-form__error") Введите телфон
+            span(class="span") телефон*
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
         .contact-form__container
-          input.contact-form__input(name='customer_mail') 
-          span(class="span") почта
-          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+          label(for="customer_mail")
+            input.contact-form__input(name='customer_mail', id='customer_mail')
+            span(class="contact-form__error") Введите e-mail
+            span(class="span") почта
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
         .contact-form__container
-          textarea.contact-form__input.contact-form__textarea(name='customer_comment')
-          span(class="span") комментарий
-          img(src="/media/static/icons/close/close_white.svg", class="reset-input")
+          label(for="customer_comment")
+            textarea.contact-form__input.contact-form__textarea(name='customer_comment', id='customer_comment')
+            span(class="span") комментарий
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
       .contact-form__bottom
-        .button.button_white( data-popup='request-accept', data-action='popup') отправить
+        button.button.button_white( data-popup='request-accept', data-action='popup') отправить
         .contact-form__bottom__text
           p Нажимая кнопку «Отправить», вы соглашаетесь с
           a(href) политикой конфиденциальности
@@ -47,7 +54,7 @@ footer.footer
     a(href="#") Сайт разработан: Акцент на результат
 include global/features/popup/template
 +popup('request-accept', "request-accept")
-  .button-close.close-btn(data-action="close-popup")
+  button.button-close.close-btn(data-action="close-popup")
     img(src = require("media/static/icons/close/close_white.svg"))
   .request-accept__text-block
     .request-accept__title Заявка успешно отправлена!

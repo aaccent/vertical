@@ -58,7 +58,7 @@
   }
   &__legal {
     @include reset-list;
-    min-width: calc(175 * 1 * var(--screen-delta) + 175px);
+    min-width: 175px;
     opacity: 0.6;
     display: flex;
     flex-direction: column;

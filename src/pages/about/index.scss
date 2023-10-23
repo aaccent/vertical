@@ -252,10 +252,10 @@
   &__title {
     //@include tenor-90();
     font-family: "tenor-sans";
-    font-size: calc(61 * 1 * var(--screen-delta) + 61px);
-    line-height: calc(61 * 1 * var(--screen-delta) + 61px);
+    font-size: 61px;
+    line-height: 61px;
     letter-spacing: .9px;
-    width: calc(1007 * 1 * var(--screen-delta) + 1007px);
+    width: 1007px;
     color: $white;
     margin-top: -6px;
   }

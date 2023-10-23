@@ -547,7 +547,7 @@
     position: absolute;
     top: 0;
     height: 100%;
-    width: calc(879 * 1 * var(--screen-delta) + 879px);
+    width: 879px;
     transition: transform .3s linear, -webkit-transform .3s linear;
 
     img {
@@ -615,7 +615,7 @@
       display: flex;
       flex-direction: column;
       background: linear-gradient(4deg, rgba(0, 0, 0, 0.3) 26.61%, rgba(0, 0, 0, 0) 43.5%) -14.385px -8.944px / 108.588% 104.758% no-repeat;
-      width: calc(879 * 1 * var(--screen-delta) + 879px);
+      width: 879px;
     }
 
     &__view {
