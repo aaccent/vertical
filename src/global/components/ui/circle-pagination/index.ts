@@ -1,6 +1,5 @@
-import { renderArc } from 'features/arcProgress'
+import { createCircleSVG, renderArc } from 'features/arcProgress'
 
-import { createCircleSVG } from 'pages/index/createSVGCircle'
 import { adaptiveValue } from 'features/adaptive'
 
 export interface CirclePagination extends HTMLElement {

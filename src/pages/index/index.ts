@@ -5,10 +5,9 @@ import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
 import 'features/popup'
 import './sections/hero-index'
-import { renderFilledArc } from 'global/features/arcProgress'
+import { createCircleSVG, renderFilledArc } from 'global/features/arcProgress'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { createCircleSVG } from 'pages/index/createSVGCircle'
 
 gsap.registerPlugin(ScrollTrigger)
 
