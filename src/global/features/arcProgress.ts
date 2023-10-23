@@ -24,7 +24,7 @@ export function renderFilledArc(el: HTMLElement | SVGElement, angle: number, rad
   el.setAttribute('d', describeArc(radius * 2, radius * 2, radius, 0, 360 - angle))
 }
 
-export function createCircleSVG(className = 'lead-section__mobile__page') {
+export function createCircleSVG(className: string) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.classList.add(className)
 

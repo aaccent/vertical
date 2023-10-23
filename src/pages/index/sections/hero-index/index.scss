@@ -150,6 +150,10 @@
       width: 315px;
     }
 
+    &__body {
+      position: relative;
+    }
+
     &__text-subtitle {
       margin-bottom: 6px;
       font-size: 12px;
@@ -161,8 +165,8 @@
       line-height: 1.15;
     }
 
-    .circle-pagination {
-      display: none;
+    .slider-pagination {
+      position: absolute;
     }
   }
 }
