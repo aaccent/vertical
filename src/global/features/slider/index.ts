@@ -15,7 +15,9 @@ export interface Slider<TRawSlide extends HTMLElement = HTMLElement, TSlide exte
   setSlide: (index: number) => void
   slideNext: () => void
   slideBack: () => void
+  clearAutoplay: () => void
   startAutoplay: () => void
+  _intervalId: number
 }
 
 export interface SliderEvents<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
@@ -41,6 +43,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
     currentSlide: null,
     slides: [],
     slideProgress: 0,
+    _intervalId: -1,
 
     initSlide(rawSlide, index) {
       options.handlers?.beforeInitSlide?.(rawSlide)
@@ -118,19 +121,23 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
       this.setSlide(this.calcIndex(this.currentSlide!.position - 1))
     },
 
+    clearAutoplay() {
+      clearInterval(this._intervalId)
+      this.slideProgress = 0
+    },
+
     startAutoplay() {
       if (!this.options.autoplayTime) return
-      const slider = this
       const STEP = 1 / this.options.autoplayTime * 3
+      this.clearAutoplay()
 
-      const autoplayInterval = setInterval(() => {
+      this._intervalId = setInterval(() => {
         if (this.slideProgress >= 1) {
-          clearInterval(autoplayInterval)
-          this.slideProgress = 0
+          this.clearAutoplay()
           this.slideNext()
         }
 
-        this.options.handlers?.onProgress?.(slider)
+        this.options.handlers?.onProgress?.(this)
         this.slideProgress += STEP
       }, 1)
     },
