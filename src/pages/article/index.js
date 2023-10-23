@@ -11,11 +11,3 @@ window.addEventListener("scroll", () => {
         }
     })
 });
-
-const links = Array.from(document.querySelectorAll(".article__outline__item a"));
-links.forEach((el) => {
-    el.addEventListener("click", () => {
-        links.find((el) => el.closest(".article__outline__item").classList.contains("article__outline__item_active"))
-            .classList.remove("article__outline__item_active")
-    })
-})
