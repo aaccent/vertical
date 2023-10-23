@@ -2,6 +2,7 @@ import "layout/general/header"
 import "layout/general/footer"
 
 // Features
+import 'features/animations/scroll'
 import 'features/animations/text'
 import 'features/animations/general'
 import 'features/animations/numbers'
