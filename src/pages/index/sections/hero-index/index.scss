@@ -7,6 +7,7 @@
   background: $blue;
   min-height: 100vh;
   display: flex;
+  @include utils.fade-up('.circle-pagination');
 
   .container {
     position: relative;
@@ -94,6 +95,10 @@
     justify-content: space-between;
     align-items: flex-end;
     color: #fff;
+  }
+
+  &__text-block {
+    max-width: 375px;
 
     &._animation-prepare {
       transition: none;
@@ -106,10 +111,6 @@
       opacity: 1;
       translate: 0;
     }
-  }
-
-  &__text-block {
-    max-width: 375px;
   }
 
   &__text-subtitle {

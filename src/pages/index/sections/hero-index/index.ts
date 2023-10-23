@@ -21,7 +21,7 @@ interface ImgSlide extends RawImgSlide, Slide {
   startSlideAnimation: () => void
 }
 
-const bodyContainer = document.querySelector('.hero-index__body') as HTMLElement
+const textBlock = document.querySelector('.hero-index__text-block') as HTMLElement
 
 const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
 const titleContainer = document.querySelector<TextWithAnimation>('.hero-index__text-title')
@@ -36,8 +36,8 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
 
   titleContainer.innerHTML = slide.dataset.title
   initTextAnimation(titleContainer)
-  bodyContainer.classList.add('_animation-prepare')
-  bodyContainer.classList.remove('_animation-start')
+  textBlock.classList.add('_animation-prepare')
+  textBlock.classList.remove('_animation-start')
 
   if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle
 
@@ -54,7 +54,7 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
 
   setTimeout(() => {
     titleContainer!.playAnimation?.()
-    bodyContainer.classList.add('_animation-start')
+    textBlock.classList.add('_animation-start')
   }, 25)
 }
 
