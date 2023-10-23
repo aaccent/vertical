@@ -69,8 +69,14 @@ createSlider<RawImgSlide, ImgSlide>({
     },
     afterInit(slider) {
       setSlideText(slider.slides[0])
+
       initCirclePagination(circle)
       circle.setCount(slider.slides.length)
+
+      circle.querySelector('[data-action="slide-prev"]')
+        ?.addEventListener('click', () => slider.slideBack())
+      circle.querySelector('[data-action="slide-next"]')
+        ?.addEventListener('click', () => slider.slideNext())
     },
     onSlideChange(slider) {
       setSlideText(slider.currentSlide!)

@@ -16,7 +16,9 @@ export function initCirclePagination(item: CirclePagination) {
   renderArc(svg.path, 0, adaptiveValue(63))
 
   item.changeCircle = function (angle: number) {
-    renderArc(svg.path, angle, adaptiveValue(63))
+    requestAnimationFrame(() => {
+      renderArc(svg.path, angle, adaptiveValue(63))
+    })
   }
 
   const count = item.querySelector('.circle-pagination__all-pages') as HTMLElement
