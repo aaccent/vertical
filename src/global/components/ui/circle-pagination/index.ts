@@ -1,6 +1,7 @@
 import { renderArc } from 'features/arcProgress'
 
 import { createCircleSVG } from 'pages/index/createSVGCircle'
+import { adaptiveValue } from 'features/adaptive'
 
 export interface CirclePagination extends HTMLElement {
   changeCircle: (angle: number) => void
@@ -12,10 +13,10 @@ export function initCirclePagination(item: CirclePagination) {
   const inner = item.querySelector('.circle-pagination__inner') as HTMLElement
   const svg = createCircleSVG('circle-pagination__svg')
   inner.prepend(svg.svg)
-  renderArc(svg.path, 0, 63)
+  renderArc(svg.path, 0, adaptiveValue(63))
 
   item.changeCircle = function (angle: number) {
-    renderArc(svg.path, angle, 63)
+    renderArc(svg.path, angle, adaptiveValue(63))
   }
 
   const count = item.querySelector('.circle-pagination__all-pages') as HTMLElement
