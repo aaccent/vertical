@@ -9,7 +9,7 @@ import 'features/animations/numbers'
 
 // Components
 import "components/ui/dropdown"
-import 'components/ui/circle-pagination'
+import 'src/global/features/slider/pagination'
 
 // Pages
 import 'pages/index'

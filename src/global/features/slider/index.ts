@@ -1,3 +1,5 @@
+import { createPagination, SliderPagination } from 'src/global/features/slider/pagination'
+
 export interface Slide extends HTMLElement {
   position: number
 }
@@ -18,6 +20,7 @@ export interface Slider<TRawSlide extends HTMLElement = HTMLElement, TSlide exte
   clearAutoplay: () => void
   startAutoplay: () => void
   _intervalId: number
+  pagination: SliderPagination | null
 }
 
 export interface SliderEvents<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
@@ -33,6 +36,9 @@ export interface SliderOptions<TRawSlide extends HTMLElement = HTMLElement, TSli
   autoplayTime?: number
   handlers?: SliderEvents<TRawSlide, TSlide>
   transitionTime?: number
+  pagination?: boolean | {
+    el: string
+  }
 }
 
 export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide>(options: SliderOptions<TRawSlide, TSlide>) {
@@ -44,6 +50,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
     slides: [],
     slideProgress: 0,
     _intervalId: -1,
+    pagination: null,
 
     initSlide(rawSlide, index) {
       options.handlers?.beforeInitSlide?.(rawSlide)
@@ -74,6 +81,8 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
         .querySelectorAll<TRawSlide>('.slider-slide')
         .forEach((rawSlide, i) => this.initSlide.call(slider, rawSlide, i))
 
+      if (options.pagination) this.pagination = createPagination(slider)
+
       options.handlers?.afterInit?.(slider)
       this.setSlide(0)
     },
@@ -91,6 +100,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
 
       this.currentSlide = this.slides[index]
 
+      this.pagination?.setCurrentNum(index + 1)
       options.handlers?.onSlideChange?.(slider)
 
       setTimeout(() => this.startAutoplay.call(slider), options.transitionTime || 0)
@@ -137,6 +147,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
           this.slideNext()
         }
 
+        this.pagination?.changeCircle(360 * this.slideProgress)
         this.options.handlers?.onProgress?.(this)
         this.slideProgress += STEP
       }, 1)

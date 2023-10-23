@@ -1,7 +1,6 @@
 @use "styles/utils";
 @use 'styles/general/variables' as *;
 @use 'styles/general/typography' as *;
-@use "components/ui/circle-pagination";
 
 .hero-index {
   background: $blue;
@@ -160,6 +159,10 @@
       margin-bottom: 19px;
       font-size: 24px;
       line-height: 1.15;
+    }
+
+    .circle-pagination {
+      display: none;
     }
   }
 }

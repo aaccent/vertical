@@ -1,6 +1,5 @@
 import { initTextAnimation, TextWithAnimation } from 'features/animations/text'
 import { createSlider, Slide } from 'features/slider'
-import { CirclePagination, initCirclePagination } from 'components/ui/circle-pagination'
 
 interface RawImgSlide extends HTMLElement {
   dataset: {
@@ -58,10 +57,12 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
   }, 25)
 }
 
-const circle = document.querySelector('.hero-index .circle-pagination') as CirclePagination
 createSlider<RawImgSlide, ImgSlide>({
   container: '.hero-index__images',
   autoplayTime: 3000,
+  pagination: {
+    el: '.hero-index .slider-pagination'
+  },
   handlers: {
     beforeInitSlide(rawSlide) {
       (rawSlide as ImgSlide).dataset.maxWidth = `${rawSlide.offsetWidth}px`
@@ -69,21 +70,9 @@ createSlider<RawImgSlide, ImgSlide>({
     },
     afterInit(slider) {
       setSlideText(slider.slides[0])
-
-      initCirclePagination(circle)
-      circle.setCount(slider.slides.length)
-
-      circle.querySelector('[data-action="slide-prev"]')
-        ?.addEventListener('click', () => slider.slideBack())
-      circle.querySelector('[data-action="slide-next"]')
-        ?.addEventListener('click', () => slider.slideNext())
     },
     onSlideChange(slider) {
       setSlideText(slider.currentSlide!)
-      circle.setCurrentNum(slider.currentSlide!.position + 1)
     },
-    onProgress(slider) {
-      circle.changeCircle(360 * slider.slideProgress)
-    }
   }
 })

@@ -1,3 +1,5 @@
+@use './pagination';
+
 .slider {
   .slider-slide.active-slide {
     z-index: 2;
