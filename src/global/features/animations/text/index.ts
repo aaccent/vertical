@@ -101,10 +101,12 @@ document.addEventListener('load', () => {
   })
 })
 
-export function alternateTextAnimation(selector: string, tl: GSAPTimeline, pos?: number) {
+export function alternateTextAnimation(selector: string, tl: GSAPTimeline, pos?: number, delay = .3) {
   document.querySelectorAll(selector).forEach((line, index) => {
     tl.from(line, {
-      duration: .8 + .3 * index, translateY: '100%',
+      duration: .8 + delay * index,
+      translateY: '60%',
+      opacity: 0,
     }, pos)
   })
 }
