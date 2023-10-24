@@ -1,29 +1,13 @@
-import 'components/ui/quickFilter'
-import 'components/pageBlocks/filter'
-import 'components/pageBlocks/map'
-import 'features/popup'
-import './sections/hero-index'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
+import 'components/ui/quickFilter'
+import 'components/pageBlocks/filter'
+import 'components/pageBlocks/map'
+import './sections/hero-index'
 
 void function () {
   if (window.matchMedia('(max-width: 1200px)').matches) return
-
-  const offerSlides = document.querySelectorAll('.offer__slide')
-
-  offerSlides.forEach((slide, index) => {
-    if (index === 0) return
-
-    // new ScrollTrigger({
-    //   trigger: '.offer',
-    //   start: 'center top',
-    //   end: `+=1500 top`,
-    //   pin: true,
-    //   markers: true
-    // })
-  })
 }()
 
 const seoBlock = document.querySelector('.seo-block') as HTMLElement
@@ -35,7 +19,6 @@ text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
 window.addEventListener('resize', () => {
   text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
   seoBlock.classList.remove('seo-block_open')
-
 })
 
 const calcSeoBlockTextHeight = (seoBlock: any) => {
@@ -71,4 +54,4 @@ void function () {
     end: '+=500 center',
     scrub: 2,
   })
-}()
+}

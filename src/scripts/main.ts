@@ -8,7 +8,7 @@ import 'features/animations/numbers'
 
 // Components
 import "components/ui/dropdown"
-import 'src/global/features/slider/pagination'
+import 'components/pageBlocks/aboutCompany'
 
 // Pages
 import 'pages/index'
