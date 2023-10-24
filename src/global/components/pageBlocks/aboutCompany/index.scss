@@ -9,13 +9,6 @@
   @include container-x();
   padding-top: 94px;
 
-  .container_left {
-    @include fade-up('.about-company__title');
-    @include fade-up('.title', 35%);
-    @include fade-up('.about-company__text-block', 35%, 1000ms);
-    @include zoom-out('.about-company__image img', 1.3, 1000ms)
-  }
-
   &__title {
     @include tenor-48();
     letter-spacing: -0.15px;

@@ -9,7 +9,7 @@ block append main
     .button.button_gray о компании
       img(src=require('media/static/icons/arrow/arrow_short.svg'))
   .offer
-    .offer__body._with-animation
+    .offer__body
       .offer__title.text-appearing почувствуйте удобство
       .offer__text-block
         .offer__text
@@ -17,7 +17,7 @@ block append main
           | её с удовольствием! Вы обязательно это почувствуете,
           | доверив нам обстановку вашего дома
         .offer__pagination
-    .offer__slides._with-animation
+    .offer__slides
       each i in Array(3)
         .offer__slide: img(src=require('media/content/index_slider_1.webp'))
 
@@ -64,14 +64,14 @@ block append main
         include global/components/pageBlocks/projectsList/template
         .project__wrapper-button
           .button.button_circle.project__button ещё
-    .partners._with-animation
+    .partners
       .container_left
         .title.title_white
           span партнеры
         div
           .partners__title.text-appearing Наши партнеры имеют многолетний опыт работы и авторитет на рынке недвижимости
       .partners__list
-        .partners__desktop._with-animation
+        .partners__desktop
           img(src = require('media/static/icons/partners_section.svg'))
         .partners__row
           .partners__row__image
@@ -93,7 +93,7 @@ block append main
           .partners__row__image
             img(src=require('media/static/icons/partners_logo/mir.svg'))
 
-  .blog._with-animation
+  .blog
     .container_left
       .title.title_gray.container_left__side
         span блог
@@ -102,7 +102,7 @@ block append main
           .blog__title.text-appearing дельные статьи и новости
           .blog__button.button.button_gray смотреть все
             img(src=require('media/static/icons/arrow/arrow_short.svg'))
-        .blog__content._with-animation
+        .blog__content
           .news-card
             .news-card__image
               img(src=require('media/content/content_2.webp'))
@@ -124,7 +124,7 @@ block append main
                 p 15
                 span июня
           .button.button_circle.blog__more.button_circle_black ещё
-        .seo-block._with-animation
+        .seo-block
           .seo-block__title SEO TEXT
           .seo-block__text
             p Одной из важнейших характеристик деятельности ГК является социальная ответственность. Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей, а расположенные на первых этажах коммерческие объекты — предоставить место для работы сотрудникам десятков организаций. Главная цель компании — сделать возможность купить квартиру от застройщика доступной максимальному количеству людей. Сорбция, несмотря на внешние воздействия, поступательно возникает лесной

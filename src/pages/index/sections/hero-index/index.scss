@@ -6,7 +6,6 @@
   background: $blue;
   min-height: 100vh;
   display: flex;
-  @include utils.fade-up('.circle-pagination');
 
   .container {
     position: relative;

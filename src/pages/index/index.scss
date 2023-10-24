@@ -59,7 +59,6 @@
 
 .partners {
   margin-top: 200px;
-  @include fade-up('.title', 130%);
 
   &__title {
     @include tenor-61;
@@ -68,8 +67,6 @@
     letter-spacing: -0.305px;
   }
   &__desktop {
-    @include fade-up('', 30%, 900ms);
-
     img {
       width: 100%;
       object-fit: contain;

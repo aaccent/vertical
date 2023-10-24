@@ -4,10 +4,6 @@
 @use 'src/styles/general/typography' as *;
 
 .our-projects {
-  @include fade-up('.title', 55%);
-  @include fade-up('.our-projects__middle-image', 30%, 1400ms);
-  @include fade-up('.our-projects__right', 25%, 1900ms);
-
   &__body {
     position: relative;
     margin-top: 30px;
@@ -44,8 +40,6 @@
     top: 50%;
     transform: translateY(-50%);
     width: 25%;
-    @include fade-up('.our-projects__text', 90%, 400ms);
-    @include fade-up('.our-projects__button', 150%, 800ms);
   }
 
   &__text {

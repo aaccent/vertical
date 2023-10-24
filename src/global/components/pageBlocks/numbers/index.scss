@@ -9,7 +9,6 @@
   grid-template-columns: repeat(5, 1fr);
   align-items: center;
   justify-content: center;
-  @include fade-up('', 30%, 250ms);
 
   &__item {
     display: flex;
