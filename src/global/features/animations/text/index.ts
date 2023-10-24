@@ -9,7 +9,7 @@ export interface TextWithAnimation extends HTMLElement {
   }
 }
 
-export function initTextAnimation(textEl: HTMLElement) {
+export function splitTextOnLines(textEl: HTMLElement) {
   if (matchMedia('(max-width: 1200px)').matches) return
 
   const innerHTML = textEl.innerHTML
@@ -46,19 +46,12 @@ export function initTextAnimation(textEl: HTMLElement) {
     .join(' ')
 
   textEl.innerHTML = String(byLines)
-
-  textEl.querySelectorAll<HTMLSpanElement>('span > span').forEach((line, index) => {
-    line.style.translate = '0 100%'
-    textEl.dataset.played = '0'
-    const delay = Number(textEl.dataset.delay || 0) + 200 * index
-    setTimeout(() => line.style.transition = `translate 800ms ease-in-out ${delay}ms`, 5)
-  })
 }
 
 document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
   if (matchMedia('(max-width: 1200px)').matches) return
 
-  initTextAnimation(text)
+  splitTextOnLines(text)
 
   text.prepareAnimation = function () {
     text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {

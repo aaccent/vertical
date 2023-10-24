@@ -1,5 +1,6 @@
-import { initTextAnimation, TextWithAnimation } from 'features/animations/text'
+import { splitTextOnLines, TextWithAnimation } from 'features/animations/text'
 import { createSlider, Slide } from 'features/slider'
+import gsap from 'gsap'
 
 interface RawImgSlide extends HTMLElement {
   dataset: {
@@ -20,6 +21,12 @@ interface ImgSlide extends RawImgSlide, Slide {
   startSlideAnimation: () => void
 }
 
+gsap.from('.hero-index__title span > span, .hero-index .slider-pagination', {
+  duration: 1.2,
+  opacity: 0,
+  translateY: '35%',
+})
+
 const textBlock = document.querySelector('.hero-index__text-block') as HTMLElement
 
 const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
@@ -34,9 +41,28 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
   }
 
   titleContainer.innerHTML = slide.dataset.title
-  initTextAnimation(titleContainer)
-  textBlock.classList.add('_animation-prepare')
-  textBlock.classList.remove('_animation-start')
+
+  splitTextOnLines(titleContainer)
+
+  gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
+    opacity: 0,
+    translateY: '35%',
+  }, {
+    delay: 0.5,
+    duration: 1.5,
+    opacity: 1,
+    translateY: '0%',
+    ease: 'power1.out'
+  })
+
+  gsap.from('.hero-index__text-title span > span', {
+    delay: 0.5,
+    duration: 1,
+    translateY: '100%',
+    ease: 'power1.out'
+  })
+
+  document.querySelector<TextWithAnimation>('.hero-index__text-title')?.playAnimation()
 
   if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle
 
@@ -50,11 +76,6 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
     link.href = slide.dataset.link
     link.innerHTML = slide.dataset.linkText
   }
-
-  setTimeout(() => {
-    titleContainer!.playAnimation?.()
-    textBlock.classList.add('_animation-start')
-  }, 25)
 }
 
 createSlider<RawImgSlide, ImgSlide>({
