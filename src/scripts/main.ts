@@ -9,6 +9,7 @@ import 'features/animations/numbers'
 // Components
 import "components/ui/dropdown"
 import 'components/pageBlocks/aboutCompany'
+import 'components/pageBlocks/ourProject'
 
 // Pages
 import 'pages/index'
