@@ -62,7 +62,7 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
     ease: 'power1.out'
   })
 
-  document.querySelector<TextWithAnimation>('.hero-index__text-title')?.playAnimation()
+  document.querySelector<TextWithAnimation>('.hero-index__text-title')?.playAnimation?.()
 
   if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle
 

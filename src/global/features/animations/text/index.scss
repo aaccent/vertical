@@ -1,10 +1,19 @@
 .text-appearing {
-  & > span {
-    overflow: hidden;
-    display: inline-block;
-
-    & > span {
-      display: inline-block;
+  &.by-words {
+    span {
+      display: inline;
     }
   }
+
+  &.by-lines {
+    & > span {
+      overflow: hidden;
+      display: inline-block;
+
+      & > span {
+        display: inline-block;
+      }
+    }
+  }
+
 }

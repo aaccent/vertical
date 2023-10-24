@@ -24,9 +24,6 @@
   &__title {
     @include tenor-61();
     color: $white;
-    &.text-appearing {
-      line-height: 0.8;
-    }
   }
   &__list {
     margin-top: 50px;
