@@ -1,15 +1,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { NumbersWithAnimation } from 'features/animations/numbers'
-
-function addTextAppearingAnimation(selector: string, tl: GSAPTimeline, pos?: number) {
-  document.querySelectorAll(selector).forEach((line, index) => {
-    tl.from(line, {
-      duration: .8 + .3 * index,
-      translateY: '100%',
-    }, pos)
-  })
-}
+import { alternateTextAnimation } from 'features/animations/text'
 
 void function () {
   const aboutSection = document.querySelector('.about-company')
@@ -18,7 +10,7 @@ void function () {
   gsap.registerPlugin(ScrollTrigger)
 
   const animation = gsap.timeline()
-  addTextAppearingAnimation('.about-company__title span > span', animation, 0)
+  alternateTextAnimation('.about-company__title span > span', animation, 0)
   animation
     .from('.about-company .title', {
       duration: 1,
