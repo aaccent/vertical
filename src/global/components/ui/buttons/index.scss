@@ -12,7 +12,7 @@
   align-items: baseline;
   text-transform: uppercase;
   width: max-content;
-  transition: all $transition-duration ease;
+  transition: background-color $transition-duration ease;
 
   &_blue{
     background-color: #0B3882;
