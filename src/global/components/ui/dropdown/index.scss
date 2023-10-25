@@ -6,6 +6,7 @@
 .dropdown {
   position: relative;
   cursor: pointer;
+
   &__content {
     z-index: $z-3;
     visibility: hidden;
@@ -15,39 +16,72 @@
     overflow: hidden;
     top: calc(100% + 30px);
     left: 0;
+
     &__wrapper {
       width: 310px;
     }
   }
-  &_dark{
-    .dropdown__title{
+
+  &_dark {
+    .dropdown__title {
       color: $black;
-      .black{
+
+      .black {
         display: block;
       }
-      .white{
+
+      .white {
         display: none;
       }
     }
   }
+
   &__list {
     @include reset-list();
     @include basic-card();
+    padding: 0;
+
     &__item {
       cursor: pointer;
       padding: 15px 25px;
       text-transform: uppercase;
       @include manrope-14();
       border-bottom: 1px solid #eeeeee;
+      &__selected {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: #0B3882;
+        &::after {
+          content: "";
+          position: relative;
+          background-image: url("/src/assets/media/static/icons/check.svg");
+          background-repeat: no-repeat;
+          display: block;
+          width: 15px;
+          height: 11px;
+          background-position: center;
+          background-size: cover;
+        }
+      }
+
+      &:hover {
+        background-color: #F2F2F2;
+      }
     }
-    &__item:first-child {
-      padding-top: 0;
+
+    &__item:first-child:hover {
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
     }
-    &__item:last-child {
-      padding-bottom: 0;
+
+    &__item:last-child:hover {
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
       border-bottom: none;
     }
   }
+
   &__title {
     @include manrope-14();
     color: $white;
@@ -55,23 +89,28 @@
     align-items: center;
     gap: 8px;
     text-transform: uppercase;
-    .black{
+    letter-spacing: .04em;
+
+    .black {
       display: none;
     }
-    img{
+
+    img {
       transition: transform 250ms ease;
     }
 
-    .white{
+    .white {
       display: block;
     }
   }
+
   &_shown {
     .dropdown__content {
       visibility: visible;
     }
-    .dropdown__title{
-      img{
+
+    .dropdown__title {
+      img {
         transform: rotate(-180deg);
       }
     }

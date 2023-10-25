@@ -150,6 +150,7 @@
     }
     &__text {
       @include manrope-24();
+      padding-right: 15px;
     }
   }
 }

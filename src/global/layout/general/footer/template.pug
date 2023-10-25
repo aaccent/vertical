@@ -3,12 +3,31 @@
     .contact-form__title Оставьте заявку на консультацию
     form(action='')
       .contact-form__list
-        input.contact-form__input(name='customer_name', placeholder='Ваше имя*') 
-        input.contact-form__input(name='customer_phome', placeholder='телефон*') 
-        input.contact-form__input(name='customer_mail', placeholder='почта') 
-        input.contact-form__input(name='customer_comment', placeholder='комментарий') 
+        .contact-form__container
+          label(for="customer_name")
+            input.contact-form__input(name='customer_name', id='customer_name')
+            span(class="contact-form__error") Введите имя
+            span(class="span") Ваше имя*
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
+        .contact-form__container
+          label(for="customer_phone")
+            input.contact-form__input(name='customer_phone', id='customer_phone', maxlength=16, required)
+            span(class="contact-form__error") Введите телфон
+            span(class="span") телефон*
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
+        .contact-form__container
+          label(for="customer_mail")
+            input.contact-form__input(name='customer_mail', id='customer_mail')
+            span(class="contact-form__error") Введите e-mail
+            span(class="span") почта
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
+        .contact-form__container
+          label(for="customer_comment")
+            textarea.contact-form__input.contact-form__textarea(name='customer_comment', id='customer_comment')
+            span(class="span") комментарий
+            img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
       .contact-form__bottom
-        .button.button_white( data-popup='request-accept', data-action='popup') отправить
+        button.button.button_white( data-popup='request-accept', data-action='popup') отправить
         .contact-form__bottom__text
           p Нажимая кнопку «Отправить», вы соглашаетесь с
           a(href) политикой конфиденциальности
@@ -22,17 +41,20 @@ footer.footer
       span Ростов-на-Дону, проспект Сиверса, 1
       span Пн-Пт, 09:00-18:00
     ul.footer__link
-      li.footer__link__item Каталог объектов
-      li.footer__link__item О компании
-      li.footer__link__item Блог
-      li.footer__link__item Контакты
-  .footer__bottom
-    p © OOO «ВЕРТИКАЛЬ», 2023
-    p Политика конфиденциальности
-    p Сайт разработан: Акцент на результат
+      li.footer__link__item 
+        a(href="#") Каталог объектов
+      li.footer__link__item
+       a(href="#") О компании
+      li.footer__link__item
+       a(href="#") Блог
+      li.footer__link__item
+       a(href="#") Контакты
+  .footer__bottom © OOO «ВЕРТИКАЛЬ», 2023
+    a(href="#") Политика конфиденциальности
+    a(href="#") Сайт разработан: Акцент на результат
 include global/features/popup/template
 +popup('request-accept', "request-accept")
-  .button-close.close-btn(data-action="close-popup")
+  button.button-close.close-btn(data-action="close-popup")
     img(src = require("media/static/icons/close/close_white.svg"))
   .request-accept__text-block
     .request-accept__title Заявка успешно отправлена!
