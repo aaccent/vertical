@@ -30,9 +30,11 @@
 
       &__top {
         align-self: end;
+        transform-origin: top;
       }
       &__bottom {
         align-self: start;
+        transform-origin: top;
       }
     }
 
@@ -41,6 +43,7 @@
       height: 1px;
       background-color: rgba(255, 255, 255, .2);
       grid-column: span 9;
+      transform-origin: left;
     }
 
     &__container {
