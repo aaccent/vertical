@@ -27,8 +27,6 @@ gsap.from('.hero-index__title span > span, .hero-index .slider-pagination', {
   translateY: '35%',
 })
 
-const textBlock = document.querySelector('.hero-index__text-block') as HTMLElement
-
 const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
 const titleContainer = document.querySelector<TextWithAnimation>('.hero-index__text-title')
 const link = document.querySelector<HTMLAnchorElement>('a.hero-index__link')
