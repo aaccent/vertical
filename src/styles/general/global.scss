@@ -1,4 +1,5 @@
-@use 'src/styles/general/variables' as *;
+@use 'styles/general/variables' as *;
+@use 'components/ui/container' as *;
 
 html {
   overflow-x: clip;
@@ -11,6 +12,10 @@ html {
   display: none;
 }
 
+.container {
+  @include container-x();
+}
+
 body {
   overflow-x: clip;
   font-weight: 400;
@@ -18,6 +23,10 @@ body {
   margin: 0;
   background: #fff;
   font-family: "onest", sans-serif;
+}
+
+.without-animations {
+  transition: none !important;
 }
 
 html.disable-scroll {

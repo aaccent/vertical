@@ -3,9 +3,13 @@
 @use 'general/variables';
 @use 'general/fonts';
 @use 'general/global';
+
+@use "general/locomotive.css";
 @use "npm/swiper/swiper";
 
-// Popup
+// Features
+@use "features/animations/text";
+@use "features/slider";
 @use 'features/popup';
 
 @use "layout/general/header";
@@ -24,3 +28,4 @@
 @use "pages/projectList";
 @use "pages/project";
 @use "pages/404" as error404;
+

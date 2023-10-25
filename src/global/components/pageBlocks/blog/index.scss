@@ -7,7 +7,7 @@
 
 .blog {
   @include container-x();
-  
+
   padding-top: 125px;
   &__button {
     height: max-content;

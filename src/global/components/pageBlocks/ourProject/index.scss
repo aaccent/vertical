@@ -1,5 +1,6 @@
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/media' as *;
+@use 'src/styles/utils/mixins' as *;
 @use 'src/styles/general/typography' as *;
 
 .our-projects {
@@ -7,24 +8,28 @@
     position: relative;
     margin-top: 30px;
   }
+
   &__title {
     font-size: 148px;
     font-family: 'tenor-sans';
     text-align: center;
     color: $white;
   }
+
   &__middle-image {
     height: 620px;
     width: 510px;
     overflow: hidden;
     border-top-left-radius: 330px;
     border-top-right-radius: 330px;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+
   &__text-block {
     position: absolute;
     left: 0;
@@ -32,13 +37,14 @@
     transform: translateY(-50%);
     width: 25%;
   }
+
   &__text {
     color: $white;
     @include manrope-17();
     letter-spacing: 0.96px;
-
     text-transform: uppercase;
   }
+
   &__right {
     width: 368px;
     height: 434px;
@@ -47,15 +53,18 @@
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+
   &__button {
     margin-top: 25px;
   }
+
   &__content {
     position: relative;
     margin-top: -70px;
@@ -71,7 +80,7 @@
       width: 40%;
       text-align: start;
     }
-    &__text{
+    &__text {
       letter-spacing: 0.72px;
 
     }
@@ -83,7 +92,7 @@
       width: 316px;
     }
     &__content {
-      margin-top:10px;
+      margin-top: 10px;
       justify-content: space-between;
     }
     &__images {
@@ -113,11 +122,11 @@
       flex-direction: column-reverse;
       margin-top: -35px;
     }
-    &__title{
+    &__title {
       width: 100%;
       text-align: center;
     }
-    &__text-block{
+    &__text-block {
       width: 100%;
     }
   }
@@ -135,14 +144,14 @@
       border-top-left-radius: 330px;
       border-top-right-radius: 330px;
     }
-    &__text-block{
+    &__text-block {
       // width: 372px;
     }
   }
 
   @media screen and (min-width: $desktop1650) {
     &__content {
-      margin-top: -140px;
+      margin-top: -155px;
     }
 
     &__title {

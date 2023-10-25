@@ -4,6 +4,7 @@ const PugPlugin = require('pug-plugin')
 const getEntry = require('./webpack/getEntry')
 const { foldersNames, paths } = require('./webpack/paths.js')
 
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin')
 
 const sourcePath = path.join(__dirname, 'src')
 
@@ -81,7 +82,25 @@ module.exports = async (env) => {
 				},
 			}),
 		],
-
-
+		optimization: {
+			minimizer: [
+				'...',
+				new ImageMinimizerPlugin({
+					generator: [
+						{
+							preset: 'webp',
+							implementation: ImageMinimizerPlugin.sharpGenerate,
+							options: {
+								encodeOptions: {
+									webp: {
+										quality: 80,
+									},
+								},
+							},
+						},
+					],
+				}),
+			],
+		},
 	}
 }

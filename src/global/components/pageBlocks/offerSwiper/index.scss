@@ -7,13 +7,18 @@
 .offer {
   height: 810px;
   position: relative;
-  .swiper {
+
+  &__slides {
     height: 100%;
   }
+
   &__slide {
     width: 100%;
     height: 100%;
-    position: relative;
+    left: 0;
+    top: 0;
+    position: absolute;
+
     &::before {
       content: '';
       display: block;
@@ -23,7 +28,14 @@
       z-index: $z-1;
       background: linear-gradient(357deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0)), linear-gradient(0deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.20) 100%);
     }
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
+
   &__title {
     position: absolute;
     @include tenor-90();
@@ -35,6 +47,7 @@
     width: min-content;
     text-transform: uppercase;
   }
+
   &__text {
     color: $white;
     position: absolute;
@@ -48,17 +61,8 @@
     @include manrope-24();
     text-transform: uppercase;
   }
-  &__image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-  &__pagination{
+
+  &__pagination {
     position: absolute;
     z-index: $z-2;
     display: flex;
@@ -67,7 +71,8 @@
     right: 648px;
     gap: 20px;
     transform: translateX(100%);
-    &__item{
+
+    &__item {
       @include manrope-24();
       display: flex;
       align-items: center;
@@ -76,10 +81,12 @@
       gap: 15px;
       color: $white;
       cursor: pointer;
-      &:hover{
+
+      &:hover {
         opacity: 1;
       }
-      &::before, &::after{
+
+      &::before, &::after {
         content: "";
         display: block;
         height: 37px;
@@ -88,25 +95,30 @@
         background-size: contain;
         background-position: center;
       }
-      &::before{
+
+      &::before {
         background-image: url("media/static/icons/brackets/brackets_left.svg");
       }
-      &::after{
+
+      &::after {
         background-image: url("media/static/icons/brackets/brackets_right.svg");
 
       }
     }
-    &__progress{
+
+    &__progress {
       width: 50px;
       height: 1px;
       position: relative;
       z-index: $z-2;
-      &__bg{
+
+      &__bg {
         width: 100%;
         height: 100%;
         background-color: rgba($color: $white, $alpha: 0.4);
       }
-      &__indicator{
+
+      &__indicator {
         position: absolute;
         width: 0;
         height: 100%;
@@ -114,9 +126,10 @@
       }
     }
   }
+
   @media screen and (max-width: $tablet1200) {
     height: 668px;
-    &__title{
+    &__title {
       top: 20px;
       font-size: 48px;
       left: 20px;
@@ -124,7 +137,7 @@
       letter-spacing: 0.35px;
 
     }
-    &__text{
+    &__text {
       bottom: 92px;
       left: 20px;
       transform: none;
@@ -136,22 +149,24 @@
       letter-spacing: 0.72px;
 
     }
-    &__pagination{
+    &__pagination {
       left: 20px;
       right: 20px;
       bottom: 40px;
       gap: 16px;
       transform: none;
-      &__progress{
+
+      &__progress {
         width: 20px;
       }
-      &__item{
+
+      &__item {
         font-size: 18px;
         line-height: 90%;
         align-items: center;
         gap: 8px;
-        
-        &::before, &::after{
+
+        &::before, &::after {
           height: 32px;
           width: 9px;
         }
@@ -159,10 +174,10 @@
     }
   }
   @media screen and (max-width: $tablet800) {
-    &__title{
+    &__title {
       font-size: 35px;
     }
-    &__text{
+    &__text {
       @include manrope-17-m();
       line-height: 130%;
       width: auto;

@@ -192,10 +192,16 @@
   background-color: $blue;
 
   &__title {
-    width: 100%;
+    @include tenor-248;
+    color: #fff;
     padding-top: 40px;
     padding-bottom: 30px;
     border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
+
+    & > span {
+      translate: -2% 0;
+      display: inline-block;
+    }
 
     img {
       width: 100%;

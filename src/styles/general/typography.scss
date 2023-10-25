@@ -84,6 +84,7 @@ $tenor-font: 'tenor-sans', $sans-font;
 @mixin tenor-248() {
   font-family: $tenor-font;
   font-size: 248px;
+  font-weight: 400;
 }
 
 .title {

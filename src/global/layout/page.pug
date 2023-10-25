@@ -6,7 +6,7 @@ html(lang='ru')
             meta(name="viewport" content="width=device-width, initial-scale=1.0")
             meta(charset="UTF-8")
             link(href=require('styles/styles.scss') rel="stylesheet")
-    body
+    body: div(data-scroll-container)
         include global/layout/general/header/template
         block main
         include general/footer/template

@@ -21,3 +21,44 @@
     margin-top: 0;
   }
 }
+
+@mixin transition($property, $duration: .3s, $timing: ease-in-out) {
+  transition-property: $property;
+  transition-timing-function: $timing;
+  transition-duration: $duration;
+}
+
+@mixin square($size) {
+  --size: #{$size};
+  width: var(--size);
+  height: var(--size);
+}
+
+@mixin circle($diameter) {
+  --diameter: #{$diameter};
+  width: var(--diameter);
+  height: var(--diameter);
+  border-radius: 50%;
+}
+
+@mixin custom-scroll($width, $track-color, $thumb-color, $height: initial) {
+  scrollbar-width: #{$width};
+  scrollbar-color: #{$thumb-color};
+
+  &::-webkit-scrollbar {
+    width: #{$width};
+    height: #{$height};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #{$thumb-color};
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #{$track-color};
+  }
+}
+
+@mixin transparent-scroll() {
+  @include custom-scroll(0, transparent, transparent, 0);
+}

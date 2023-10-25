@@ -250,7 +250,6 @@
 
 .history {
   &__title {
-    //@include tenor-90();
     font-family: "tenor-sans";
     font-size: 61px;
     line-height: 61px;
@@ -449,9 +448,7 @@
 }
 
 .our-projects{
-  //margin-top: 160px;
   @media screen and (max-width: $tablet1200) {
-    //margin-top: 45px;
   }
 }
 

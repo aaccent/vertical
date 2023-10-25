@@ -15,13 +15,13 @@ const gallerySwiper = new Swiper('.gallery__swiper', {
   modules: [Navigation, Autoplay],
 })
 
-initPageViewer(gallerySwiper)
-initOfferSwiper('.offer__swiper')
+// initPageViewer(gallerySwiper)
+// initOfferSwiper('.offer__swiper')
 
-const progressBar = document.querySelector('.building-summary__progress-indicator') as HTMLElement
-const progress = progressBar.dataset.progress?.toString() as any
+// const progressBar = document.querySelector('.building-summary__progress-indicator') as HTMLElement
+// const progress = progressBar?.dataset.progress?.toString() as any
 
-renderArc(progressBar.querySelector('#progress') as HTMLElement, 360 * (progress / 100), 120)
+// renderArc(progressBar.querySelector('#progress') as HTMLElement, 360 * (progress / 100), 120)
 
 const galleryPopupDesktop = new Swiper('.gallery-popup__swiper', {
   navigation: { nextEl: '.gallery-popup__right', prevEl: '.gallery-popup__left' },

@@ -1,10 +1,13 @@
 import { renderArc } from 'global/features/arcProgress'
+import Swiper from 'swiper'
 
-const initPageViewer = (swiper: any) => {
-  const pageViewer = document.querySelector('.page-viewer') as any
+const initPageViewer = (swiper: Swiper) => {
+  const pageViewer = document.querySelector<HTMLDivElement>('.page-viewer')
 
-  pageViewer.querySelector('.page-viewer__page p').textContent = swiper.activeIndex + 1
-  pageViewer.querySelector('.page-viewer__page span').textContent = swiper.slides.length
+  if (!pageViewer) return
+
+  pageViewer.querySelector('.page-viewer__page p')!.textContent = `${swiper.activeIndex + 1}`
+  pageViewer.querySelector('.page-viewer__page span')!.textContent = `${swiper.slides.length}`
 
   let angle = 0
   let stepAngle = 360 / swiper.slides.length
@@ -19,17 +22,17 @@ const initPageViewer = (swiper: any) => {
     let startX = 0
     arcRender(angle)
 
-    swiper.on('slideChange', (e: any) => {
-      pageViewer.querySelector('p').textContent = e.activeIndex + 1
+    swiper.on('slideChange', (swiper) => {
+      pageViewer.querySelector('p')!.textContent = `${swiper.activeIndex + 1}`
 
-      currentAngle = stepAngle * (e.activeIndex + 1)
+      currentAngle = stepAngle * (swiper.activeIndex + 1)
       arcRender( currentAngle)
     })
-    swiper.on('touchStart', (e: any) => {
-      startX = e.touches.startX
+    swiper.on('touchStart', (swiper) => {
+      startX = swiper.touches.startX
     })
-    swiper.on('progress', (e: any) => {
-      const diff = e.touches.currentX - startX
+    swiper.on('progress', (swiper) => {
+      const diff = swiper.touches.currentX - startX
       const progress = diff / window.innerWidth
       angle = currentAngle - stepAngle * progress
 
@@ -39,7 +42,7 @@ const initPageViewer = (swiper: any) => {
       arcRender(angle)
     })
 
-    swiper.on('autoplayTimeLeft', (e: any, _: any, progress: number) => {
+    swiper.on('autoplayTimeLeft', (swiper, _, progress) => {
       angle = currentAngle - stepAngle * progress
       arcRender(angle)
     })
