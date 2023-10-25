@@ -7,6 +7,9 @@
 
 .blog {
   @include container-x();
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
 
   padding-top: 125px;
   &__button {
