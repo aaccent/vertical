@@ -250,7 +250,11 @@
 
 .history {
   &__title {
-    @include tenor-90();
+    font-family: "tenor-sans";
+    font-size: 61px;
+    line-height: 61px;
+    letter-spacing: .9px;
+    width: 1007px;
     color: $white;
     margin-top: -6px;
   }
@@ -262,6 +266,7 @@
   &__content{
     &__wrapper{
       display: flex;
+      margin-bottom: 160px;
     }
 
     width: 80%;
@@ -276,6 +281,12 @@
     .arrow-button {
       flex-shrink: 0;
       position: relative;
+      &:hover {
+        background-color: white;
+        &::before {
+          background-image: url('/src/assets/media/static/icons/arrow/arrow_long_black.svg');
+        }
+      }
     }
     .arrow-button_left {
       left: 80px;
@@ -289,6 +300,12 @@
     margin-top: 60px;
     .arrow-button_left{
       top: 0;
+      &:hover {
+        background-color: white;
+        &::before {
+          background-image: url('/src/assets/media/static/icons/arrow/arrow_long_black.svg');
+        }
+      }
     }
   }
   &__nav {
@@ -432,7 +449,6 @@
 
 .our-projects{
   @media screen and (max-width: $tablet1200) {
-    margin-top: 45px;
   }
 }
 
@@ -491,6 +507,7 @@
       font-weight: 400;
       padding-top: 35px;
       padding-bottom: 35px;
+      text-transform: uppercase;
       &:last-child {
         display: flex;
         justify-content: end;

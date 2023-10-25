@@ -6,8 +6,11 @@
     .our-projects__content
       .our-projects__text-block
         .our-projects__text Компания «Вертикаль» продолжает социальную линию группы: новостройки способны обеспечить жильем сотни семей
-        .our-projects__button.button.button_white смотреть все
+        button.our-projects__button.button.button_white смотреть все
           img(src=require('media/static/icons/arrow/arrow_short.svg'))
+          button.button.button_white.button_animate
+                img(src=require('media/static/icons/arrow/arrow_short.svg'))
+                span смотреть все
       .our-projects__images
         .our-projects__middle-image
           img(src=require('media/static/our_projects_1.webp'))

@@ -16,9 +16,10 @@
 @use "sections/hero-index";
 
 .offer {
-  margin-top: 130px;
+
+  /*margin-top: 130px;*/
   @media screen and (max-width: $tablet1200) {
-    margin-top: 64px;
+    /*margin-top: 64px;*/
   }
 }
 
@@ -27,9 +28,11 @@
   background-color: $blue;
   padding-top: 80px;
   padding-bottom: 170px;
+
   .map {
     margin-top: 35px;
   }
+
   @media screen and (max-width: $tablet1200) {
     padding-top: 40px;
     padding-bottom: 40px;
@@ -38,6 +41,7 @@
 
 .building-filter {
   margin-top: 200px;
+
   @media screen and (max-width: $tablet1200) {
     margin-top: 80px;
   }
@@ -47,10 +51,12 @@
   &__project-list {
     display: none;
   }
+
   @media screen and (max-width: $tablet1200) {
     .map {
       display: none;
     }
+
     &__project-list {
       display: block;
     }
@@ -66,40 +72,78 @@
     margin-top: -6px;
     letter-spacing: -0.305px;
   }
+
   &__desktop {
-    img {
+    display: grid;
+    grid-template-columns: 270px 1px 270px 1px 270px 1px 270px 1px 270px;
+    align-items: baseline;
+    justify-content: space-around;
+    &__img {
+      display: block;
+      margin: auto;
+    }
+
+    .border {
+      width: 1px;
+      height: 34px;
+      background-color: rgba(255, 255, 255, .2);
+
+      &__top {
+        align-self: end;
+      }
+      &__bottom {
+        align-self: start;
+      }
+    }
+
+    &__line {
       width: 100%;
-      object-fit: contain;
+      height: 1px;
+      background-color: rgba(255, 255, 255, .2);
+      grid-column: span 9;
+    }
+
+    &__container {
+      width: 272px;
+      padding: 35px 0;
     }
   }
+
   .container_left {
     margin-bottom: 134px;
   }
+
   &__row {
     display: none;
   }
 
   @media screen and (max-width: $tablet1200) {
     margin-top: 80px;
+
     .container_left {
       margin-bottom: 40px;
     }
+
     &__title {
       font-size: 30px;
       letter-spacing: -0.15px;
       margin-top: 0;
     }
+
     &__list {
       display: flex;
       position: relative;
     }
+
     &__desktop {
       display: none;
     }
+
     &__row {
       border-bottom: none;
       gap: 4px;
       display: flex;
+
       &__image {
         width: 110px;
         height: 110px;
@@ -109,22 +153,28 @@
         align-items: center;
         border-radius: 50%;
         border: 1px solid rgba($color: $white, $alpha: 0.2);
+
         img {
           opacity: 0.5;
           width: auto;
           height: 14px;
         }
+
         &::before {
           display: none;
         }
       }
     }
   }
+
   @media screen and (max-width: $tablet800) {
     &__list {
       left: -20%;
     }
   }
+
+
+
 }
 
 .seo-block {
@@ -134,6 +184,7 @@
   &__title {
     @include manrope-24();
   }
+
   &__text {
     @include manrope-17();
     transition: height 250ms ease;
@@ -141,20 +192,24 @@
     padding-top: 20px;
     color: #6d6d6d;
     overflow: hidden;
+
     p {
       position: absolute;
       visibility: hidden;
       box-sizing: content-box;
     }
+
     p:first-child {
       position: static;
       visibility: visible;
     }
-    p + p {
+
+    p+p {
       padding-top: 20px;
       margin-top: 0;
     }
   }
+
   &__expand {
     margin-top: 24px;
     @include manrope-17-m();
@@ -164,50 +219,63 @@
     text-transform: uppercase;
     gap: 6px;
     align-items: center;
+
     img {
       transition: transform 250ms ease;
     }
-    img:first-child{
+
+    img:first-child {
       display: none;
     }
-    img:last-child{
+
+    img:last-child {
       transform: rotate(90deg);
     }
   }
+
   &_open {
     p {
       position: static;
       visibility: visible;
     }
+
     .seo-block__expand {
       img:first-child {
         transform: rotate(-180deg);
       }
-      img:last-child{
+
+      img:last-child {
         transform: rotate(-90deg);
 
       }
     }
   }
+
   @media screen and (max-width: $tablet1200) {
     margin-bottom: 50px;
     margin-top: 50px;
+
     &__title {
       font-size: 18px;
     }
+
     &__text {
       font-size: 15px;
       padding-top: 0;
+
       p:first-child {
         padding-top: 8px;
       }
     }
+
     &__expand {
       margin-top: 16px;
-      img:last-child{
+
+      img:last-child {
         display: none;
       }
-      img:first-child{
+
+      img:first-child {
         display: block;
       }
     }
