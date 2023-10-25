@@ -41,3 +41,12 @@ ScrollTrigger.scrollerProxy('[data-scroll-container]',
   })
 
 scroll.on('scroll', ScrollTrigger.update)
+
+window.onbeforeunload = function () {
+  scroll.scrollTo(0,
+    {
+      disableLerp: true,
+      duration: 0,
+    })
+  window.scrollTo({top: 0})
+}
