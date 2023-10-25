@@ -5,6 +5,7 @@ import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
 import './sections/hero-index'
+import './sections/partners'
 
 void function () {
   const seoBlock = document.querySelector<HTMLElement>('.seo-block')

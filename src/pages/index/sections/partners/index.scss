@@ -1,0 +1,118 @@
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+
+.partners {
+  margin-top: 200px;
+
+  &__title {
+    @include tenor-61;
+    color: $white;
+    margin-top: -6px;
+    letter-spacing: -0.305px;
+  }
+
+  &__desktop {
+    display: grid;
+    grid-template-columns: 270px 1px 270px 1px 270px 1px 270px 1px 270px;
+    align-items: baseline;
+    justify-content: space-around;
+    &__img {
+      display: block;
+      margin: auto;
+    }
+
+    .border {
+      width: 1px;
+      height: 34px;
+      background-color: rgba(255, 255, 255, .2);
+
+      &__top {
+        align-self: end;
+      }
+      &__bottom {
+        align-self: start;
+      }
+    }
+
+    &__line {
+      width: 100%;
+      height: 1px;
+      background-color: rgba(255, 255, 255, .2);
+      grid-column: span 9;
+    }
+
+    &__container {
+      width: 272px;
+      padding: 35px 0;
+    }
+  }
+
+  .container_left {
+    margin-bottom: 134px;
+  }
+
+  &__row {
+    display: none;
+  }
+
+  @media screen and (max-width: $tablet1200) {
+    margin-top: 80px;
+
+    .container_left {
+      margin-bottom: 40px;
+    }
+
+    &__title {
+      font-size: 30px;
+      letter-spacing: -0.15px;
+      margin-top: 0;
+    }
+
+    &__list {
+      display: flex;
+      position: relative;
+    }
+
+    &__desktop {
+      display: none;
+    }
+
+    &__row {
+      border-bottom: none;
+      gap: 4px;
+      display: flex;
+
+      &__image {
+        width: 110px;
+        height: 110px;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        border: 1px solid rgba($color: $white, $alpha: 0.2);
+
+        img {
+          opacity: 0.5;
+          width: auto;
+          height: 14px;
+        }
+
+        &::before {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $tablet800) {
+    &__list {
+      left: -20%;
+    }
+  }
+
+
+
+}
