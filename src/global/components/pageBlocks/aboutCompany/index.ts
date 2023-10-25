@@ -5,7 +5,7 @@ import { alternateTextAnimation } from 'features/animations/text'
 
 void function () {
   const aboutSection = document.querySelector('.about-company')
-  if (!aboutSection) return
+  if (!aboutSection || matchMedia('(max-width: 1200px)').matches) return
 
   gsap.registerPlugin(ScrollTrigger)
 

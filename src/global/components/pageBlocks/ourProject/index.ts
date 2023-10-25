@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function() {
   const ourProjects = document.querySelector('.our-projects')
-  if (!ourProjects) return
+  if (!ourProjects || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
     .from('.our-projects .title', {

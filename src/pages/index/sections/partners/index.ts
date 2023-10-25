@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function () {
   const partners = document.querySelector('.partners')
-  if (!partners) return
+  if (!partners || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
     .from('.partners__title span > span', {
@@ -22,7 +22,7 @@ void function () {
       translateY: '35%',
     }, 1)
     .from('.partners__desktop__line', {
-      duration: 4,
+      duration: 2.6,
       scaleX: 0,
       ease: 'power1.out'
     }, 1.2)
