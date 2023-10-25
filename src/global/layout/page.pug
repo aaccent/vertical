@@ -7,6 +7,9 @@ html(lang='ru')
             meta(charset="UTF-8")
             link(href=require('styles/styles.scss') rel="stylesheet")
     body: div(data-scroll-container)
+        include global/components/pageBlocks/map/popup/mapPopup
+        include global/components/pageBlocks/map/popup/projectPopup
+
         include global/layout/general/header/template
         block main
         include general/footer/template
