@@ -25,8 +25,6 @@ module.exports = {
         { width: 1680 },
         { width: 375, mediaQuery: 'only screen and (max-width: 900px)' },
         { width: 800, mediaQuery: 'only screen and (max-width: 1200px)' },
-        { width: 1200, mediaQuery: 'only screen and (max-width: 1440px)' },
-        { width: 1440, mediaQuery: 'only screen and (max-width: 1600px)' },
       ],
       limitMediaWidth: false,
     }),
