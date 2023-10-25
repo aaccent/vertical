@@ -16,14 +16,6 @@
 @use "sections/hero-index";
 @use "sections/partners";
 
-.offer {
-
-  /*margin-top: 130px;*/
-  @media screen and (max-width: $tablet1200) {
-    /*margin-top: 64px;*/
-  }
-}
-
 .blue-section {
   @include container-x();
   background-color: $blue;

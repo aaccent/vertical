@@ -1,5 +1,6 @@
 import Swiper from 'swiper'
 import { Navigation } from 'swiper/modules'
+import 'components/pageBlocks/blog'
 
 document.querySelectorAll('.article__media-block__video').forEach((videoBlock) => {
   videoBlock.querySelector('.article__media-block__play-button')?.addEventListener('click', () => {
