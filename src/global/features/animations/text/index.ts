@@ -63,42 +63,40 @@ export function splitTextOnLines(textEl: HTMLElement) {
   lines.forEach(line => line.style.marginBottom = `${linesGap}px`)
 }
 
-document.addEventListener('load', () => {
-  document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
-    if (matchMedia('(max-width: 1200px)').matches) return
+document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
+  if (matchMedia('(max-width: 1200px)').matches) return
 
-    splitTextOnLines(text)
+  splitTextOnLines(text)
 
-    text.prepareAnimation = function () {
-      text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
-        line.classList.add('without-animations')
+  text.prepareAnimation = function () {
+    text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
+      line.classList.add('without-animations')
 
-        setTimeout(() => {
-          line.style.translate = '0 100%'
-          text.dataset.played = '0'
+      setTimeout(() => {
+        line.style.translate = '0 100%'
+        text.dataset.played = '0'
 
-          setTimeout(() => line.classList.remove('without-animations'), 15)
-        }, 5)
+        setTimeout(() => line.classList.remove('without-animations'), 15)
+      }, 5)
+    })
+  }
+
+  text.playAnimation = function () {
+    text
+      .querySelectorAll<HTMLSpanElement>('span > span')
+      .forEach(line => {
+        line.style.translate = '0'
+        text.dataset.played = '1'
       })
-    }
-
-    text.playAnimation = function () {
-      text
-        .querySelectorAll<HTMLSpanElement>('span > span')
-        .forEach(line => {
-          line.style.translate = '0'
-          text.dataset.played = '1'
-        })
-    }
+  }
 
 
-    text.replayAnimation = function () {
-      if (!Boolean(+text.dataset.played)) return text.playAnimation()
+  text.replayAnimation = function () {
+    if (!Boolean(+text.dataset.played)) return text.playAnimation()
 
-      text.prepareAnimation()
-      setTimeout(text.playAnimation, 35)
-    }
-  })
+    text.prepareAnimation()
+    setTimeout(text.playAnimation, 35)
+  }
 })
 
 export function alternateTextAnimation(selector: string, tl: GSAPTimeline, pos?: number, delay = .3) {
