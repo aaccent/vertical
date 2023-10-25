@@ -1,10 +1,11 @@
-import "layout/general/header"
-import "layout/general/footer"
-
 // Features
 import 'features/animations/scroll'
 import 'features/animations/text'
 import 'features/animations/numbers'
+
+import "layout/general/header"
+import "layout/general/footer/index.ts"
+import "layout/general/footer/index.js"
 
 // Components
 import "components/ui/dropdown"
