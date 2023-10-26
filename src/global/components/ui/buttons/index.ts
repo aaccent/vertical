@@ -64,3 +64,7 @@ function initButtonSwitch(buttonSwitch: HTMLElement, buttonSwitchMark: HTMLEleme
     pos = 0
   })
 }
+
+document.querySelectorAll<HTMLElement>('.button_circle').forEach(btn => {
+  btn.onclick = () => btn.classList.add('_loading')
+})
