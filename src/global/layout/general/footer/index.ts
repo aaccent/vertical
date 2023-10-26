@@ -52,3 +52,51 @@ void function () {
     },
   })
 }()
+
+void function () {
+  const footer = document.querySelector('.footer')
+  if (!footer || matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .from('.footer__title span', {
+      duration: 1,
+      translateY: '70%',
+      opacity: 0,
+    })
+    .from('.footer__logo', {
+      duration: .7,
+      translateY: '35%',
+      opacity: 0,
+    }, '>-0')
+    .from('.footer__content__middle p', {
+      duration: .7,
+      translateY: '45%',
+      opacity: 0,
+    }, '<0')
+    .from('.footer__link', {
+      duration: .7,
+      translateY: '35%',
+      opacity: 0,
+    }, '<0')
+    .from('.footer__content__middle span', {
+      duration: .7,
+      translateY: '100%',
+      opacity: 0,
+    }, '>-0')
+    .from('.footer__bottom', {
+      duration: .7,
+      translateY: '35%',
+      opacity: 0,
+    }, '<0.4')
+    .from('.footer__line', {
+      duration: 1.3,
+      width: 0,
+    }, '<0')
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: footer,
+    start: `top+=35% bottom`,
+  })
+}()
