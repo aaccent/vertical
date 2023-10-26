@@ -48,5 +48,5 @@ window.onbeforeunload = function () {
       disableLerp: true,
       duration: 0,
     })
-  window.scrollTo({top: 0})
+  window.scrollTo({top: 0, behavior: 'instant'})
 }
