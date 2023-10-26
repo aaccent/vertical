@@ -14,7 +14,7 @@ void function () {
   const animation = gsap.timeline()
     .pause()
     .from('.contact-form__title span > span', {
-      duration: 1,
+      duration: .7,
       opacity: 0,
       translateY: '70%',
       onStart() {
@@ -22,11 +22,11 @@ void function () {
       }
     })
     .from('.contact-form__container', {
-      duration: 1,
+      duration: .8,
       width: 0,
-    })
+    }, '<0.4')
     .from('.contact-form__container .span', {
-      duration: 1,
+      duration: .8,
       opacity: 0,
       translateY: '100%',
       onComplete() {
@@ -37,7 +37,7 @@ void function () {
       duration: 1,
       opacity: 0,
       translateY: '35%',
-    })
+    }, '<.6')
 
   new ScrollTrigger({
     scroller: '[data-scroll-container]',
@@ -58,7 +58,7 @@ void function () {
   if (!footer || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
-    .from('.footer__title span', {
+    .from('.footer__title span > span', {
       duration: 1,
       translateY: '70%',
       opacity: 0,
@@ -67,7 +67,7 @@ void function () {
       duration: .7,
       translateY: '35%',
       opacity: 0,
-    }, '>-0')
+    }, '>-0.35')
     .from('.footer__content__middle p', {
       duration: .7,
       translateY: '45%',
@@ -82,7 +82,7 @@ void function () {
       duration: .7,
       translateY: '100%',
       opacity: 0,
-    }, '>-0')
+    }, '<0.4')
     .from('.footer__bottom', {
       duration: .7,
       translateY: '35%',

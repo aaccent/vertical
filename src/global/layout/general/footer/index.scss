@@ -4,6 +4,11 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/media' as *;
 
+*:has(+ .contact-form) {
+  z-index: 1;
+  position: relative;
+}
+
 .contact-form {
   position: relative;
   @include container-x();
@@ -261,7 +266,7 @@
         letter-spacing: .04em;
       }
 
-      span+span {
+      span + span {
         margin-top: 12px;
       }
     }
@@ -347,7 +352,7 @@
           line-height: 130%;
         }
 
-        span+span {
+        span + span {
           margin-top: 4px;
         }
       }
@@ -382,7 +387,7 @@
         font-size: 12px;
       }
 
-      p+p {
+      p + p {
         margin-top: 0;
       }
     }
