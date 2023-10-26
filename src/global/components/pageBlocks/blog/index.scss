@@ -10,8 +10,8 @@
   position: relative;
   z-index: 1;
   background: #FFFFFF;
-
   padding-top: 125px;
+
   &__button {
     height: max-content;
     flex-shrink: 0;
@@ -20,10 +20,9 @@
     display: none;
   }
   &__header {
+    margin-bottom: 60px;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 60px;
-    border-bottom: 1px solid #d9d9d9;
   }
   &__content{
     display: flex;

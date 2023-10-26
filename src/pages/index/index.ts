@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
+import 'components/pageBlocks/blog'
 import './sections/hero-index'
 import './sections/partners'
 

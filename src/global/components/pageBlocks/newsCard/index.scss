@@ -4,13 +4,25 @@
 @use 'src/styles/general/typography' as *;
 
 .news-card {
+  position: relative;
   display: flex;
   margin-top: 35px;
-  padding-bottom: 35px;
-  border-bottom: 1px solid #d9d9d9;
+  padding-top: 35px;
   overflow: hidden;
   gap: 42px;
+  &:first-child {
+    margin-top: 0;
+  }
+  &__line {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background: #d9d9d9;
+  }
   &__image {
+    overflow: hidden;
     flex-shrink: 0;
     width: 265px;
     height: 215px;
@@ -38,8 +50,12 @@
     line-height: 125%;
   }
   &__title {
+    overflow: hidden;
     text-transform: uppercase;
     @include manrope-24();
+    span {
+      display: inline-block;
+    }
   }
   &__date {
     display: flex;
@@ -58,9 +74,8 @@
       color: #0B3882;
       cursor: pointer;
     }
-    .news-card__image {
-      transform: scale(1.1);
-      transition: transform .3s linear,-webkit-transform .3s linear;
+    .news-card__image img {
+      transform: scale(1.1) !important;
     }
   }
   &_white {
