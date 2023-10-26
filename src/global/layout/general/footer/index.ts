@@ -42,7 +42,7 @@ void function () {
   new ScrollTrigger({
     scroller: '[data-scroll-container]',
     trigger: contactForm,
-    start: `bottom-=${contactForm.offsetHeight} top`,
+    start: `top top`,
     end: `bottom top`,
     scrub: 0,
     onUpdate (self) {
