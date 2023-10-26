@@ -8,7 +8,7 @@ void function() {
 
   const animation = gsap.timeline()
     .from('.our-projects .title', {
-      duration: 1,
+      duration: .7,
       opacity: 0,
       translateY: '100%',
     }, 0)
@@ -17,13 +17,13 @@ void function() {
 
   animation
     .from('.our-projects__middle-image', {
-      duration: 1,
+      duration: .7,
       opacity: 0,
-    }, 1)
+    }, '>-0.1')
     .from('.our-projects__right', {
-      duration: 1,
+      duration: .7,
       opacity: 0,
-    }, 1.3)
+    }, '<0.3')
 
   new ScrollTrigger({
     scroller: '[data-scroll-container]',
