@@ -13,7 +13,7 @@ void function() {
       translateY: '100%',
     }, 0)
 
-  alternateTextAnimation('.our-projects__title span > span', animation, 0.5, .5)
+  alternateTextAnimation('.our-projects__title span > span', animation, '<0.2', 0)
 
   animation
     .from('.our-projects__middle-image', {

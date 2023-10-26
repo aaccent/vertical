@@ -99,7 +99,7 @@ document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => 
   }
 })
 
-export function alternateTextAnimation(selector: string, tl: GSAPTimeline, pos?: number, delay = .3) {
+export function alternateTextAnimation(selector: string, tl: GSAPTimeline, pos?: number | string, delay = .3) {
   document.querySelectorAll(selector).forEach((line, index) => {
     tl.from(line, {
       duration: .8 + delay * index,
