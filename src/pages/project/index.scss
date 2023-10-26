@@ -701,6 +701,10 @@
   @media screen and (max-width: $tablet1200) {
     padding-top: 40px;
 
+    &__image {
+      width: 335px;
+    }
+
     &__content {
       grid-template-columns: 1fr;
       height: auto;
@@ -726,6 +730,7 @@
 
       &__content {
         padding: 16px;
+        width: 335px;
       }
 
       &__view {
@@ -765,7 +770,7 @@
     }
 
     &__content {
-      margin-top: -40px;
+      margin-top: -25px;
     }
   }
 }

@@ -35,6 +35,8 @@ function popupBtnHandler(e: MouseEvent) {
 
 	if (!popupName) throw new Error('button with data-action="popup" doesnt have data-popup')
 
+	if (target.closest('form')?.querySelector('.contact-form__error__active')) return
+
 	openPopup(popupName)
 }
 

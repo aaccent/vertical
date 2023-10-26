@@ -137,6 +137,10 @@
     background-color: #FFFFFF1A;
     border-radius: 50px;
     display: none;
+
+    &__active {
+      display: inline;
+    }
   }
 
   @media screen and (max-width: $tablet1200) {
