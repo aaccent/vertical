@@ -1,5 +1,4 @@
 import gsap from 'gsap'
-import { alternateTextAnimation } from 'features/animations/text'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function() {
@@ -12,10 +11,8 @@ void function() {
       opacity: 0,
       translateY: '100%',
     }, 0)
-
-  alternateTextAnimation('.our-projects__title span > span', animation, '<0.2', 0)
-
-  animation
+    .textAppearing('.our-projects__title', {
+    }, '<0.2')
     .from('.our-projects__middle-image', {
       duration: .7,
       opacity: 0,

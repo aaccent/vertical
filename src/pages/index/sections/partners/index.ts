@@ -6,11 +6,7 @@ void function () {
   if (!partners || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
-    .from('.partners__title span > span', {
-      duration: .7,
-      translateY: '80%',
-      opacity: 0,
-    }, 0)
+    .textAppearing('.partners__title', {}, 0)
     .from('.partners .title', {
       duration: .7,
       translateY: '130%',

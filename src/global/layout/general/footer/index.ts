@@ -13,10 +13,7 @@ void function () {
 
   const animation = gsap.timeline()
     .pause()
-    .from('.contact-form__title span > span', {
-      duration: .7,
-      opacity: 0,
-      translateY: '70%',
+    .textAppearing('.contact-form__title', {
       onStart() {
         contactForm.classList.add('_gsap-animation')
       }
