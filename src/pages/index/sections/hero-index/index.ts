@@ -22,11 +22,7 @@ interface ImgSlide extends RawImgSlide, Slide {
 
 gsap.timeline()
   .textAppearing('.hero-index__title', {}, 0)
-  .from('.hero-index .slider-pagination', {
-    duration: 1.2,
-    opacity: 0,
-    translateY: '35%',
-  })
+  .fadeUp('.hero-index .slider-pagination', { duration: 1.2 })
 
 const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
 const titleContainer = document.querySelector<HTMLElement>('.hero-index__text-title')
@@ -44,12 +40,12 @@ function setSlideText(slide: RawImgSlide | ImgSlide) {
   gsap.timeline().textAppearing('.hero-index__text-title', { delay: .4 }, 0)
   gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
     opacity: 0,
-    translateY: '90%',
+    yPercent: 90,
   }, {
     duration: 1,
     delay: .4,
     opacity: 1,
-    translateY: '0%',
+    yPercent: 0,
   })
 
   if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle

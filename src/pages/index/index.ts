@@ -50,8 +50,8 @@ void function () {
 
 void function () {
   const animation = gsap.timeline()
-    .to('.our-projects__middle-image', { translateY: 50 })
-    .to('.our-projects__right', { translateY: 50 })
+    .to('.our-projects__middle-image', { y: 50 })
+    .to('.our-projects__right', { y: 50 })
 
   new ScrollTrigger({
     animation, trigger: '.our-projects', start: 'center center', end: '+=500 center', scrub: 2,

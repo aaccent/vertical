@@ -6,21 +6,9 @@ void function () {
   if (!blog || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
-    .from('.blog .title', {
-      duration: 0.7,
-      opacity: 0,
-      translateY: '150%',
-    }, 0)
-    .from('.blog__title', {
-      duration: 0.7,
-      opacity: 0,
-      translateY: '70%',
-    }, 0)
-    .from('.blog__button', {
-      duration: 0.7,
-      opacity: 0,
-      translateY: '150%',
-    }, 0)
+    .fadeUp('.blog .title', { yPercent: 150 }, 0)
+    .textAppearing('.blog__title', {}, 0)
+    .fadeUp('.blog__button', { yPercent: 150 }, 0)
 
   blog.querySelectorAll('.news-card').forEach(card => {
     animation
@@ -36,21 +24,9 @@ void function () {
           card.querySelector('img')!.style.transition = 'transform .3s linear'
         }
       }, '<0')
-      .from(card.querySelector('.news-card__title span'), {
-        duration: 1,
-        translateY: '70%',
-        opacity: 0,
-      }, '<0')
-      .from(card.querySelector('.news-card__date'), {
-        duration: 1,
-        translateY: '45%',
-        opacity: 0,
-      }, '<0')
-      .from(card.querySelector('.news-card__text'), {
-        duration: 1,
-        translateY: '45%',
-        opacity: 0,
-      }, '<0.25')
+      .fadeUp(card.querySelector('.news-card__title span'), { yPercent: 70 }, '<0')
+      .fadeUp(card.querySelector('.news-card__date'), {}, '<0')
+      .fadeUp(card.querySelector('.news-card__text'), {}, '<0.25')
   })
 
   new ScrollTrigger({
@@ -60,11 +36,7 @@ void function () {
     start: `top+=35% bottom`,
   })
 
-  const fadeUp = gsap.from('.blog .seo-block', {
-    duration: 1,
-    translateY: '35%',
-    opacity: 0,
-  })
+  const fadeUp = gsap.timeline().fadeUp('.blog .seo-block', {})
 
   new ScrollTrigger({
     scroller: '[data-scroll-container]',

@@ -104,7 +104,7 @@ document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => 
 
 gsap.registerEffect({
   name: 'textAppearing',
-  effect(targets: HTMLElement[], config: Required<TextAppearingConfig>) {
+  effect(targets: HTMLElement[], config: Required<TextAppearingFilterConfig>) {
     targets.forEach(splitTextOnLines)
 
     const timeline = gsap.timeline()

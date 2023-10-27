@@ -25,16 +25,12 @@ void function () {
     .from('.contact-form__container .span', {
       duration: .8,
       opacity: 0,
-      translateY: '100%',
+      yPercent: 100,
       onComplete() {
         contactForm.classList.remove('_gsap-animation')
       }
     }, '<+=0.1')
-    .from('.contact-form__bottom', {
-      duration: 1,
-      opacity: 0,
-      translateY: '35%',
-    }, '<.6')
+    .fadeUp('.contact-form__bottom', {}, '<.6')
 
   new ScrollTrigger({
     scroller: '[data-scroll-container]',
@@ -55,36 +51,14 @@ void function () {
   if (!footer || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
-    .from('.footer__title span > span', {
-      duration: 1,
-      translateY: '70%',
-      opacity: 0,
-    })
-    .from('.footer__logo', {
-      duration: .7,
-      translateY: '35%',
-      opacity: 0,
-    }, '>-0.35')
-    .from('.footer__content__middle p', {
-      duration: .7,
-      translateY: '45%',
-      opacity: 0,
-    }, '<0')
-    .from('.footer__link', {
-      duration: .7,
-      translateY: '35%',
-      opacity: 0,
-    }, '<0')
-    .from('.footer__content__middle span', {
-      duration: .7,
-      translateY: '100%',
-      opacity: 0,
+    .textAppearing('.footer__title', {})
+    .fadeUp('.footer__logo', {}, '>-0.35')
+    .fadeUp('.footer__content__middle p', {}, '<0')
+    .fadeUp('.footer__link', {}, '<0')
+    .fadeUp('.footer__content__middle span', {
+      yPercent: 100,
     }, '<0.4')
-    .from('.footer__bottom', {
-      duration: .7,
-      translateY: '35%',
-      opacity: 0,
-    }, '<0.4')
+    .fadeUp('.footer__bottom', {}, '<0.4')
     .from('.footer__line', {
       duration: 1.3,
       width: 0,

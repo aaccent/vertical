@@ -7,16 +7,8 @@ void function () {
 
   const animation = gsap.timeline()
     .textAppearing('.partners__title', {}, 0)
-    .from('.partners .title', {
-      duration: .7,
-      translateY: '130%',
-      opacity: 0,
-    }, 0)
-    .from('.partners__desktop__container', {
-      duration: .7,
-      opacity: 0,
-      translateY: '35%',
-    }, '<0.35')
+    .fadeUp('.partners .title', { yPercent: 130 }, 0)
+    .fadeUp('.partners__desktop__container', {}, '<0.35')
     .from('.partners__desktop__line', {
       duration: 2.2,
       scaleX: 0,

@@ -6,14 +6,10 @@ void function() {
   if (!ourProjects || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
-    .from('.our-projects .title', {
-      duration: .7,
-      opacity: 0,
-      translateY: '100%',
-    }, 0)
+    .fadeUp('.our-projects .title', { yPercent: 100 }, 0)
     .textAppearing('.our-projects__title', {
     }, '<0.2')
-    .from('.our-projects__middle-image', {
+    .fade('.our-projects__middle-image', {
       duration: .7,
       opacity: 0,
     }, '>-0.1')
@@ -30,25 +26,13 @@ void function() {
   })
 
   const parallax = gsap.timeline()
-    .to('.our-projects__middle-image', {
-      translateY: '8%',
-    }, 0)
-    .to('.our-projects__right', {
-      translateY: '35%',
-    }, 0)
+    .to('.our-projects__middle-image', { yPercent: 8 }, 0)
+    .to('.our-projects__right', { yPercent: 35 }, 0)
 
   const fadeUp = gsap.timeline()
     .pause()
-    .from('.our-projects__text', {
-      duration: 1,
-      opacity: 0,
-      translateY: '30%',
-    }, 0)
-    .from('.our-projects__button', {
-      duration: 1,
-      opacity: 0,
-      translateY: '150%',
-    }, 0)
+    .fadeUp('.our-projects__text', {}, 0)
+    .fadeUp('.our-projects__button', { yPercent: 150 }, 0)
 
   new ScrollTrigger({
     animation: parallax,
