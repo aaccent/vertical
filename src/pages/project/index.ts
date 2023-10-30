@@ -167,7 +167,7 @@ void function () {
   if (!summary || matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
-    .fadeUp('.building-summary .title', { yPercent: 150 }, 0)
+    .fadeUp('.building-summary .title:not(.docs .title)', { yPercent: 150 }, 0)
     .textAppearing('.building-summary__title', {
       duration: 1,
       alternate: true,
@@ -215,6 +215,36 @@ void function () {
     animation: animationCenter,
     trigger: '.building-summary__title',
     start: 'center+=5% center',
+  })
+}()
+
+// Docs animations
+void function() {
+  const docs = document.querySelector('.docs')
+  if (!docs || matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .fadeUp('.docs .title', { yPercent: 150 })
+
+  const cards: {
+    [index: string]: Element[]
+  } = {}
+
+  document.querySelectorAll<HTMLElement>('.docs__item').forEach(card => {
+    card.offsetTop in cards ? cards[card.offsetTop].push(card) : cards[card.offsetTop] = [card]
+  })
+
+  Object.values(cards).forEach((line, lineNum) => {
+    line.forEach((card, cardIndex) => {
+      animation.fadeUp(card, {}, cardIndex === 0 ? `<${lineNum * 0.5}` : '<0')
+    })
+  })
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: docs,
+    start: 'top+=30% center',
   })
 }()
 
