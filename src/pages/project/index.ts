@@ -30,6 +30,7 @@ void function () {
   )
 }()
 
+// Hero of project animation
 void function () {
   const projectHeader = document.querySelector('.project-header')
   if (!projectHeader || matchMedia('(max-width: 1200px)').matches) return
@@ -54,6 +55,7 @@ void function () {
   })
 }()
 
+// .idea animations
 void function () {
   const aboutProject = document.querySelector('.idea')
   if (!aboutProject || matchMedia('(max-width: 1200px)').matches) return
@@ -113,6 +115,24 @@ void function () {
   })
 }()
 
+// Gallery animations
+void function () {
+  const gallery = document.querySelector('.gallery')
+  if (!gallery || matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .fadeUp('.gallery .title', { yPercent: 150 }, 0)
+    .fadeUp('.gallery .slider-pagination', {}, 0)
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: gallery,
+    start: 'top+=30% center',
+  })
+}()
+
+// Location animation
 void function () {
   const location = document.querySelectorAll('.location')
   if (!location || matchMedia('(max-width: 1200px)').matches) return
@@ -120,7 +140,7 @@ void function () {
   const animation = gsap.timeline()
     .fadeUp('.location .title', { yPercent: 150 }, 0)
     .textAppearing('.location__title > span:first-child', {}, 0)
-    .fade('.location .map', {}, '<0.4')
+    .fade('.location .map', { duration: 1 }, '<0.4')
 
   new ScrollTrigger({
     scroller: '[data-scroll-container]',
