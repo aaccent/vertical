@@ -9,30 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { createCircleSVG, renderArc } from 'features/arcProgress'
 import { adaptiveValue } from 'features/adaptive'
 
-void function () {
-  const gallerySwiperEl = document.querySelector('.gallery__swiper')
-  if (!gallerySwiperEl) return
-
-  createSwiperPagination(
-    document.querySelector('.gallery .slider-pagination'),
-    initCustomSwiper(
-      new Swiper('.gallery__swiper', {
-        navigation: {
-          nextEl: '.page-viewer__right',
-          prevEl: '.page-viewer__left',
-        },
-        loop: true,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
-        modules: [ Navigation, Autoplay ],
-      }),
-    ),
-  )
-}()
-
-// Hero of project animation
+// animations of project-header
 void function () {
   const projectHeader = document.querySelector('.project-header')
   if (!projectHeader || matchMedia('(max-width: 1200px)').matches) return
@@ -132,6 +109,40 @@ void function () {
     trigger: gallery,
     start: 'top+=30% center',
   })
+}()
+
+// Gallery sliders
+void function () {
+  const gallerySwiperEl = document.querySelector('.gallery__swiper')
+  if (!gallerySwiperEl) return
+
+  createSwiperPagination(
+    document.querySelector('.gallery .slider-pagination'),
+    initCustomSwiper(
+      new Swiper('.gallery__swiper', {
+        navigation: {
+          nextEl: '.page-viewer__right',
+          prevEl: '.page-viewer__left',
+        },
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        modules: [ Navigation, Autoplay ],
+      }),
+    ),
+  )
+  new Swiper('.gallery-popup__swiper', {
+    navigation: {
+      nextEl: '.gallery-popup__right',
+      prevEl: '.gallery-popup__left',
+    },
+
+    modules: [ Navigation, Autoplay ],
+  })
+
+  new Swiper('.gallery-popup__mobile-swiper', {})
 }()
 
 // Location animation
@@ -247,14 +258,3 @@ void function() {
     start: 'top+=30% center',
   })
 }()
-
-new Swiper('.gallery-popup__swiper', {
-  navigation: {
-    nextEl: '.gallery-popup__right',
-    prevEl: '.gallery-popup__left',
-  },
-
-  modules: [ Navigation, Autoplay ],
-})
-
-new Swiper('.gallery-popup__mobile-swiper', {})
