@@ -612,6 +612,15 @@
     }
   }
 
+  &__svg-progress {
+    width: 100%;
+    height: 100%;
+
+    path {
+      stroke: #2E2E2E !important;
+    }
+  }
+
   &__progress {
     position: absolute;
     top: 50%;
@@ -705,14 +714,25 @@
     @include reset-list();
 
     &__item {
+      position: relative;
       display: flex;
       justify-content: space-between;
       @include manrope-14();
       padding-bottom: 16px;
-      border-bottom: 1px solid #d9d9d9;
       padding-top: 16px;
       text-transform: uppercase;
       cursor: pointer;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: var(--after-width);
+        height: 1px;
+        background-color: #d9d9d9;
+      }
 
       &:hover {
         color: #0b3882
@@ -723,8 +743,11 @@
       }
 
       &:last-child {
-        border-bottom: none;
         padding-bottom: 0;
+
+        &::after {
+          content: none;
+        }
       }
     }
 

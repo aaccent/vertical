@@ -6,6 +6,8 @@ import 'components/pageBlocks/filterPopup'
 import { initCustomSwiper } from 'features/slider/customSwiper'
 import { createSwiperPagination } from 'features/slider/pagination'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { createCircleSVG, renderArc } from 'features/arcProgress'
+import { adaptiveValue } from 'features/adaptive'
 
 void function () {
   const gallerySwiperEl = document.querySelector('.gallery__swiper')
@@ -101,7 +103,7 @@ void function () {
   })
 
   const listAnimation = gsap.timeline()
-    .fadeUp('.idea__list__item :is(span, p)', {}, 0)
+    .fadeUp('.idea__list__item :is(span, p)', { yPercent: 150 }, 0)
     .from('.idea__list__item', {
       duration: 1.2,
       '--after-width': '0%',
@@ -156,6 +158,63 @@ void function () {
     animation: benefitsFadeUp,
     trigger: '.location .benefits',
     start: 'center bottom',
+  })
+}()
+
+// Building summary animations
+void function () {
+  const summary = document.querySelector('.building-summary')
+  if (!summary || matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .fadeUp('.building-summary .title', { yPercent: 150 }, 0)
+    .textAppearing('.building-summary__title', {
+      duration: 1,
+      alternate: true,
+    }, 0)
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: summary,
+    start: 'top+=20% bottom',
+  })
+
+  function startBuildingProgress() {
+    const el = summary!.querySelector<HTMLElement>('.building-summary__progress p')
+    const num = parseInt(String(el?.textContent))
+    if (!num || !el) return
+
+    const svg = createCircleSVG('building-summary__svg-progress')
+    summary!.querySelector('.building-summary__progress-indicator')?.append(svg.svg)
+    renderArc(svg.path, 0, adaptiveValue(120))
+
+    let iterator = 0
+    el.innerText = '0%'
+
+    const interval = setInterval(() => {
+      ++iterator
+      el.innerText = `${iterator}%`
+      renderArc(svg.path, 360 * (iterator / 100), adaptiveValue(120))
+
+      if (iterator >= num) clearInterval(interval)
+    }, 35)
+  }
+
+  const animationCenter = gsap.timeline()
+    .fade('.building-summary__gallery', {
+      onStart: startBuildingProgress
+    }, '<0.4')
+    .fadeUp('.building-summary__status', {}, '<0.4')
+    .fadeUp('.building-summary__month-list__item :is(span, img)', { yPercent: 150 }, '<0')
+    .from('.building-summary__month-list__item', { '--after-width': '0%' }, '<0.4')
+
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation: animationCenter,
+    trigger: '.building-summary__title',
+    start: 'center+=5% center',
   })
 }()
 
