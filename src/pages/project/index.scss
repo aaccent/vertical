@@ -506,13 +506,17 @@
     text-transform: uppercase;
     margin-top: -6px;
 
-    span:last-child {
+    & > span:last-child {
       display: none;
     }
   }
 
   .button {
     display: none;
+  }
+
+  .benefits__item:last-child {
+    margin-right: 97px;
   }
 
   @media screen and (min-width: $desktop1460) {
@@ -533,11 +537,11 @@
       font-size: 35px;
       margin-top: 0;
 
-      span:last-child {
+      & > span:last-child {
         display: block;
       }
 
-      span:first-child {
+      & > span:first-child {
         display: none;
       }
     }

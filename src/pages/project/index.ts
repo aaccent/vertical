@@ -113,6 +113,31 @@ void function () {
   })
 }()
 
+void function () {
+  const location = document.querySelectorAll('.location')
+  if (!location || matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .fadeUp('.location .title', { yPercent: 150 }, 0)
+    .textAppearing('.location__title > span:first-child', {}, 0)
+    .fade('.location .map', {}, '<0.4')
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: location,
+    start: 'top+=20% bottom',
+  })
+
+  const benefitsFadeUp = gsap.timeline().fadeUp('.location .benefits', {})
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation: benefitsFadeUp,
+    trigger: '.location .benefits',
+    start: 'center bottom',
+  })
+}()
 
 new Swiper('.gallery-popup__swiper', {
   navigation: {
