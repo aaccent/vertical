@@ -5,6 +5,7 @@ import 'components/pageBlocks/map'
 import 'components/pageBlocks/filterPopup'
 import { initCustomSwiper } from 'features/slider/customSwiper'
 import { createSwiperPagination } from 'features/slider/pagination'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function () {
   const gallerySwiperEl = document.querySelector('.gallery__swiper')
@@ -24,19 +25,21 @@ void function () {
           disableOnInteraction: false,
         },
         modules: [ Navigation, Autoplay ],
-      })
+      }),
     ),
   )
 }()
 
 void function () {
+  const projectHeader = document.querySelector('.project-header')
+  if (!projectHeader || matchMedia('(max-width: 1200px)').matches) return
+
   const animation = gsap.timeline()
     .from('.project-header__image img', {
       duration: 5,
       scale: 1.4,
     }, 0)
-    .textAppearing('.project-header__title', {
-    }, 0)
+    .textAppearing('.project-header__title', {}, 0)
     .fadeUp('.project-header__actions', { yPercent: 120 }, '<0.4')
     .fadeUp('.project-header__list__item', {}, '<0.4')
     .from('.project-header__list', {
@@ -51,14 +54,67 @@ void function () {
   })
 }()
 
-// initOfferSwiper('.offer__swiper')
+void function () {
+  const aboutProject = document.querySelector('.idea')
+  if (!aboutProject || matchMedia('(max-width: 1200px)').matches) return
 
-// const progressBar = document.querySelector('.building-summary__progress-indicator') as HTMLElement
-// const progress = progressBar?.dataset.progress?.toString() as any
+  const animation = gsap.timeline()
+    .fadeUp('.idea .title', { yPercent: 140 }, 0)
+    .textAppearing('.idea__title', {
+      duration: 1,
+      alternate: true,
+    }, 0)
+    .fade('.idea__middle', {}, '<0.7')
+    .fade('.idea__left', {}, '<0.7')
 
-// renderArc(progressBar.querySelector('#progress') as HTMLElement, 360 * (progress / 100), 120)
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: aboutProject,
+    start: 'top+=20% bottom',
+  })
 
-const galleryPopupDesktop = new Swiper('.gallery-popup__swiper', {
+  const parallax = gsap.timeline()
+    .to('.idea__middle', { yPercent: 10 }, 0)
+    .to('.idea__left', { yPercent: 6 }, 0)
+
+  const fadeUp = gsap.timeline()
+    .pause()
+    .textAppearing('.quote__title', {
+      duration: 1,
+      alternate: true,
+    }, 0)
+    .fadeUp('.quote__quotation', { yPercent: 150 }, 0)
+
+  new ScrollTrigger({
+    animation: parallax,
+    scroller: '[data-scroll-container]',
+    trigger: aboutProject,
+    scrub: 1.8,
+    start: 'center center',
+    end: '+=800 top',
+    onUpdate(scroll) {
+      if (scroll.progress >= 0.35) fadeUp.resume()
+    },
+  })
+
+  const listAnimation = gsap.timeline()
+    .fadeUp('.idea__list__item :is(span, p)', {}, 0)
+    .from('.idea__list__item', {
+      duration: 1.2,
+      '--after-width': '0%',
+    }, '<0.4')
+
+  new ScrollTrigger({
+    animation: listAnimation,
+    scroller: '[data-scroll-container]',
+    trigger: '.idea__list',
+    start: 'top center',
+  })
+}()
+
+
+new Swiper('.gallery-popup__swiper', {
   navigation: {
     nextEl: '.gallery-popup__right',
     prevEl: '.gallery-popup__left',
@@ -67,4 +123,4 @@ const galleryPopupDesktop = new Swiper('.gallery-popup__swiper', {
   modules: [ Navigation, Autoplay ],
 })
 
-const galleryPopupMobile = new Swiper('.gallery-popup__mobile-swiper', {})
+new Swiper('.gallery-popup__mobile-swiper', {})

@@ -258,17 +258,32 @@
     @include reset-list();
 
     &__item {
+      position: relative;
       display: flex;
       justify-content: space-between;
       @include manrope-14();
       padding-top: 14px;
       padding-bottom: 14px;
-      border-bottom: 1px solid #d9d9d9;
       text-transform: uppercase;
       gap: 45px;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: var(--after-width);
+        height: 1px;
+        background-color: #d9d9d9;
+      }
 
       span {
         opacity: 0.6;
+      }
+
+      span, p {
+        display: inline-block;
       }
     }
   }
@@ -390,6 +405,10 @@
   &__title {
     @include tenor-61();
     padding-right: 140px;
+  }
+
+  &__quotation {
+    display: inline-block;
   }
 
   @media screen and (max-width: $tablet1200) {
