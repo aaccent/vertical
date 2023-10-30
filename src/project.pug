@@ -105,14 +105,17 @@ block append main
           span тыс. м2
         .benefits__text.benefits__text__third общая площадь жилого комплекса
   .offer
-    .swiper.offer__swiper: .swiper-wrapper
-      each i in Array(4)
-        .swiper-slide.offer__slide
-          .offer__title почувствуйте удобство
-          .offer__text очень любим нашу работу, подходим к ней творчески и делаем её с удовольствием! Вы обязательно это почувствуете, доверив нам обстановку вашего дома
-          .offer__image
-            img(src=require('media/content/content_10.webp'))
-    .offer__pagination
+    .offer__body
+      .offer__title почувствуйте удобство
+      .offer__text-block
+        .offer__text
+          | очень любим нашу работу, подходим к ней творчески и делаем
+          | её с удовольствием! Вы обязательно это почувствуете,
+          | доверив нам обстановку вашего дома
+        .offer__pagination
+    .offer__slides
+      each i in Array(3)
+        .offer__slide: img(src=require('media/content/content_10.webp'))
   .building-summary
     .title.title_gray.building-summary__subtitle ход строительства
     .building-summary__title ОТЧЁТ СТРОЙКИ
