@@ -5,6 +5,7 @@ function buildFilter(text) {
 
     const itemSelected = Array.from(document.querySelectorAll(".dropdown__list__item__selected")).find((el) => el.textContent === text);
     const filterSelectedRight = filterSelected.querySelector(".filter__selected__right");
+    console.log(itemSelected)
 
     if (itemSelected) {
 
@@ -29,12 +30,11 @@ function buildFilter(text) {
             }
         }
     } else {
-        const deselected = filterSelectedRight.querySelectorAll(".badge").forEach((el) => {
+        filterSelectedRight.querySelectorAll(".badge").forEach((el) => {
             if (el.textContent === text) {
-                deselected.remove();
+                el.remove();
             }
         })
-
     }
 }
 
@@ -48,6 +48,9 @@ dropdownItems.forEach((el) => el.addEventListener("click", (e) => {
         filterSelected.style.display = "flex";
     }
 }))
+
+
+
 
 if (document.querySelector(".filter__selected__reset")) {
     document.querySelector(".filter__selected__reset").onclick = () => {

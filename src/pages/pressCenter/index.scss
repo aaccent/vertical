@@ -92,6 +92,9 @@
     }
   }
   @media screen and (max-width: $tablet1200) {
+    &__title {
+      font-size: 35px;
+    }
     &__header {
       align-items: start;
       flex-direction: column;
@@ -105,6 +108,7 @@
       width: 100%;
       display: flex;
       .quick-filter__item {
+        justify-content: center;
         width: 100%;
       }
     }
