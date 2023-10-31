@@ -44,7 +44,7 @@ void function () {
     scroller: '[data-scroll-container]',
     animation,
     trigger: companyWorth,
-    start: 'top+=20% bottom',
+    start: 'top+=35% center',
   })
 }()
 
