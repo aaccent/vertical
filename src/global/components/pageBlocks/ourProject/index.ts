@@ -5,26 +5,6 @@ void function() {
   const ourProjects = document.querySelector('.our-projects')
   if (!ourProjects || matchMedia('(max-width: 1200px)').matches) return
 
-  const animation = gsap.timeline()
-    .fadeUp('.our-projects .title', { yPercent: 100 }, 0)
-    .textAppearing('.our-projects__title', {
-    }, '<0.2')
-    .fade('.our-projects__middle-image', {
-      duration: .7,
-      opacity: 0,
-    }, '>-0.1')
-    .from('.our-projects__right', {
-      duration: .7,
-      opacity: 0,
-    }, '<0.3')
-
-  new ScrollTrigger({
-    scroller: '[data-scroll-container]',
-    animation,
-    trigger: ourProjects,
-    start: 'top+=35% bottom',
-  })
-
   const parallax = gsap.timeline()
     .to('.our-projects__middle-image', { yPercent: 8 }, 0)
     .to('.our-projects__right', { yPercent: 6 }, 0)
@@ -44,5 +24,27 @@ void function() {
     onUpdate(scroll) {
       if (scroll.progress >= 0.15) fadeUp.resume()
     }
+  })
+
+  window.addEventListener('load', () => {
+    const animation = gsap.timeline()
+      .fadeUp('.our-projects .title', { yPercent: 100 }, 0)
+      .textAppearing('.our-projects__title', {
+      }, '<0.2')
+      .fade('.our-projects__middle-image', {
+        duration: .7,
+        opacity: 0,
+      }, '>-0.1')
+      .from('.our-projects__right', {
+        duration: .7,
+        opacity: 0,
+      }, '<0.3')
+
+    new ScrollTrigger({
+      scroller: '[data-scroll-container]',
+      animation,
+      trigger: ourProjects,
+      start: 'top+=35% bottom',
+    })
   })
 }()

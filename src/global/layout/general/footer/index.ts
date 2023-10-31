@@ -11,38 +11,40 @@ void function () {
   contactForm.style.translate = '0% -100%'
   contactFormBg.style.scale = '1.1'
 
-  const animation = gsap.timeline()
-    .pause()
-    .textAppearing('.contact-form__title', {
-      onStart() {
-        contactForm.classList.add('_gsap-animation')
-      }
-    })
-    .from('.contact-form__container', {
-      duration: .8,
-      width: 0,
-    }, '<0.4')
-    .from('.contact-form__container .span', {
-      duration: .8,
-      opacity: 0,
-      yPercent: 100,
-      onComplete() {
-        contactForm.classList.remove('_gsap-animation')
-      }
-    }, '<+=0.1')
-    .fadeUp('.contact-form__bottom', {}, '<.6')
+  window.addEventListener('load', () => {
+    const animation = gsap.timeline()
+      .pause()
+      .textAppearing('.contact-form__title', {
+        onStart() {
+          contactForm.classList.add('_gsap-animation')
+        }
+      })
+      .from('.contact-form__container', {
+        duration: .8,
+        width: 0,
+      }, '<0.4')
+      .from('.contact-form__container .span', {
+        duration: .8,
+        opacity: 0,
+        yPercent: 100,
+        onComplete() {
+          contactForm.classList.remove('_gsap-animation')
+        }
+      }, '<+=0.1')
+      .fadeUp('.contact-form__bottom', {}, '<.6')
 
-  new ScrollTrigger({
-    scroller: '[data-scroll-container]',
-    trigger: contactForm,
-    start: `top top`,
-    end: `bottom top`,
-    scrub: 0,
-    onUpdate (self) {
-      contactForm.style.translate = `0% -${100 - 100 * self.progress}%`
-      contactFormBg.style.scale = String(1.1 - self.progress / 10)
-      if (self.progress >= 0.84) animation.play()
-    },
+    new ScrollTrigger({
+      scroller: '[data-scroll-container]',
+      trigger: contactForm,
+      start: `top top`,
+      end: `bottom top`,
+      scrub: 0,
+      onUpdate (self) {
+        contactForm.style.translate = `0% -${100 - 100 * self.progress}%`
+        contactFormBg.style.scale = String(1.1 - self.progress / 10)
+        if (self.progress >= 0.84) animation.play()
+      },
+    })
   })
 }()
 

@@ -2,7 +2,7 @@ import gsap from 'gsap'
 import { disableScroll, enableScroll } from 'features/scroll'
 
 disableScroll()
-document.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('load', () => {
   const loaderEvent = new CustomEvent('loader-gone')
   const pageLoader = document.querySelector<HTMLElement>('.page-loader')
   if (!pageLoader) return
