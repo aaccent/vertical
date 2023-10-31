@@ -7,8 +7,11 @@
 
 .blog {
   @include container-x();
-
+  position: relative;
+  z-index: 1;
+  background: #FFFFFF;
   padding-top: 125px;
+
   &__button {
     height: max-content;
     flex-shrink: 0;
@@ -17,10 +20,21 @@
     display: none;
   }
   &__header {
+    position: relative;
+    padding-bottom: 60px;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 60px;
-    border-bottom: 1px solid #d9d9d9;
+    --after-width: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: var(--after-width);
+      background-color: #d9d9d9;
+    }
   }
   &__content{
     display: flex;

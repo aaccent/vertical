@@ -70,18 +70,7 @@ block append main
       each i in Array(5)
         .swiper-slide.gallery__slide
           img(src=require('media/content/content_9.webp'))
-
-    .gallery__page-viewer.page-viewer
-      img.page-viewer__left(src=require('media/static/icons/arrow/arrow_small.svg'))
-      .page-viewer__content
-        svg.page-viewer__progress
-          <path id="progress" fill="none" stroke="#fff" stroke-width="2" />
-        svg.page-viewer__progress-bg
-          <circle cx="65" cy="65" r="63" fill="none" stroke-width="2" stroke="rgba(255, 255, 255, 0.2)"/>
-        .page-viewer__page
-          span 6
-          p 2
-      img.page-viewer__right(src=require('media/static/icons/arrow/arrow_small.svg'))
+    .slider-pagination
   .location
     .container_left
       .title.title_white
@@ -104,15 +93,11 @@ block append main
           span тыс. м2
         .benefits__text.benefits__text__first общая площадь благоустройства комплекса
 
-      .benefits__border.benefits__border__first
-
       .benefits__item
         .benefits__number.benefits__number__second
           p 5
           span домов
         .benefits__text.benefits__text__second уже сдано в эксплуатацию
-
-      .benefits__border.benefits__border__second
 
       .benefits__item
         .benefits__number.benefits__number__third
@@ -120,21 +105,23 @@ block append main
           span тыс. м2
         .benefits__text.benefits__text__third общая площадь жилого комплекса
   .offer
-    .swiper.offer__swiper: .swiper-wrapper
-      each i in Array(4)
-        .swiper-slide.offer__slide
-          .offer__title почувствуйте удобство
-          .offer__text очень любим нашу работу, подходим к ней творчески и делаем её с удовольствием! Вы обязательно это почувствуете, доверив нам обстановку вашего дома
-          .offer__image
-            img(src=require('media/content/content_10.webp'))
-    .offer__pagination
+    .offer__body
+      .offer__title почувствуйте удобство
+      .offer__text-block
+        .offer__text
+          | очень любим нашу работу, подходим к ней творчески и делаем
+          | её с удовольствием! Вы обязательно это почувствуете,
+          | доверив нам обстановку вашего дома
+        .offer__pagination
+    .offer__slides
+      each i in Array(3)
+        .offer__slide: img(src=require('media/content/content_10.webp'))
   .building-summary
     .title.title_gray.building-summary__subtitle ход строительства
     .building-summary__title ОТЧЁТ СТРОЙКИ
     .building-summary__content
       .building-summary__status
-        svg(data-progress='68').building-summary__progress-indicator
-          <path id="progress" fill="none" stroke="#2E2E2E" stroke-width="2" />
+        .building-summary__progress-indicator
         svg.building-summary__progress-indicator-bg
           <circle cx="120" cy="120" r="118" fill="none" stroke-width="2" stroke="#2E2E2E"/>
         .building-summary__progress

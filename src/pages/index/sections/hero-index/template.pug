@@ -33,7 +33,7 @@ include global/layout/utils
   ]
 
 .hero-index: .container
-  h1.hero-index__title.text-appearing ВЕРТИКАЛЬ
+  h1.hero-index__title ВЕРТИКАЛЬ
   .hero-index__images.slider
     each slide in slides
       .hero-index__img-wrapper.slider-slide(
@@ -46,6 +46,6 @@ include global/layout/utils
   .hero-index__body
     .hero-index__text-block
       .hero-index__text-subtitle
-      .hero-index__text-title.text-appearing
+      .hero-index__text-title
       +anchor("").hero-index__link.button.button_white.button-arrow-right
     .slider-pagination

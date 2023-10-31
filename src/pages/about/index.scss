@@ -26,13 +26,14 @@
       linear-gradient(49deg, rgba(0, 0, 0, 0.3) 12.99%, rgba(0, 0, 0, 0) 25.64%);
   }
   &__title {
+    position: relative;
+    left: -28px;
     margin-top: 170px;
     text-align: center;
     color: $white;
-    img {
-      width: 100%;
-      object-fit: contain;
-    }
+    font-size: 248px;
+    line-height: 1;
+    font-family: 'tenor-sans';
   }
   &__text {
     @include manrope-24();
@@ -41,12 +42,23 @@
     text-transform: uppercase;
   }
   &__bottom {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 40px;
     padding-bottom: 80px;
-    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
+    --before-width: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 1px;
+      width: var(--before-width);
+      background-color: rgba($color: $white, $alpha: 0.2);
+    }
   }
   &__image {
     position: absolute;
@@ -67,6 +79,7 @@
     &__title {
       margin-top: 160px;
       padding-bottom: 26px;
+      font-size: 54px;
     }
     &__bottom {
       padding-top: 16px;
@@ -166,15 +179,38 @@
   }
 
   &__item {
-    &__title {
-      @include manrope-24();
-    }
-    border-right: 1px solid rgba($color: $white, $alpha: 0.2);
+    position: relative;
     padding-left: 60px;
     padding-right: 70px;
     width: 100%;
     text-transform: uppercase;
     color: $white;
+    --after-height: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      background-color: rgba($color: $white, $alpha: 0.2);
+      height: var(--after-height);
+      width: 1px;
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &::after {
+        content: none;
+      }
+    }
+    &:first-child {
+      padding-left: 0;
+    }
+
+    &__title {
+      @include manrope-24();
+    }
     &__text {
       @include manrope-17();
       margin-top: 40px;
@@ -183,14 +219,6 @@
     }
     &__image {
       margin-top: 20px;
-    }
-    &:last-child {
-      border-left: 1px solid rgba($color: $white, $alpha: 0.2);
-      border-right: none;
-      padding-right: 0;
-    }
-    &:first-child {
-      padding-left: 0;
     }
   }
   @media screen and (max-width: $tablet1200) {
@@ -474,18 +502,34 @@
 }
 
 .awards {
+  background-color: #fff;
   @include container-x();
   padding-top: 120px;
   padding-bottom: 130px;
+
   &__title {
     @include tenor-90();
   }
 
   &__table {
     &__header {
+      position: relative;
       margin-top: 80px;
       display: grid;
       grid-template-columns: 3fr 2fr 1fr;
+      padding-bottom: 10px;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: var(--after-width);
+        background-color: #d9d9d9;
+      }
+
       &__item {
         @include manrope-14();
         opacity: 0.6;
@@ -494,13 +538,22 @@
           justify-self: end;
         }
       }
-      padding-bottom: 10px;
-      border-bottom: 1px solid #d9d9d9;
     }
     &__row {
+      position: relative;
       display: grid;
       grid-template-columns: 3fr 2fr 1fr;
-      border-bottom: 1px solid #d9d9d9;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: var(--after-width);
+        background-color: #d9d9d9;
+      }
     }
     &__item {
       @include manrope-24();
@@ -515,6 +568,7 @@
       }
     }
   }
+
   @media screen and (max-width: $tablet1200) {
     padding-top: 40px;
     padding-bottom: 80px;

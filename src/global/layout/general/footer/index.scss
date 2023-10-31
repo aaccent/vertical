@@ -4,15 +4,27 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/media' as *;
 
+:not(.popup, .header_white, .page-loader):has(~ .contact-form) {
+  position: relative;
+  z-index: 1;
+}
+
 .contact-form {
+  position: relative;
   @include container-x();
   display: flex;
   padding-top: 100px;
   padding-bottom: 204px;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%),
-    url('media/static/footer_bg.webp') no-repeat;
-  background-size: cover;
-  background-repeat: no-repeat;
+
+  &__bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%), url('media/static/footer_bg.webp') no-repeat;
+    background-size: cover;
+  }
 
   .button {
     padding: 16px 40px;
@@ -68,8 +80,13 @@
     }
   }
 
+  &._gsap-animation &__container .span {
+    transition: none;
+  }
+
   &__container {
     position: relative;
+    overflow: hidden;
 
     .span {
       position: absolute;
@@ -196,11 +213,10 @@
   background-color: $blue;
 
   &__title {
+    margin-bottom: -20px;
     @include tenor-248;
     color: #fff;
     padding-top: 40px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
 
     & > span {
       translate: -2% 0;
@@ -212,9 +228,26 @@
     }
   }
 
+  &__line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba($color: $white, $alpha: 0.2);
+
+    &:first-child {
+      top: 0;
+    }
+
+    &:last-child {
+      bottom: 0;
+    }
+  }
+
   &__content {
+    position: relative;
+    padding: 60px 0;
     display: flex;
-    padding-top: 60px;
     justify-content: space-between;
 
     &__middle {
@@ -237,7 +270,7 @@
         letter-spacing: .04em;
       }
 
-      span+span {
+      span + span {
         margin-top: 12px;
       }
     }
@@ -264,14 +297,12 @@
 
   &__bottom {
     @include manrope-14();
-    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
-    margin-top: 60px;
     display: flex;
     color: $white;
     opacity: 0.6;
     justify-content: space-between;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
   }
 
   @media screen and (min-width: $tablet1200) {
@@ -325,7 +356,7 @@
           line-height: 130%;
         }
 
-        span+span {
+        span + span {
           margin-top: 4px;
         }
       }
@@ -360,7 +391,7 @@
         font-size: 12px;
       }
 
-      p+p {
+      p + p {
         margin-top: 0;
       }
     }

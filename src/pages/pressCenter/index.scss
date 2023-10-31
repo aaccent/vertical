@@ -46,13 +46,29 @@
     justify-content: space-between;
   }
   &__month-divider {
-    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
+    position: relative;
     margin-top: 40px;
+    --before-width: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 1px;
+      width: var(--before-width);
+      background-color: rgba($color: $white, $alpha: 0.2);
+    }
+
     .title {
       margin-top: 35px;
     }
     .news-card:last-child {
-      border-bottom: none;
+      padding-bottom: 0;
+
+      &::after {
+        content: none;
+      }
     }
   }
   &__month-divider:last-child {

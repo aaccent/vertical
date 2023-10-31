@@ -1,39 +1,27 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { NumbersWithAnimation } from 'features/animations/numbers'
-import { alternateTextAnimation } from 'features/animations/text'
 
 void function () {
   const aboutSection = document.querySelector('.about-company')
-  if (!aboutSection) return
+  if (!aboutSection || matchMedia('(max-width: 1200px)').matches) return
 
   gsap.registerPlugin(ScrollTrigger)
 
   const animation = gsap.timeline()
-  alternateTextAnimation('.about-company__title span > span', animation, 0)
-  animation
-    .from('.about-company .title', {
-      duration: 1,
-      translateY: '100%',
-      opacity: 0,
-    }, 0)
-    .from('.about-company__image', {
-      duration: 1,
-      opacity: 0,
-    }, 1)
+    .textAppearing('.about-company__title', {
+      alternate: true,
+    }, '<0.2')
+    .fadeUp('.about-company .title', { yPercent: 100 }, 0)
+    .fade('.about-company__image', {}, 1)
     .from('.about-company__image img', {
       duration: 1,
       scale: 1.4
     }, 1)
-    .from('.about-company__text', {
-      duration: 1,
-      translateY: '30%',
-      opacity: 0,
-    }, 1)
-    .from('.about-company__button', {
+    .fadeUp('.about-company__text', {}, 1)
+    .fadeUp('.about-company__button', {
       duration: 1.4,
-      translateY: '170%',
-      opacity: 0,
+      yPercent: 170,
     }, 1)
 
   new ScrollTrigger({
@@ -51,7 +39,7 @@ void function () {
     },
     duration: 1,
     opacity: 0,
-    translateY: '35%',
+    yPercent: 35,
     onStart() {
       document
         .querySelectorAll<NumbersWithAnimation>('.about-company .benefits .number-animation')

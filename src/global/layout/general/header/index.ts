@@ -1,4 +1,6 @@
+import gsap from 'gsap'
 import 'components/ui/accordion'
+import { afterLoader } from 'features/animations/page-loader'
 
 const header = document.querySelector('.header') as HTMLElement
 const headerContainer = document.querySelector('.header__container') as HTMLElement
@@ -14,3 +16,14 @@ window.addEventListener('scroll', (e) => {
   }
   lastScrollPos = document.documentElement.scrollTop
 })
+
+void function() {
+  const animation = gsap.timeline({ paused: true })
+    .fadeUp('.header__content, .breadcrumb', {}, 0)
+    .from('.header__content', {
+      duration: 2.2,
+      '--after-width': '0%'
+    }, '<0')
+
+  afterLoader(() => animation.resume())
+}()

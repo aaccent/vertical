@@ -19,14 +19,26 @@
 
 .contacts {
   position: relative;
+  margin-top: 66px;
+  margin-bottom: 160px;
+
   &__title {
+    position: relative;
     @include tenor-90();
-    padding-top: 66px;
     padding-bottom: 40px;
     color: $white;
-    border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
     margin-right: 355px;
-    margin-top: -6px;
+    --after-width: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: var(--after-width);
+      background-color: rgba($color: $white, $alpha: 0.2);
+    }
   }
   &__info {
     display: flex;

@@ -1,3 +1,5 @@
+import gsap from 'gsap'
+
 export interface TextWithAnimation extends HTMLElement {
   playAnimation: () => void
   replayAnimation: () => void
@@ -9,8 +11,14 @@ export interface TextWithAnimation extends HTMLElement {
   }
 }
 
+function fixBr(text: string) {
+  return text.replace(/<br>((?:<\/span>)+)/, '$1<br>')
+}
+
 export function splitTextOnLines(textEl: HTMLElement) {
   if (matchMedia('(max-width: 1200px)').matches) return
+
+  textEl.classList.add('text-appearing')
 
   const innerHTML = textEl.innerHTML
   const byWords = innerHTML
@@ -44,7 +52,7 @@ export function splitTextOnLines(textEl: HTMLElement) {
         return nextIsBR ? `${word.trim()}<br>` : word.trim()
       })
       .join(' '))
-    .map(line => `<span class="text-line"><span>${line}</span></span>`.replace('<br></span></span>', '</span></span><br>'))
+    .map(line => fixBr(`<span class="text-line"><span>${line}</span></span>`))
     .join(' ')
 
   textEl.classList.remove('by-words')
@@ -52,61 +60,100 @@ export function splitTextOnLines(textEl: HTMLElement) {
 
   textEl.innerHTML = String(byLines)
 
-  const test = document.createElement('div')
-  test.style.display = 'none'
-  test.innerHTML = String(byWords)
-  textEl.prepend(test)
-
   const lines = textEl.querySelectorAll<HTMLSpanElement>('.text-line')
   const linesGap = lines[1] ? lines[0].getBoundingClientRect().bottom - lines[1].getBoundingClientRect().top : -15
 
   lines.forEach(line => line.style.marginBottom = `${linesGap}px`)
 }
 
-document.addEventListener('load', () => {
-  document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
-    if (matchMedia('(max-width: 1200px)').matches) return
+document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
+  if (matchMedia('(max-width: 1200px)').matches) return
 
-    splitTextOnLines(text)
+  splitTextOnLines(text)
 
-    text.prepareAnimation = function () {
-      text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
-        line.classList.add('without-animations')
+  text.prepareAnimation = function () {
+    text.querySelectorAll<HTMLSpanElement>('span > span').forEach(line => {
+      line.classList.add('without-animations')
 
-        setTimeout(() => {
-          line.style.translate = '0 100%'
-          text.dataset.played = '0'
+      setTimeout(() => {
+        line.style.translate = '0 100%'
+        text.dataset.played = '0'
 
-          setTimeout(() => line.classList.remove('without-animations'), 15)
-        }, 5)
+        setTimeout(() => line.classList.remove('without-animations'), 15)
+      }, 5)
+    })
+  }
+
+  text.playAnimation = function () {
+    text
+      .querySelectorAll<HTMLSpanElement>('span > span')
+      .forEach(line => {
+        line.style.translate = '0'
+        text.dataset.played = '1'
+      })
+  }
+
+
+  text.replayAnimation = function () {
+    if (!Boolean(+text.dataset.played)) return text.playAnimation()
+
+    text.prepareAnimation()
+    setTimeout(text.playAnimation, 35)
+  }
+})
+
+gsap.registerEffect({
+  name: 'textAppearing',
+  effect(targets: HTMLElement[], config: Required<TextAppearingFilterConfig>) {
+    targets.forEach(splitTextOnLines)
+
+    const timeline = gsap.timeline({ paused: true })
+
+    if (config.alternate) {
+      targets.forEach(target => {
+        gsap.utils.toArray('span > span', target).forEach((line, index) => {
+            timeline.fromTo(line as Element, {
+              duration: config.duration + config.lineDelay * index,
+              yPercent: config.yPercent,
+              opacity: 0,
+            }, {
+              yPercent: 0,
+              opacity: 1,
+            }, 0)
+          },
+        )
+      })
+    } else {
+      targets.forEach(target => {
+        const q = gsap.utils.selector(target)
+        timeline.fromTo(q('span > span'), {
+          duration: config.duration,
+          yPercent: config.yPercent,
+          opacity: 0,
+        }, {
+          yPercent: 0,
+          opacity: 1,
+        }, 0)
       })
     }
 
-    text.playAnimation = function () {
-      text
-        .querySelectorAll<HTMLSpanElement>('span > span')
-        .forEach(line => {
-          line.style.translate = '0'
-          text.dataset.played = '1'
-        })
-    }
-
-
-    text.replayAnimation = function () {
-      if (!Boolean(+text.dataset.played)) return text.playAnimation()
-
-      text.prepareAnimation()
-      setTimeout(text.playAnimation, 35)
-    }
-  })
+    return gsap.from(targets, {
+      delay: config.delay,
+      duration: timeline.duration(),
+      onStart() {
+        timeline.play()
+        config.onStart?.()
+      },
+      onComplete() {
+        config.onComplete?.()
+      }
+    })
+  },
+  defaults: {
+    duration: 0.7,
+    alternate: false,
+    yPercent: 70,
+    lineDelay: .4,
+  },
+  extendTimeline: true,
 })
-
-export function alternateTextAnimation(selector: string, tl: GSAPTimeline, pos?: number, delay = .3) {
-  document.querySelectorAll(selector).forEach((line, index) => {
-    tl.from(line, {
-      duration: .8 + delay * index,
-      translateY: '60%',
-      opacity: 0,
-    }, pos)
-  })
-}

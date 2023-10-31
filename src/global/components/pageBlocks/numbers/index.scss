@@ -19,10 +19,6 @@
     position: relative;
   }
 
-  &::before {
-    left: 50px;
-  }
-
   &__item {
     display: flex;
     flex-direction: column;
@@ -38,6 +34,11 @@
   }
 
   &_white {
+    &::before,
+    &::after {
+      background-color: #fff;
+    }
+
     .benefits__number {
       color: $white;
     }

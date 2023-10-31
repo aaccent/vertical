@@ -11,54 +11,64 @@
   background-color: $blue;
   @include container-x();
   padding-bottom: 130px;
+
   &__button {
     margin-top: 80px;
     display: flex;
     justify-content: center;
+
     &:hover {
       background-color: white;
       color: #2E2E2E
 
     }
   }
+
   &__wrapper-button {
     display: flex;
     justify-content: center;
   }
+
   &__filter {
     margin-top: 40px;
   }
+
   &__title {
     @include tenor-90();
     color: $white;
     margin-top: 66px;
+
     .filter__founded {
       margin-top: 4px;
     }
   }
+
   &__list {
     display: flex;
     flex-direction: column;
     gap: 40px;
     margin-top: 20px;
+
     &__item {
       position: relative;
       overflow: hidden;
-      &:hover &__image{
+
+      &:hover &__image {
         transform: scale(1.1);
-        transition: transform .3s linear,-webkit-transform .3s linear;
+        transition: transform .3s linear, -webkit-transform .3s linear;
       }
+
       &__content {
         position: relative;
         background: linear-gradient(
-            179deg,
-            rgba(0, 0, 0, 0.6) -2.27%,
-            rgba(0, 0, 0, 0.32) 14.44%,
-            rgba(0, 0, 0, 0) 29.76%
-          ),
-          linear-gradient(0deg, rgba(0, 0, 0, 0.5) 4.75%, rgba(0, 0, 0, 0) 46.91%),
-          linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
-          0px -61.404px / 100% 116.667% no-repeat;
+                        179deg,
+                        rgba(0, 0, 0, 0.6) -2.27%,
+                        rgba(0, 0, 0, 0.32) 14.44%,
+                        rgba(0, 0, 0, 0) 29.76%
+        ),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.5) 4.75%, rgba(0, 0, 0, 0) 46.91%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%),
+        0px -61.404px / 100% 116.667% no-repeat;
         height: 100%;
         padding: 25px;
         z-index: $z-2;
@@ -68,30 +78,35 @@
         color: $white;
         text-transform: uppercase;
       }
+
       &__badges {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
+
       &__title {
         @include tenor-48();
       }
+
       &__text {
         margin-top: 10px;
         @include manrope-14();
       }
+
       &__header {
         display: flex;
         justify-content: space-between;
       }
+
       &__image {
         position: absolute;
         top: 0;
         height: 100%;
         width: 100%;
         overflow: hidden;
-        transition: transform .3s linear,-webkit-transform .3s linear;
-        
+        transition: transform .3s linear, -webkit-transform .3s linear;
+
         img {
           height: 100%;
           width: 100%;
@@ -99,26 +114,27 @@
         }
       }
     }
+
     &__row {
       display: flex;
       align-items: center;
       gap: 40px;
-      &:nth-child(odd) {
-        .project__list__item:first-child,
-        .project__list__item:last-child {
-          width: 100%;
-          height: 354px;
-        }
+
+      &:nth-child(even) .project__list__item:last-child,
+      &:nth-child(odd) .project__list__item:first-child {
+        width: 52%;
+        height: 485px;
       }
-      &:nth-child(even) {
-        .project__list__item:last-child,
-        .project__list__item:first-child {
-          width: 100%;
-          height: 354px;
-        }
+
+      &:nth-child(odd) .project__list__item:last-child,
+      &:nth-child(even) .project__list__item:first-child {
+        flex-grow: 1;
+        height: 425px;
+        width: auto;
       }
     }
   }
+
   .button_circle {
     span:last-child {
       display: none;
@@ -136,31 +152,6 @@
       &__item__title {
         @include tenor-61();
       }
-      &__row {
-        &:nth-child(even) {
-          .project__list__item:last-child {
-            width: 52%;
-            height: 485px;
-          }
-          .project__list__item:first-child {
-            flex-grow: 1;
-            width: auto;
-            height: 425px;
-          }
-        }
-
-        &:nth-child(odd) {
-          .project__list__item:first-child {
-            width: 52%;
-            height: 485px;
-          }
-          .project__list__item:last-child {
-            flex-grow: 1;
-            height: 425px;
-            width: auto;
-          }
-        }
-      }
     }
   }
 
@@ -169,6 +160,7 @@
     padding-top: 95px;
     &__list {
       gap: 20px;
+
       &__row {
         gap: 20px;
       }
@@ -184,6 +176,7 @@
       span:first-child {
         display: none;
       }
+
       span:last-child {
         display: block;
       }
@@ -195,20 +188,25 @@
       &__row {
         flex-direction: column;
       }
+
       &__item {
         &__content {
           padding: 12px;
         }
+
         &__title {
           @include tenor-30();
         }
+
         &__text {
           font-size: 10px;
         }
+
         .price-badge {
           display: none;
         }
       }
+
       &:nth-child(odd) {
         .project__list__item:first-child,
         .project__list__item:last-child {
@@ -216,6 +214,7 @@
           height: 354px;
         }
       }
+
       &:nth-child(even) {
         .project__list__item:last-child,
         .project__list__item:first-child {
@@ -233,6 +232,7 @@
           height: 206px;
         }
       }
+
       &:nth-child(even) {
         .project__list__item:last-child,
         .project__list__item:first-child {

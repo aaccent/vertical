@@ -4,7 +4,12 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/mixins' as *;
 @use 'src/styles/utils/media' as *;
-@use 'src/global/components/pageBlocks/blog';
+@use 'src/styles/general/variables' as *;
+@use 'src/styles/utils/mixins' as *;
+@use 'src/styles/utils/media' as *;
+@use 'src/styles/general/typography' as *;
+@use 'components/ui/container' as *;
+@use 'src/global/components/pageBlocks/newsCard';
 
 .article {
   @include container-x();

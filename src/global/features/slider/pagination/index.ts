@@ -1,8 +1,7 @@
 import { createCircleSVG, renderArc, renderFilledArc } from 'features/arcProgress'
-
 import { adaptiveValue } from 'features/adaptive'
 import { Slider } from 'features/slider'
-import Swiper from 'npm/swiper'
+import { CustomSwiper } from 'features/slider/customSwiper'
 
 export interface SliderPagination extends HTMLElement {
   changeCircle: (angle: number) => void
@@ -34,14 +33,14 @@ function createInner() {
   return { inner, count, current }
 }
 
-function createDesktopPagination(slider: Slider<any, any>) {
+function createDesktopPagination(slidesCount: number) {
   const { inner, count, current } = createInner()
   const circle = createCircleSVG('slider-pagination__svg')
 
   inner.prepend(circle.svg)
   renderArc(circle.path, 0, adaptiveValue(63))
 
-  count.innerText = String(slider.slides.length)
+  count.innerText = String(slidesCount)
   current.innerText = '1'
 
   function circleHandler(angle: number) {
@@ -65,13 +64,13 @@ function createDesktopPagination(slider: Slider<any, any>) {
   return { inner, countHandler, numHandler, circleHandler }
 }
 
-const PAGES_CIRCLES = 5
+const MOBILE_PAGES_LIMIT = 5
 
-function createMobilePagination(slider: Slider<any, any>) {
+function createMobilePagination(slides: any[]) {
   const mobileContainer = document.createElement('div')
   mobileContainer.className = 'slider-pagination__mobile-list'
 
-  slider.slides.slice(0, PAGES_CIRCLES).forEach((_: any, index: number) => {
+  slides.slice(0, MOBILE_PAGES_LIMIT).forEach((_, index) => {
     const circle = createCircleSVG('slider-pagination__mobile-dot')
     renderFilledArc(circle.path, 0, adaptiveValue(1.75))
 
@@ -79,16 +78,16 @@ function createMobilePagination(slider: Slider<any, any>) {
       circle.svg.classList.add('_white')
     }
 
-    if (index + 1 === PAGES_CIRCLES) {
+    if (index + 1 === MOBILE_PAGES_LIMIT) {
       circle.svg.classList.add('_small')
     }
 
     mobileContainer.append(circle.svg)
   })
 
-  function circleHandler(angle: number) {
-    const currentIsLast = slider.currentSlide.position + 1 > PAGES_CIRCLES
-    const currentIndex = currentIsLast ? PAGES_CIRCLES - 1 : slider.currentSlide.position
+  function circleHandler(angle: number, currentSlidePos: number) {
+    const currentIsLast = currentSlidePos + 1 > MOBILE_PAGES_LIMIT
+    const currentIndex = currentIsLast ? MOBILE_PAGES_LIMIT - 1 : currentSlidePos
     const targetItem = mobileContainer.children.item(currentIndex)
 
     if (!targetItem) return
@@ -97,11 +96,11 @@ function createMobilePagination(slider: Slider<any, any>) {
 
   }
 
-  function numHandler(value: number) {
-    const currentIsLast = slider.currentSlide.position + 1 > PAGES_CIRCLES
-    const previousIsLast = slider.previousSlide?.position + 1 > PAGES_CIRCLES
-    const currentIndex = currentIsLast ? PAGES_CIRCLES - 1 : slider.currentSlide.position
-    const previousIndex = previousIsLast ? PAGES_CIRCLES - 1 : slider.previousSlide?.position
+  function numHandler(value: number, previousSlidePos: number) {
+    const currentIsLast = value + 1 > MOBILE_PAGES_LIMIT
+    const previousIsLast = previousSlidePos + 1 > MOBILE_PAGES_LIMIT
+    const currentIndex = currentIsLast ? MOBILE_PAGES_LIMIT - 1 : value
+    const previousIndex = previousIsLast ? MOBILE_PAGES_LIMIT - 1 : previousSlidePos
 
     const targetItem = mobileContainer.children.item(currentIndex)
     const prevItem = mobileContainer.children.item(previousIndex)
@@ -121,7 +120,43 @@ function createMobilePagination(slider: Slider<any, any>) {
   return { mobileContainer, numHandler, circleHandler }
 }
 
-export function createPagination(slider: Slider<any, any>) {
+interface SliderForPagination {
+  slides: any[]
+  get currentSlidePos(): number
+  get previousSlidePos(): number
+  slideBack: () => void
+  slideNext: () => void
+}
+
+export function createPagination(container: HTMLElement, slider: SliderForPagination) {
+  const pagination = container as SliderPagination
+
+  const desktopPagination = createDesktopPagination(slider.slides.length)
+  const mobilePagination = createMobilePagination(slider.slides)
+
+  pagination.append(desktopPagination.inner, mobilePagination.mobileContainer)
+
+  pagination.changeCircle = function (angle: number) {
+    desktopPagination.circleHandler(angle)
+    mobilePagination.circleHandler(angle, slider.currentSlidePos)
+  }
+
+  pagination.setCount = function (num: number) {
+    desktopPagination.countHandler(num)
+  }
+
+  pagination.setCurrentNum = function (value: number) {
+    desktopPagination.numHandler(value)
+    mobilePagination.numHandler(value, slider.previousSlidePos)
+  }
+
+  pagination.prepend(createBtn('slide-prev', () => slider.slideBack()))
+  pagination.append(createBtn('slide-next', () => slider.slideNext()))
+
+  return pagination
+}
+
+export function createSliderPagination(slider: Slider<any, any>) {
   if (!slider.container) return null
 
   let container: SliderPagination | null
@@ -134,27 +169,43 @@ export function createPagination(slider: Slider<any, any>) {
 
   if (!container) throw new Error('For creating pagination need add .slider-pagination element')
 
-  const desktopPagination = createDesktopPagination(slider)
-  const mobilePagination = createMobilePagination(slider)
-
-  container.append(desktopPagination.inner, mobilePagination.mobileContainer)
-
-  container.changeCircle = function (angle: number) {
-    desktopPagination.circleHandler(angle)
-    mobilePagination.circleHandler(angle)
+  const sliderForPagination: SliderForPagination = {
+    slides: slider.slides,
+    get currentSlidePos() {
+      return slider.currentSlide?.position || -1
+    },
+    get previousSlidePos() {
+      return slider.previousSlide?.position || -1
+    },
+    slideBack: () => slider.slideBack.call(slider),
+    slideNext: () => slider.slideNext.call(slider),
   }
 
-  container.setCount = function (num: number) {
-    desktopPagination.countHandler(num)
+  return createPagination(container, sliderForPagination)
+}
+
+export function createSwiperPagination(container: HTMLElement | null, swiper: CustomSwiper) {
+  if (!container) return
+
+  const sliderForPagination: SliderForPagination = {
+    slides: swiper.slides,
+    get currentSlidePos() {
+      return swiper.realIndex
+    },
+    get previousSlidePos() {
+      return swiper.realPreviousIndex
+    },
+    slideBack: () => swiper.slidePrev.call(swiper),
+    slideNext: () => swiper.slideNext.call(swiper),
   }
 
-  container.setCurrentNum = function (value: number) {
-    desktopPagination.numHandler(value)
-    mobilePagination.numHandler(value)
-  }
+  const pagination = createPagination(container, sliderForPagination)
 
-  container.prepend(createBtn('slide-prev', () => slider.slideBack.call(slider)))
-  container.append(createBtn('slide-next', () => slider.slideNext.call(slider)))
+  swiper.on('slideChange', (swiper) => {
+    pagination.setCurrentNum(swiper.realIndex)
+  })
 
-  return container
+  swiper.on('autoplayTimeLeft', (swiper, _, percent) => {
+    pagination.changeCircle(360 - 360 * percent)
+  })
 }

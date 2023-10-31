@@ -1,4 +1,4 @@
-import { createPagination, SliderPagination } from 'src/global/features/slider/pagination'
+import { createSliderPagination, SliderPagination} from 'src/global/features/slider/pagination'
 
 export interface Slide extends HTMLElement {
   position: number
@@ -81,7 +81,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
         .querySelectorAll<TRawSlide>('.slider-slide')
         .forEach((rawSlide, i) => this.initSlide.call(slider, rawSlide, i))
 
-      if (options.pagination) this.pagination = createPagination(slider)
+      if (options.pagination) this.pagination = createSliderPagination(slider)
 
       options.handlers?.afterInit?.(slider)
       this.setSlide(0)
