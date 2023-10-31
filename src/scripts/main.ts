@@ -11,14 +11,19 @@ import "components/ui/dropdown"
 import 'components/pageBlocks/aboutCompany'
 import 'components/pageBlocks/ourProject'
 
-import "../pages/article"
+import "../pages/article/index.ts"
+import "../pages/article/index.js"
+
 import "components/pageBlocks/filter"
+
+import "global/features/popup/index"
+import "global/components/pageBlocks/filterPopup"
 
 
 // Pages
 import 'pages/index'
 import 'pages/about'
-import 'pages/article'
+import 'pages/article/index'
 import 'pages/pressCenter'
 import 'pages/project'
 import 'pages/projectList'

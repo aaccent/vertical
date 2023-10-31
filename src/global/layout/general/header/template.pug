@@ -58,7 +58,7 @@ mixin header
               img(src=require('media/static/icons/phone/phone_white.svg'))
               span 8 800 580-98-59
             a(href="#contact-form").header__phone__button.button.button_transparent заказать звонок
-          .header__mobile__phone
+          a(href="#contact-form").header__mobile__phone
             img(src=require('media/static/icons/phone/phone_white_no_border.svg'))
         img.header__logo(src=require('media/static/icons/vertical/vertical_logo.svg'))
         .header__bg
@@ -84,7 +84,7 @@ mixin header-dark
             span 8 800 580-98-59
           a(href="#contact-form").header__phone__button.button.button_dark заказать звонок
 
-        .header__mobile__phone
+        a(href="#contact-form").header__mobile__phone
           img(src=require('media/static/icons/phone/phone_black_no_border.svg'))
 
       img.header__logo(src=require('media/static/icons/vertical/vertical_logo_black.svg'))

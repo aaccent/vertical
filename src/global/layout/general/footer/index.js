@@ -9,7 +9,8 @@ if (form) {
             span.classList.add("span__active");
             if (!el.classList.contains("contact-form__textarea")) {
                 el.closest(".contact-form__container").querySelector(".reset-input").style.display = "block";
-                el.closest(".contact-form__container").querySelector(".contact-form__error").style.display = "none";
+                el.nextElementSibling.classList.remove("contact-form__error__active");
+                //el.closest(".contact-form__container").querySelector(".contact-form__error").style.display = "none";
             }
         }
         el.onblur = () => {
@@ -36,13 +37,13 @@ if (form) {
     form.querySelector("button").addEventListener("click", (e) => {
         e.preventDefault();
         if (!form.customer_name.value) {
-            form.customer_name.closest(".contact-form__container").querySelector(".contact-form__error").style.display = "inline";
+            form.customer_name.nextElementSibling.classList.add("contact-form__error__active");
         }
         if (!form.customer_phone.value || form.customer_phone.value.length < 16) {
-            form.customer_phone.closest(".contact-form__container").querySelector(".contact-form__error").style.display = "inline";
+            form.customer_phone.nextElementSibling.classList.add("contact-form__error__active");
         }
         if (form.customer_mail.value && !form.customer_mail.value.match(/.+@.+\..+/i)) {
-            form.customer_mail.closest(".contact-form__container").querySelector(".contact-form__error").style.display = "inline";
+            form.customer_mail.nextElementSibling.classList.add("contact-form__error__active");
         }
     })
 }
