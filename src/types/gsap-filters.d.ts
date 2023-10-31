@@ -5,6 +5,7 @@ interface TextAppearingFilterConfig {
   lineDelay?: number
   delay?: number
   onStart?(): void
+  onComplete?(): void
 }
 
 interface FadeUpFilterConfig {

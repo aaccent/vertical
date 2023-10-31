@@ -135,9 +135,12 @@ gsap.registerEffect({
     return gsap.from(targets, {
       delay: config.delay,
       duration: timeline.duration(),
-      onStart: () => {
+      onStart() {
         timeline.play()
         config.onStart?.()
+      },
+      onComplete() {
+        config.onComplete?.()
       }
     })
   },
