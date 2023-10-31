@@ -201,7 +201,7 @@ void function () {
 
     const svg = createCircleSVG('building-summary__svg-progress')
     summary!.querySelector('.building-summary__progress-indicator')?.append(svg.svg)
-    renderArc(svg.path, 0, adaptiveValue(120))
+    renderArc(svg.path, 0, 120)
 
     let iterator = 0
     el.innerText = '0%'
@@ -209,7 +209,7 @@ void function () {
     const interval = setInterval(() => {
       ++iterator
       el.innerText = `${iterator}%`
-      renderArc(svg.path, 360 * (iterator / 100), adaptiveValue(120))
+      renderArc(svg.path, 360 * (iterator / 100), 120)
 
       if (iterator >= num) clearInterval(interval)
     }, 35)
