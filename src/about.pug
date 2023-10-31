@@ -7,11 +7,10 @@ block append main
       ul.breadcrumb
         li.breadcrumb__item главная
         li.breadcrumb__item.breadcrumb__item_active о компании
-      .about-header__title
-        img(src=require('media/static/icons/vertical_text.svg'))
+      .about-header__title ВЕРТИКАЛЬ
       .about-header__bottom
         .about-header__text ГК Вертикаль успешно работает с 2005 года и является одним из лидеров в девелопменте жилой и коммерческой недвижимости
-        .arrow-button.arrow-button_down.arrow-button_gray
+        button(data-action="scroll").arrow-button.arrow-button_down.arrow-button_gray
     .about-header__image
       img(src=require('media/static/about_company_lead.webp'))
   include global/components/pageBlocks/aboutCompany/template

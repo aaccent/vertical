@@ -26,13 +26,14 @@
       linear-gradient(49deg, rgba(0, 0, 0, 0.3) 12.99%, rgba(0, 0, 0, 0) 25.64%);
   }
   &__title {
+    position: relative;
+    left: -28px;
     margin-top: 170px;
     text-align: center;
     color: $white;
-    img {
-      width: 100%;
-      object-fit: contain;
-    }
+    font-size: 248px;
+    line-height: 1;
+    font-family: 'tenor-sans';
   }
   &__text {
     @include manrope-24();
@@ -41,12 +42,23 @@
     text-transform: uppercase;
   }
   &__bottom {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 40px;
     padding-bottom: 80px;
-    border-top: 1px solid rgba($color: $white, $alpha: 0.2);
+    --before-width: 100%;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 1px;
+      width: var(--before-width);
+      background-color: rgba($color: $white, $alpha: 0.2);
+    }
   }
   &__image {
     position: absolute;
@@ -67,6 +79,7 @@
     &__title {
       margin-top: 160px;
       padding-bottom: 26px;
+      font-size: 54px;
     }
     &__bottom {
       padding-top: 16px;

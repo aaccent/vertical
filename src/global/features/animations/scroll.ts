@@ -4,7 +4,7 @@ import gsap from 'gsap'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const scroll = new LocomotiveScroll({
+export const scroll = new LocomotiveScroll({
   multiplier: 0.6,
   el: document.querySelector<HTMLElement>('[data-scroll-container]') || undefined,
   smooth: true,
