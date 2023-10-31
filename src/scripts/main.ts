@@ -3,6 +3,7 @@ import 'features/animations/scroll'
 import 'features/animations/text'
 import 'features/animations/numbers'
 import 'features/animations/appearing'
+import 'features/animations/page-loader'
 
 import "layout/general/header"
 import "layout/general/footer/index.ts"

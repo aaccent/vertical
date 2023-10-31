@@ -1,12 +1,13 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { afterLoader } from 'features/animations/page-loader'
 
 // Animations
 void function () {
   const contacts = document.querySelector('.contacts')
   if (!contacts || matchMedia('(max-width: 1200px)').matches) return
 
-  gsap.timeline()
+  const animation = gsap.timeline({ paused: true })
     .textAppearing('.contacts__title', {})
     .from('.contacts__title', {
       duration: 3,
@@ -17,7 +18,7 @@ void function () {
       opacity: 0,
       onComplete() {
         const animation = gsap.to('.contacts__image', {
-          yPercent: 10
+          yPercent: 10,
         })
 
         new ScrollTrigger({
@@ -26,12 +27,14 @@ void function () {
           trigger: contacts,
           start: 'top top',
           end: 'bottom top',
-          scrub: 1
+          scrub: 1,
         })
-      }
+      },
     }, '<0')
     .fadeUp('.contacts__info', {}, '<0.4')
     .fadeUp('.contacts__position__button', { yPercent: 120 }, '<0')
     .fadeUp('.contacts__call__phone', {}, '<0.2')
     .fadeUp('.contacts__call__email', {}, '<0.2')
+
+  afterLoader(() => animation.resume())
 }()

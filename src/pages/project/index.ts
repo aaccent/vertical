@@ -8,13 +8,14 @@ import { createSwiperPagination } from 'features/slider/pagination'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { createCircleSVG, renderArc } from 'features/arcProgress'
 import { adaptiveValue } from 'features/adaptive'
+import { afterLoader } from 'features/animations/page-loader'
 
 // animations of project-header
 void function () {
   const projectHeader = document.querySelector('.project-header')
   if (!projectHeader || matchMedia('(max-width: 1200px)').matches) return
 
-  const animation = gsap.timeline()
+  const animation = gsap.timeline({ paused: true })
     .from('.project-header__image img', {
       duration: 5,
       scale: 1.4,
@@ -32,6 +33,8 @@ void function () {
       '--after-height': '0%',
     }, '<0.15')
   })
+
+  afterLoader(() => animation.resume())
 }()
 
 // .idea animations

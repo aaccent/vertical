@@ -1,20 +1,23 @@
 import 'components/ui/quickFilter'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { afterLoader } from 'features/animations/page-loader'
 
 // Animations
 void function () {
   const pressCenter = document.querySelector('.press-center__header')
   if (!pressCenter || window.matchMedia('(max-width: 1200px)').matches) return
 
-  gsap.timeline()
+  const animation = gsap.timeline({ paused: true })
     .textAppearing('.press-center__title', {})
     .fadeUp('.press-center__quick-filter__desktop', { yPercent: 120 }, '<0')
+
+  afterLoader(() => animation.resume())
 
   document.querySelectorAll('.press-center__month-divider').forEach(item => {
     const q = gsap.utils.selector(item)
 
-    const animation = gsap.timeline()
+    const animation = gsap.timeline({ paused: true })
       .fadeUp(q('.title'), { yPercent: 150 })
       .fadeUp(item, {
         duration: 1.5,
@@ -37,11 +40,13 @@ void function () {
       }, '<0.4')
       .fadeUp(q('.news-card__text'), {}, '<0')
 
-    new ScrollTrigger({
-      scroller: '[data-scroll-container]',
-      animation,
-      trigger: item,
-      start: 'top+=10% center+=25%',
+    afterLoader(() => {
+      new ScrollTrigger({
+        scroller: '[data-scroll-container]',
+        animation,
+        trigger: item,
+        start: 'top+=10% center+=25%',
+      })
     })
   })
 }()

@@ -1,0 +1,31 @@
+.page-loader {
+  position: fixed;
+  z-index: 5;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  --after-height: 0%;
+
+  img {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    width: 120px;
+    object-fit: contain;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: var(--after-height);
+    background-color: #0E2448;
+  }
+}

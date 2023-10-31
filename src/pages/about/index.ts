@@ -4,13 +4,14 @@ import 'components/ui/buttons'
 import gsap from 'gsap'
 import { scroll } from 'features/animations/scroll'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { afterLoader } from 'features/animations/page-loader'
 
 // About-header animations
 void function () {
   const aboutHeader = document.querySelector('.about-header')
   if (!aboutHeader || matchMedia('(max-width: 1200px)').matches) return
 
-  gsap.timeline()
+  const animation = gsap.timeline({ paused: true })
     .textAppearing('.about-header__title', { duration: 1 })
     .textAppearing('.about-header__text', { alternate: true })
     .fadeUp('.about-header .arrow-button', { yPercent: 140 }, '<0')
@@ -18,6 +19,8 @@ void function () {
       duration: 1.3,
       '--before-width': '0%',
     }, '<0.4')
+
+  afterLoader(() => animation.resume())
 
   const nextSection = document.querySelector<HTMLElement>('.about-header + *')
   document.querySelector('.about-header [data-action="scroll"]')?.addEventListener('click', () => {
@@ -107,7 +110,7 @@ void function () {
         if (!matchMedia('(max-width: 1200px)').matches) return
 
         setSlideData(swiper.slides[swiper.activeIndex] as HistorySlide)
-      }
+      },
     },
   })
 
@@ -120,14 +123,14 @@ void function () {
     .fade('.history__swiper', {
       duration: 1,
       onStart() {
-          slider.slideTo(0)
-          slider.on('slideChange', (swiper) => {
-            setSlideData(swiper.slides[swiper.activeIndex] as HistorySlide)
+        slider.slideTo(0)
+        slider.on('slideChange', (swiper) => {
+          setSlideData(swiper.slides[swiper.activeIndex] as HistorySlide)
 
-            gsap.timeline()
-              .textAppearing('.history__title', { alternate: true })
-          })
-      }
+          gsap.timeline()
+            .textAppearing('.history__title', { alternate: true })
+        })
+      },
     }, '<0')
     .fadeUp('.history__year-view', {}, '<0')
 
@@ -140,7 +143,7 @@ void function () {
 }()
 
 // Awards animations
-void function() {
+void function () {
   const awards = document.querySelector('.awards')
   if (matchMedia('(max-width: 1200px)').matches) return
 
@@ -148,9 +151,15 @@ void function() {
     .fadeUp('.awards .title', { yPercent: 150 })
     .textAppearing('.awards__title', {}, '<0')
     .fadeUp('.awards__table__header__item', { yPercent: 150 })
-    .from('.awards__table__header', { duration: 1.2, '--after-width': '0%' }, '<0.4')
+    .from('.awards__table__header', {
+      duration: 1.2,
+      '--after-width': '0%',
+    }, '<0.4')
     .fadeUp('.awards__table__item', {}, '<0')
-    .from('.awards__table__row', { duration: 1.2, '--after-width': '0%' }, '<0.2')
+    .from('.awards__table__row', {
+      duration: 1.2,
+      '--after-width': '0%',
+    }, '<0.2')
 
   new ScrollTrigger({
     scroller: '[data-scroll-container]',

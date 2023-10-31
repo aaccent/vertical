@@ -8,6 +8,7 @@
 @use "npm/swiper/swiper";
 
 // Features
+@use "features/animations/page-loader";
 @use "features/animations/text";
 @use "features/slider";
 @use 'features/popup';
