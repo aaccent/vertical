@@ -107,8 +107,7 @@ gsap.registerEffect({
   effect(targets: HTMLElement[], config: Required<TextAppearingFilterConfig>) {
     targets.forEach(splitTextOnLines)
 
-    const timeline = gsap.timeline()
-      .pause()
+    const timeline = gsap.timeline({ paused: true })
 
     if (config.alternate) {
       targets.forEach(target => {
@@ -118,7 +117,7 @@ gsap.registerEffect({
               yPercent: config.yPercent,
               opacity: 0,
             }, 0)
-          }
+          },
         )
       })
     } else {
@@ -148,7 +147,7 @@ gsap.registerEffect({
     duration: 0.7,
     alternate: false,
     yPercent: 70,
-    lineDelay: .4
+    lineDelay: .4,
   },
   extendTimeline: true,
 })
