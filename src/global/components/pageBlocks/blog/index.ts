@@ -9,12 +9,16 @@ void function () {
     .fadeUp('.blog .title', { yPercent: 150 }, 0)
     .textAppearing('.blog__title', {}, 0)
     .fadeUp('.blog__button', { yPercent: 150 }, 0)
+    .from('.blog__header', {
+      duration: 1.2,
+      '--after-width': '0%',
+    }, '<0')
 
   blog.querySelectorAll('.news-card').forEach(card => {
     animation
-      .from(card.querySelector('.news-card__line'), {
+      .from(card.querySelector('.news-card'), {
         duration: 1.2,
-        width: 0,
+        '--after-width': '0%',
       }, '>-0.3')
       .from(card.querySelector('img'), {
         duration: 1,
