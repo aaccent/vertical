@@ -112,10 +112,13 @@ gsap.registerEffect({
     if (config.alternate) {
       targets.forEach(target => {
         gsap.utils.toArray('span > span', target).forEach((line, index) => {
-            timeline.from(line as Element, {
+            timeline.fromTo(line as Element, {
               duration: config.duration + config.lineDelay * index,
               yPercent: config.yPercent,
               opacity: 0,
+            }, {
+              yPercent: 0,
+              opacity: 1,
             }, 0)
           },
         )
@@ -123,10 +126,13 @@ gsap.registerEffect({
     } else {
       targets.forEach(target => {
         const q = gsap.utils.selector(target)
-        timeline.from(q('span > span'), {
+        timeline.fromTo(q('span > span'), {
           duration: config.duration,
           yPercent: config.yPercent,
           opacity: 0,
+        }, {
+          yPercent: 0,
+          opacity: 1,
         }, 0)
       })
     }
