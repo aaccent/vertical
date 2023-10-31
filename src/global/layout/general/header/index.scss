@@ -41,7 +41,18 @@
     }
 
     div.header__content {
-      border-bottom: 1px solid rgba($color: $black, $alpha: 0.15);
+      position: relative;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: var(--after-width);
+        height: 1px;
+        background-color: rgba($color: $black, $alpha: 0.15);
+      }
     }
     div.header_scrolled {
       background-color: $white;
@@ -61,7 +72,18 @@
   }
   &_border {
     .header__content {
-      border-bottom: 1px solid rgba($color: $white, $alpha: 0.15);
+      position: relative;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: var(--after-width);
+        height: 1px;
+        background-color: rgba($color: $white, $alpha: 0.15);
+      }
     }
 
     .header__logo {
