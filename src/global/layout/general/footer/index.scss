@@ -4,7 +4,7 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/media' as *;
 
-:not(.popup):has(~ .contact-form) {
+:not(.popup, .header_white):has(~ .contact-form) {
   position: relative;
   z-index: 1;
 }
