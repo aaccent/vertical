@@ -43,18 +43,18 @@ block append main
         .title.title_white
           span история
         div
-          .history__title Торжественное открытие нашего первого офиса
+          .history__title
     .container_left.history__content__wrapper
       div.history__left-btn
         .arrow-button.arrow-button_left.arrow-button_large.history__nav
       div.history__content
         .history__view
           .history__swiper.swiper: .swiper-wrapper
-            .swiper-slide.history__slide
+            div(data-year="2001" data-title="Торжественное открытие нашего первого офиса").swiper-slide.history__slide
               img(src=require('media/content/content_12.webp'))
-            .swiper-slide.history__slide
+            div(data-year="2007" data-title="Торжественное открытие нашего второго офиса").swiper-slide.history__slide
               img(src=require('media/content/content_11.webp'))
-            .swiper-slide.history__slide
+            div(data-year="2014" data-title="Торжественное открытие нашего третьего офиса").swiper-slide.history__slide
               img(src=require('media/content/content_12.webp'))
           .arrow-button.arrow-button_right.arrow-button_large.history__nav
         .history__year-view__wrapper

@@ -1,22 +1,9 @@
 import Swiper from 'swiper'
-import { Navigation, Autoplay } from 'swiper/modules'
+import { Autoplay, Navigation } from 'swiper/modules'
 import 'components/ui/buttons'
 import gsap from 'gsap'
 import { scroll } from 'features/animations/scroll'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-new Swiper('.history__swiper', {
-  navigation: {
-    nextEl: '.arrow-button_right',
-    prevEl: '.arrow-button_left',
-  },
-  spaceBetween: 60,
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
-  modules: [ Navigation, Autoplay ],
-})
 
 // About-header animations
 void function () {
@@ -46,8 +33,8 @@ void function () {
   const animation = gsap.timeline()
     .textAppearing('.company-worth__title', {})
     .textAppearing('.company-worth__item__title', {})
-    .fadeUp('.company-worth__item__text', {}, '<0.4')
-    .fadeUp('.company-worth__item__image', {}, '<0')
+    .fadeUp('.company-worth__item__image', {}, '<0.4')
+    .fadeUp('.company-worth__item__text', {}, '<0')
     .from('.company-worth__item', {
       duration: 1.2,
       '--after-height': '0%',
@@ -58,5 +45,96 @@ void function () {
     animation,
     trigger: companyWorth,
     start: 'top+=20% bottom',
+  })
+}()
+
+// History animations
+interface HistorySlide extends HTMLElement {
+  dataset: {
+    year: string
+    title: string
+  } & {
+    [index: string]: string
+  }
+}
+
+function setSlideData(slide: HistorySlide) {
+  if (!slide.dataset.title || !slide.dataset.year) {
+    return console.error('Slide of .history__swiper should have [data-year] and [data-title]')
+  }
+  const yearContainer = document.querySelector('.history__year-view__year')
+  const titleContainer = document.querySelector('.history__title')
+
+  if (!yearContainer || !titleContainer) return
+
+  titleContainer.textContent = slide.dataset.title
+
+  let year = Number(yearContainer.textContent)
+  const newYear = Number(slide.dataset.year)
+  const isIncr = newYear > year
+
+  if (!year || newYear === year) return yearContainer.textContent = `${newYear}`
+
+  const interval = setInterval(() => {
+    year = isIncr ? year + 1 : year - 1
+    yearContainer.textContent = `${year}`
+
+    if ((isIncr && year >= newYear) || (!isIncr && year <= newYear)) clearInterval(interval)
+  }, 100)
+}
+
+void function () {
+  const history = document.querySelector('.history')
+
+  if (!history) return
+
+  const slider = new Swiper('.history__swiper', {
+    navigation: {
+      nextEl: '.arrow-button_right',
+      prevEl: '.arrow-button_left',
+    },
+    spaceBetween: 60,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    modules: [ Navigation, Autoplay ],
+    on: {
+      init(swiper) {
+        setSlideData(swiper.slides[0] as HistorySlide)
+      },
+      slideChange(swiper) {
+        if (!matchMedia('(max-width: 1200px)').matches) return
+
+        setSlideData(swiper.slides[swiper.activeIndex] as HistorySlide)
+      }
+    },
+  })
+
+  if (matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .fadeUp('.history .title', { yPercent: 140 }, 0)
+    .textAppearing('.history__title', { alternate: true }, 0)
+    .fadeUp('.history__nav', {}, '<0.4')
+    .fade('.history__swiper', {
+      duration: 1,
+      onStart() {
+          slider.slideTo(0)
+          slider.on('slideChange', (swiper) => {
+            setSlideData(swiper.slides[swiper.activeIndex] as HistorySlide)
+
+            gsap.timeline()
+              .textAppearing('.history__title', { alternate: true })
+          })
+      }
+    }, '<0')
+    .fadeUp('.history__year-view', {}, '<0')
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: history,
+    start: 'top+=30% center',
   })
 }()
