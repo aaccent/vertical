@@ -79,7 +79,9 @@
     }
   }
   &_white {
-    border-bottom: 1px solid rgba($color: $white, $alpha: 0.2);
+    &::after {
+      background-color: rgba($color: $white, $alpha: 0.2);
+    }
 
     .news-card__title,
     .news-card__text {
