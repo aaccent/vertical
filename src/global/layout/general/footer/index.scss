@@ -4,9 +4,9 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/utils/media' as *;
 
-*:has(+ .contact-form) {
-  z-index: 1;
+:not(.popup):has(~ .contact-form) {
   position: relative;
+  z-index: 1;
 }
 
 .contact-form {

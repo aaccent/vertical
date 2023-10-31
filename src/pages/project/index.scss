@@ -573,8 +573,10 @@
 }
 
 .building-summary {
+  background-color: #fff;
   @include container-x();
   padding-top: 100px;
+  padding-bottom: 160px;
 
   &__title {
     @include tenor-90();
@@ -948,6 +950,24 @@
 }
 
 .next-project {
+  position: relative;
+  background-color: #fff;
+  cursor: pointer;
+  --after-height: 30%;
+  border-top: 1px solid #d9d9d9;
+
+  &::after {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: block;
+    width: 100%;
+    height: var(--after-height);
+    background-color: #0b3882;
+  }
+
   &__wrapper {
     display: flex;
     width: max-content;
@@ -958,17 +978,8 @@
     gap: 60px;
   }
 
-  border-top: 1px solid #d9d9d9;
-  margin-top: 160px;
-
   p {
     @include tenor-90();
-  }
-
-  &:hover {
-    .next-project__wrapper {
-      margin-left: 0;
-    }
   }
 
   @media screen and (max-width: $tablet1200) {

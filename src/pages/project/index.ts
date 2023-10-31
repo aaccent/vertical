@@ -258,3 +258,35 @@ void function() {
     start: 'top+=30% center',
   })
 }()
+
+// Next project
+void function() {
+  const nextProject = document.querySelector<HTMLElement>('.next-project')
+  if (!nextProject || matchMedia('(max-width: 1200px)').matches) return
+
+  const link = nextProject.querySelector('a')
+
+  const animation = gsap.timeline()
+    .pause()
+    .fromTo(nextProject, {
+      '--after-height': '0%',
+    }, {
+      duration: 5,
+      '--after-height': '100%',
+      onComplete() {
+        link?.click()
+      }
+    })
+    .pause()
+
+  nextProject.addEventListener('mouseenter', () => {
+    animation.timeScale(1)
+    animation.restart()
+    animation.resume()
+  })
+
+  nextProject.addEventListener('mouseleave', () => {
+    animation.timeScale(4)
+    animation.reverse()
+  })
+}()
