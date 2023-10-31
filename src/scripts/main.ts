@@ -16,7 +16,6 @@ import 'components/pageBlocks/ourProject'
 import "../pages/article"
 import "components/pageBlocks/filter"
 
-
 // Pages
 import 'pages/index'
 import 'pages/about'
@@ -24,3 +23,4 @@ import 'pages/article'
 import 'pages/pressCenter'
 import 'pages/project'
 import 'pages/projectList'
+import 'pages/contacts'
