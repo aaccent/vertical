@@ -502,18 +502,34 @@
 }
 
 .awards {
+  background-color: #fff;
   @include container-x();
   padding-top: 120px;
   padding-bottom: 130px;
+
   &__title {
     @include tenor-90();
   }
 
   &__table {
     &__header {
+      position: relative;
       margin-top: 80px;
       display: grid;
       grid-template-columns: 3fr 2fr 1fr;
+      padding-bottom: 10px;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: var(--after-width);
+        background-color: #d9d9d9;
+      }
+
       &__item {
         @include manrope-14();
         opacity: 0.6;
@@ -522,13 +538,22 @@
           justify-self: end;
         }
       }
-      padding-bottom: 10px;
-      border-bottom: 1px solid #d9d9d9;
     }
     &__row {
+      position: relative;
       display: grid;
       grid-template-columns: 3fr 2fr 1fr;
-      border-bottom: 1px solid #d9d9d9;
+      --after-width: 100%;
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: var(--after-width);
+        background-color: #d9d9d9;
+      }
     }
     &__item {
       @include manrope-24();
@@ -543,6 +568,7 @@
       }
     }
   }
+
   @media screen and (max-width: $tablet1200) {
     padding-top: 40px;
     padding-bottom: 80px;

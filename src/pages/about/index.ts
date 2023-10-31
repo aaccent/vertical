@@ -138,3 +138,24 @@ void function () {
     start: 'top+=30% center',
   })
 }()
+
+// Awards animations
+void function() {
+  const awards = document.querySelector('.awards')
+  if (matchMedia('(max-width: 1200px)').matches) return
+
+  const animation = gsap.timeline()
+    .fadeUp('.awards .title', { yPercent: 150 })
+    .textAppearing('.awards__title', {}, '<0')
+    .fadeUp('.awards__table__header__item', { yPercent: 150 })
+    .from('.awards__table__header', { duration: 1.2, '--after-width': '0%' }, '<0.4')
+    .fadeUp('.awards__table__item', {}, '<0')
+    .from('.awards__table__row', { duration: 1.2, '--after-width': '0%' }, '<0.2')
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: awards,
+    start: 'top+=35% bottom',
+  })
+}()
