@@ -5,7 +5,6 @@ import 'features/animations/numbers'
 import 'features/animations/appearing'
 import 'features/animations/page-loader'
 import 'features/popup/index'
-import 'features/map'
 
 import 'layout/general/header'
 import 'layout/general/footer/index.ts'
