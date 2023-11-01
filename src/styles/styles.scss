@@ -6,6 +6,7 @@
 
 @use "general/locomotive.css";
 @use "npm/swiper/swiper";
+@use "npm/mapbox-gl/dist/mapbox-gl";
 
 // Features
 @use "features/animations/page-loader";
