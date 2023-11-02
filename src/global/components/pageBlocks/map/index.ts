@@ -404,6 +404,9 @@ function createProjectsList(map: Map) {
   document.querySelectorAll('.building-filter :is(.dropdown__list__item, .quick-filter__item)').forEach(item => {
     item.addEventListener('click', filter)
   })
+
+  document.querySelector('.map .project-list__content')?.addEventListener('mouseenter', () => scroll.stop())
+  document.querySelector('.map .project-list__content')?.addEventListener('mouseleave', () => scroll.start())
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
