@@ -163,6 +163,7 @@
 }
 
 .button-close{
+  position: relative;
   width: 37px;
   height: 37px;
   background-color: rgba($white, 0.2);
@@ -175,14 +176,22 @@
   &_gray{
     background-color: transparent;
     border: 1px solid rgba($color: $black, $alpha: 0.2);
+    &::before,
+    &::after {
+      background-color: rgba($color: $black, $alpha: 0.2);
+    }
   }
   &::before,
   &::after {
     content: '';
     position: absolute;
-    width: 15px;
+    width: 54.0540541%;
     height: 1.5px;
     background-color: #fff;
+  }
+
+  img {
+    display: none;
   }
 
   &::before {

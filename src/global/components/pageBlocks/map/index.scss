@@ -209,6 +209,11 @@
 
     .button-close {
       flex-shrink: 0;
+
+      &::before,
+      &::after {
+        width: 15px;
+      }
     }
   }
 
