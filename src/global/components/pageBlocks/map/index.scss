@@ -201,7 +201,7 @@
       z-index: $z-2;
       position: relative;
       display: flex;
-      gap: 128px;
+      justify-content: space-between;
       padding-left: 25px;
       padding-right: 20px;
       padding-top: 20px;
@@ -214,8 +214,23 @@
 
   &__badge {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
+  }
+
+  &__clock-icon.badge {
+    gap: 2px;
+    align-items: center;
+
+    &::before {
+      content: '';
+      background-image: url('media/static/icons/timer.svg');
+      width: 18px;
+      height: 18px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 
   &__image {
@@ -254,6 +269,18 @@
 
   &__bottom {
     @include bottom-card();
+    color: #0E2448;
+    gap: 10px;
+
+    &::after {
+      content: '';
+      width: 12px;
+      height: 17px;
+      background-image: url('media/static/icons/arrow/arrow_short_blue.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 }
 

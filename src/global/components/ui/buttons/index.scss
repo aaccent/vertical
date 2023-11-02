@@ -1,6 +1,7 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/styles/general/variables' as *;
 @use 'src/styles/utils/media' as *;
+@use "styles/utils";
 
 .button{
   padding: 10px 20px;
@@ -170,9 +171,30 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  @include utils.transition(background-color, 300ms);
   &_gray{
     background-color: transparent;
     border: 1px solid rgba($color: $black, $alpha: 0.2);
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 1.5px;
+    background-color: #fff;
+  }
+
+  &::before {
+    rotate: 45deg;
+  }
+
+  &::after {
+    rotate: -45deg;
+  }
+
+  &:hover {
+    background-color: rgba($white, 0.5);
   }
 }
 
