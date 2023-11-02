@@ -8,7 +8,6 @@ function buildFilter(text) {
     console.log(itemSelected)
 
     if (itemSelected) {
-
         const newSelected = document.createElement("div");
         newSelected.classList.add("badge", "badge_blue");
         newSelected.textContent = text;
@@ -38,7 +37,23 @@ function buildFilter(text) {
     }
 }
 
-dropdownItems.forEach((el) => el.addEventListener("click", (e) => {
+function changeDropdownValue(target) {
+    const list = JSON.parse(target.parentElement.dataset.value || '[]')
+    if (!list.includes(target.dataset.id)) {
+        list.push(target.dataset.id)
+    } else {
+        const index = list.findIndex(i => i === target.dataset.id)
+        if (index !== -1) list.splice(index, 1)
+    }
+
+    target.parentElement.dataset.value = JSON.stringify(list)
+}
+
+dropdownItems.forEach((el) => el.addEventListener("click", () => {
+    if (el.classList.contains('filter__dropdown_reset')) return
+
+    if (el.dataset.id) changeDropdownValue(el)
+
     el.classList.toggle("dropdown__list__item__selected");
     if (filterSelected) {
         buildFilter(el.textContent);
@@ -49,8 +64,14 @@ dropdownItems.forEach((el) => el.addEventListener("click", (e) => {
     }
 }))
 
-
-
+document.querySelectorAll('.filter__dropdown_reset').forEach(btn => {
+    btn.addEventListener('click', () => {
+        btn.parentElement.dataset.value = '[]'
+        for (const childrenKey of btn.parentElement.children) {
+            childrenKey.classList.remove('dropdown__list__item__selected')
+        }
+    })
+})
 
 if (document.querySelector(".filter__selected__reset")) {
     document.querySelector(".filter__selected__reset").onclick = () => {

@@ -28,19 +28,19 @@ block append main
       .filter__content
         .filter__left
           include global/components/ui/quickFilter/template
-          +dropdown("Тип недвижимости").filter__dropdown
-            ul.dropdown__list
-              li.dropdown__list__item ТРК
-              li.dropdown__list__item.filter__dropdown_active Жилищные комплексы
-              li.dropdown__list__item Промышленные объекты
-              li.dropdown__list__item Склады
-              li.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
-          +dropdown("Стадия постройки").filter__dropdown
-            ul.dropdown__list
-              li.dropdown__list__item ТРК
-              li.dropdown__list__item Жилищные комплексы
-              li.dropdown__list__item Промышленные объекты
-              li.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
+          +dropdown("Тип недвижимости")(data-name="type").filter__dropdown
+            .dropdown__list
+              button(data-id="1").dropdown__list__item ТРК
+              button(data-id="2").dropdown__list__item Жилищные комплексы
+              button(data-id="3").dropdown__list__item Промышленные объекты
+              button(data-id="4").dropdown__list__item Склады
+              button.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
+          +dropdown("Стадия постройки")(data-name="stage").filter__dropdown
+            .dropdown__list
+              button(data-id="1").dropdown__list__item ТРК
+              button(data-id="2").dropdown__list__item Жилищные комплексы
+              button(data-id="3").dropdown__list__item Промышленные объекты
+              button.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
         .filter__right
           span.active плиткой
           .button-switch

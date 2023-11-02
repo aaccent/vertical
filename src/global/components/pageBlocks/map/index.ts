@@ -1,4 +1,4 @@
-import { Map, type GeoJSONSource, LngLatBounds, Popup, MapboxGeoJSONFeature, EventData, MapMouseEvent } from 'mapbox-gl'
+import { Map, type GeoJSONSource, LngLatBounds, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import type { Point } from 'geojson'
 
@@ -36,6 +36,8 @@ interface ProjectElement extends HTMLElement {
   }
 }
 
+type ProjectPropKeys = keyof ProjectElement['dataset']
+
 type ProjectProperties = Omit<ProjectElement['dataset'], 'coords' | 'id'> & {
   id: number
 }
@@ -51,11 +53,11 @@ function loadHandler(map: Map, mapContainer: HTMLElement) {
     e.preventDefault()
   }, true)
 
-  if (document.querySelector('.map .project-list')) createProjectsList(map)
+  if (document.querySelector('.map .project-list:not(.infrastructure-list)')) createProjectsList(map)
 }
 
 function getData() {
-  const projectList = document.querySelectorAll<ProjectElement>('.project-list__item')
+  const projectList = document.querySelectorAll<ProjectElement>('.map .project-list__item:not(.hidden)')
   const projects = Array.from(projectList).map((project, index) => {
     const propsContainsList = propsList.map(prop => ({
       prop,
@@ -187,12 +189,18 @@ function createClusters(map: Map, data: GeoData) {
 const projectList = document.querySelector('.map .project-list')
 let activeProjectId: number = -1
 
-function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [number, number]) {
+function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [ number, number ]) {
   const price = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'RUB',
     minimumFractionDigits: 0,
   }).format(parseInt(props.price))
+
+  const typeList = document.querySelectorAll<HTMLElement>(
+    '.building-filter .dropdown[data-name="type"] .dropdown__list__item')
+  const type = Array.from(typeList)
+    .find(i => i.dataset.id === props.type)
+    ?.textContent
 
   const card = document.createElement('div')
   card.className = 'project-card invisible'
@@ -200,7 +208,7 @@ function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, co
     <div class="project-card__top">
       <div class="project-card__top__content">
         <div class="project-card__badge">
-          <div class="badge">Жилищный комплекс</div>
+          <div class="badge">${type}</div>
           <div class="project-card__clock-icon badge badge_dark">
             <span>${props.date}</span>
           </div>
@@ -226,7 +234,7 @@ function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, co
 
 const mapContent = document.querySelector('.map__content')
 
-function toggleProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [number, number]) {
+function toggleProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [ number, number ]) {
   if (!mapContent || !projectList) return
 
   if (activeProjectId !== -1) {
@@ -344,6 +352,12 @@ function createPoints(map: Map, data: GeoData) {
   })
 }
 
+function setProjectsCount() {
+  const projectNum = document.querySelectorAll('.map .project-list__item:not(.hidden)').length
+  const title = document.querySelector<HTMLElement>('.map .project-list__title')
+  if (title) title.innerText = `${projectNum} проектов найдено`
+}
+
 function createProjectsList(map: Map) {
   const data = getData()
   map.addSource('projects', {
@@ -353,9 +367,43 @@ function createProjectsList(map: Map) {
     clusterMaxZoom: 17,
     clusterRadius: 60,
   })
+  setProjectsCount()
 
   createClusters(map, data)
   createPoints(map, data)
+
+  function filter() {
+    const dropdowns = document.querySelectorAll<HTMLElement>('.building-filter .filter__dropdown')
+    const activeCategoryId = document.querySelector<HTMLElement>('.building-filter .quick-filter_active')?.dataset.id
+
+    const projects = document.querySelectorAll<ProjectElement>('.map .project-list__item')
+    Array.from(projects)
+      .forEach(project => {
+        project.classList.remove('hidden')
+
+        const dropdownsResult = Array.from(dropdowns).map<boolean>(dropdown => {
+          const name = dropdown.dataset.name
+          const listStr = dropdown.querySelector<HTMLElement>('.dropdown__list')?.dataset.value
+          const list = JSON.parse(listStr || '[]')
+
+          return list.length === 0
+            || !(String(name) in project.dataset)
+            || list.includes(project.dataset[String(name) as ProjectPropKeys])
+        })
+
+        const categoryResult = activeCategoryId === 'all' || project.dataset.category === activeCategoryId
+
+        if (dropdownsResult.includes(false) || !categoryResult) project.classList.add('hidden')
+      })
+
+    setProjectsCount()
+    const source = map.getSource('projects') as GeoJSONSource
+    source.setData(getData())
+  }
+
+  document.querySelectorAll('.building-filter :is(.dropdown__list__item, .quick-filter__item)').forEach(item => {
+    item.addEventListener('click', filter)
+  })
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
@@ -388,7 +436,7 @@ const renderStructureList = () => {
 }
 
 structureList.forEach(x => {
-  x.addEventListener('click', (e) => {
+  x.addEventListener('click', () => {
     x.classList.toggle('infrastructure-list__item_active')
     renderStructureList()
 
