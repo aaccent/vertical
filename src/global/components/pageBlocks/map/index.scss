@@ -17,6 +17,7 @@
   a {
     display: flex;
     gap: 10px;
+
     * {
       width: max-content;
     }
@@ -26,6 +27,7 @@
 .map {
   position: relative;
   height: 700px;
+
   &__content {
     z-index: 1;
     position: absolute;
@@ -35,6 +37,7 @@
     top: 50%;
     transform: translateY(-50%);
   }
+
   &__view {
     width: 100%;
     height: 100%;
@@ -46,19 +49,23 @@
     }
   }
 }
+
 .project-list__content::-webkit-scrollbar {
   width: 2px;
 }
+
 .project-list__content::-webkit-scrollbar-thumb {
   background-color: rgba($color: #0e2448, $alpha: 0.3);
   border-radius: 2px;
 }
+
 .project-list {
   @include basic-card();
   padding: 0;
   display: flex;
   flex-direction: column;
   height: 100%;
+
   &__title {
     @include manrope-14();
     padding-top: 30px;
@@ -68,6 +75,7 @@
     color: rgba($color: $black, $alpha: 0.5);
     text-transform: uppercase;
   }
+
   &__content {
     margin-top: 26px;
     margin-right: 12px;
@@ -76,8 +84,9 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
-    
+
   }
+
   &__item {
     display: flex;
     align-items: center;
@@ -85,15 +94,19 @@
     padding-left: 30px;
     padding-top: 15px;
     padding-bottom: 15px;
+
     &:hover {
       background-color: #F2F2F2;
+
       .project-list__item__content::before {
         content: none;
       }
     }
+
     &__content {
       position: relative;
       width: 100%;
+
       &::before {
         position: absolute;
         content: '';
@@ -103,18 +116,21 @@
         background-color: rgba($color: $black, $alpha: 0.2);
       }
     }
+
     &__image {
       width: 75px;
       height: 75px;
       border-radius: 50%;
       flex-shrink: 0;
       overflow: hidden;
+
       img {
         height: 100%;
         width: 100%;
         object-fit: cover;
       }
     }
+
     &__title {
       @include manrope-17-m();
       line-height: 90%;
@@ -122,6 +138,7 @@
       letter-spacing: 1px;
 
     }
+
     &__text {
       @include manrope-17-m();
       margin-top: 8px;
@@ -130,15 +147,32 @@
       padding-right: 9px;
     }
   }
+
   &__item:first-child {
     .project-list__item__content {
-      &::before{
+      &::before {
         display: none;
       }
     }
   }
+
   &__bottom {
     @include bottom-card();
+  }
+}
+
+.project-list__map-popup {
+  .mapboxgl-popup-content {
+    padding: 5px 16px;
+    border-radius: 50px;
+    font-family: 'Manrope', 'manrope';
+    font-size: 14px;
+    line-height: 1.25;
+    color: #2E2E2E;
+
+    span {
+      color: #6D6D6D;
+    }
   }
 }
 
@@ -149,9 +183,11 @@
   flex-direction: column;
   overflow: hidden;
   height: 100%;
+
   &__top {
     position: relative;
     height: 100%;
+
     &__content {
       z-index: $z-2;
       position: relative;
@@ -161,43 +197,52 @@
       padding-right: 20px;
       padding-top: 20px;
     }
+
     .button-close {
       flex-shrink: 0;
     }
   }
+
   &__badge {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
   }
+
   &__image {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+
   &__title {
     @include manrope-24();
     text-transform: uppercase;
   }
+
   &__text {
     @include manrope-14();
     margin-top: 8px;
     color: rgba($color: $black, $alpha: 0.6);
   }
+
   .price-badge {
     margin-top: 20px;
   }
+
   &__content {
     margin: 0 30px;
     margin-top: 25px;
     margin-bottom: 40px;
   }
+
   &__bottom {
     @include bottom-card();
   }
@@ -211,67 +256,83 @@
     margin-left: 0;
     margin-right: 0;
   }
+
   .infrastructure-list__item_active {
     background-color: #f7f7f7;
     padding-bottom: 12px;
+
     .infrastructure-list__item__content {
-      &::before{
+      &::before {
         display: none;
       }
+
       margin-bottom: 1px;
     }
   }
 
   &_disable-border {
     .infrastructure-list__item__content {
-      &::before{
+      &::before {
         display: none;
       }
     }
   }
+
   &__item {
     transition: background-color 250ms ease;
+
     &:hover {
       background-color: #f7f7f7;
-      .infrastructure-list__item__content{
-        &::before{
+
+      .infrastructure-list__item__content {
+        &::before {
           display: none;
         }
       }
     }
+
     @include manrope-17-m();
     padding: 12px 30px;
     cursor: pointer;
+
     &__content {
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
+
       &::before {
         top: -20px;
       }
     }
   }
+
   &__bottom {
     opacity: 0.3;
     color: $black;
+
     .white {
       display: block;
     }
+
     .blue {
       display: none;
     }
+
     &:hover {
       color: #0B3882;
       opacity: 1;
     }
+
     &_active {
       opacity: 1;
       color: #0B3882;
+
       .white {
         display: none;
       }
+
       .blue {
         display: block;
       }

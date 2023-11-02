@@ -1,4 +1,4 @@
-import { Map, type GeoJSONSource, LngLatBounds } from 'mapbox-gl'
+import { Map, type GeoJSONSource, LngLatBounds, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import type { Point } from 'geojson'
 
@@ -29,13 +29,13 @@ interface ProjectElement extends HTMLElement {
     type: string
     category: string
     stage: string
-    title: string
+    mapTitle: string
   } & {
     [index: string]: string
   }
 }
 
-const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'title' ]
+const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'mapTitle' ]
 
 function loadHandler(map: Map, mapContainer: HTMLElement) {
   mapContainer.addEventListener('wheel', (e) => {
@@ -89,32 +89,22 @@ function getData() {
   } as const
 }
 
+type GeoData = ReturnType<typeof getData>
+
 function setBounds(map: Map, bounds: LngLatBounds) {
   const mapContent = document.querySelector<HTMLElement>('.map__content')
   const left = mapContent ? mapContent.offsetLeft + mapContent.offsetWidth + 60 : 50
-  map.fitBounds(bounds, { padding: { left, top: 60, bottom: 60, right: 60 } })
+  map.fitBounds(bounds, {
+    padding: {
+      left,
+      top: 60,
+      bottom: 60,
+      right: 60,
+    },
+  })
 }
 
-function createProjectsList(map: Map) {
-  const data = getData()
-  map.addSource('projects', {
-    type: 'geojson',
-    data,
-    cluster: true,
-    clusterMaxZoom: 17,
-    clusterRadius: 60,
-  })
-
-  let imgUrl = String(document.querySelector<HTMLElement>('.map .project-list')?.dataset.markIcon)
-  imgUrl = `${window.location.origin}${imgUrl.startsWith('/') ? '' : '/'}${imgUrl}`
-
-  map.loadImage(imgUrl, (error, image) => {
-      if (error || !image) throw error
-
-      map.addImage('map-marker', image)
-    },
-  )
-
+function createClusters(map: Map, data: GeoData) {
   map.addLayer({
     id: 'clusters',
     type: 'circle',
@@ -129,28 +119,6 @@ function createProjectsList(map: Map) {
   const bounds = new LngLatBounds()
   data.features.forEach(point => bounds.extend(point.geometry.coordinates))
   setBounds(map, bounds)
-
-  map.addLayer({
-    id: 'cluster-count',
-    type: 'symbol',
-    source: 'projects',
-    filter: [ 'has', 'point_count' ],
-    layout: {
-      'text-field': [ 'get', 'point_count_abbreviated' ],
-      'text-font': [ 'DIN Offc Pro Medium', 'Arial Unicode MS Bold' ],
-      'text-size': 24,
-    },
-  })
-
-  map.addLayer({
-    id: 'points',
-    type: 'symbol',
-    source: 'projects',
-    filter: [ '!', [ 'has', 'point_count' ] ],
-    layout: {
-      'icon-image': 'map-marker',
-    },
-  })
 
   map.on('click', 'clusters', (e) => {
     const features = map.queryRenderedFeatures(e.point, {
@@ -179,6 +147,83 @@ function createProjectsList(map: Map) {
   map.on('mouseleave', 'clusters', () => {
     map.getCanvas().style.cursor = ''
   })
+
+  map.addLayer({
+    id: 'cluster-count',
+    type: 'symbol',
+    source: 'projects',
+    filter: [ 'has', 'point_count' ],
+    layout: {
+      'text-field': [ 'get', 'point_count_abbreviated' ],
+      'text-font': [ 'DIN Offc Pro Medium', 'Arial Unicode MS Bold' ],
+      'text-size': 24,
+    },
+  })
+}
+
+function createPoints(map: Map, data: GeoData) {
+  let imgUrl = String(document.querySelector<HTMLElement>('.map .project-list')?.dataset.markIcon)
+  imgUrl = `${window.location.origin}${imgUrl.startsWith('/') ? '' : '/'}${imgUrl}`
+
+  map.loadImage(imgUrl, (error, image) => {
+      if (error || !image) throw error
+
+      map.addImage('map-marker', image)
+    },
+  )
+
+  map.addLayer({
+    id: 'points',
+    type: 'symbol',
+    source: 'projects',
+    filter: [ '!', [ 'has', 'point_count' ] ],
+    layout: {
+      'icon-image': 'map-marker',
+    },
+  })
+
+  let activePopup: Popup | null = null
+
+  map.on('mouseenter', 'points', (e) => {
+    map.getCanvas().style.cursor = 'pointer'
+    if (!e.features?.[0].properties) return
+
+    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [number, number]
+    const props = (e.features[0].properties as ProjectElement['dataset'])
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+    }
+
+    activePopup = new Popup({
+      closeButton: false,
+      className: 'project-list__map-popup',
+      offset: 35,
+    })
+      .setLngLat(coordinates)
+      .setHTML(props.mapTitle)
+      .addTo(map)
+  })
+
+  map.on('mouseleave', 'points', (e) => {
+    map.getCanvas().style.cursor = ''
+
+    activePopup?.remove()
+  })
+}
+
+function createProjectsList(map: Map) {
+  const data = getData()
+  map.addSource('projects', {
+    type: 'geojson',
+    data,
+    cluster: true,
+    clusterMaxZoom: 17,
+    clusterRadius: 60,
+  })
+
+  createClusters(map, data)
+  createPoints(map, data)
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
