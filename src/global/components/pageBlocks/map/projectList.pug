@@ -1,47 +1,86 @@
-.project-list
-  .project-list__title 15 проектов найдено
+-
+  var list = [
+    {
+      img: require('media/content/content_2.webp'),
+      name: 'жк волково',
+      address: 'Ростов-на-Дону, мкр. Северный, ул. Волкова, 39',
+      coords: '59.1821, 50.9912',
+      type: '2',
+      category: '1',
+      stage: '2',
+      title: 'ЖК Волково — <span>от 4,6 млн ₽</span>',
+    },
+    {
+      img: require('media/content/content_22.webp'),
+      name: 'складское помещение',
+      address: 'Курск, ул. Видова, 121а',
+      coords: '54.3249,38.0668',
+      type: '4',
+      category: '2',
+      stage: '1',
+      title: 'Складское помещение — <span>от 4,6 млн ₽</span>',
+    },
+    {
+      img: require('media/content/content_23.webp'),
+      name: 'жк азимут',
+      address: 'Ростов-на-Дону, мкр. Северный, ул. Волкова, 39',
+      coords: '58.7844,39.8346',
+      type: '2',
+      category: '1',
+      stage: '1',
+      title: 'ЖК Азимут — <span>от 4,6 млн ₽</span>',
+    },
+    {
+      img: require('media/content/content_24.webp'),
+      name: 'жк меридиан',
+      address: 'Казань, Оренбургский тракт, 8',
+      coords: '59.1851, 40.7953',
+      type: '2',
+      category: '1',
+      stage: '2',
+      title: 'ЖК Меридиан — <span>от 4,6 млн ₽</span>',
+    },
+    {
+      img: require('media/content/content_23.webp'),
+      name: 'жк северный',
+      address: 'Ростов-на-Дону, мкр. Северный, ул. Волкова, 39',
+      coords: '56.3622, 38.0040',
+      type: '1',
+      category: '1',
+      stage: '3',
+      title: 'ЖК Северный — <span>от 4,6 млн ₽</span>',
+    },
+    {
+      img: require('media/content/content_23.webp'),
+      name: 'жк северный',
+      address: 'Ростов-на-Дону, мкр. Северный, ул. Волкова, 39',
+      coords: '56.7538, 45.2803',
+      type: '3',
+      category: '1',
+      stage: '4',
+      title: 'ЖК Северный — <span>от 4,6 млн ₽</span>',
+    },
+  ]
+
+.project-list(data-mark-icon=require('media/static/map-mark.png'))
+  .project-list__title
   .project-list__content
-    .project-list__item
-      .project-list__item__image
-        img(src=require('media/content/content_2.webp'))
-      .project-list__item__content
-        .project-list__item__title жк волково
-        .project-list__item__text Ростов-на-Дону, мкр. Северный, ул. Волкова, 39
-
-    .project-list__item
-      .project-list__item__image
-        img(src=require('media/content/content_22.webp'))
-      .project-list__item__content
-        .project-list__item__title складское помещение
-        .project-list__item__text Курск, ул. Видова, 121а
-
-    .project-list__item
-      .project-list__item__image
-        img(src=require('media/content/content_23.webp'))
-      .project-list__item__content
-        .project-list__item__title жк азимут
-        .project-list__item__text Ростов-на-Дону, мкр. Северный, ул. Волкова, 39
-
-    .project-list__item
-      .project-list__item__image
-        img(src=require('media/content/content_24.webp'))
-      .project-list__item__content
-        .project-list__item__title жк меридиан
-        .project-list__item__text Казань, Оренбургский тракт, 8
-
-    .project-list__item
-      .project-list__item__image
-        img(src=require('media/content/content_23.webp'))
-      .project-list__item__content
-        .project-list__item__title жк северный
-        .project-list__item__text Ростов-на-Дону, мкр. Северный, ул. Волкова, 39
-    .project-list__item
-      .project-list__item__image
-        img(src=require('media/content/content_23.webp'))
-      .project-list__item__content
-        .project-list__item__title жк северный
-        .project-list__item__text Ростов-на-Дону, мкр. Северный, ул. Волкова, 39
-  
+    each project in list
+      .project-list__item(
+        data-type=project.type,
+        data-name=project.name
+        data-address=project.address
+        data-coords=project.coords,
+        data-category=project.category,
+        data-stage=project.stage,
+        data-img=project.img
+        data-title!=project.title
+      )
+        .project-list__item__image
+          img(src=project.img)
+        .project-list__item__content
+          .project-list__item__title= project.name
+          .project-list__item__text= project.address
   .project-list__bottom
     a(href='') смотреть все
       img(src=require('media/static/icons/arrow/arrow_short_blue.svg')) 
