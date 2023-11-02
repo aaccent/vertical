@@ -1,4 +1,4 @@
-import { Map, type GeoJSONSource, LngLatBounds, Popup } from 'mapbox-gl'
+import { Map, type GeoJSONSource, LngLatBounds, Popup, MapboxGeoJSONFeature, EventData, MapMouseEvent } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import type { Point } from 'geojson'
 
@@ -32,10 +32,11 @@ interface ProjectElement extends HTMLElement {
     price: string
     date: string
     link: string
+    id: string
   }
 }
 
-type ProjectProperties = Omit<ProjectElement['dataset'], 'coords'> & {
+type ProjectProperties = Omit<ProjectElement['dataset'], 'coords' | 'id'> & {
   id: number
 }
 
@@ -72,8 +73,11 @@ function getData() {
         'One of [data-*] attributes doesnt exists or has no value in ".project-list__item". Details above')
     }
 
+    project.dataset.id = String(index)
+
     const {
       coords,
+      id: idStr,
       ...props
     } = project.dataset
 
@@ -100,18 +104,30 @@ function getData() {
 
 type GeoData = ReturnType<typeof getData>
 
-function setBounds(map: Map, bounds: LngLatBounds) {
-  const mapContent = document.querySelector<HTMLElement>('.map__content')
-  const left = mapContent ? mapContent.offsetLeft + mapContent.offsetWidth + 60 : 50
-  map.fitBounds(bounds, {
-    padding: {
-      left,
-      top: 60,
-      bottom: 60,
-      right: 60,
-    },
-  })
+function _setBoundsToList() {
+  let calculatedBound: LngLatBounds | null = null
+
+  return function (map: Map, data: GeoData) {
+    if (!calculatedBound) {
+      const bounds = new LngLatBounds()
+      data.features.forEach(point => bounds.extend(point.geometry.coordinates))
+      calculatedBound = bounds
+    }
+
+    const mapContent = document.querySelector<HTMLElement>('.map__content')
+    const left = mapContent ? mapContent.offsetLeft + mapContent.offsetWidth + 60 : 50
+    map.fitBounds(calculatedBound, {
+      padding: {
+        left,
+        top: 60,
+        bottom: 60,
+        right: 60,
+      },
+    })
+  }
 }
+
+const setBoundsToList = _setBoundsToList()
 
 function createClusters(map: Map, data: GeoData) {
   map.addLayer({
@@ -125,9 +141,7 @@ function createClusters(map: Map, data: GeoData) {
     },
   })
 
-  const bounds = new LngLatBounds()
-  data.features.forEach(point => bounds.extend(point.geometry.coordinates))
-  setBounds(map, bounds)
+  setBoundsToList(map, data)
 
   map.on('click', 'clusters', (e) => {
     const features = map.queryRenderedFeatures(e.point, {
@@ -171,7 +185,9 @@ function createClusters(map: Map, data: GeoData) {
 }
 
 const projectList = document.querySelector('.map .project-list')
-function createProjectCard(props: ProjectProperties) {
+let activeProjectId: number = -1
+
+function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [number, number]) {
   const price = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'RUB',
@@ -203,17 +219,14 @@ function createProjectCard(props: ProjectProperties) {
     <a class="project-card__bottom" href="${props.link}">смотреть проект</a>
   `
 
-  card.querySelector('.button-close')?.addEventListener('click', () => {
-    card.remove()
-    projectList?.classList.remove('invisible')
-  })
+  card.querySelector('.button-close')?.addEventListener('click', () => toggleProjectCard(map, data, props, coordinates))
 
   return card
 }
 
-let activeProjectId: number = -1
 const mapContent = document.querySelector('.map__content')
-function toggleProjectCard(props: ProjectProperties) {
+
+function toggleProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [number, number]) {
   if (!mapContent || !projectList) return
 
   if (activeProjectId !== -1) {
@@ -222,20 +235,31 @@ function toggleProjectCard(props: ProjectProperties) {
     setTimeout(() => targetCard?.remove())
 
     if (activeProjectId === props.id) {
+      setBoundsToList(map, data)
+
       projectList.classList.remove('invisible')
       activeProjectId = -1
+
       return
     }
   }
 
-  const card = createProjectCard(props)
+  map.flyTo({
+    center: coordinates,
+    essential: true,
+    zoom: 13,
+  })
+
+  const card = createProjectCard(map, data, props, coordinates)
   mapContent.append(card)
+
   projectList.classList.add('invisible')
   card.classList.remove('invisible')
+
   activeProjectId = props.id
 }
 
-function createPoints(map: Map) {
+function createPoints(map: Map, data: GeoData) {
   let imgUrl = String(document.querySelector<HTMLElement>('.map .project-list')?.dataset.markIcon)
   imgUrl = `${window.location.origin}${imgUrl.startsWith('/') ? '' : '/'}${imgUrl}`
 
@@ -262,7 +286,7 @@ function createPoints(map: Map) {
     map.getCanvas().style.cursor = 'pointer'
     if (!e.features?.[0].properties) return
 
-    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [number, number]
+    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
     const props = (e.features[0].properties as ProjectElement['dataset'])
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
@@ -273,7 +297,7 @@ function createPoints(map: Map) {
       style: 'currency',
       currency: 'RUB',
       minimumFractionDigits: 0,
-      notation: "compact"
+      notation: 'compact',
     }).format(parseInt(props.price))
 
     const name = props.name.toLowerCase().includes('жк')
@@ -299,15 +323,23 @@ function createPoints(map: Map) {
   map.on('click', 'points', (e) => {
     if (!e.features?.[0].properties) return
 
-    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [number, number]
+    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
     const props = (e.features[0].properties as ProjectProperties)
 
-    toggleProjectCard(props)
+    toggleProjectCard(map, data, props, coordinates)
+  })
 
-    map.flyTo({
-      center: coordinates,
-      essential: true,
-      zoom: 13,
+  document.querySelectorAll<HTMLElement>('.map .project-list__item').forEach(item => {
+    item.addEventListener('click', () => {
+      const targetId = parseInt(String(item.dataset.id))
+      const targetItem = data.features.find(i => i.properties.id === targetId)
+
+      if (!targetItem) return
+
+      const coordinates = targetItem.geometry.coordinates as [ number, number ]
+      const props = targetItem.properties
+
+      toggleProjectCard(map, data, props, coordinates)
     })
   })
 }
@@ -323,7 +355,7 @@ function createProjectsList(map: Map) {
   })
 
   createClusters(map, data)
-  createPoints(map)
+  createPoints(map, data)
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
