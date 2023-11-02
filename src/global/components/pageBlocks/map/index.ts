@@ -29,13 +29,17 @@ interface ProjectElement extends HTMLElement {
     type: string
     category: string
     stage: string
-    mapTitle: string
-  } & {
-    [index: string]: string
+    price: string
+    date: string
+    link: string
   }
 }
 
-const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'mapTitle' ]
+type ProjectProperties = Omit<ProjectElement['dataset'], 'coords'> & {
+  id: number
+}
+
+const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'price', 'date', 'link' ]
 
 function loadHandler(map: Map, mapContainer: HTMLElement) {
   mapContainer.addEventListener('wheel', (e) => {
@@ -51,7 +55,7 @@ function loadHandler(map: Map, mapContainer: HTMLElement) {
 
 function getData() {
   const projectList = document.querySelectorAll<ProjectElement>('.project-list__item')
-  const projects = Array.from(projectList).map(project => {
+  const projects = Array.from(projectList).map((project, index) => {
     const propsContainsList = propsList.map(prop => ({
       prop,
       exists: prop in project.dataset,
@@ -73,9 +77,14 @@ function getData() {
       ...props
     } = project.dataset
 
+    const properties: ProjectProperties = {
+      id: index,
+      ...props,
+    }
+
     return {
       type: 'Feature',
-      properties: props,
+      properties,
       geometry: {
         type: 'Point',
         coordinates: project.dataset.coords.trim().split(',').map(parseFloat).reverse() as [ number, number ],
@@ -161,7 +170,72 @@ function createClusters(map: Map, data: GeoData) {
   })
 }
 
-function createPoints(map: Map, data: GeoData) {
+const projectList = document.querySelector('.map .project-list')
+function createProjectCard(props: ProjectProperties) {
+  const price = new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+    minimumFractionDigits: 0,
+  }).format(parseInt(props.price))
+
+  const card = document.createElement('div')
+  card.className = 'project-card invisible'
+  card.innerHTML = `
+    <div class="project-card__top">
+      <div class="project-card__top__content">
+        <div class="project-card__badge">
+          <div class="badge">Жилищный комплекс</div>
+          <div class="project-card__clock-icon badge badge_dark">
+            <span>${props.date}</span>
+          </div>
+        </div>
+        <button class="button-close" type="button"></button>
+      </div>
+      <div class="project-card__image">
+        <img src="${props.img}" alt="">
+      </div>
+    </div>
+    <div class="project-card__content">
+      <div class="project-card__title">${props.name}</div>
+      <div class="project-card__text">${props.address}</div>
+      <div class="price-badge price-badge_dark">От ${price}</div>
+    </div>
+    <a class="project-card__bottom" href="${props.link}">смотреть проект</a>
+  `
+
+  card.querySelector('.button-close')?.addEventListener('click', () => {
+    card.remove()
+    projectList?.classList.remove('invisible')
+  })
+
+  return card
+}
+
+let activeProjectId: number = -1
+const mapContent = document.querySelector('.map__content')
+function toggleProjectCard(props: ProjectProperties) {
+  if (!mapContent || !projectList) return
+
+  if (activeProjectId !== -1) {
+    const targetCard = document.querySelector('.project-card')
+    targetCard?.classList.add('invisible')
+    setTimeout(() => targetCard?.remove())
+
+    if (activeProjectId === props.id) {
+      projectList.classList.remove('invisible')
+      activeProjectId = -1
+      return
+    }
+  }
+
+  const card = createProjectCard(props)
+  mapContent.append(card)
+  projectList.classList.add('invisible')
+  card.classList.remove('invisible')
+  activeProjectId = props.id
+}
+
+function createPoints(map: Map) {
   let imgUrl = String(document.querySelector<HTMLElement>('.map .project-list')?.dataset.markIcon)
   imgUrl = `${window.location.origin}${imgUrl.startsWith('/') ? '' : '/'}${imgUrl}`
 
@@ -195,20 +269,46 @@ function createPoints(map: Map, data: GeoData) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
     }
 
+    const price = new Intl.NumberFormat('ru-RU', {
+      style: 'currency',
+      currency: 'RUB',
+      minimumFractionDigits: 0,
+      notation: "compact"
+    }).format(parseInt(props.price))
+
+    const name = props.name.toLowerCase().includes('жк')
+      ? props.name.toLowerCase().replace('жк', 'ЖК')
+      : `${props.name.at(0)?.toUpperCase()}${props.name.slice(1)}`
+
     activePopup = new Popup({
       closeButton: false,
       className: 'project-list__map-popup',
       offset: 35,
     })
       .setLngLat(coordinates)
-      .setHTML(props.mapTitle)
+      .setHTML(`${name} — <span>от ${price}</span>`)
       .addTo(map)
   })
 
-  map.on('mouseleave', 'points', (e) => {
+  map.on('mouseleave', 'points', () => {
     map.getCanvas().style.cursor = ''
 
     activePopup?.remove()
+  })
+
+  map.on('click', 'points', (e) => {
+    if (!e.features?.[0].properties) return
+
+    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [number, number]
+    const props = (e.features[0].properties as ProjectProperties)
+
+    toggleProjectCard(props)
+
+    map.flyTo({
+      center: coordinates,
+      essential: true,
+      zoom: 13,
+    })
   })
 }
 
@@ -223,7 +323,7 @@ function createProjectsList(map: Map) {
   })
 
   createClusters(map, data)
-  createPoints(map, data)
+  createPoints(map)
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')

@@ -12,6 +12,11 @@ html {
   display: none;
 }
 
+.invisible {
+  opacity: 0;
+  visibility: hidden;
+}
+
 .container {
   @include container-x();
 }

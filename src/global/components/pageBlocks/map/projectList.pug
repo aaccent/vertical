@@ -8,7 +8,9 @@
       type: '2',
       category: '1',
       stage: '2',
-      title: 'ЖК Волково — <span>от 4,6 млн ₽</span>',
+      price: '4600000',
+      date: 'март 2023',
+      link: '/'
     },
     {
       img: require('media/content/content_22.webp'),
@@ -18,7 +20,9 @@
       type: '4',
       category: '2',
       stage: '1',
-      title: 'Складское помещение — <span>от 4,6 млн ₽</span>',
+      price: '4600000',
+      date: 'март 2023',
+      link: '/'
     },
     {
       img: require('media/content/content_23.webp'),
@@ -28,7 +32,9 @@
       type: '2',
       category: '1',
       stage: '1',
-      title: 'ЖК Азимут — <span>от 4,6 млн ₽</span>',
+      price: '4600000',
+      date: 'март 2023',
+      link: '/'
     },
     {
       img: require('media/content/content_24.webp'),
@@ -38,7 +44,9 @@
       type: '2',
       category: '1',
       stage: '2',
-      title: 'ЖК Меридиан — <span>от 4,6 млн ₽</span>',
+      price: '4600000',
+      date: 'март 2023',
+      link: '/'
     },
     {
       img: require('media/content/content_23.webp'),
@@ -48,7 +56,9 @@
       type: '1',
       category: '1',
       stage: '3',
-      title: 'ЖК Северный — <span>от 4,6 млн ₽</span>',
+      price: '4600000',
+      date: 'март 2023',
+      link: '/'
     },
     {
       img: require('media/content/content_23.webp'),
@@ -58,7 +68,9 @@
       type: '3',
       category: '1',
       stage: '4',
-      title: 'ЖК Северный — <span>от 4,6 млн ₽</span>',
+      price: '4600000',
+      date: 'март 2023',
+      link: '/'
     },
   ]
 
@@ -74,7 +86,9 @@
         data-category=project.category,
         data-stage=project.stage,
         data-img=project.img
-        data-map-title!=project.title
+        data-price=project.price
+        data-date=project.date
+        data-link=project.link
       )
         .project-list__item__image
           img(src=project.img)
