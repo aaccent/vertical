@@ -27,6 +27,7 @@
   position: relative;
   height: 700px;
   &__content {
+    z-index: 1;
     position: absolute;
     height: calc(100% - 120px);
     width: 450px;
@@ -38,6 +39,11 @@
     width: 100%;
     height: 100%;
     background-color: black;
+
+    .mapboxgl-ctrl-bottom-left,
+    .mapboxgl-ctrl-bottom-right {
+      display: none;
+    }
   }
 }
 .project-list__content::-webkit-scrollbar {
