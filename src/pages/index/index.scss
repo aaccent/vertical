@@ -32,6 +32,10 @@
   }
 }
 
+.blue-section:has(.map.visible) {
+  z-index: 4;
+}
+
 .building-filter {
   margin-top: 200px;
 
@@ -45,9 +49,30 @@
     display: none;
   }
 
+  .button-close {
+    display: none;
+  }
+
   @media screen and (max-width: $tablet1200) {
     .map {
-      display: none;
+      position: fixed;
+      z-index: 30;
+      left: 0;
+      top: 0;
+      margin-top: 0;
+      width: 100vw;
+      height: 100vh;
+      opacity: 0;
+      visibility: hidden;
+      @include transition((opacity, visibility), 300ms);
+
+      .button-close {
+        display: flex;
+        position: absolute;
+        z-index: 1;
+        left: 20px;
+        top: 20px;
+      }
     }
 
     &__project-list {
@@ -83,7 +108,7 @@
       visibility: visible;
     }
 
-    p+p {
+    p + p {
       padding-top: 20px;
       margin-top: 0;
     }

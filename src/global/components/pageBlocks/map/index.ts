@@ -1,6 +1,10 @@
 import { Map, type GeoJSONSource, LngLatBounds, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import type { Point } from 'geojson'
+import './mobile-map'
+import { createMobilePointLabels } from 'components/pageBlocks/map/mobile-map'
+import { isDesktop } from 'features/adaptive'
+import { createPopup } from 'components/pageBlocks/map/utils'
 
 // Creating map
 void function () {
@@ -14,7 +18,7 @@ void function () {
     zoom: 14,
     accessToken: 'pk.eyJ1Ijoic2V2YS1hYWNjZW50IiwiYSI6ImNsb2ZlNzR0NDByajUya3FwcmQ4bHdoZG8ifQ.2oZ5rpkSs2dKoP5a10lkcg',
     dragRotate: false,
-    cooperativeGestures: true,
+    cooperativeGestures: document.querySelector('.map .project-list') ? isDesktop : true,
   })
 
   map.on('load', () => loadHandler(map, mapContainer))
@@ -117,7 +121,7 @@ function _setBoundsToList() {
     }
 
     const mapContent = document.querySelector<HTMLElement>('.map__content')
-    const left = mapContent ? mapContent.offsetLeft + mapContent.offsetWidth + 60 : 50
+    const left = mapContent && isDesktop ? mapContent.offsetLeft + mapContent.offsetWidth + 60 : 60
     map.fitBounds(calculatedBound, {
       padding: {
         left,
@@ -290,43 +294,27 @@ function createPoints(map: Map, data: GeoData) {
 
   let activePopup: Popup | null = null
 
-  map.on('mouseenter', 'points', (e) => {
-    map.getCanvas().style.cursor = 'pointer'
-    if (!e.features?.[0].properties) return
+  if (isDesktop) {
+    map.on('mouseenter', 'points', (e) => {
+      map.getCanvas().style.cursor = 'pointer'
+      if (!e.features?.[0].properties) return
 
-    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
-    const props = (e.features[0].properties as ProjectElement['dataset'])
+      const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
+      const props = (e.features[0].properties as ProjectElement['dataset'])
 
-    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-    }
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+      }
 
-    const price = new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 0,
-      notation: 'compact',
-    }).format(parseInt(props.price))
-
-    const name = props.name.toLowerCase().includes('жк')
-      ? props.name.toLowerCase().replace('жк', 'ЖК')
-      : `${props.name.at(0)?.toUpperCase()}${props.name.slice(1)}`
-
-    activePopup = new Popup({
-      closeButton: false,
-      className: 'project-list__map-popup',
-      offset: 35,
+      activePopup = createPopup(coordinates, props).addTo(map)
     })
-      .setLngLat(coordinates)
-      .setHTML(`${name} — <span>от ${price}</span>`)
-      .addTo(map)
-  })
 
-  map.on('mouseleave', 'points', () => {
-    map.getCanvas().style.cursor = ''
+    map.on('mouseleave', 'points', () => {
+      map.getCanvas().style.cursor = ''
 
-    activePopup?.remove()
-  })
+      activePopup?.remove()
+    })
+  }
 
   map.on('click', 'points', (e) => {
     if (!e.features?.[0].properties) return
@@ -350,6 +338,8 @@ function createPoints(map: Map, data: GeoData) {
       toggleProjectCard(map, data, props, coordinates)
     })
   })
+
+  createMobilePointLabels(map)
 }
 
 function setProjectsCount() {

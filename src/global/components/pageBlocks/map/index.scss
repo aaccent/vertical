@@ -172,14 +172,33 @@
 .project-list__map-popup {
   .mapboxgl-popup-content {
     padding: 5px 16px;
+    display: flex;
+    gap: 4px;
     border-radius: 50px;
     font-family: 'Manrope', 'manrope';
     font-size: 14px;
     line-height: 1.25;
     color: #2E2E2E;
+    white-space: nowrap;
+    width: fit-content;
+    max-width: 320px;
 
-    span {
+    span.label-title {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    span.label-price {
       color: #6D6D6D;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .project-list__map-popup {
+    .mapboxgl-popup-content {
+      max-width: 240px;
     }
   }
 }

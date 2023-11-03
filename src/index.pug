@@ -47,14 +47,15 @@ block append main
             .button-switch__mark
           span на карте
       .filter__content__mobile
-        .filter__button
+        button.filter__button
           span фильтр
           img(src=require('media/static/icons/filter/filter_white.svg'))
-        .filter__button(data-popup='project-popup', data-action='popup')
+        button.filter__button(data-action="map")
           span на карте
           img(src=require('media/static/icons/location.svg'))
     .map-block
       .map
+        button.button-close(data-action="map")
         .map__content
           include global/components/pageBlocks/map/projectList
           //- include global/components/pageBlocks/map/projectCard
