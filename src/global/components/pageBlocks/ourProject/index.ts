@@ -1,9 +1,10 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { isMobile } from 'features/adaptive'
 
 void function() {
   const ourProjects = document.querySelector('.our-projects')
-  if (!ourProjects || matchMedia('(max-width: 1200px)').matches) return
+  if (!ourProjects || isMobile) return
 
   const parallax = gsap.timeline()
     .to('.our-projects__middle-image', { yPercent: 8 }, 0)

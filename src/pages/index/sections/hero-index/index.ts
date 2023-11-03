@@ -1,6 +1,7 @@
 import { createSlider, Slide } from 'features/slider'
 import gsap from 'gsap'
 import { afterLoader } from 'features/animations/page-loader'
+import { isDesktop } from 'features/adaptive'
 
 interface RawImgSlide extends HTMLElement {
   dataset: {
@@ -22,7 +23,7 @@ interface ImgSlide extends RawImgSlide, Slide {
 }
 
 void function () {
-  if (matchMedia('(min-width: 1200px)').matches) {
+  if (isDesktop) {
     const animation = gsap.timeline({ paused: true })
       .textAppearing('.hero-index__title', {}, 0)
       .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
@@ -45,7 +46,7 @@ void function () {
 
     titleContainer.innerHTML = slide.dataset.title
 
-    if (matchMedia('(min-width: 1200px)').matches) {
+    if (isDesktop) {
       gsap.timeline().textAppearing('.hero-index__text-title', { delay: .4 }, 0)
       gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
         opacity: 0,

@@ -1,10 +1,11 @@
 import "features/popup/index"
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import { isMobile } from 'features/adaptive'
 
 void function () {
   const contactForm = document.querySelector<HTMLElement>('.contact-form')
-  if (!contactForm || matchMedia('(max-width: 1200px)').matches) return
+  if (!contactForm || isMobile) return
 
   const contactFormBg = contactForm.querySelector('.contact-form__bg') as HTMLElement
 
@@ -50,7 +51,7 @@ void function () {
 
 void function () {
   const footer = document.querySelector('.footer')
-  if (!footer || matchMedia('(max-width: 1200px)').matches) return
+  if (!footer || isMobile) return
 
   const animation = gsap.timeline()
     .textAppearing('.footer__title', {})

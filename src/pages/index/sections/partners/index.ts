@@ -1,9 +1,10 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { isMobile } from 'features/adaptive'
 
 void function () {
   const partners = document.querySelector('.partners')
-  if (!partners || matchMedia('(max-width: 1200px)').matches) return
+  if (!partners || isMobile) return
 
   window.addEventListener('load', () => {
     const animation = gsap.timeline()
