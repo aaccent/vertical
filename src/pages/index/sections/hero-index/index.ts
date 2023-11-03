@@ -21,10 +21,16 @@ interface ImgSlide extends RawImgSlide, Slide {
   startSlideAnimation: () => void
 }
 
-void function() {
-  const animation = gsap.timeline({ paused: true })
-    .textAppearing('.hero-index__title', {}, 0)
-    .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
+void function () {
+  if (matchMedia('(min-width: 1200px)').matches) {
+    const animation = gsap.timeline({ paused: true })
+      .textAppearing('.hero-index__title', {}, 0)
+      .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
+
+    afterLoader(() => {
+      animation.resume()
+    })
+  }
 
   const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
   const titleContainer = document.querySelector<HTMLElement>('.hero-index__text-title')
@@ -39,16 +45,18 @@ void function() {
 
     titleContainer.innerHTML = slide.dataset.title
 
-    gsap.timeline().textAppearing('.hero-index__text-title', { delay: .4 }, 0)
-    gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
-      opacity: 0,
-      yPercent: 90,
-    }, {
-      duration: 1,
-      delay: .4,
-      opacity: 1,
-      yPercent: 0,
-    })
+    if (matchMedia('(min-width: 1200px)').matches) {
+      gsap.timeline().textAppearing('.hero-index__text-title', { delay: .4 }, 0)
+      gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
+        opacity: 0,
+        yPercent: 90,
+      }, {
+        duration: 1,
+        delay: .4,
+        opacity: 1,
+        yPercent: 0,
+      })
+    }
 
     if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle
 
@@ -82,9 +90,5 @@ void function() {
         setSlideText(slider.currentSlide!)
       },
     },
-  })
-
-  afterLoader(() => {
-    animation.resume()
   })
 }()
