@@ -1,11 +1,10 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { NumbersWithAnimation } from 'features/animations/numbers'
-import { isMobile } from 'features/adaptive'
 
 void function () {
   const aboutSection = document.querySelector('.about-company')
-  if (!aboutSection || isMobile) return
+  if (!aboutSection) return
 
   gsap.registerPlugin(ScrollTrigger)
 

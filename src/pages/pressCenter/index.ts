@@ -2,12 +2,11 @@ import 'components/ui/quickFilter'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { afterLoader } from 'features/animations/page-loader'
-import { isMobile } from 'features/adaptive'
 
 // Animations
 void function () {
   const pressCenter = document.querySelector('.press-center__header')
-  if (!pressCenter || isMobile) return
+  if (!pressCenter) return
 
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.press-center__title', {})

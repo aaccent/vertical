@@ -4,7 +4,7 @@ import { isMobile } from 'features/adaptive'
 
 void function() {
   const ourProjects = document.querySelector('.our-projects')
-  if (!ourProjects || isMobile) return
+  if (!ourProjects) return
 
   const parallax = gsap.timeline()
     .to('.our-projects__middle-image', { yPercent: 8 }, 0)

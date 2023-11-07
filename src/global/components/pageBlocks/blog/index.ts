@@ -1,10 +1,9 @@
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import { isMobile } from 'features/adaptive'
 
 void function () {
   const blog = document.querySelector('.blog')
-  if (!blog || isMobile) return
+  if (!blog) return
 
   const animation = gsap.timeline()
     .fadeUp('.blog .title', { yPercent: 150 }, 0)

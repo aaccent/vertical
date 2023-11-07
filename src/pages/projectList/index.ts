@@ -2,11 +2,11 @@ import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import { adaptiveValue, isMobile } from 'features/adaptive'
+import { adaptiveValue } from 'features/adaptive'
 
 void function () {
   const projects = document.querySelector('.project__list')
-  if (!projects || isMobile) return
+  if (!projects) return
 
   const animation = gsap.timeline()
     .fromTo('.project__list__row:nth-child(odd) .project__list__item:last-child, .project__list__row:nth-child(even) .project__list__item:first-child', {

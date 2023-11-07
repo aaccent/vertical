@@ -5,12 +5,12 @@ import gsap from 'gsap'
 import { scroll } from 'features/animations/scroll'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { afterLoader } from 'features/animations/page-loader'
-import { isDesktop, isMobile } from 'features/adaptive'
+import { isDesktop } from 'features/adaptive'
 
 // About-header animations
 void function () {
   const aboutHeader = document.querySelector('.about-header')
-  if (!aboutHeader || isMobile) return
+  if (!aboutHeader) return
 
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.about-header__title', { duration: 1 })
@@ -32,7 +32,7 @@ void function () {
 // Company-worth animations
 void function () {
   const companyWorth = document.querySelector('.company-worth')
-  if (!companyWorth || isMobile) return
+  if (!companyWorth) return
 
   const animation = gsap.timeline()
     .textAppearing('.company-worth__title', {})
@@ -115,8 +115,6 @@ void function () {
     },
   })
 
-  if (isMobile) return
-
   const animation = gsap.timeline()
     .fadeUp('.history .title', { yPercent: 140 }, 0)
     .textAppearing('.history__title', { alternate: true }, 0)
@@ -146,7 +144,6 @@ void function () {
 // Awards animations
 void function () {
   const awards = document.querySelector('.awards')
-  if (isMobile) return
 
   const animation = gsap.timeline()
     .fadeUp('.awards .title', { yPercent: 150 })

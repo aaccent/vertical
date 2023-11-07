@@ -1,5 +1,4 @@
 import gsap from 'gsap'
-import { isMobile } from 'features/adaptive'
 
 export interface TextWithAnimation extends HTMLElement {
   playAnimation: () => void
@@ -17,8 +16,6 @@ function fixBr(text: string) {
 }
 
 export function splitTextOnLines(textEl: HTMLElement) {
-  if (isMobile) return
-
   textEl.classList.add('text-appearing')
 
   const innerHTML = textEl.innerHTML
@@ -68,8 +65,6 @@ export function splitTextOnLines(textEl: HTMLElement) {
 }
 
 document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
-  if (isMobile) return
-
   splitTextOnLines(text)
 
   text.prepareAnimation = function () {

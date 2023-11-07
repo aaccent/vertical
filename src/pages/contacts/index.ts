@@ -1,12 +1,11 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { afterLoader } from 'features/animations/page-loader'
-import { isMobile } from 'features/adaptive'
 
 // Animations
 void function () {
   const contacts = document.querySelector('.contacts')
-  if (!contacts || isMobile) return
+  if (!contacts) return
 
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.contacts__title', {})

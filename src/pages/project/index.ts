@@ -7,13 +7,12 @@ import { initCustomSwiper } from 'features/slider/customSwiper'
 import { createSwiperPagination } from 'features/slider/pagination'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { createCircleSVG, renderArc } from 'features/arcProgress'
-import { isMobile } from 'features/adaptive'
 import { afterLoader } from 'features/animations/page-loader'
 
 // animations of project-header
 void function () {
   const projectHeader = document.querySelector('.project-header')
-  if (!projectHeader || isMobile) return
+  if (!projectHeader) return
 
   const animation = gsap.timeline({ paused: true })
     .from('.project-header__image img', {
@@ -40,7 +39,7 @@ void function () {
 // .idea animations
 void function () {
   const aboutProject = document.querySelector('.idea')
-  if (!aboutProject || isMobile) return
+  if (!aboutProject) return
 
   const animation = gsap.timeline()
     .fadeUp('.idea .title', { yPercent: 140 }, 0)
@@ -100,7 +99,7 @@ void function () {
 // Gallery animations
 void function () {
   const gallery = document.querySelector('.gallery')
-  if (!gallery || isMobile) return
+  if (!gallery) return
 
   const animation = gsap.timeline()
     .fadeUp('.gallery .title', { yPercent: 150 }, 0)
@@ -151,7 +150,7 @@ void function () {
 // Location animation
 void function () {
   const location = document.querySelectorAll('.location')
-  if (!location || isMobile) return
+  if (!location) return
 
   const animation = gsap.timeline()
     .fadeUp('.location .title', { yPercent: 150 }, 0)
@@ -178,7 +177,7 @@ void function () {
 // Building summary animations
 void function () {
   const summary = document.querySelector('.building-summary')
-  if (!summary || isMobile) return
+  if (!summary) return
 
   const animation = gsap.timeline()
     .fadeUp('.building-summary .title:not(.docs .title)', { yPercent: 150 }, 0)
@@ -235,7 +234,7 @@ void function () {
 // Docs animations
 void function() {
   const docs = document.querySelector('.docs')
-  if (!docs || isMobile) return
+  if (!docs) return
 
   const animation = gsap.timeline()
     .fadeUp('.docs .title', { yPercent: 150 })
@@ -265,7 +264,7 @@ void function() {
 // Next project
 void function() {
   const nextProject = document.querySelector<HTMLElement>('.next-project')
-  if (!nextProject || isMobile) return
+  if (!nextProject) return
 
   const link = nextProject.querySelector('a')
 

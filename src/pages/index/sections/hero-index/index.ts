@@ -1,7 +1,6 @@
 import { createSlider, Slide } from 'features/slider'
 import gsap from 'gsap'
 import { afterLoader } from 'features/animations/page-loader'
-import { isDesktop } from 'features/adaptive'
 
 interface RawImgSlide extends HTMLElement {
   dataset: {
@@ -23,15 +22,13 @@ interface ImgSlide extends RawImgSlide, Slide {
 }
 
 void function () {
-  if (isDesktop) {
-    const animation = gsap.timeline({ paused: true })
-      .textAppearing('.hero-index__title', {}, 0)
-      .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
+  const animation = gsap.timeline({ paused: true })
+    .textAppearing('.hero-index__title', {}, 0)
+    .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
 
-    afterLoader(() => {
-      animation.resume()
-    })
-  }
+  afterLoader(() => {
+    animation.resume()
+  })
 
   const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
   const titleContainer = document.querySelector<HTMLElement>('.hero-index__text-title')
@@ -46,18 +43,16 @@ void function () {
 
     titleContainer.innerHTML = slide.dataset.title
 
-    if (isDesktop) {
-      gsap.timeline().textAppearing('.hero-index__text-title', { delay: .4 }, 0)
-      gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
-        opacity: 0,
-        yPercent: 90,
-      }, {
-        duration: 1,
-        delay: .4,
-        opacity: 1,
-        yPercent: 0,
-      })
-    }
+    gsap.timeline().textAppearing('.hero-index__text-title', { delay: .4 }, 0)
+    gsap.fromTo('.hero-index__text-subtitle, .hero-index__link', {
+      opacity: 0,
+      yPercent: 90,
+    }, {
+      duration: 1,
+      delay: .4,
+      opacity: 1,
+      yPercent: 0,
+    })
 
     if (slide.dataset.subtitle) subtitleContainer.innerHTML = slide.dataset.subtitle
 
