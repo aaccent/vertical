@@ -55,6 +55,31 @@
       display: none;
     }
   }
+
+  &__mobile-buttons {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .map {
+    &__mobile-buttons {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      padding: 0 20px;
+      z-index: 4;
+      display: flex;
+      gap: 10px;
+
+      .filter__button {
+        background-color: #fff;
+        color: #2E2E2E;
+        border-color: transparent;
+      }
+    }
+
+  }
 }
 
 .project-list__content::-webkit-scrollbar {

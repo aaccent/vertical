@@ -1,10 +1,18 @@
-import { Map, type GeoJSONSource, LngLatBounds, Popup } from 'mapbox-gl'
+import { type GeoJSONSource, Map, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import type { Point } from 'geojson'
 import './mobile-map'
-import { createMobilePointLabels } from 'components/pageBlocks/map/mobile-map'
-import { isDesktop } from 'features/adaptive'
-import { createPopup } from 'components/pageBlocks/map/utils'
+import { createMobilePointLabels, mobileClickHandler } from 'components/pageBlocks/map/mobile-map'
+import { isDesktop, isMobile } from 'features/adaptive'
+import {
+  createPopup,
+  GeoData,
+  getData,
+  ProjectElement,
+  ProjectProperties,
+  ProjectPropKeys,
+  setBoundsToList,
+} from 'components/pageBlocks/map/utils'
 
 // Creating map
 void function () {
@@ -24,30 +32,6 @@ void function () {
   map.on('load', () => loadHandler(map, mapContainer))
 }()
 
-interface ProjectElement extends HTMLElement {
-  dataset: {
-    img: string
-    name: string
-    address: string
-    coords: string
-    type: string
-    category: string
-    stage: string
-    price: string
-    date: string
-    link: string
-    id: string
-  }
-}
-
-type ProjectPropKeys = keyof ProjectElement['dataset']
-
-type ProjectProperties = Omit<ProjectElement['dataset'], 'coords' | 'id'> & {
-  id: number
-}
-
-const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'price', 'date', 'link' ]
-
 function loadHandler(map: Map, mapContainer: HTMLElement) {
   mapContainer.addEventListener('wheel', (e) => {
     scroll.start()
@@ -60,82 +44,7 @@ function loadHandler(map: Map, mapContainer: HTMLElement) {
   if (document.querySelector('.map .project-list:not(.infrastructure-list)')) createProjectsList(map)
 }
 
-function getData() {
-  const projectList = document.querySelectorAll<ProjectElement>('.map .project-list__item:not(.hidden)')
-  const projects = Array.from(projectList).map((project, index) => {
-    const propsContainsList = propsList.map(prop => ({
-      prop,
-      exists: prop in project.dataset,
-    }))
-
-    if (propsContainsList.map(i => i.exists).includes(false)) {
-      console.error(
-        'One of [data-*] attributes doesnt exists or has no value in ".project-list__item"\n',
-        'Element:\n', project, '\n',
-        'Props list:\n', Object.fromEntries(propsContainsList.map(Object.values)),
-      )
-
-      throw new Error(
-        'One of [data-*] attributes doesnt exists or has no value in ".project-list__item". Details above')
-    }
-
-    project.dataset.id = String(index)
-
-    const {
-      coords,
-      id: idStr,
-      ...props
-    } = project.dataset
-
-    const properties: ProjectProperties = {
-      id: index,
-      ...props,
-    }
-
-    return {
-      type: 'Feature',
-      properties,
-      geometry: {
-        type: 'Point',
-        coordinates: project.dataset.coords.trim().split(',').map(parseFloat).reverse() as [ number, number ],
-      },
-    } as const
-  })
-
-  return {
-    type: 'FeatureCollection',
-    features: projects,
-  } as const
-}
-
-type GeoData = ReturnType<typeof getData>
-
-function _setBoundsToList() {
-  let calculatedBound: LngLatBounds | null = null
-
-  return function (map: Map, data: GeoData) {
-    if (!calculatedBound) {
-      const bounds = new LngLatBounds()
-      data.features.forEach(point => bounds.extend(point.geometry.coordinates))
-      calculatedBound = bounds
-    }
-
-    const mapContent = document.querySelector<HTMLElement>('.map__content')
-    const left = mapContent && isDesktop ? mapContent.offsetLeft + mapContent.offsetWidth + 60 : 60
-    map.fitBounds(calculatedBound, {
-      padding: {
-        left,
-        top: 60,
-        bottom: 60,
-        right: 60,
-      },
-    })
-  }
-}
-
-const setBoundsToList = _setBoundsToList()
-
-function createClusters(map: Map, data: GeoData) {
+function createClusters(map: Map) {
   map.addLayer({
     id: 'clusters',
     type: 'circle',
@@ -147,7 +56,7 @@ function createClusters(map: Map, data: GeoData) {
     },
   })
 
-  setBoundsToList(map, data)
+  setBoundsToList(map)
 
   map.on('click', 'clusters', (e) => {
     const features = map.queryRenderedFeatures(e.point, {
@@ -170,10 +79,14 @@ function createClusters(map: Map, data: GeoData) {
   })
 
   map.on('mouseenter', 'clusters', () => {
+    if (isMobile) return
+
     map.getCanvas().style.cursor = 'pointer'
   })
 
   map.on('mouseleave', 'clusters', () => {
+    if (isMobile) return
+
     map.getCanvas().style.cursor = ''
   })
 
@@ -193,7 +106,7 @@ function createClusters(map: Map, data: GeoData) {
 const projectList = document.querySelector('.map .project-list')
 let activeProjectId: number = -1
 
-function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [ number, number ]) {
+function createProjectCard(map: Map, props: ProjectProperties, coordinates: [ number, number ]) {
   const price = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'RUB',
@@ -231,14 +144,14 @@ function createProjectCard(map: Map, data: GeoData, props: ProjectProperties, co
     <a class="project-card__bottom" href="${props.link}">смотреть проект</a>
   `
 
-  card.querySelector('.button-close')?.addEventListener('click', () => toggleProjectCard(map, data, props, coordinates))
+  card.querySelector('.button-close')?.addEventListener('click', () => toggleProjectCard(map, props, coordinates))
 
   return card
 }
 
 const mapContent = document.querySelector('.map__content')
 
-function toggleProjectCard(map: Map, data: GeoData, props: ProjectProperties, coordinates: [ number, number ]) {
+function toggleProjectCard(map: Map, props: ProjectProperties, coordinates: [ number, number ]) {
   if (!mapContent || !projectList) return
 
   if (activeProjectId !== -1) {
@@ -247,7 +160,7 @@ function toggleProjectCard(map: Map, data: GeoData, props: ProjectProperties, co
     setTimeout(() => targetCard?.remove())
 
     if (activeProjectId === props.id) {
-      setBoundsToList(map, data)
+      setBoundsToList(map)
 
       projectList.classList.remove('invisible')
       activeProjectId = -1
@@ -262,7 +175,7 @@ function toggleProjectCard(map: Map, data: GeoData, props: ProjectProperties, co
     zoom: 13,
   })
 
-  const card = createProjectCard(map, data, props, coordinates)
+  const card = createProjectCard(map, props, coordinates)
   mapContent.append(card)
 
   projectList.classList.add('invisible')
@@ -294,27 +207,29 @@ function createPoints(map: Map, data: GeoData) {
 
   let activePopup: Popup | null = null
 
-  if (isDesktop) {
-    map.on('mouseenter', 'points', (e) => {
-      map.getCanvas().style.cursor = 'pointer'
-      if (!e.features?.[0].properties) return
+  map.on('mouseenter', 'points', (e) => {
+    if (isMobile) return
 
-      const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
-      const props = (e.features[0].properties as ProjectElement['dataset'])
+    map.getCanvas().style.cursor = 'pointer'
+    if (!e.features?.[0].properties) return
 
-      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
-      }
+    const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
+    const props = (e.features[0].properties as ProjectElement['dataset'])
 
-      activePopup = createPopup(coordinates, props).addTo(map)
-    })
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+    }
 
-    map.on('mouseleave', 'points', () => {
-      map.getCanvas().style.cursor = ''
+    activePopup = createPopup(coordinates, props).addTo(map)
+  })
 
-      activePopup?.remove()
-    })
-  }
+  map.on('mouseleave', 'points', () => {
+    if (isMobile) return
+
+    map.getCanvas().style.cursor = ''
+
+    activePopup?.remove()
+  })
 
   map.on('click', 'points', (e) => {
     if (!e.features?.[0].properties) return
@@ -322,7 +237,8 @@ function createPoints(map: Map, data: GeoData) {
     const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
     const props = (e.features[0].properties as ProjectProperties)
 
-    toggleProjectCard(map, data, props, coordinates)
+    if (isMobile) mobileClickHandler(map, props, coordinates)
+    if (isDesktop) toggleProjectCard(map, props, coordinates)
   })
 
   document.querySelectorAll<HTMLElement>('.map .project-list__item').forEach(item => {
@@ -335,7 +251,7 @@ function createPoints(map: Map, data: GeoData) {
       const coordinates = targetItem.geometry.coordinates as [ number, number ]
       const props = targetItem.properties
 
-      toggleProjectCard(map, data, props, coordinates)
+      toggleProjectCard(map, props, coordinates)
     })
   })
 
@@ -359,7 +275,7 @@ function createProjectsList(map: Map) {
   })
   setProjectsCount()
 
-  createClusters(map, data)
+  createClusters(map)
   createPoints(map, data)
 
   function filter() {
