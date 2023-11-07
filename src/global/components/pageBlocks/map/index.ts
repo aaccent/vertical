@@ -2,7 +2,10 @@ import { type GeoJSONSource, Map, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import type { Point } from 'geojson'
 import './mobile-map'
-import { createMobilePointLabels, mobileClickHandler } from 'components/pageBlocks/map/mobile-map'
+import {
+  createMobilePointLabels,
+  mobileClickHandler,
+} from 'components/pageBlocks/map/mobile-map'
 import { isDesktop, isMobile } from 'features/adaptive'
 import {
   createPopup,
@@ -260,8 +263,8 @@ function createPoints(map: Map, data: GeoData) {
 
 function setProjectsCount() {
   const projectNum = document.querySelectorAll('.map .project-list__item:not(.hidden)').length
-  const title = document.querySelector<HTMLElement>('.map .project-list__title')
-  if (title) title.innerText = `${projectNum} проектов найдено`
+  const title = document.querySelector<HTMLElement>(isMobile ? '.filter-popup__project-count' : '.map .project-list__title')
+  if (title) title.innerText = isMobile ? `показать ${projectNum} проектов` : `${projectNum} проектов найдено`
 }
 
 function createProjectsList(map: Map) {
@@ -280,14 +283,18 @@ function createProjectsList(map: Map) {
 
   function filter() {
     const dropdowns = document.querySelectorAll<HTMLElement>('.building-filter .filter__dropdown')
-    const activeCategoryId = document.querySelector<HTMLElement>('.building-filter .quick-filter_active')?.dataset.id
+    const checkboxes = document.querySelectorAll<HTMLElement>('.filter-popup .checkbox__list')
+    const radios = document.querySelectorAll<HTMLElement>('.radio__list')
+
+    const activeCategoryId = isMobile
+      ? document.querySelector<HTMLElement>('.radio_active[data-name="project_type"]')?.dataset.value
+      : document.querySelector<HTMLElement>('.building-filter .quick-filter_active')?.dataset.id
 
     const projects = document.querySelectorAll<ProjectElement>('.map .project-list__item')
-    Array.from(projects)
-      .forEach(project => {
+    Array.from(projects).forEach(project => {
         project.classList.remove('hidden')
 
-        const dropdownsResult = Array.from(dropdowns).map<boolean>(dropdown => {
+        const dropdownsResult = isDesktop ? Array.from(dropdowns).map<boolean>(dropdown => {
           const name = dropdown.dataset.name
           const listStr = dropdown.querySelector<HTMLElement>('.dropdown__list')?.dataset.value
           const list = JSON.parse(listStr || '[]')
@@ -295,11 +302,33 @@ function createProjectsList(map: Map) {
           return list.length === 0
             || !(String(name) in project.dataset)
             || list.includes(project.dataset[String(name) as ProjectPropKeys])
-        })
+        }) : []
+
+        const checkboxesResult = isMobile ? Array.from(checkboxes).map<boolean>(checkboxList => {
+          const name = String(checkboxList.querySelector<HTMLElement>(`.checkbox`)?.dataset.name) as keyof ProjectProperties
+          if (!(name in project.dataset)) return true
+
+          const list = Array.from(checkboxList.querySelectorAll<HTMLElement>(`.checkbox_active`)).map(i => String(i.dataset.value))
+          return list.length === 0 || list.includes(project.dataset[name])
+        }) : []
+
+        const radioResult = isMobile ? Array.from(radios).map<boolean>(radio => {
+          const name = String(radio.querySelector<HTMLElement>(`.radio`)?.dataset.name) as keyof ProjectProperties
+          if (!(name in project.dataset)) return true
+
+          const activeItem = radio.querySelector<HTMLElement>(`.radio_active`)
+
+          return activeItem === null || activeItem.dataset.value === project.dataset[name]
+        }) : []
 
         const categoryResult = activeCategoryId === 'all' || project.dataset.category === activeCategoryId
 
-        if (dropdownsResult.includes(false) || !categoryResult) project.classList.add('hidden')
+        if (
+          radioResult.includes(false)
+          || dropdownsResult.includes(false)
+          || checkboxesResult.includes(false)
+          || !categoryResult
+        ) project.classList.add('hidden')
       })
 
     setProjectsCount()
@@ -307,7 +336,7 @@ function createProjectsList(map: Map) {
     source.setData(getData())
   }
 
-  document.querySelectorAll('.building-filter :is(.dropdown__list__item, .quick-filter__item)').forEach(item => {
+  document.querySelectorAll(':is(.building-filter, .filter-popup) :is(.dropdown__list__item, .quick-filter__item, .radio, .checkbox)').forEach(item => {
     item.addEventListener('click', filter)
   })
 

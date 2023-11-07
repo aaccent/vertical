@@ -47,7 +47,7 @@ block append main
             .button-switch__mark
           span на карте
       .filter__content__mobile
-        button.filter__button
+        button.filter__button(data-action="popup" data-popup="filter-popup")
           span фильтр
           img(src=require('media/static/icons/filter/filter_white.svg'))
         button.filter__button(data-action="map")
