@@ -10,6 +10,8 @@ import { createCircleSVG, renderArc } from 'features/arcProgress'
 import { adaptiveValue } from 'features/adaptive'
 import { afterLoader } from 'features/animations/page-loader'
 
+console.log('ol')
+
 // animations of project-header
 void function () {
   const projectHeader = document.querySelector('.project-header')
@@ -293,3 +295,8 @@ void function() {
     animation.reverse()
   })
 }()
+
+document.querySelector(".project-header__actions__item")?.addEventListener("click", () => {
+  document.querySelector("#location")?.scrollIntoView();
+})
+

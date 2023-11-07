@@ -15,7 +15,7 @@ block append main
             img(src=require('media/static/icons/arrow/arrow_short.svg'))
             .button.button_white.button_animate сайт проекта
               img(src=require('media/static/icons/arrow/arrow_short.svg'))
-          .project-header__actions__item
+          button.project-header__actions__item
             img(src=require('media/static/icons/location.svg'))
             span смотреть на карте
             span на карте
@@ -79,7 +79,7 @@ block append main
         .location__title
           span удобная и развитая инфраструктура
           span всё нужное рядом
-    .map
+    .map(id="location")
       .map__content
         include global/components/pageBlocks/map/infrastructureList
       .map__view

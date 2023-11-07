@@ -17,6 +17,8 @@ import 'components/pageBlocks/ourProject'
 import "components/pageBlocks/filterPopup"
 import "components/pageBlocks/filter"
 
+import '../pages/project/index.ts'
+
 // Pages
 import 'pages/index'
 import 'pages/about'

@@ -11,7 +11,15 @@
   background-color: $blue;
   padding-top: 130px;
   padding-bottom: 160px;
+
   @media screen and (max-width: $tablet1200) {
+    padding-bottom: 80px;
+    padding-top: 95px;
+  }
+}
+
+@media screen and (max-width: $tablet1200) {
+  .blue-section__contacts {
     padding-bottom: 80px;
     padding-top: 95px;
   }
@@ -40,6 +48,7 @@
       background-color: rgba($color: $white, $alpha: 0.2);
     }
   }
+
   &__info {
     display: flex;
     margin-top: 20px;
@@ -49,12 +58,14 @@
     gap: 20px;
 
   }
+
   &__position {
     &__title {
       @include manrope-24();
       color: $white;
       text-transform: uppercase
     }
+
     &__hours {
       @include manrope-17-m();
       text-transform: uppercase;
@@ -64,30 +75,36 @@
       line-height: 90%;
       gap: 8px;
     }
+
     &__button {
       margin-top: 30px;
     }
   }
+
   &__legal {
     @include reset-list;
     min-width: 175px;
     opacity: 0.6;
     display: flex;
     flex-direction: column;
+
     li {
       @include manrope-17();
       letter-spacing: .01em;
       color: $white;
     }
   }
+
   &__call {
     margin-top: 100px;
+
     &__phone {
       font-family: 'manrope';
       font-size: 58px;
       color: $white;
       letter-spacing: 1.16px;
     }
+
     &__email {
       @include manrope-24();
       text-transform: uppercase;
@@ -98,9 +115,11 @@
       align-items: center;
     }
   }
+
   &__arrow-button {
     margin-top: 142px;
   }
+
   &__image {
     right: 0;
     top: 0;
@@ -109,30 +128,37 @@
     width: 450px;
     border-radius: 354.5px 354.5px 0px 0px;
     overflow: hidden;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+
   @media screen and (min-width: $desktop1460) {
     &__image {
       width: 710px;
     }
+
     &__title {
       width: 100%;
     }
 
   }
+
   @media screen and (min-width: $desktop1650) {
     &__info {
       flex-direction: row;
       gap: 124px;
     }
   }
+
   @media screen and (max-width: $tablet1200) {
+    margin-bottom: 35px;
     display: flex;
     flex-direction: column;
+
     &__title {
       width: 100%;
       font-size: 55px;
@@ -144,14 +170,21 @@
     &__legal {
       display: none;
     }
+
     &__position {
       &__button {
         display: none;
       }
+
       &__hours {
         opacity: 0.6;
       }
+
+      &__title {
+        font-size: 18px;
+      }
     }
+
     &__info {
       margin-top: 18px;
       width: 60%;
@@ -164,51 +197,68 @@
       flex-direction: column;
       order: 3;
       width: 60%;
+
       &__phone {
         font-size: 30px;
       }
+
       &__email {
         font-size: 18px;
         margin-top: 12px;
       }
     }
+
     &__image {
       margin-top: 32px;
       width: 260px;
       order: 2;
       align-self: center;
     }
+
     &__arrow-button {
       margin-top: 32px;
       order: 4;
     }
   }
+
   @media screen and (max-width: $tablet800) {
     &__title {
       font-size: 35px;
+      margin-top: 0;
     }
+
     &__call {
       align-self: center;
       width: 100%;
+      align-items: center;
     }
+
     &__image {
       width: 182px;
       position: static;
       height: 212px;
     }
-    &__info{
+
+    &__info {
       width: 100%;
     }
+
     &__arrow-button {
       align-self: center;
+      width: 64px;
+      height: 64px;
     }
   }
 }
+
 .map {
   margin-top: 164px;
+
   @media screen and (max-width: $tablet1200) {
+    height: 500px;
     margin-top: 32px;
-    &__content{
+
+    &__content {
       display: block;
       height: auto;
       top: auto;
@@ -217,7 +267,8 @@
       transform: translateX(-50%);
       width: auto;
     }
-    .button{
+
+    .button {
       width: max-content;
     }
   }

@@ -77,9 +77,10 @@
       margin-top: 95px;
     }
     &__title {
-      margin-top: 160px;
+      margin-top: 0;
       padding-bottom: 26px;
       font-size: 54px;
+      left: 0;
     }
     &__bottom {
       padding-top: 16px;
@@ -93,6 +94,8 @@
     &__content {
       background: linear-gradient(0deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.06) 100%),
         linear-gradient(1deg, rgba(0, 0, 0, 0.3) 22.67%, rgba(0, 0, 0, 0) 65.65%) no-repeat;
+        height: 100vh;
+        justify-content: space-between;
     }
   }
   @media screen and (max-width: $tablet800) {
@@ -422,6 +425,9 @@
     &__title {
       font-size: 30px;
       margin-top: 0;
+      width: fit-content;
+      line-height: 30px;
+      
     }
     &__swiper {
       width: 100%;
@@ -434,6 +440,7 @@
     &__content__wrapper{
       display: flex;
       gap: 0;
+      margin-bottom: 100px;
     }
     &__view{
       width: 100%;
@@ -443,6 +450,7 @@
     }
     &__year-view {
       width: 100%;
+      top: 40px;
 
       &__year {
         font-size: 110px;
@@ -509,6 +517,10 @@
 
   &__title {
     @include tenor-90();
+
+    &__mobile {
+      display: none;
+    }
   }
 
   &__table {
@@ -604,7 +616,12 @@
   }
   @media screen and (max-width: $tablet800) {
     &__title{
-      font-size: 35px;
+      display: none;
+      &__mobile {
+        display: block;
+        font-size: 35px;
+        margin-bottom: 20px;
+      }
     }
   }
 }
