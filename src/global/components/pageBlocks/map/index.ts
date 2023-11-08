@@ -3,6 +3,7 @@ import { scroll } from 'features/animations/scroll'
 import './mobile-map'
 import { isDesktop } from 'features/adaptive'
 import { createProjectsList } from 'components/pageBlocks/map/projectList'
+import { createInfrastructureList } from 'components/pageBlocks/map/infrastructureList'
 
 // Creating map
 void function () {
@@ -32,6 +33,7 @@ function loadHandler(map: Map, mapContainer: HTMLElement) {
   }, true)
 
   if (document.querySelector('.map .project-list:not(.infrastructure-list)')) createProjectsList(map)
+  if (document.querySelector('.map .project-list.infrastructure-list')) createInfrastructureList(map)
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
