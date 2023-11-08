@@ -1,6 +1,7 @@
-import { LngLatBounds, Map } from 'mapbox-gl'
+import { LngLatBounds, Map, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
-import { isDesktop } from 'features/adaptive'
+import { isDesktop, isMobile } from 'features/adaptive'
+import { Point } from 'geojson'
 
 interface InfrastructureElement extends HTMLElement {
   dataset: {
@@ -129,6 +130,7 @@ function generateInfrastructureList(map: Map) {
 function createLayers(map: Map) {
   const bounds = new LngLatBounds()
 
+  let activePopup: Popup | null = null
   getData().forEach(category => {
     category.features.forEach(i => bounds.extend(i.geometry.coordinates))
 
@@ -164,6 +166,38 @@ function createLayers(map: Map) {
 
         'icon-image': `${category.features[0].properties.type} icon`,
       },
+    })
+
+    map.on('mouseenter', `${category.features[0].properties.type} bg`, (e) => {
+      if (isMobile) return
+
+      map.getCanvas().style.cursor = 'pointer'
+      if (!e.features?.[0].properties) return
+
+      const coordinates = (e.features[0].geometry as Point).coordinates.slice() as [ number, number ]
+      const props = (e.features[0].properties as InfrastructureProperties)
+
+      while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360
+      }
+
+      activePopup = new Popup({
+        closeButton: false,
+        className: 'project-list__map-popup',
+        offset: 35,
+        anchor: 'bottom',
+        closeOnClick: false,
+      })
+        .setLngLat(coordinates)
+        .setHTML(`${props.name}`).addTo(map)
+    })
+
+    map.on('mouseleave', `${category.features[0].properties.type} bg`, () => {
+      if (isMobile) return
+
+      map.getCanvas().style.cursor = ''
+
+      activePopup?.remove()
     })
   })
 
