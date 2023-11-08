@@ -10,7 +10,6 @@ if (form) {
             if (!el.classList.contains("contact-form__textarea")) {
                 el.closest(".contact-form__container").querySelector(".reset-input").style.display = "block";
                 el.nextElementSibling.classList.remove("contact-form__error__active");
-                //el.closest(".contact-form__container").querySelector(".contact-form__error").style.display = "none";
             }
         }
         el.onblur = () => {
@@ -35,24 +34,31 @@ if (form) {
     });
 
     form.querySelector("button").addEventListener("click", (e) => {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             e.preventDefault()
+            let valid = true;
             if (!form.customer_name.value) {
                 form.customer_name.nextElementSibling.classList.add("contact-form__error__active");
+                valid = false;
             }
             if (!form.customer_phone.value || form.customer_phone.value.length < 16) {
                 form.customer_phone.nextElementSibling.classList.add("contact-form__error__active");
+                valid = false;
             }
             if (form.customer_mail.value && !form.customer_mail.value.match(/.+@.+\..+/i)) {
                 form.customer_mail.nextElementSibling.classList.add("contact-form__error__active");
+                valid = false;
             }
-            resolve()
-        }).then(() => {
-            if(!form.querySelector(".contact-form__error__active")) {
+
+            valid ? resolve(() => {
                 form.requestSubmit(e.currentTarget);
                 form.reset();
-            }
-        })
+            }) : reject(new Error("введите верные данные"))
+            
+        }).then(
+            result => result(),
+            error => console.log(error)
+        )
         
     })
 }

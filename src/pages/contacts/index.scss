@@ -27,7 +27,7 @@
 
 .contacts {
   position: relative;
-  margin-top: 66px;
+  margin-top: 52px;
   margin-bottom: 160px;
 
   &__title {
@@ -73,7 +73,8 @@
       margin-top: 20px;
       color: $white;
       line-height: 90%;
-      gap: 8px;
+      gap: 6px;
+      align-items: center;
     }
 
     &__button {
@@ -178,6 +179,7 @@
 
       &__hours {
         opacity: 0.6;
+        font-size: 15px;
       }
 
       &__title {
