@@ -132,7 +132,7 @@
       background-color: #F2F2F2;
 
       .project-list__item__content::before {
-        content: none;
+        opacity: 0;
       }
     }
 
@@ -345,12 +345,16 @@
 }
 
 .infrastructure-list {
+  height: 620px;
+
+  .project-list__title {
+    padding-bottom: 25px;
+  }
+
   &__content {
     gap: 0;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 0;
+    margin: 0;
   }
 
   .infrastructure-list__item_active {
@@ -375,32 +379,56 @@
   }
 
   &__item {
-    transition: background-color 250ms ease;
-
-    &:hover {
-      background-color: #f7f7f7;
-
-      .infrastructure-list__item__content {
-        &::before {
-          display: none;
-        }
-      }
-    }
-
     @include manrope-17-m();
     padding: 12px 30px;
     cursor: pointer;
+    transition: background-color 250ms ease;
+
+    &:hover,
+    &._active {
+      background-color: #f7f7f7;
+
+      .infrastructure-list__item__content::before {
+        opacity: 0;
+        display: block;
+      }
+
+      & + .infrastructure-list__item .infrastructure-list__item__content::before {
+        opacity: 0;
+        display: block;
+      }
+    }
 
     &__content {
-      height: 100%;
+      box-sizing: content-box;
+      min-height: 100%;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
 
       &::before {
-        top: -20px;
+        top: -12px;
+        transition: opacity 250ms ease;
       }
+    }
+  }
+
+  &__item-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid #2E2E2E;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      object-position: center;
     }
   }
 
@@ -425,6 +453,10 @@
   &__bottom {
     opacity: 0.3;
     color: $black;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
 
     .white {
       display: block;

@@ -24,59 +24,67 @@ interface InfrastructureCategory {
   }[]
 }
 
-function getData() {
-  const list = document.querySelectorAll<InfrastructureElement>('.project-list__data-item')
-  return Array.from(list).map(item => {
-    const propsContainsList = propsList.map(prop => ({
-      prop,
-      exists: prop in item.dataset,
-    }))
+function _getData() {
+  let cache: InfrastructureCategory[]
 
-    if (propsContainsList.map(i => i.exists).includes(false)) {
-      console.error(
-        'One of [data-*] attributes doesnt exists or has no value in ".project-list__data-item"\n',
-        'Element:\n', item, '\n',
-        'Props list:\n', Object.fromEntries(propsContainsList.map(Object.values)),
-      )
+  return function () {
+    const list = document.querySelectorAll<InfrastructureElement>('.project-list__data-item')
+    cache = cache || Array.from(list).map(item => {
+      const propsContainsList = propsList.map(prop => ({
+        prop,
+        exists: prop in item.dataset,
+      }))
 
-      throw new Error(
-        'One of [data-*] attributes doesnt exists or has no value in ".project-list__data-item". Details above')
-    }
+      if (propsContainsList.map(i => i.exists).includes(false)) {
+        console.error(
+          'One of [data-*] attributes doesnt exists or has no value in ".project-list__data-item"\n',
+          'Element:\n', item, '\n',
+          'Props list:\n', Object.fromEntries(propsContainsList.map(Object.values)),
+        )
 
-    const {
-      coords,
-      ...props
-    } = item.dataset
-
-    const properties: InfrastructureProperties = {
-      ...props,
-    }
-
-    return {
-      type: 'Feature',
-      properties,
-      geometry: {
-        type: 'Point',
-        coordinates: item.dataset.coords.trim().split(',').map(parseFloat).reverse() as [ number, number ],
-      },
-    } as const
-  })
-    .reduce<InfrastructureCategory[]>((result, item) => {
-      const targetIndex = result.findIndex(i => i.features[0].properties.type === item.properties.type)
-      if (targetIndex === -1) {
-        result.push({
-          type: 'FeatureCollection',
-          features: [ item ],
-        })
-      } else {
-        result[targetIndex].features.push(item)
+        throw new Error(
+          'One of [data-*] attributes doesnt exists or has no value in ".project-list__data-item". Details above')
       }
 
-      return result
-    }, [])
+      const {
+        coords,
+        ...props
+      } = item.dataset
+
+      const properties: InfrastructureProperties = {
+        ...props,
+      }
+
+      return {
+        type: 'Feature',
+        properties,
+        geometry: {
+          type: 'Point',
+          coordinates: item.dataset.coords.trim().split(',').map(parseFloat).reverse() as [ number, number ],
+        },
+      } as const
+    })
+      .reduce<InfrastructureCategory[]>((result, item) => {
+        const targetIndex = result.findIndex(i => i.features[0].properties.type === item.properties.type)
+        if (targetIndex === -1) {
+          result.push({
+            type: 'FeatureCollection',
+            features: [ item ],
+          })
+        } else {
+          result[targetIndex].features.push(item)
+        }
+
+        return result
+      }, [])
+
+    return cache
+  }
 }
 
-function generateInfrastructureList() {
+const getData = _getData()
+
+function generateInfrastructureList(map: Map) {
   const listContainer = document.querySelector('.infrastructure-list__content')
   if (!listContainer) return
 
@@ -84,12 +92,35 @@ function generateInfrastructureList() {
     const itemEl = document.createElement('div')
     itemEl.className = 'project-list__item infrastructure-list__item'
     itemEl.innerHTML = `
-      <img src="${category.features[0].properties.icon}" alt="" />
+      <div class="infrastructure-list__item-icon">
+        <img src="${category.features[0].properties.icon}" alt="" />
+      </div>
       <div class="infrastructure-list__item__content project-list__item__content">
         <span class="infrastructure-list__item-title">${category.features[0].properties.type}</span>
         <span class="infrastructure-list__item-num">${category.features.length}</span>
       </div>
     `
+
+    itemEl.onclick = () => {
+      const currentActive = document.querySelector('.infrastructure-list__item._active')
+      if (currentActive !== itemEl) currentActive?.classList.remove('_active')
+      itemEl.classList.toggle('_active')
+
+      if (itemEl.classList.contains('_active')) {
+        getData().forEach(category => {
+          map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'none')
+          map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'none')
+        })
+
+        map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
+        map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'visible')
+      } else {
+        getData().forEach(category => {
+          map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
+          map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'visible')
+        })
+      }
+    }
 
     listContainer.append(itemEl)
   })
@@ -154,6 +185,15 @@ export function createInfrastructureList(map: Map) {
     e.preventDefault()
   }, true)
 
-  generateInfrastructureList()
+  document.querySelector('.infrastructure-list button[data-action="reset-infrastructure"]')?.addEventListener('click', () => {
+    document.querySelector('.infrastructure-list__item._active')?.classList.remove('_active')
+
+    getData().forEach(category => {
+      map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
+      map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'visible')
+    })
+  })
+
+  generateInfrastructureList(map)
   createLayers(map)
 }

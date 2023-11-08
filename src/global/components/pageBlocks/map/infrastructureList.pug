@@ -73,7 +73,7 @@
           data-type=item.type
         )
   .project-list__content.infrastructure-list__content
-  .project-list__bottom.infrastructure-list__bottom
-    a(href='') сбросить все
+  button(data-action="reset-infrastructure").project-list__bottom.infrastructure-list__bottom
+      | сбросить все
       img(src=require('media/static/icons/update/update_black.svg')).white
       img(src=require('media/static/icons/update/update_blue.svg')).blue
