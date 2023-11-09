@@ -30,3 +30,6 @@ const cssVars: CSSVariables = {
 export function adaptiveValue(initialValue: number, mod = 1) {
   return initialValue * mod * cssVars.screenDiff! + initialValue
 }
+
+export const isMobile = matchMedia('(max-width: 1200px)').matches
+export const isDesktop = matchMedia('(min-width: 1200px)').matches

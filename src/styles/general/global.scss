@@ -9,7 +9,17 @@ html {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.invisible {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.visible {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .container {

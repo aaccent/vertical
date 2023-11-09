@@ -569,6 +569,10 @@
     .benefits {
       margin-top: 64px;
     }
+
+    .benefits__item:last-child {
+      margin-right: 0;
+    }
   }
 }
 

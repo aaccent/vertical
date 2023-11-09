@@ -17,6 +17,7 @@
   a {
     display: flex;
     gap: 10px;
+
     * {
       width: max-content;
     }
@@ -26,33 +27,78 @@
 .map {
   position: relative;
   height: 700px;
+
   &__content {
+    z-index: 1;
     position: absolute;
     height: calc(100% - 120px);
     width: 450px;
     left: 40px;
     top: 50%;
     transform: translateY(-50%);
+
+    & > * {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+    }
   }
+
   &__view {
     width: 100%;
     height: 100%;
     background-color: black;
+
+    .mapboxgl-ctrl-bottom-left,
+    .mapboxgl-ctrl-bottom-right {
+      display: none;
+    }
+  }
+
+  &__mobile-buttons {
+    display: none;
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  .map {
+    &__mobile-buttons {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      padding: 0 20px;
+      z-index: 4;
+      display: flex;
+      gap: 10px;
+
+      .filter__button {
+        background-color: #fff;
+        color: #2E2E2E;
+        border-color: transparent;
+      }
+    }
+
+  }
+}
+
 .project-list__content::-webkit-scrollbar {
   width: 2px;
 }
+
 .project-list__content::-webkit-scrollbar-thumb {
   background-color: rgba($color: #0e2448, $alpha: 0.3);
   border-radius: 2px;
 }
+
 .project-list {
   @include basic-card();
   padding: 0;
   display: flex;
   flex-direction: column;
   height: 100%;
+  @include transition((opacity, visibility), 300ms);
+
   &__title {
     @include manrope-14();
     padding-top: 30px;
@@ -62,6 +108,7 @@
     color: rgba($color: $black, $alpha: 0.5);
     text-transform: uppercase;
   }
+
   &__content {
     margin-top: 26px;
     margin-right: 12px;
@@ -70,8 +117,9 @@
     overflow: auto;
     display: flex;
     flex-direction: column;
-    
+
   }
+
   &__item {
     display: flex;
     align-items: center;
@@ -79,15 +127,19 @@
     padding-left: 30px;
     padding-top: 15px;
     padding-bottom: 15px;
+
     &:hover {
       background-color: #F2F2F2;
+
       .project-list__item__content::before {
-        content: none;
+        opacity: 0;
       }
     }
+
     &__content {
       position: relative;
       width: 100%;
+
       &::before {
         position: absolute;
         content: '';
@@ -97,18 +149,21 @@
         background-color: rgba($color: $black, $alpha: 0.2);
       }
     }
+
     &__image {
       width: 75px;
       height: 75px;
       border-radius: 50%;
       flex-shrink: 0;
       overflow: hidden;
+
       img {
         height: 100%;
         width: 100%;
         object-fit: cover;
       }
     }
+
     &__title {
       @include manrope-17-m();
       line-height: 90%;
@@ -116,6 +171,7 @@
       letter-spacing: 1px;
 
     }
+
     &__text {
       @include manrope-17-m();
       margin-top: 8px;
@@ -124,15 +180,51 @@
       padding-right: 9px;
     }
   }
+
   &__item:first-child {
     .project-list__item__content {
-      &::before{
+      &::before {
         display: none;
       }
     }
   }
+
   &__bottom {
     @include bottom-card();
+  }
+}
+
+.project-list__map-popup {
+  .mapboxgl-popup-content {
+    padding: 5px 16px;
+    display: flex;
+    gap: 4px;
+    border-radius: 50px;
+    font-family: 'Manrope', 'manrope';
+    font-size: 14px;
+    line-height: 1.25;
+    color: #2E2E2E;
+    white-space: nowrap;
+    width: fit-content;
+    max-width: 320px;
+
+    span.label-title {
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    span.label-price {
+      color: #6D6D6D;
+    }
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .project-list__map-popup {
+    .mapboxgl-popup-content {
+      max-width: 240px;
+    }
   }
 }
 
@@ -143,129 +235,250 @@
   flex-direction: column;
   overflow: hidden;
   height: 100%;
+  @include transition((opacity, visibility), 300ms);
+
   &__top {
     position: relative;
     height: 100%;
+
     &__content {
       z-index: $z-2;
       position: relative;
       display: flex;
-      gap: 128px;
+      justify-content: space-between;
       padding-left: 25px;
       padding-right: 20px;
       padding-top: 20px;
     }
+
     .button-close {
       flex-shrink: 0;
+
+      &::before,
+      &::after {
+        width: 15px;
+      }
     }
   }
+
   &__badge {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 10px;
   }
+
+  &__clock-icon.badge {
+    gap: 2px;
+    align-items: center;
+
+    &::before {
+      content: '';
+      background-image: url('media/static/icons/timer.svg');
+      width: 18px;
+      height: 18px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
   &__image {
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background: hsl(0deg 0% 0% / 10%);
+      opacity: 1;
+    }
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
+
   &__title {
     @include manrope-24();
     text-transform: uppercase;
   }
+
   &__text {
     @include manrope-14();
     margin-top: 8px;
     color: rgba($color: $black, $alpha: 0.6);
   }
+
   .price-badge {
     margin-top: 20px;
   }
+
   &__content {
     margin: 0 30px;
     margin-top: 25px;
     margin-bottom: 40px;
   }
+
   &__bottom {
     @include bottom-card();
+    color: #0E2448;
+    gap: 10px;
+
+    &::after {
+      content: '';
+      width: 12px;
+      height: 17px;
+      background-image: url('media/static/icons/arrow/arrow_short_blue.svg');
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
   }
 }
 
 .infrastructure-list {
+  height: 620px;
+
+  .project-list__title {
+    padding-bottom: 25px;
+  }
+
   &__content {
     gap: 0;
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
+    padding: 0;
+    margin: 0;
   }
+
   .infrastructure-list__item_active {
     background-color: #f7f7f7;
     padding-bottom: 12px;
+
     .infrastructure-list__item__content {
-      &::before{
+      &::before {
         display: none;
       }
+
       margin-bottom: 1px;
     }
   }
 
   &_disable-border {
     .infrastructure-list__item__content {
-      &::before{
+      &::before {
         display: none;
       }
     }
   }
+
   &__item {
-    transition: background-color 250ms ease;
-    &:hover {
-      background-color: #f7f7f7;
-      .infrastructure-list__item__content{
-        &::before{
-          display: none;
-        }
-      }
-    }
     @include manrope-17-m();
     padding: 12px 30px;
     cursor: pointer;
+    transition: background-color 250ms ease;
+
+    &:hover,
+    &._active {
+      background-color: #f7f7f7;
+
+      .infrastructure-list__item__content::before {
+        opacity: 0;
+        display: block;
+      }
+
+      & + .infrastructure-list__item .infrastructure-list__item__content::before {
+        opacity: 0;
+        display: block;
+      }
+    }
+
     &__content {
-      height: 100%;
+      box-sizing: content-box;
+      min-height: 100%;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100%;
+
       &::before {
-        top: -20px;
+        top: -12px;
+        transition: opacity 250ms ease;
       }
     }
   }
+
+  &__item-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    flex-shrink: 0;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 1px solid #2E2E2E;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+
+  &__item-title {
+    font-family: 'manrope';
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 90%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  &__item-num {
+    font-family: 'manrope';
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 130%;
+    letter-spacing: 0.96px;
+    text-transform: uppercase;
+  }
+
   &__bottom {
     opacity: 0.3;
     color: $black;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-transform: uppercase;
+
     .white {
       display: block;
     }
+
     .blue {
       display: none;
     }
+
     &:hover {
       color: #0B3882;
       opacity: 1;
     }
+
     &_active {
       opacity: 1;
       color: #0B3882;
+
       .white {
         display: none;
       }
+
       .blue {
         display: block;
       }
