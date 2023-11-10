@@ -43,7 +43,7 @@ void function () {
     onStart() {
       document
         .querySelectorAll<NumbersWithAnimation>('.about-company .benefits .number-animation')
-        .forEach(i => i.playAnimation())
+        .forEach(i => i.playAnimation?.())
     }
   })
 }()
