@@ -56,6 +56,51 @@
     }
   }
 
+  &__init-marker {
+    display: none;
+  }
+
+  &__init-marker {
+    width: 92px;
+    height: 92px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+  }
+
+  &__init-marker-inner {
+    position: relative;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    border-radius: 50%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -5px;
+      width: 35px;
+      height: 35px;
+      transform: translateX(-50%) scaleX(0.75) rotate(45deg);
+      background-color: #fff;
+    }
+
+    img {
+      position: absolute;
+      z-index: 1;
+      width: calc(100% - 20px);
+      height: calc(100% - 20px);
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
   &__mobile-buttons {
     display: none;
   }

@@ -1,4 +1,4 @@
-import { Map } from 'mapbox-gl'
+import { Map, Marker } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import './mobile-map'
 import { isDesktop } from 'features/adaptive'
@@ -34,6 +34,45 @@ function loadHandler(map: Map, mapContainer: HTMLElement) {
 
   if (document.querySelector('.map .project-list:not(.infrastructure-list)')) createProjectsList(map)
   if (document.querySelector('.map .project-list.infrastructure-list')) createInfrastructureList(map)
+  createInitMarker(map)
+}
+
+interface MainPointElement extends HTMLElement {
+  dataset: {
+    img: string
+    coords: string
+  }
+}
+
+function createInitMarker(map: Map) {
+  const dataEl = document.querySelector<MainPointElement>('.map__init-marker-data')
+  if (!dataEl) return
+
+  const markerEl = document.createElement('div')
+  markerEl.className = 'map__init-marker'
+  markerEl.innerHTML = `
+    <div class="map__init-marker-inner">
+        <img src="${dataEl.dataset.img}" alt="">
+    </div>
+  `
+
+  const coords = dataEl
+    .dataset
+    .coords
+    .split(',')
+    .map(parseFloat)
+    .reverse() as [number, number]
+
+  new Marker({
+    element: markerEl,
+    anchor: 'bottom',
+  })
+    .setLngLat(coords)
+    .addTo(map);
+
+  if (document.querySelector('.map .project-list')) return
+
+  map.setCenter(coords).setZoom(14)
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
