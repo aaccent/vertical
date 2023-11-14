@@ -23,6 +23,10 @@
     left: -29px;
     @include tenor-248();
     color: #FFFFFF;
+
+    span {
+      will-change: transform;
+    }
   }
 
   &__images,
