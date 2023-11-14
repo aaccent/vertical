@@ -5,7 +5,12 @@ disableScroll()
 window.addEventListener('load', () => {
   const loaderEvent = new CustomEvent('loader-gone')
   const pageLoader = document.querySelector<HTMLElement>('.page-loader')
-  if (!pageLoader) return
+  if (!pageLoader) {
+    document.dispatchEvent(loaderEvent)
+    enableScroll()
+
+    return
+  }
 
   gsap.timeline()
     .to(pageLoader, {

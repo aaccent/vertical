@@ -4,19 +4,18 @@ import 'features/animations/text'
 import 'features/animations/numbers'
 import 'features/animations/appearing'
 import 'features/animations/page-loader'
-import "features/popup/index"
+import 'features/popup/index'
 
 import "layout/general/header"
 import "layout/general/footer/index.js"
 import "layout/general/footer/index.ts"
 
-
 // Components
-import "components/ui/dropdown"
+import 'components/ui/dropdown'
 import 'components/pageBlocks/aboutCompany'
 import 'components/pageBlocks/ourProject'
-import "components/pageBlocks/filterPopup"
-import "components/pageBlocks/filter"
+import 'components/pageBlocks/filterPopup'
+import 'components/pageBlocks/filter'
 
 
 // Pages

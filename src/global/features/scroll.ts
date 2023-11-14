@@ -1,9 +1,11 @@
+import { isMobile } from 'features/adaptive'
+
 const html = document.documentElement
 
 export function toggleScroll() {
   html.classList.toggle('scroll-off')
 
-  if (window.matchMedia('(max-width: 1200px)').matches) {
+  if (isMobile) {
     html.classList.toggle('disable-scroll')
     return
   }

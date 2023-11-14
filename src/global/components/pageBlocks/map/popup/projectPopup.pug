@@ -8,11 +8,11 @@ include global/features/popup/template
     .project-popup__title жк меридиа
     .project-popup__text Казань, Оренбургский тракт, 8
     .price-badge.price-badge_dark От 4 600 000 ₽
-    .button.button_blue
+    a(href="").button.button_blue
       span смотреть проект
       img(src=require('media/static/icons/arrow/arrow_short_white.svg')) 
   .project-popup__badges 
-    .badge Жилищный комплекс
-    .badge.badge_dark
+    .badge(data-name="type") Жилищный комплекс
+    .badge.badge_dark(data-name="time")
       img(src=require("media/static/icons/timer.svg"))
       span март 2023

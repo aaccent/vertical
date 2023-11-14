@@ -21,10 +21,14 @@ interface ImgSlide extends RawImgSlide, Slide {
   startSlideAnimation: () => void
 }
 
-void function() {
+void function () {
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.hero-index__title', {}, 0)
     .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
+
+  afterLoader(() => {
+    animation.resume()
+  })
 
   const subtitleContainer = document.querySelector('.hero-index__text-subtitle')
   const titleContainer = document.querySelector<HTMLElement>('.hero-index__text-title')
@@ -82,9 +86,5 @@ void function() {
         setSlideText(slider.currentSlide!)
       },
     },
-  })
-
-  afterLoader(() => {
-    animation.resume()
   })
 }()

@@ -5,7 +5,7 @@ import { afterLoader } from 'features/animations/page-loader'
 // Animations
 void function () {
   const contacts = document.querySelector('.contacts')
-  if (!contacts || matchMedia('(max-width: 1200px)').matches) return
+  if (!contacts) return
 
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.contacts__title', {})

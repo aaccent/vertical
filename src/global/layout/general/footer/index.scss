@@ -36,6 +36,8 @@
   }
 
   &__title {
+    position: relative;
+    z-index: 1;
     @include tenor-61();
     color: $white;
   }
@@ -337,6 +339,11 @@
       padding-bottom: 24px;
       padding-top: 24px;
       font-size: 54px;
+      margin-bottom: 0;
+
+      span {
+        translate: -5.5px 0;
+      }
     }
 
     &__content {
