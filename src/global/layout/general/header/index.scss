@@ -178,6 +178,9 @@
     }
   }
   @media screen and (max-width: $tablet1200) {
+    &__logo {
+      width: 155px;
+    }
     &__content {
       padding-top: 20px;
       padding-bottom: 20px;

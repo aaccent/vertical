@@ -12,7 +12,7 @@
 @use 'src/global/components/pageBlocks/offerSwiper';
 
 .project-header {
-  height: 810px;
+  height: 100vh;
   position: relative;
 
   &__image {
@@ -158,10 +158,23 @@
   }
 
   @media screen and (max-width: $tablet1200) {
-    height: 738px;
+    height: 100vh;
+    &__actions {
+      gap: 10px;
+    }
 
     &__list {
       width: max-content;
+      &__item {
+        font-size: 12px;
+        letter-spacing: .04em;
+        padding: 12px 4px 0 12px;
+  
+        &::before {
+          height: 32px;
+          width: 32px;
+        }
+      }
     }
 
     &__title {
@@ -180,6 +193,7 @@
         flex-grow: 0;
         padding: 0 20px;
         border-radius: 50px;
+        justify-content: space-between;
 
         span:nth-child(2) {
           display: none;
@@ -187,6 +201,14 @@
 
         span:last-child {
           display: block;
+          order: 1;
+          font-size: 12px;
+        }
+
+        img {
+          order: 2;
+          width: 20px;
+          height: 20px;
         }
       }
     }
@@ -197,6 +219,7 @@
 
     &__list__wrapper {
       margin-top: 32px;
+      overflow: auto;
     }
   }
 
@@ -413,10 +436,14 @@
 
   @media screen and (max-width: $tablet1200) {
     margin-top: 64px;
+    gap: 20px;
 
     &__title {
       font-size: 30px;
-      padding: 0;
+      padding-right: 10px;
+    }
+    img {
+      width: 32px;
     }
   }
 }

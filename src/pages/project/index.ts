@@ -292,3 +292,8 @@ void function() {
     animation.reverse()
   })
 }()
+
+document.querySelector(".project-header__actions__item")?.addEventListener("click", () => {
+  document.querySelector("#location")?.scrollIntoView();
+})
+
