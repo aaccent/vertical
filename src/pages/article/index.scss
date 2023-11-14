@@ -13,6 +13,7 @@
 
 .article {
   @include container-x();
+  background-color: #fff;
   padding-top: 130px;
 
   //padding-bottom: 180px;
