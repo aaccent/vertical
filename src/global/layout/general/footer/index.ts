@@ -4,7 +4,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 
 void function () {
   const contactForm = document.querySelector<HTMLElement>('.contact-form')
-  if (!contactForm) return
+  if (!contactForm || document.querySelector('.project')) return
 
   const contactFormBg = contactForm.querySelector('.contact-form__bg') as HTMLElement
 

@@ -1,4 +1,4 @@
-import { LngLatBounds, Map, Popup } from 'mapbox-gl'
+import { LngLatBounds, Map, Marker, Popup } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import { isDesktop, isMobile } from 'features/adaptive'
 import { Point } from 'geojson'
