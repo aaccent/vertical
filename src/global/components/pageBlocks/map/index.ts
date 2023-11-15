@@ -5,6 +5,41 @@ import { isDesktop } from 'features/adaptive'
 import { createProjectsList } from 'components/pageBlocks/map/projectList'
 import { createInfrastructureList } from 'components/pageBlocks/map/infrastructureList'
 
+function createSwitcher(mapView: Map) {
+  const targetContainer = document.querySelector(':is(.map-block, .project)')
+  if (!targetContainer) return
+
+  const switchBtn = document.querySelector('.button-switch')
+  if (!switchBtn) return
+
+  switchBtn.addEventListener('buttonChecked', switchHandler)
+  switchBtn.addEventListener('buttonUnchecked', switchHandler)
+
+  const map = targetContainer.querySelector<HTMLElement>('.map')
+  const projectList = targetContainer.querySelector<HTMLElement>(':is(.map-block__project-list, #ajax-response-block)')
+
+  if (!map || !projectList) return
+  const mapIsHidden = getComputedStyle(map).display
+  map.dataset.hidden = String(mapIsHidden === 'none')
+
+  function switchHandler() {
+    if (!map || !projectList) return
+
+    if (map.dataset.hidden === 'false') {
+      map.style.display = 'none'
+      projectList.style.display = 'block'
+
+      map.dataset.hidden = 'true'
+    } else {
+      map.style.display = 'block'
+      mapView.resize()
+      projectList.style.display = 'none'
+
+      map.dataset.hidden = 'false'
+    }
+  }
+}
+
 // Creating map
 void function () {
   const mapContainer = document.querySelector<HTMLElement>('.map__view')
@@ -20,7 +55,10 @@ void function () {
     cooperativeGestures: document.querySelector('.map .project-list') ? isDesktop : true,
   })
 
-  map.on('load', () => loadHandler(map, mapContainer))
+  map.on('load', () => {
+    loadHandler(map, mapContainer)
+    createSwitcher(map)
+  })
 }()
 
 function loadHandler(map: Map, mapContainer: HTMLElement) {
