@@ -36,94 +36,77 @@
     }
   }
 
+  &__body {
+    position: relative;
+    z-index: 5;
+    padding: 80px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   &__title {
-    position: absolute;
     @include tenor-90();
     color: $white;
-    left: 80px;
-    top: 80px;
-
-    z-index: $z-2;
     width: min-content;
     text-transform: uppercase;
   }
 
-  &__text {
+  &__text-block {
+    max-width: 570px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-self: flex-end;
     color: $white;
-    position: absolute;
-    width: 567px;
-    right: 648px;
-    transform: translateX(100%);
-    top: 498px;
-    z-index: $z-2;
     letter-spacing: 0.96px;
-
     @include manrope-24();
     text-transform: uppercase;
   }
 
   &__pagination {
-    position: absolute;
-    z-index: $z-2;
     display: flex;
     align-items: center;
-    bottom: 80px;
-    right: 648px;
     gap: 20px;
-    transform: translateX(100%);
+  }
 
-    &__item {
-      @include manrope-24();
-      display: flex;
-      align-items: center;
-      opacity: .6;
-      transition: opacity 250ms ease;
-      gap: 15px;
-      color: $white;
-      cursor: pointer;
+  &__pagination-item {
+    width: 60px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include manrope-24;
+    border-radius: 8px;
+    border: 1px solid #fff;
+    opacity: .5;
+    clip-path: polygon(0 0, 15% 0, 15% 15%, 85% 15%, 85% 0, 100% 0, 100% 100%, 85% 100%, 85% 85%, 15% 85%, 15% 100%, 0 100%);
+    will-change: transform;
+    transition: opacity 300ms ease-in-out;
 
-      &:hover {
-        opacity: 1;
-      }
-
-      &::before, &::after {
-        content: "";
-        display: block;
-        height: 37px;
-        width: 10px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        background-position: center;
-      }
-
-      &::before {
-        background-image: url("media/static/icons/brackets/brackets_left.svg");
-      }
-
-      &::after {
-        background-image: url("media/static/icons/brackets/brackets_right.svg");
-
-      }
+    &._active {
+      opacity: 1;
     }
+  }
 
-    &__progress {
-      width: 50px;
+  &__pagination-line {
+    position: relative;
+    width: 50px;
+    height: 1px;
+    background: rgb(255, 255, 255, .5);
+    transition: opacity 300ms ease-in-out;
+    --after-width: 0%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: var(--after-width);
       height: 1px;
-      position: relative;
-      z-index: $z-2;
-
-      &__bg {
-        width: 100%;
-        height: 100%;
-        background-color: rgba($color: $white, $alpha: 0.4);
-      }
-
-      &__indicator {
-        position: absolute;
-        width: 0;
-        height: 100%;
-        background-color: $white;
-      }
+      background-color: #fff;
     }
   }
 
@@ -149,29 +132,6 @@
       letter-spacing: 0.72px;
 
     }
-    &__pagination {
-      left: 20px;
-      right: 20px;
-      bottom: 40px;
-      gap: 16px;
-      transform: none;
-
-      &__progress {
-        width: 20px;
-      }
-
-      &__item {
-        font-size: 18px;
-        line-height: 90%;
-        align-items: center;
-        gap: 8px;
-
-        &::before, &::after {
-          height: 32px;
-          width: 9px;
-        }
-      }
-    }
   }
   @media screen and (max-width: $tablet800) {
     &__title {
@@ -181,7 +141,6 @@
       @include manrope-17-m();
       line-height: 130%;
       width: auto;
-
     }
   }
 }

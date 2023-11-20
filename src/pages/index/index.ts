@@ -1,6 +1,7 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+import 'components/pageBlocks/offerSwiper'
 import 'components/ui/quickFilter'
 import 'components/pageBlocks/filter'
 import 'components/pageBlocks/map'
@@ -32,7 +33,6 @@ void function () {
     })
     return height
   }
-
 
   document.querySelector('.seo-block__expand')?.addEventListener('click', () => {
     if (seoBlock.classList.contains('seo-block_open')) {
