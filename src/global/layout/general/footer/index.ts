@@ -1,6 +1,6 @@
-import "features/popup/index"
+import 'features/popup/index'
 import gsap from 'gsap'
-import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function () {
   const contactForm = document.querySelector<HTMLElement>('.contact-form')
@@ -17,7 +17,7 @@ void function () {
       .textAppearing('.contact-form__title', {
         onStart() {
           contactForm.classList.add('_gsap-animation')
-        }
+        },
       })
       .from('.contact-form__container', {
         duration: .8,
@@ -29,22 +29,25 @@ void function () {
         yPercent: 100,
         onComplete() {
           contactForm.classList.remove('_gsap-animation')
-        }
+        },
       }, '<+=0.1')
       .fadeUp('.contact-form__bottom', {}, '<.6')
 
-    new ScrollTrigger({
+    const scrollContactForm = new ScrollTrigger({
       scroller: '[data-scroll-container]',
       trigger: contactForm,
       start: `top top`,
       end: `bottom top`,
       scrub: 0,
-      onUpdate (self) {
+      onUpdate(self) {
         contactForm.style.translate = `0% -${100 - 100 * self.progress}%`
         contactFormBg.style.scale = String(1.1 - self.progress / 10)
         if (self.progress >= 0.84) animation.play()
       },
     })
+
+    const resizeObserver = new ResizeObserver(() => scrollContactForm.refresh())
+    resizeObserver.observe(document.body)
   })
 }()
 
