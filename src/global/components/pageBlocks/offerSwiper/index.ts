@@ -106,4 +106,6 @@ void function () {
       }
     },
   })
+
+  ScrollTrigger.refresh()
 }()

@@ -43,6 +43,9 @@ ScrollTrigger.scrollerProxy(
 
 scroll.on('scroll', ScrollTrigger.update)
 
+// @ts-ignore
+ScrollTrigger.addEventListener('refresh', () => scroll.update())
+
 window.onbeforeunload = function () {
   scroll.scrollTo(
     0,
