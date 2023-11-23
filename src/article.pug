@@ -27,15 +27,16 @@ block append main
     .article__image
       img(src=require('media/content/content_21.png'))
     .container_left
-      ul.article__outline
-        li.article__outline__item.article__outline__item_active 
-          a(href="#t1") Что такое приемка квартиры?
-        li.article__outline__item 
-          a(href="#t2") В какой момент нужно принимать квартиру у застройщика?
-        li.article__outline__item 
-          a(href="#t3") Сколько есть времени на приёмку квартиры с момента получения уведомления?
-        li.article__outline__item 
-          a(href="#t4") Подводим итоги
+      .article__outline-wrapper
+        ul(data-scroll data-scroll-sticky data-scroll-target=".article__outline-wrapper" data-scroll-offset="0, 80px").article__outline 
+          li.article__outline__item.article__outline__item_active 
+            a(href="#t1") Что такое приемка квартиры?
+          li.article__outline__item 
+            a(href="#t2") В какой момент нужно принимать квартиру у застройщика?
+          li.article__outline__item 
+            a(href="#t3") Сколько есть времени на приёмку квартиры с момента получения уведомления?
+          li.article__outline__item 
+            a(href="#t4") Подводим итоги
       .article__content
         .article__text(id="t1")
           .article__text__title_2 Что такое приемка квартиры?

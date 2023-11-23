@@ -10,6 +10,7 @@ import './sections/partners'
 
 void function () {
   const seoBlock = document.querySelector<HTMLElement>('.seo-block')
+  const seoBlockExpand = seoBlock?.querySelector<HTMLElement>('.seo-block__expand span')
 
   if (!seoBlock) return
 
@@ -36,6 +37,7 @@ void function () {
 
   document.querySelector('.seo-block__expand')?.addEventListener('click', () => {
     if (seoBlock.classList.contains('seo-block_open')) {
+      seoBlockExpand ? seoBlockExpand.innerText = 'Развернуть' : ""
       seoBlock.classList.remove('seo-block_open')
       text.style.height = `${seoBlockParagraph!.getBoundingClientRect().height}px`
       return
@@ -44,6 +46,8 @@ void function () {
 
     text.style.height = `${height}px`
     seoBlock.classList.add('seo-block_open')
+    seoBlockExpand ? seoBlockExpand.innerText = 'Свернуть' : ""
+    //seoBlock.innerText = 'Свернуть'
   })
 }()
 

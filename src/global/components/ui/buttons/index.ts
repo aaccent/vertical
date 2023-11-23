@@ -1,3 +1,5 @@
+import { scroll } from '@/global/features/animations/scroll'
+
 void function () {
   const buttonSwitch = document.querySelector<HTMLElement>('.button-switch')
   const buttonSwitchMark = document.querySelector<HTMLElement>('.button-switch__mark')

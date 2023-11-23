@@ -82,11 +82,12 @@
   @media screen and (max-width: $tablet1200) {
     padding-bottom: 64px;
     flex-direction: column;
-    gap: 40px;
+    gap: 80px;
     &::before,
     &::after {
-      transform: rotate(90deg);
-      width: 45px;
+      display: none;
+      /*transform: rotate(90deg);
+      width: 45px;*/
     }
 
     &::before {

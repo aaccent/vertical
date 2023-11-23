@@ -50,3 +50,15 @@ window.onbeforeunload = function () {
     })
   window.scrollTo({top: 0, behavior: 'instant'})
 }
+
+const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .header__mobile__phone');
+const form = document.querySelector<HTMLElement>('#contact-form');
+
+
+if (buttonScrollToForm && form) {
+  buttonScrollToForm.forEach(btn => {
+    btn.addEventListener('click' , () => {
+      scroll.scrollTo(form.getBoundingClientRect().bottom)
+    })
+  })
+}

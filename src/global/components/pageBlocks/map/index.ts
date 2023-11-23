@@ -1,4 +1,5 @@
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
+console.log(structureList)
 
 const renderStructureList = () => {
   if(document.querySelectorAll(".infrastructure-list__item_active").length === 0){

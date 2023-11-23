@@ -24,17 +24,6 @@ mixin mobile-header
                 li.mobile-header__accordion__list__item Торговые комплексы
                 li.mobile-header__accordion__list__item ТРК
                 li.mobile-header__accordion__list__item Помещения общего назначения
-        .accordion.mobile-header__accordion
-          .accordion__header.mobile-header__accordion__header
-            span Каталог объектов
-            img(src=require('media/static/icons/triangle/triangle_white_down.svg'))
-          .accordion__body
-            .accordion__body__wrapper
-              ul.mobile-header__accordion__list
-                li.mobile-header__accordion__list__item Смотреть все
-                  img(src=require('media/static/icons/arrow/arrow_short_white.svg'))
-                li.mobile-header__accordion__list__item Гостиницы
-                li.mobile-header__accordion__list__item Жилищные комплексы
         .mobile-header__item Контакты
       .mobile-header__bottom
         span 8 800 580-98-59
@@ -57,8 +46,8 @@ mixin header
             .header__phone__link
               img(src=require('media/static/icons/phone/phone_white.svg'))
               span 8 800 580-98-59
-            a(href="#contact-form").header__phone__button.button.button_transparent заказать звонок
-          a(href="#contact-form").header__mobile__phone
+            .header__phone__button.button.button_transparent заказать звонок
+          .header__mobile__phone
             img(src=require('media/static/icons/phone/phone_white_no_border.svg'))
         img.header__logo(src=require('media/static/icons/vertical/vertical_logo.svg'))
         .header__bg
