@@ -1,4 +1,5 @@
  import IMask from 'imask';
+ import gsap from 'gsap'
 
 const form = document.querySelector("form");
 if (form) {
@@ -6,6 +7,7 @@ if (form) {
         el.onfocus = () => {
             
             const span = el.closest(".contact-form__container").querySelector(".span");
+            gsap.to(span, {y:-20, duration:.4})
             span.classList.add("span__active");
             if (!el.classList.contains("contact-form__textarea")) {
                 el.closest(".contact-form__container").querySelector(".reset-input").style.display = "block";
@@ -15,6 +17,7 @@ if (form) {
         el.onblur = () => {
             if (!el.value) {
                 const span = el.closest(".contact-form__container").querySelector(".span");
+                gsap.fromTo(span, {y:-20, duration:.4}, {y:0, duration:.4})
                 span.classList.remove("span__active");
                 el.closest(".contact-form__container").querySelector(".reset-input").style.display = "none";
             }

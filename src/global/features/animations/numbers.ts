@@ -4,7 +4,7 @@ export interface NumbersWithAnimation extends HTMLElement {
 
 window.addEventListener('load', () => {
   document.querySelectorAll<NumbersWithAnimation>('.number-animation').forEach(el => {
-    el.style.width = `${el.offsetWidth}px`
+    //el.style.width = `${el.offsetWidth}px`
     const num = parseInt(String(el.textContent))
     const isIncr = num < 10
     let iterator = isIncr ? 0 : num + 20

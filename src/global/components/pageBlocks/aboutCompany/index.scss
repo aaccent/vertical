@@ -37,6 +37,12 @@
     margin-top: 20px;
     display: flex;
     gap: 12px;
+
+    .button_gray:hover {
+      background-color: #EEE;
+      color: #2E2E2E;
+      cursor: default;
+    }
   }
 
   &__image {
