@@ -1,40 +1,83 @@
+-
+  var list = [
+    {
+      name: 'Детский сад №8',
+      icon: require('media/static/icons/children.png'),
+      coords: '55.81004044323492, 49.18842061116819',
+      type: 'детский сады',
+    },
+    {
+      name: 'Детский сад №6',
+      icon: require('media/static/icons/children.png'),
+      coords: '55.81369396298816, 49.20019383486153',
+      type: 'детский сады',
+    },
+    {
+      name: 'Школа №8',
+      icon: require('media/static/icons/school.png'),
+      coords: '55.804905453457955, 49.20242583993505',
+      type: 'образование',
+    },
+    {
+      name: 'Кафе "У дома"',
+      icon: require('media/static/icons/cafe.png'),
+      coords: '55.81061986598979, 49.195953858851574',
+      type: 'рестораны и кафе',
+    },
+    {
+      name: 'Ресторан "Вечерняя ложа"',
+      icon: require('media/static/icons/cafe.png'),
+      coords: '55.80831275401056, 49.213695921478525',
+      type: 'рестораны и кафе',
+    },
+    {
+      name: 'Больница №6',
+      icon: require('media/static/icons/medical.png'),
+      coords: '55.80327858339449, 49.21297850808097',
+      type: 'Медицина',
+    },
+    {
+      name: 'ДРКБ',
+      icon: require('media/static/icons/medical.png'),
+      coords: '55.81708004013693, 49.21001143070697',
+      type: 'Медицина',
+    },
+    {
+      name: 'Магазин одежды',
+      icon: require('media/static/icons/shop.png'),
+      coords: '55.79870587784908, 49.20877785897132',
+      type: 'шоппинг',
+    },
+    {
+      name: 'Магазин обуви',
+      icon: require('media/static/icons/shop.png'),
+      coords: '55.799833609828376, 49.188444637833136',
+      type: 'шоппинг',
+    },
+    {
+      name: 'Баскетбольный корт',
+      icon: require('media/static/icons/sport.png'),
+      coords: '55.80773205425886, 49.223905436695425',
+      type: 'Спорт',
+    },
+  ]
+
 .project-list.infrastructure-list
   .project-list__title 28 объектов найдено
+  div(
+    data-coords="55.809210484034764, 49.20278040554005"
+    data-img=""
+  ).map__init-marker-data
+  .project-list__data
+      each item in list
+        .project-list__data-item(
+          data-name=item.name
+          data-icon=item.icon
+          data-coords=item.coords
+          data-type=item.type
+        )
   .project-list__content.infrastructure-list__content
-    .project-list__item.infrastructure-list__item
-      img(src=require('media/static/icons/children.svg')) 
-      .infrastructure-list__item__content.project-list__item__content
-        p детский сады
-        span 3
-
-    .project-list__item.infrastructure-list__item
-      img(src=require('media/static/icons/school.svg')) 
-      .infrastructure-list__item__content.project-list__item__content
-        p образование
-        span 2
-
-    .project-list__item.infrastructure-list__item
-      img(src=require('media/static/icons/cafe.svg')) 
-      .infrastructure-list__item__content.project-list__item__content
-        p рестораны и кафе
-        span 12
-
-    .project-list__item.infrastructure-list__item
-      img(src=require('media/static/icons/health.svg')) 
-      .infrastructure-list__item__content.project-list__item__content
-        p Медицина
-        span 4
-    .project-list__item.infrastructure-list__item
-      img(src=require('media/static/icons/shop.svg')) 
-      .infrastructure-list__item__content.project-list__item__content
-        p шоппинг
-        span 2
-    .project-list__item.infrastructure-list__item
-      img(src=require('media/static/icons/sport.svg'))  
-      .infrastructure-list__item__content.project-list__item__content
-        p Спорт
-        span 5
-  .project-list__bottom.infrastructure-list__bottom 
-    a(href='') сбросить все
-      img(src=require('media/static/icons/update/update_black.svg')).white 
-      img(src=require('media/static/icons/update/update_blue.svg')).blue 
+  button(data-action="reset-infrastructure").project-list__bottom.infrastructure-list__bottom
+      | сбросить все
+      img(src=require('media/static/icons/update/update_black.svg')).white
+      img(src=require('media/static/icons/update/update_blue.svg')).blue

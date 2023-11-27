@@ -37,15 +37,31 @@ if (form) {
     });
 
     form.querySelector("button").addEventListener("click", (e) => {
-        e.preventDefault();
-        if (!form.customer_name.value) {
-            form.customer_name.nextElementSibling.classList.add("contact-form__error__active");
-        }
-        if (!form.customer_phone.value || form.customer_phone.value.length < 16) {
-            form.customer_phone.nextElementSibling.classList.add("contact-form__error__active");
-        }
-        if (form.customer_mail.value && !form.customer_mail.value.match(/.+@.+\..+/i)) {
-            form.customer_mail.nextElementSibling.classList.add("contact-form__error__active");
-        }
+        return new Promise((resolve, reject) => {
+            e.preventDefault()
+            let valid = true;
+            if (!form.customer_name.value) {
+                form.customer_name.nextElementSibling.classList.add("contact-form__error__active");
+                valid = false;
+            }
+            if (!form.customer_phone.value || form.customer_phone.value.length < 16) {
+                form.customer_phone.nextElementSibling.classList.add("contact-form__error__active");
+                valid = false;
+            }
+            if (form.customer_mail.value && !form.customer_mail.value.match(/.+@.+\..+/i)) {
+                form.customer_mail.nextElementSibling.classList.add("contact-form__error__active");
+                valid = false;
+            }
+
+            valid ? resolve(() => {
+                form.requestSubmit(e.currentTarget);
+                form.reset();
+            }) : reject(new Error("введите верные данные"))
+            
+        }).then(
+            result => result(),
+            error => console.log(error)
+        )
+        
     })
 }

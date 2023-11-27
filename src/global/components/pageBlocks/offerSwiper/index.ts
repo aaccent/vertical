@@ -1,80 +1,111 @@
-import Swiper from 'swiper'
-import { Pagination, Autoplay } from 'swiper/modules'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import gsap from 'gsap'
 
-const getPaginationItem = (page: string) => {
-  const pageItem = document.createElement('div')
-  pageItem.textContent = page
-  pageItem.classList.add('offer__pagination__item')
-  return pageItem
+interface OfferSlide {
+  pos: number
+  played: boolean
+  title: string
+  text: string
+  pagination: HTMLElement
 }
 
-const getProgressItem = () => {
-  const progressParent = document.createElement('div')
-  const progressIndicator = document.createElement('div')
-  const progressBg = document.createElement('div')
+function renderOfferPagination(num: number, needLine = true) {
+  const container = document.querySelector('.offer__pagination') as HTMLElement
 
-  progressBg.classList.add('offer__pagination__progress__bg')
-  progressIndicator.classList.add('offer__pagination__progress__indicator')
-  progressParent.classList.add('offer__pagination__progress')
+  const div = document.createElement('div')
+  div.classList.add('offer__pagination-item')
+  if (num === 1) div.classList.add('_active')
+  div.innerText = `${num}`
 
-  progressParent.append(progressIndicator)
-  progressParent.append(progressBg)
-  return progressParent
+  const line = document.createElement('div')
+  line.className = 'offer__pagination-line'
+
+  container.append(div)
+  if (needLine) container.append(line)
+
+  return { div, line }
 }
 
-const initOfferSwiper = (className: string) => {
-  const swiper = new Swiper(className, {
-    modules: [Autoplay],
-    allowTouchMove: false,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
+void function () {
+  const offer = document.querySelector('.offer')
+  if (!offer) return
+
+  const animation = gsap
+    .timeline({ paused: true })
+    .addLabel('start')
+
+  const lineAnimation = gsap.timeline()
+
+  const slides = document.querySelectorAll<HTMLElement>('.offer__slide:not(:first-child)')
+  const step = 1 / (slides.length + 1)
+
+  const firstPagination = renderOfferPagination(1, slides.length !== 1)
+  lineAnimation.to(firstPagination.line, {
+    '--after-width': '100%'
+  })
+
+  const order = Array.from(slides).map((slide, i) => {
+    animation
+      .from(slide, {
+        duration: .8,
+        scale: 0,
+        rotate: 45 * Math.random() + 45,
+      })
+      .addLabel(`slide ${i}`)
+
+    const pagination = renderOfferPagination(i + 2, i + 1 !== slides.length)
+
+    lineAnimation.to(pagination.line, {
+      '--after-width': '100%'
+    })
+
+    return {
+      pos: (i + 1) * step,
+      played: false,
+      title: String(slide.dataset.title),
+      text: String(slide.dataset.text),
+      pagination: pagination.div,
+    }
+  })
+
+  const titleContainer = offer.querySelector('.offer__title')
+  const textContainer = offer.querySelector('.offer__text')
+
+  function changeText(slide: OfferSlide) {
+    if (!titleContainer || !textContainer) return
+
+    titleContainer.textContent = slide.title
+    textContainer.textContent = slide.text
+  }
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    trigger: '.offer',
+    animation: lineAnimation,
+    scrub: 1,
+    pin: true,
+    start: 'center center',
+    end: `+=${800 * slides.length} center`,
+    onUpdate(self) {
+      if (self.direction === 1) {
+        const closest = order.findLast(i => self.progress >= i.pos && !i.played)
+        if (!closest) return
+
+        closest.played = true
+        animation.tweenTo(animation.nextLabel())
+        changeText(closest)
+        closest.pagination.classList.add('_active')
+      } else {
+        const closest = order.find(i => self.progress <= i.pos && i.played)
+        if (!closest) return
+
+        closest.played = false
+        animation.tweenTo(animation.previousLabel())
+        changeText(closest)
+        closest.pagination.classList.remove('_active')
+      }
     },
-    on: {
-      afterInit: (e: any) => {
-        Array(e.slides.length)
-          .fill('')
-          .forEach((_, page: number) => {
-            const pagination = document.querySelector('.offer__pagination') as HTMLElement
-            pagination.append(getPaginationItem((page + 1).toString()))
-            if (page + 1 === e.slides.length) return
-            pagination.append(getProgressItem())
-          })
-        const pageItem = document.querySelector<HTMLElement>('.offer__pagination__item') as HTMLElement
-        pageItem.style.opacity = '1'
-      },
-    },
   })
 
-  swiper.on('slideChange', (e: any) => {
-    const pages = document.querySelectorAll('.offer__pagination__item')
-
-    pages.forEach((page: any, index: number) => {
-      page.style.opacity = ''
-
-      if (index !== e.activeIndex) return
-      page.style.opacity = '1'
-    })
-  })
-
-  swiper.on('autoplayTimeLeft', (s: any, _: any, progress: number) => {
-    const pages = document.querySelectorAll('.offer__pagination__progress__indicator') as any
-    
-    pages.forEach((page: any, index: number) => {
-      page.style.width = null
-
-      if (index !== swiper.activeIndex) return
-      page.style.width = `${100 * (1 - progress)}%`
-    })
-  })
-
-  const pages = document.querySelectorAll<HTMLElement>('.offer__pagination__item')
-  pages.forEach((page, index) => {
-    page.addEventListener('click', () => {
-      swiper.slideTo(index)
-      // swiper.autoplay.start()
-    })
-  })
-}
-
-export { initOfferSwiper }
+  ScrollTrigger.refresh()
+}()

@@ -37,9 +37,10 @@
   }
 
   &__list {
-    @include reset-list();
     @include basic-card();
     padding: 0;
+    display: flex;
+    flex-direction: column;
 
     &__item {
       cursor: pointer;

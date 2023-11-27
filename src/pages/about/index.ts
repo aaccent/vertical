@@ -5,11 +5,12 @@ import gsap from 'gsap'
 import { scroll } from 'features/animations/scroll'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { afterLoader } from 'features/animations/page-loader'
+import { isDesktop } from 'features/adaptive'
 
 // About-header animations
 void function () {
   const aboutHeader = document.querySelector('.about-header')
-  if (!aboutHeader || matchMedia('(max-width: 1200px)').matches) return
+  if (!aboutHeader) return
 
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.about-header__title', { duration: 1 })
@@ -31,7 +32,7 @@ void function () {
 // Company-worth animations
 void function () {
   const companyWorth = document.querySelector('.company-worth')
-  if (!companyWorth || matchMedia('(max-width: 1200px)').matches) return
+  if (!companyWorth) return
 
   const animation = gsap.timeline()
     .textAppearing('.company-worth__title', {})
@@ -107,14 +108,12 @@ void function () {
         setSlideData(swiper.slides[0] as HistorySlide)
       },
       slideChange(swiper) {
-        if (!matchMedia('(max-width: 1200px)').matches) return
+        if (isDesktop) return
 
         setSlideData(swiper.slides[swiper.activeIndex] as HistorySlide)
       },
     },
   })
-
-  if (matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
     .fadeUp('.history .title', { yPercent: 140 }, 0)
@@ -145,7 +144,6 @@ void function () {
 // Awards animations
 void function () {
   const awards = document.querySelector('.awards')
-  if (matchMedia('(max-width: 1200px)').matches) return
 
   const animation = gsap.timeline()
     .fadeUp('.awards .title', { yPercent: 150 })

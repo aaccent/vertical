@@ -1,5 +1,5 @@
 import LocomotiveScroll from 'locomotive-scroll'
-import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gsap from 'gsap'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -25,8 +25,7 @@ ScrollTrigger.scrollerProxy('[data-scroll-container]',
   {
     scrollTop(value) {
       return arguments.length
-        ? void scroll.scrollTo(value!,
-          {disableLerp: true})
+        ? void scroll.scrollTo(value!, { disableLerp: true })
         : (scroll as unknown as LocoScroll).scroll.instance.scroll.y
     },
     getBoundingClientRect() {
@@ -41,6 +40,9 @@ ScrollTrigger.scrollerProxy('[data-scroll-container]',
   })
 
 scroll.on('scroll', ScrollTrigger.update)
+
+// @ts-ignore
+ScrollTrigger.addEventListener('refresh', () => scroll.update())
 
 window.onbeforeunload = function () {
   scroll.scrollTo(0,

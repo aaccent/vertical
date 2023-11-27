@@ -3,7 +3,7 @@ import {ScrollTrigger} from 'gsap/ScrollTrigger'
 
 void function () {
   const blog = document.querySelector('.blog')
-  if (!blog || matchMedia('(max-width: 1200px)').matches) return
+  if (!blog) return
 
   const animation = gsap.timeline()
     .fadeUp('.blog .title', { yPercent: 150 }, 0)

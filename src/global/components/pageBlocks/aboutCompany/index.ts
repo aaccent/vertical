@@ -4,7 +4,7 @@ import { NumbersWithAnimation } from 'features/animations/numbers'
 
 void function () {
   const aboutSection = document.querySelector('.about-company')
-  if (!aboutSection || matchMedia('(max-width: 1200px)').matches) return
+  if (!aboutSection) return
 
   gsap.registerPlugin(ScrollTrigger)
 
@@ -43,7 +43,7 @@ void function () {
     onStart() {
       document
         .querySelectorAll<NumbersWithAnimation>('.about-company .benefits .number-animation')
-        .forEach(i => i.playAnimation())
+        .forEach(i => i.playAnimation?.())
     }
   })
 }()

@@ -16,8 +16,6 @@ function fixBr(text: string) {
 }
 
 export function splitTextOnLines(textEl: HTMLElement) {
-  if (matchMedia('(max-width: 1200px)').matches) return
-
   textEl.classList.add('text-appearing')
 
   const innerHTML = textEl.innerHTML
@@ -67,8 +65,6 @@ export function splitTextOnLines(textEl: HTMLElement) {
 }
 
 document.querySelectorAll<TextWithAnimation>('.text-appearing').forEach(text => {
-  if (matchMedia('(max-width: 1200px)').matches) return
-
   splitTextOnLines(text)
 
   text.prepareAnimation = function () {

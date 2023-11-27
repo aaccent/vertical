@@ -3,7 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function () {
   const partners = document.querySelector('.partners')
-  if (!partners || matchMedia('(max-width: 1200px)').matches) return
+  if (!partners) return
 
   window.addEventListener('load', () => {
     const animation = gsap.timeline()

@@ -28,33 +28,41 @@ block append main
       .filter__content
         .filter__left
           include global/components/ui/quickFilter/template
-          +dropdown("Тип недвижимости").filter__dropdown
-            ul.dropdown__list
-              li.dropdown__list__item ТРК
-              li.dropdown__list__item.filter__dropdown_active Жилищные комплексы
-              li.dropdown__list__item Промышленные объекты
-              li.dropdown__list__item Склады
-              li.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
-          +dropdown("Стадия постройки").filter__dropdown
-            ul.dropdown__list
-              li.dropdown__list__item ТРК
-              li.dropdown__list__item Жилищные комплексы
-              li.dropdown__list__item Промышленные объекты
-              li.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
+          +dropdown("Тип недвижимости")(data-name="type").filter__dropdown
+            .dropdown__list
+              button(data-id="1").dropdown__list__item ТРК
+              button(data-id="2").dropdown__list__item Жилищные комплексы
+              button(data-id="3").dropdown__list__item Промышленные объекты
+              button(data-id="4").dropdown__list__item Склады
+              button.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
+          +dropdown("Стадия постройки")(data-name="stage").filter__dropdown
+            .dropdown__list
+              button(data-id="1").dropdown__list__item ТРК
+              button(data-id="2").dropdown__list__item Жилищные комплексы
+              button(data-id="3").dropdown__list__item Промышленные объекты
+              button.dropdown__list__item.filter__dropdown_reset Сбросить фильтры
         .filter__right
           span.active на карте
           .button-switch
             .button-switch__mark
           span плиткой
       .filter__content__mobile
-        .filter__button
+        button.filter__button(data-action="popup" data-popup="filter-popup")
           span фильтр
           img(src=require('media/static/icons/filter/filter_white.svg'))
-        .filter__button(data-popup='project-popup', data-action='popup')
+        button.filter__button(data-action="map")
           span на карте
           img(src=require('media/static/icons/location.svg'))
     .map-block
       .map
+        button.button-close(data-action="map")
+        .map__mobile-buttons
+          button.filter__button(data-action="popup" data-popup="filter-popup")
+            span фильтр
+            img(src=require('media/static/icons/filter/filter_gray.svg'))
+          button.filter__button(data-action="map")
+            span списком
+            img(src=require('media/static/icons/list.svg'))
         .map__content
           include global/components/pageBlocks/map/projectList
           //- include global/components/pageBlocks/map/projectCard

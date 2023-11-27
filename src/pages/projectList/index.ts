@@ -6,7 +6,7 @@ import { adaptiveValue } from 'features/adaptive'
 
 void function () {
   const projects = document.querySelector('.project__list')
-  if (!projects || matchMedia('(max-width: 1200px)').matches) return
+  if (!projects) return
 
   const animation = gsap.timeline()
     .fromTo('.project__list__row:nth-child(odd) .project__list__item:last-child, .project__list__row:nth-child(even) .project__list__item:first-child', {
