@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
     //el.style.width = `${el.offsetWidth}px`
     const num = parseInt(String(el.textContent))
     const isIncr = num < 10
-    let iterator = isIncr ? 0 : num + 20
+    let iterator = 0
     let animationPlayed = false
 
     el.innerText = `${iterator}`
@@ -15,10 +15,10 @@ window.addEventListener('load', () => {
     function playAnimation() {
       if (animationPlayed) return
       const interval = setInterval(() => {
-        iterator += isIncr ? 1 : -1
+        iterator += isIncr ? 1 : num/20
 
-        el.innerText = String(iterator)
-        if ((isIncr && iterator >= num) || (!isIncr && iterator <= num)) {
+        el.innerText = String(Math.round(iterator))
+        if ((isIncr && iterator >= num) || (!isIncr && iterator >= num)) {
           clearInterval(interval)
           animationPlayed = true
         }
