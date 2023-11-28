@@ -53,8 +53,12 @@ void function () {
     accessToken: 'pk.eyJ1Ijoic2V2YS1hYWNjZW50IiwiYSI6ImNsb2ZlNzR0NDByajUya3FwcmQ4bHdoZG8ifQ.2oZ5rpkSs2dKoP5a10lkcg',
     dragRotate: false,
     cooperativeGestures: document.querySelector('.map .project-list') ? isDesktop : true,
+    locale: {
+      "ScrollZoomBlocker.CtrlMessage": "ctrl + scroll для увеличения масштаба карты",
+      "ScrollZoomBlocker.CmdMessage" : "⌘ + scroll для увеличения масштаба карты",
+      'TouchPanBlocker.Message': 'Используйте два пальца чтобы подвинуть карту'
+    },
   })
-
   map.on('load', () => {
     loadHandler(map, mapContainer)
     createSwitcher(map)

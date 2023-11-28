@@ -745,8 +745,21 @@
 
   &__month-list {
     @include reset-list();
+    
+    &__all-show,
+    &__all-show:checked + & li:last-child {
+      display: none;
+    }
+    
+    &__all-show:not(:checked) + & li:nth-child(n+6):not(:last-child) {
+      visibility: hidden;
+      height: 0;
+      padding: 0;
+      opacity: 0;
+    }
 
     &__item {
+      transition: 1s all;
       position: relative;
       display: flex;
       justify-content: space-between;
@@ -1012,6 +1025,7 @@
     margin-left: -236px;
     transition: margin-left 250ms ease;
     gap: 60px;
+    animation: marquee 15s linear infinite;
   }
 
   p {
@@ -1031,7 +1045,14 @@
     }
   }
 }
-
+@keyframes marquee {
+  from {
+      transform: translateX(120%);
+  }
+  to {
+      transform: translateX(-120%);
+  }
+}
 .gallery-popup {
 
   .gallery-popup__left,
