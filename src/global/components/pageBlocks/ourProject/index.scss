@@ -129,6 +129,10 @@
     &__text-block {
       width: 100%;
     }
+    
+    &__middle-image {
+      height: 358px;
+    }
   }
 
   @media screen and (min-width: $desktop1460) {
