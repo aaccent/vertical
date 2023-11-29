@@ -1,4 +1,4 @@
-import { Map, Marker } from 'mapbox-gl'
+import { Map, Marker, NavigationControl } from 'mapbox-gl'
 import { scroll } from 'features/animations/scroll'
 import './mobile-map'
 import { isDesktop } from 'features/adaptive'
@@ -20,6 +20,8 @@ function createSwitcher(mapView: Map) {
   if (!map || !projectList) return
   const mapIsHidden = getComputedStyle(map).display
   map.dataset.hidden = String(mapIsHidden === 'none')
+  
+  projectList.style.display = map.dataset.hidden === 'true' ? 'block' : ''
 
   function switchHandler() {
     if (!map || !projectList) return
@@ -33,7 +35,7 @@ function createSwitcher(mapView: Map) {
       map.style.display = 'block'
       mapView.resize()
       projectList.style.display = 'none'
-
+      
       map.dataset.hidden = 'false'
     }
   }
@@ -55,13 +57,23 @@ void function () {
     locale: {
       "ScrollZoomBlocker.CtrlMessage": "ctrl + scroll для увеличения масштаба карты",
       "ScrollZoomBlocker.CmdMessage" : "⌘ + scroll для увеличения масштаба карты",
-      'TouchPanBlocker.Message': 'Используйте два пальца чтобы подвинуть карту'
+      'TouchPanBlocker.Message': 'Используйте два пальца чтобы подвинуть карту',
+      'NavigationControl.ZoomIn': 'Увеличить',
+      'NavigationControl.ZoomOut': 'Уменьшить',
     },
   })
   map.on('load', () => {
     loadHandler(map, mapContainer)
     createSwitcher(map)
   })
+  map.addControl(
+      new NavigationControl({
+        showCompass: false,
+        showZoom: true,
+        visualizePitch: false
+      }),
+      'bottom-right'
+    );
 }()
 
 function loadHandler(map: Map, mapContainer: HTMLElement) {

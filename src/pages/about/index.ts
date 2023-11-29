@@ -1,6 +1,8 @@
 import Swiper from 'swiper'
 import { Autoplay, Navigation } from 'swiper/modules'
 import 'components/ui/buttons'
+import 'components/pageBlocks/filter'
+import 'components/pageBlocks/map'
 import gsap from 'gsap'
 import { scroll } from 'features/animations/scroll'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'

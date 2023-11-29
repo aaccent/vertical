@@ -50,9 +50,35 @@
     height: 100%;
     background-color: black;
 
-    .mapboxgl-ctrl-bottom-left,
-    .mapboxgl-ctrl-bottom-right {
-      display: none;
+    .mapboxgl {
+      &-ctrl-bottom-left .mapboxgl-ctrl-logo,
+      &-ctrl-bottom-right .mapboxgl-ctrl-attrib {
+        display: none;
+      }
+
+      &-ctrl-group {
+        display: flex;
+        background: transparent;
+        box-shadow: none;
+        gap: 12px;
+        margin:0 40px 40px 0;
+
+        button.mapboxgl-ctrl-zoom-in,
+        button.mapboxgl-ctrl-zoom-out {
+          border-radius: 50%;
+          background-color: #fff;
+          width: 36px;
+          height: 36px
+        }
+      }
+
+      &-ctrl-zoom-in {
+        order: 1
+      }
+
+      &-ctrl-zoom-out {
+        order: 0
+      }
     }
   }
 
