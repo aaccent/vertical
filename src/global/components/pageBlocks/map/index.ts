@@ -12,8 +12,7 @@ function createSwitcher(mapView: Map) {
   const switchBtn = document.querySelector('.button-switch')
   if (!switchBtn) return
 
-  switchBtn.addEventListener('buttonChecked', switchHandler)
-  switchBtn.addEventListener('buttonUnchecked', switchHandler)
+  switchBtn.addEventListener('click', switchHandler)
 
   const map = targetContainer.querySelector<HTMLElement>('.map')
   const projectList = targetContainer.querySelector<HTMLElement>(':is(.map-block__project-list, #ajax-response-block)')

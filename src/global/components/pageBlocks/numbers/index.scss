@@ -59,13 +59,10 @@
     }
 
     span {
-      position: absolute;
       @include manrope-17();
       text-transform: uppercase;
       flex-shrink: 0;
       letter-spacing: 0.56px;
-      top: 24px;
-      left: 100%;
       white-space: nowrap;
     }
   }

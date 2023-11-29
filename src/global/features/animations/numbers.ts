@@ -15,7 +15,7 @@ window.addEventListener('load', () => {
     function playAnimation() {
       if (animationPlayed) return
       const interval = setInterval(() => {
-        iterator += isIncr ? 1 : num/20
+        iterator += num/10
 
         el.innerText = String(Math.round(iterator))
         if ((isIncr && iterator >= num) || (!isIncr && iterator >= num)) {

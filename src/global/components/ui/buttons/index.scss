@@ -143,6 +143,7 @@
 }
 
 .button-switch{
+  cursor: pointer;
   border-radius: 50px;
   border: 1px solid $white;
   width: 72px;
@@ -161,6 +162,9 @@
     border-radius: 50%;
   }
 
+  &._active .button-switch__mark {
+      left: calc(100% - 30px);
+  }
 }
 
 .button-close{

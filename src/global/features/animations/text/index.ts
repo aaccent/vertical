@@ -28,23 +28,26 @@ export function splitTextOnLines(textEl: HTMLElement) {
     .map(i => `<span>${i}</span>`)
     .map(i => i.replace('<span>|</span>', '<br>'))
     .join(' ')
-
+  
   textEl.classList.add('by-words')
 
   textEl.innerHTML = String(byWords)
 
   const byLinesRaw: {
-    [index: string]: string[]
-  } = {}
+    offsetTop: number
+    html: string[]
+  }[] = []
 
   textEl.querySelectorAll('span').forEach(word => {
-    byLinesRaw[word.offsetTop] ?
-      byLinesRaw[word.offsetTop].push(word.innerHTML) :
-      byLinesRaw[word.offsetTop] = [ word.innerHTML ]
+    const targetIndex = byLinesRaw.findIndex(i => i.offsetTop === word.offsetTop)
+
+     targetIndex !== -1 
+     ? byLinesRaw[targetIndex].html.push(word.innerHTML)
+     : byLinesRaw.push({offsetTop: word.offsetTop, html: [word.innerHTML]})
   })
 
-  const byLines = Object.values(byLinesRaw)
-    .map(line => line
+  const byLines = byLinesRaw
+    .map(line => line.html
       .map(word => {
         const nextIsBR = new RegExp(`(?:<\\w+>(${word})<\\/\\w+> |${word} )<br>`).test(textEl.innerHTML)
         return nextIsBR ? `${word.trim()}<br>` : word.trim()
