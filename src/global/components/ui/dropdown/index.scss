@@ -41,6 +41,8 @@
     padding: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+    margin: 0;
 
     &__item {
       cursor: pointer;
@@ -48,6 +50,7 @@
       text-transform: uppercase;
       @include manrope-14();
       border-bottom: 1px solid #eeeeee;
+      line-height: 20px;
       &__selected {
         display: flex;
         align-items: center;
