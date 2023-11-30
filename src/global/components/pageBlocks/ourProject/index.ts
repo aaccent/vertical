@@ -24,6 +24,9 @@ void function() {
     end: '+=800 top',
     onUpdate(scroll) {
       if (scroll.progress >= 0.15) fadeUp.resume()
+    },
+    onEnter(self) {
+      self.refresh()
     }
   })
 

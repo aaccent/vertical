@@ -112,8 +112,8 @@ void function () {
         
         order[closest.index + 1 >= order.length ? closest.index : closest.index + 1].pagination.classList.remove('_active')
       }
-    },
+    }
   })
-
-  ScrollTrigger.refresh()
+  
+  setTimeout(ScrollTrigger.refresh, 200)
 }()
