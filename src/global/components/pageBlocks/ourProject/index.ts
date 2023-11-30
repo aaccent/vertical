@@ -46,6 +46,7 @@ void function() {
       animation,
       trigger: ourProjects,
       start: 'top+=35% bottom',
+      
     })
   })
 }()
