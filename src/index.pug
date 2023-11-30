@@ -18,8 +18,9 @@ block append main
           | доверив нам обстановку вашего дома
         .offer__pagination
     .offer__slides
-      each i in Array(3)
-        .offer__slide: img(src=require('media/content/index_slider_1.webp'))
+      .offer__slide(data-title="title-1" data-text="text-2"): img(src=require('media/content/index_slider_1.webp'))
+      each i in Array(2)
+        .offer__slide(data-title="title-"+i data-text="text"): img(src=require('media/content/index_slider_1.webp'))
 
   .blue-section
     include global/components/pageBlocks/ourProject/template

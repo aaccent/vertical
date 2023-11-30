@@ -2,6 +2,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import gsap from 'gsap'
 
 interface OfferSlide {
+  index: number
   pos: number
   played: boolean
   title: string
@@ -29,6 +30,9 @@ function renderOfferPagination(num: number, needLine = true) {
 void function () {
   const offer = document.querySelector('.offer')
   if (!offer) return
+  
+  const titleContainer = offer.querySelector('.offer__title')
+  const textContainer = offer.querySelector('.offer__text')
 
   const animation = gsap
     .timeline({ paused: true })
@@ -36,31 +40,27 @@ void function () {
 
   const lineAnimation = gsap.timeline()
 
-  const slides = document.querySelectorAll<HTMLElement>('.offer__slide:not(:first-child)')
-  const step = 1 / (slides.length + 1)
-
-  const firstPagination = renderOfferPagination(1, slides.length !== 1)
-  lineAnimation.to(firstPagination.line, {
-    '--after-width': '100%'
-  })
+  const slides = document.querySelectorAll<HTMLElement>('.offer__slide')
+  const step = 1 / (slides.length)
 
   const order = Array.from(slides).map((slide, i) => {
     animation
-      .from(slide, {
+      .from(slide, i === 0 ? {} : {
         duration: .8,
         scale: 0,
         rotate: 45 * Math.random() + 45,
       })
       .addLabel(`slide ${i}`)
 
-    const pagination = renderOfferPagination(i + 2, i + 1 !== slides.length)
+    const pagination = renderOfferPagination(i + 1, i + 1 !== slides.length)
 
     lineAnimation.to(pagination.line, {
       '--after-width': '100%'
     })
 
     return {
-      pos: (i + 1) * step,
+      index: i,
+      pos: (i) * step,
       played: false,
       title: String(slide.dataset.title),
       text: String(slide.dataset.text),
@@ -68,14 +68,16 @@ void function () {
     }
   })
 
-  const titleContainer = offer.querySelector('.offer__title')
-  const textContainer = offer.querySelector('.offer__text')
+  function changeText(slide: OfferSlide, direction: number) {
+    if (!titleContainer || !textContainer) return;
+    
+    if (slide.index === 0 && direction === 1) return
 
-  function changeText(slide: OfferSlide) {
-    if (!titleContainer || !textContainer) return
+    titleContainer.textContent = slide.title ?? ''
+    textContainer.textContent = slide.text ?? ''
 
-    titleContainer.textContent = slide.title
-    textContainer.textContent = slide.text
+    gsap.timeline().textAppearing(titleContainer, { delay: .8 })
+    gsap.timeline().textAppearing(textContainer, { delay: .8 })
   }
 
   new ScrollTrigger({
@@ -85,24 +87,30 @@ void function () {
     scrub: 1,
     pin: true,
     start: 'center center',
-    end: `+=${800 * slides.length} center`,
+    end: `+=${400 * slides.length} center`,
     onUpdate(self) {
       if (self.direction === 1) {
+        console.log(order);
+        
         const closest = order.findLast(i => self.progress >= i.pos && !i.played)
         if (!closest) return
 
         closest.played = true
         animation.tweenTo(animation.nextLabel())
-        changeText(closest)
+        changeText(closest, self.direction)
         closest.pagination.classList.add('_active')
       } else {
-        const closest = order.find(i => self.progress <= i.pos && i.played)
+        const closest = order.find(i => self.progress <= (order[i.index + 1] || order[i.index]).pos && i.played)
         if (!closest) return
 
         closest.played = false
         animation.tweenTo(animation.previousLabel())
-        changeText(closest)
-        closest.pagination.classList.remove('_active')
+        console.log(closest);
+        
+        changeText(closest, self.direction)
+
+        
+        order[closest.index + 1 >= order.length ? closest.index : closest.index + 1].pagination.classList.remove('_active')
       }
     },
   })
