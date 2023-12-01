@@ -7,7 +7,7 @@ if (form) {
         el.onfocus = () => {
             
             const span = el.closest(".contact-form__container").querySelector(".span");
-            gsap.to(span, {y:-20, duration:.4})
+            gsap.to(span, {y:-25, duration:.4})
             span.classList.add("span__active");
             if (!el.classList.contains("contact-form__textarea")) {
                 el.closest(".contact-form__container").querySelector(".reset-input").style.display = "block";
