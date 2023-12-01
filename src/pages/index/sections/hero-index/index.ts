@@ -68,23 +68,25 @@ void function () {
     }
   }
 
-  createSlider<RawImgSlide, ImgSlide>({
-    container: '.hero-index__images',
-    autoplayTime: 3000,
-    pagination: {
-      el: '.hero-index .slider-pagination',
-    },
-    handlers: {
-      beforeInitSlide(rawSlide) {
-        (rawSlide as ImgSlide).dataset.maxWidth = `${rawSlide.offsetWidth}px`
-        rawSlide.style.maxWidth = `${rawSlide.offsetWidth}px`
+  afterLoader(() => {
+    createSlider<RawImgSlide, ImgSlide>({
+      container: '.hero-index__images',
+      autoplayTime: 3000,
+      pagination: {
+        el: '.hero-index .slider-pagination',
       },
-      afterInit(slider) {
-        setSlideText(slider.slides[0])
+      handlers: {
+        beforeInitSlide(rawSlide) {
+          (rawSlide as ImgSlide).dataset.maxWidth = `${rawSlide.offsetWidth}px`
+          rawSlide.style.maxWidth = `${rawSlide.offsetWidth}px`
+        },
+        afterInit(slider) {
+          setSlideText(slider.slides[0])
+        },
+        onSlideChange(slider) {
+          setSlideText(slider.currentSlide!)
+        },
       },
-      onSlideChange(slider) {
-        setSlideText(slider.currentSlide!)
-      },
-    },
+    })
   })
 }()
