@@ -21,23 +21,22 @@ interface LocoScroll {
   }
 }
 
-ScrollTrigger.scrollerProxy('[data-scroll-container]',
-  {
-    scrollTop(value) {
-      return arguments.length
-        ? void scroll.scrollTo(value!, { disableLerp: true })
-        : (scroll as unknown as LocoScroll).scroll.instance.scroll.y
-    },
-    getBoundingClientRect() {
-      return {
-        top: 0,
-        left: 0,
-        width: window.innerWidth,
-        height: window.innerHeight,
-      }
-    },
-    pinType: document.querySelector<HTMLElement>('[data-scroll-container]')?.style.transform ? 'transform' : 'fixed',
-  })
+ScrollTrigger.scrollerProxy('[data-scroll-container]',  {
+  scrollTop(value) {
+    return arguments.length
+      ? void scroll.scrollTo(value!, { disableLerp: true })
+      : (scroll as unknown as LocoScroll).scroll.instance.scroll.y
+  },
+  getBoundingClientRect() {
+    return {
+      top:0,
+      left: 0,
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
+  },
+  pinType: document.querySelector<HTMLElement>('[data-scroll-container]')?.style.transform ? 'transform' : 'fixed',
+})
 
 scroll.on('scroll', ScrollTrigger.update)
 
@@ -50,7 +49,7 @@ window.onbeforeunload = function () {
       disableLerp: true,
       duration: 0,
     })
-  window.scrollTo({top: 0, behavior: 'instant'})
+  window.scrollTo({ top: 0, behavior: 'instant' })
 }
 
 const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .header__mobile__phone');
@@ -59,7 +58,7 @@ const form = document.querySelector<HTMLElement>('#contact-form');
 
 if (buttonScrollToForm && form) {
   buttonScrollToForm.forEach(btn => {
-    btn.addEventListener('click' , () => {
+    btn.addEventListener('click', () => {
       scroll.scrollTo(form.getBoundingClientRect().bottom)
     })
   })

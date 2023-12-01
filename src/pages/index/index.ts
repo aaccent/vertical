@@ -11,7 +11,8 @@ import './sections/partners'
 
 void function () {
   const seoBlock = document.querySelector<HTMLElement>('.seo-block')
-  const seoBlockExpand = seoBlock?.querySelector<HTMLElement>('.seo-block__expand span')
+  const seoBlockExpand = seoBlock?.querySelector<HTMLElement>('.seo-block__expand')
+  const seoBlockExpandSpan = seoBlockExpand?.querySelector<HTMLElement>('span')
 
   if (!seoBlock) return
 
@@ -34,21 +35,6 @@ void function () {
     })
     return height
   }
-
-  document.querySelector('.seo-block__expand')?.addEventListener('click', () => {
-    if (seoBlock.classList.contains('seo-block_open')) {
-      seoBlockExpand ? seoBlockExpand.innerText = 'Развернуть' : ""
-      seoBlock.classList.remove('seo-block_open')
-      text.style.height = `${seoBlockParagraph!.getBoundingClientRect().height}px`
-      return
-    }
-    const height = calcSeoBlockTextHeight(seoBlock)
-
-    text.style.height = `${height}px`
-    seoBlock.classList.add('seo-block_open')
-    seoBlockExpand ? seoBlockExpand.innerText = 'Свернуть' : ""
-    //seoBlock.innerText = 'Свернуть'
-  })
 }()
 
 
@@ -58,6 +44,10 @@ void function () {
     .to('.our-projects__right', { y: 50 })
 
   new ScrollTrigger({
-    animation, trigger: '.our-projects', start: 'center center', end: '+=500 center', scrub: 2,
+    animation, 
+    trigger: '.our-projects', 
+    start: 'center center', 
+    end: '+=500 center', 
+    scrub: 2,
   })
 }

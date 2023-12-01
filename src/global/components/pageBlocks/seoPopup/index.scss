@@ -1,0 +1,62 @@
+@use "styles/utils" as *;
+
+.popup[data-popup="seo"] .popup {
+    &__inner{
+       display: flex;
+       flex-direction: column;
+       width: 100%;
+       background: #fff;
+       max-width: 600px;
+       max-height: 600px;
+       overflow: auto;
+       // $width, $track-color, $thumb-color, $height: initial
+       @include custom-scroll(5px, transperent, #00000077); 
+       &::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+       }
+       .seo__title h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .seo__content p {
+            font-size: 1.4rem;
+            padding-bottom: 1rem
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            transition: all .5s;
+            top: 20px;
+            left: 95%;
+            border-radius: 50%;
+            padding: 2px;
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 9%;
+                left: 47.8%;
+                width: 2px;
+                height: 90%;
+                background-color: #00000077;
+            }
+            &::after {
+                transform: rotate(45deg);
+            }
+            &::before {
+                transform: rotate(-45deg);
+            }
+            &:hover {
+                background: #00000004;
+            }
+            
+            &:active {
+                background: #00000020;
+            }
+        }
+    }
+}
