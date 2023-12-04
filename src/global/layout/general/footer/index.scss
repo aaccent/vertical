@@ -145,20 +145,44 @@
   }
 
   &__error {
-    position: absolute;
-    left: 0;
-    top: 32px;
     padding: 3px 10px;
+    position: absolute;
+    right: 5%;
+    top: -6px;
     color: #D60101;
     text-transform: uppercase;
     @include manrope-12();
     letter-spacing: .04em;
-    background-color: #FFFFFF1A;
-    border-radius: 50px;
     display: none;
+    transition: all .3s;
 
     &__active {
-      display: inline;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    
+    &-img {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    &-info {
+      white-space: nowrap;
+      opacity: 0;
+      width: 0;
+      transition: all .3s;
+      overflow: hidden;
+    }
+
+    &:hover {
+      border-radius: 50px;
+      background-color: #FFFFFF1A;
+
+      .contact-form__error-info {
+        opacity: 1;
+        width: fit-content;
+      }
     }
   }
 

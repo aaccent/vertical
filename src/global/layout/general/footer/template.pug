@@ -7,19 +7,25 @@
         .contact-form__container
           label(for="customer_name")
             input.contact-form__input(name='customer_name', id='customer_name')
-            span(class="contact-form__error") Введите имя
+            span(class="contact-form__error")
+              div.contact-form__error-info Введите имя
+              img.contact-form__error-img(src=require("media/static/icons/info.svg"))
             span(class="span") Ваше имя*
             img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
         .contact-form__container
           label(for="customer_phone")
             input.contact-form__input(name='customer_phone', id='customer_phone', maxlength=16, required)
-            span(class="contact-form__error") Введите телефон
+            span(class="contact-form__error")
+              div.contact-form__error-info Введите телефон
+              img.contact-form__error-img(src=require("media/static/icons/info.svg"))
             span(class="span") телефон*
             img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
         .contact-form__container
           label(for="customer_mail")
             input.contact-form__input(name='customer_mail', id='customer_mail')
-            span(class="contact-form__error") Введите e-mail
+            span(class="contact-form__error")
+              div.contact-form__error-info Введите e-mail
+              img.contact-form__error-img(src=require("media/static/icons/info.svg"))
             span(class="span") почта
             img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
         .contact-form__container
