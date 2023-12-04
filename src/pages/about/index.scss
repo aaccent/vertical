@@ -189,7 +189,6 @@
     padding-left: 60px;
     padding-right: 70px;
     width: 100%;
-    text-transform: uppercase;
     color: $white;
     --after-height: 100%;
 
@@ -575,7 +574,9 @@
       font-weight: 400;
       padding-top: 35px;
       padding-bottom: 35px;
-      text-transform: uppercase;
+      &:first-child {
+        text-transform: uppercase;
+      }
       &:last-child {
         display: flex;
         justify-content: end;

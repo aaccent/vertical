@@ -60,15 +60,5 @@ footer.footer
   .footer__bottom © OOO «ВЕРТИКАЛЬ», 2023
     a(href="#") Политика конфиденциальности
     a(href="#") Сайт разработан: Акцент на результат
-include global/features/popup/template
-include features/popup/template
-include layout/utils
 
-+popup('request-accept', "request-accept")
-  button.button-close.close-btn(data-action="close-popup")
-    img(src = require("media/static/icons/close/close_white.svg"))
-  .request-accept__text-block
-    .request-accept__title Заявка успешно отправлена!
-    .request-accept__text Мы получили ваш запрос, менеджер свяжется с вами в течение 2-х рабочих дней
-  .button.button_white отлично
 include global/components/pageBlocks/filterPopup/template
