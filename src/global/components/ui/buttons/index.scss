@@ -171,7 +171,7 @@
   position: relative;
   width: 37px;
   height: 37px;
-  background-color: rgba($white, 0.2);
+  background-color: rgba($white, 0.4);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -188,7 +188,7 @@
   }
   &::before,
   &::after {
-    content: 's';
+    content: '';
     position: absolute;
     width: 54.0540541%;
     height: 1.5px;
@@ -208,7 +208,7 @@
   }
 
   &:hover {
-    background-color: rgba($white, 0.5);
+    background-color: rgba($white, 0.8);
   }
 }
 

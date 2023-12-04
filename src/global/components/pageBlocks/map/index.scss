@@ -311,7 +311,12 @@
   overflow: hidden;
   height: 100%;
   @include transition((opacity, visibility), 300ms);
-
+  .button-close {
+    &::before,
+    &::after {
+      background-color: #00000094;
+    }
+  }
   &__top {
     position: relative;
     height: 100%;

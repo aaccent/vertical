@@ -34,7 +34,7 @@
             span(class="span") комментарий
             img(src=require("media/static/icons/close/close_white.svg"), class="reset-input")
       .contact-form__bottom
-        button.button.button_white( data-popup='request-accept', data-action='popup') отправить
+        button.button.button_white( data-popup='request-accept', data-action="popup") отправить
         .contact-form__bottom__text
           p Нажимая кнопку «Отправить», вы соглашаетесь с
           a(href) политикой конфиденциальности
@@ -61,6 +61,9 @@ footer.footer
     a(href="#") Политика конфиденциальности
     a(href="#") Сайт разработан: Акцент на результат
 include global/features/popup/template
+include features/popup/template
+include layout/utils
+
 +popup('request-accept', "request-accept")
   button.button-close.close-btn(data-action="close-popup")
     img(src = require("media/static/icons/close/close_white.svg"))
