@@ -54,12 +54,13 @@ void function () {
     scroller: '[data-scroll-container]',
     animation,
     trigger: aboutProject,
+    markers: true,
     start: 'top+=20% bottom',
   })
 
   const parallax = gsap.timeline()
-    .to('.idea__middle', { yPercent: 10 }, 0)
-    .to('.idea__left', { yPercent: 6 }, 0)
+    .to('.idea__left', { yPercent: .1 }, 0)
+    .to('.idea__middle', { yPercent: 17 }, 0)
 
   const fadeUp = gsap.timeline()
     .pause()
