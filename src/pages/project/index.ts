@@ -54,7 +54,6 @@ void function () {
     scroller: '[data-scroll-container]',
     animation,
     trigger: aboutProject,
-    markers: true,
     start: 'top+=20% bottom',
   })
 

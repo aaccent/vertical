@@ -190,10 +190,10 @@ export function createSwiperPagination(container: HTMLElement | null, swiper: Cu
   const sliderForPagination: SliderForPagination = {
     slides: swiper.slides,
     get currentSlidePos() {
-      return swiper.realIndex
+      return swiper.realIndex + 1
     },
     get previousSlidePos() {
-      return swiper.realPreviousIndex
+      return swiper.realPreviousIndex + 1
     },
     slideBack: () => swiper.slidePrev.call(swiper),
     slideNext: () => swiper.slideNext.call(swiper),
@@ -202,7 +202,7 @@ export function createSwiperPagination(container: HTMLElement | null, swiper: Cu
   const pagination = createPagination(container, sliderForPagination)
 
   swiper.on('slideChange', (swiper) => {
-    pagination.setCurrentNum(swiper.realIndex)
+    pagination.setCurrentNum(swiper.realIndex + 1)
   })
 
   swiper.on('autoplayTimeLeft', (swiper, _, percent) => {
