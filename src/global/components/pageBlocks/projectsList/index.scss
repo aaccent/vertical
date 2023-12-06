@@ -139,6 +139,10 @@
     span:last-child {
       display: none;
     }
+    &:hover {
+      background-color: white;
+      color: #2E2E2E;
+    }
   }
 
   @media screen and (min-width: $desktop1460) {

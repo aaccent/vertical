@@ -1026,7 +1026,7 @@
     margin-left: -236px;
     transition: margin-left 250ms ease;
     gap: 60px;
-    animation: marquee 15s linear infinite;
+    animation: marquee 10s cubic-bezier(0, 0.2, 1, 0.78) infinite;
   }
 
   p {
@@ -1047,11 +1047,11 @@
   }
 }
 @keyframes marquee {
-  from {
-      transform: translateX(120%);
+  0% {
+    transform: translateX(95%);
   }
-  to {
-      transform: translateX(-120%);
+  100% {
+    transform: translateX(-95%);
   }
 }
 .gallery-popup {
