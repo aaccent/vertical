@@ -3,8 +3,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import 'components/pageBlocks/offerSwiper'
 import 'components/ui/quickFilter'
-import 'components/pageBlocks/filter'
-import 'components/pageBlocks/map'
+import 'components/pageBlocks/mapBlock'
 import 'components/pageBlocks/blog'
 import './sections/hero-index'
 import './sections/partners'
@@ -41,7 +40,7 @@ void function () {
 void function () {
   const animation = gsap.timeline()
     .to('.our-projects__middle-image', { y: 50 })
-    .to('.our-projects__right', { y: 50 })
+    .to('.our-projects__right', { y: 40 })
 
   new ScrollTrigger({
     animation, 
