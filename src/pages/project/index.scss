@@ -698,6 +698,7 @@
     height: 100%;
     overflow: hidden;
     margin: auto;
+    cursor: pointer;
 
     &:hover .building-summary__image {
       transform: scale(1.1);
