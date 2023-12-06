@@ -11,6 +11,18 @@
 @use 'components/pageBlocks/numbers';
 @use 'src/global/components/pageBlocks/offerSwiper';
 
+.cursor-label {
+  position: fixed;
+  z-index: 20;
+  opacity: .5;
+  color: #f7f7f7;
+  background: #2e2e2e;
+  border-radius: 1px;
+  padding: 5px;
+  translate: 20% 0;
+  font-size: 1.2em;
+}
+
 .project-header {
   height: 100vh;
   position: relative;

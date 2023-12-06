@@ -131,7 +131,7 @@ void function () {
           delay: 3000,
           disableOnInteraction: false,
         },
-        modules: [ Navigation, Autoplay ],
+        modules: [Navigation, Autoplay],
       }),
     ),
   )
@@ -141,7 +141,7 @@ void function () {
       prevEl: '.gallery-popup__left',
     },
 
-    modules: [ Navigation, Autoplay ],
+    modules: [Navigation, Autoplay],
   })
 
   new Swiper('.gallery-popup__mobile-swiper', {})
@@ -232,7 +232,7 @@ void function () {
 }()
 
 // Docs animations
-void function() {
+void function () {
   const docs = document.querySelector('.docs')
   if (!docs) return
 
@@ -262,7 +262,7 @@ void function() {
 }()
 
 // Next project
-void function() {
+void function () {
   const nextProject = document.querySelector<HTMLElement>('.next-project')
   if (!nextProject) return
 
@@ -281,17 +281,50 @@ void function() {
     })
     .pause()
 
-  nextProject.addEventListener('mouseenter', () => {
+  // const follower = document.querySelector<HTMLSpanElement>('.next-project > span');
+  nextProject.addEventListener('mouseenter', (e) => {
     animation.timeScale(1)
     animation.restart()
     animation.resume()
+    createCursorLabel()
   })
+  
+  // document.addEventListener('mousemove', function (e) {
+  //   // Set the position of the follower element
+  //   follower!.style.top = e.clientY + 'px';
+  //   follower!.style.left = e.clientX + 'px';
+  // });
 
   nextProject.addEventListener('mouseleave', () => {
     animation.timeScale(4)
     animation.reverse()
+    removeCursorLabel()
   })
 }()
+
+function createCursorLabel() {
+  const span = document.createElement('span')
+  span.className = 'cursor-label'
+  span.innerText = 'Перейти'
+
+  document.addEventListener('mousemove', mouseMoveHandler)
+
+  document.body.prepend(span)
+}
+
+function removeCursorLabel() {
+  const cursorLabel = document.querySelector<HTMLSpanElement>('.cursor-label')
+  document.removeEventListener('mousemove', mouseMoveHandler)
+  cursorLabel?.remove()
+}
+
+function mouseMoveHandler(e: MouseEvent) {
+  const cursorLabel = document.querySelector<HTMLSpanElement>('.cursor-label')
+  if (!cursorLabel) return
+
+  cursorLabel.style.top = `${e.clientY + 40}px`
+  cursorLabel.style.left = `${e.clientX - cursorLabel.offsetWidth / 2}px`
+}
 
 document.querySelector(".project-header__actions__item")?.addEventListener("click", () => {
   document.querySelector("#location")?.scrollIntoView();
