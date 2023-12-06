@@ -28,6 +28,7 @@
     height: 215px;
     transition: transform .3s linear,-webkit-transform .3s linear;
     img {
+      transition: all 1s;
       object-fit: cover;
       height: 100%;
       width: 100%;
