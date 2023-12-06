@@ -7,10 +7,7 @@
 @use 'src/styles/utils/media' as *;
 @use 'src/global/components/pageBlocks/aboutCompany';
 @use 'src/global/components/pageBlocks/ourProject';
-@use 'src/global/components/pageBlocks/filter';
-@use 'src/global/components/pageBlocks/map';
-@use 'src/global/components/pageBlocks/map/popup';
-@use 'src/global/components/pageBlocks/projectsList';
+@use 'src/global/components/pageBlocks/mapBlock';
 @use 'components/ui/logoTitle' as *;
 
 .about-header {

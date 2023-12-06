@@ -54,25 +54,7 @@ block append main
         button.filter__button(data-action="map")
           span на карте
           img(src=require('media/static/icons/location.svg'))
-    .map-block
-      .map
-        button.button-close(data-action="map")
-        .map__mobile-buttons
-          button.filter__button(data-action="popup" data-popup="filter-popup")
-            span фильтр
-            img(src=require('media/static/icons/filter/filter_gray.svg'))
-          button.filter__button(data-action="map")
-            span списком
-            img(src=require('media/static/icons/list.svg'))
-        .map__content
-          include global/components/pageBlocks/map/projectList
-          //- include global/components/pageBlocks/map/projectCard
-          //- include global/components/pageBlocks/map/infrastructureList
-        .map__view
-        
-      .map-block__project-list
-        include global/components/pageBlocks/projectsList/template
-        .project__wrapper-button
-          .button.button_circle.project__button ещё
+    include global/components/pageBlocks/mapBlock/mapTemplate
+
     include pages/index/sections/partners/template
   include global/components/pageBlocks/blog/template

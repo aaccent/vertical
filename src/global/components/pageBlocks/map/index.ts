@@ -1,36 +1,69 @@
 import { Map, Marker, NavigationControl } from 'mapbox-gl'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import gsap from 'gsap'
 import { scroll } from 'features/animations/scroll'
 import './mobile-map'
-import { isDesktop } from 'features/adaptive'
+import { adaptiveValue, isDesktop } from 'features/adaptive'
 import { createProjectsList } from 'components/pageBlocks/map/projectList'
 import { createInfrastructureList } from 'components/pageBlocks/map/infrastructureList'
 
+function createScrollTrigger() {
+  const projects = document.querySelector('.project__list')
+  if (!projects) return
+
+  const animation = gsap.timeline()
+    .fromTo('.project__list__row:nth-child(odd) .project__list__item:last-child, .project__list__row:nth-child(even) .project__list__item:first-child', {
+      y: adaptiveValue(30) * -1,
+    }, {
+      y: adaptiveValue(30),
+    }, 0)
+
+  new ScrollTrigger({
+    scroller: '[data-scroll-container]',
+    animation,
+    trigger: projects,
+    start: 'top center',
+    end: 'bottom+=25% center',
+    scrub: 1,
+  })
+}
+
 function createSwitcher(mapView: Map) {
+  console.log('check')
   const targetContainer = document.querySelector(':is(.map-block, .project)')
   if (!targetContainer) return
 
   const switchBtn = document.querySelector('.button-switch')
   if (!switchBtn) return
 
+  
   switchBtn.addEventListener('click', switchHandler)
-
+  
   const map = targetContainer.querySelector<HTMLElement>('.map')
   const projectList = targetContainer.querySelector<HTMLElement>(':is(.map-block__project-list, #ajax-response-block)')
-
+  
   if (!map || !projectList) return
   const mapIsHidden = getComputedStyle(map).display
   map.dataset.hidden = String(mapIsHidden === 'none')
+
+  let isSwiperCreated = mapIsHidden === 'none'
+  if (mapIsHidden === 'none') createScrollTrigger()
   
   projectList.style.display = map.dataset.hidden === 'true' ? 'block' : ''
 
   function switchHandler() {
     if (!map || !projectList) return
 
+
     if (map.dataset.hidden === 'false') {
       map.style.display = 'none'
       projectList.style.display = 'block'
 
       map.dataset.hidden = 'true'
+
+      if (isSwiperCreated) return
+      createScrollTrigger()
+      isSwiperCreated = true
     } else {
       map.style.display = 'block'
       mapView.resize()
@@ -63,6 +96,7 @@ void function () {
     },
   })
   map.on('load', () => {
+    console.log('check1')
     loadHandler(map, mapContainer)
     createSwitcher(map)
   })

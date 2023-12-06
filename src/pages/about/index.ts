@@ -100,10 +100,6 @@ void function () {
       prevEl: '.arrow-button_left',
     },
     spaceBetween: 60,
-    autoplay: {
-      delay: 3000,
-      disableOnInteraction: false,
-    },
     modules: [ Navigation, Autoplay ],
     on: {
       init(swiper) {

@@ -4,15 +4,12 @@
 @use 'src/styles/general/typography' as *;
 @use 'src/global/components/pageBlocks/aboutCompany';
 @use 'src/global/components/pageBlocks/offerSwiper';
-@use 'src/global/components/pageBlocks/filter';
-@use 'src/global/components/pageBlocks/map';
-@use 'src/global/components/pageBlocks/map/popup';
+@use 'src/global/components/pageBlocks/mapBlock';
 @use 'src/global/components/pageBlocks/blog';
 @use 'src/global/components/pageBlocks/ourProject';
 @use 'components/ui/container' as *;
 @use 'components/ui/pageViewer' as *;
 @use 'components/ui/logoTitle' as *;
-@use 'src/global/components/pageBlocks/projectsList';
 @use "sections/hero-index";
 @use "sections/partners";
 

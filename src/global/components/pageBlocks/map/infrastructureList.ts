@@ -226,10 +226,17 @@ export function createInfrastructureList(map: Map) {
     e.preventDefault()
   }, true)
 
+
+
   document.querySelector('.infrastructure-list button[data-action="reset-infrastructure"]')?.addEventListener(
     'click',
     () => {
-      document.querySelector('.infrastructure-list__item._active')?.classList.remove('_active')
+      const activeItems = document.querySelectorAll('.infrastructure-list__item._active');
+
+      // Удаляем класс _active у каждого найденного элемента
+      activeItems.forEach(item => {
+        item.classList.remove('_active');
+      });
 
       getData().forEach(category => {
         map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
