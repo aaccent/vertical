@@ -22,6 +22,10 @@ interface ImgSlide extends RawImgSlide, Slide {
 }
 
 void function () {
+  const heroIndex = document.querySelector('.hero-index')
+
+   if (!heroIndex) return
+
   const animation = gsap.timeline({ paused: true })
     .textAppearing('.hero-index__title', {}, 0)
     .fadeUp('.hero-index .slider-pagination, .hero-index__text-block', { duration: 1.2 })
@@ -71,13 +75,17 @@ void function () {
   afterLoader(() => {
     createSlider<RawImgSlide, ImgSlide>({
       container: '.hero-index__images',
-      autoplayTime: 3000,
+      autoplayTime: 5000,
       pagination: {
         el: '.hero-index .slider-pagination',
       },
       handlers: {
-        beforeInitSlide(rawSlide) {
+        beforeInit () {
+          document.querySelector('hero-index__images')?.classList.add('_init-state')
+        },
+        beforeInitSlide(rawSlide, index) {
           (rawSlide as ImgSlide).dataset.maxWidth = `${rawSlide.offsetWidth}px`
+          
           rawSlide.style.maxWidth = `${rawSlide.offsetWidth}px`
         },
         afterInit(slider) {

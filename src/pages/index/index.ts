@@ -20,13 +20,6 @@ void function () {
 
   if (!text || !seoBlockParagraph) return
 
-  text.style.height = `${seoBlockParagraph.getBoundingClientRect().height}px`
-
-  window.addEventListener('resize', () => {
-    text.style.height = `${seoBlockParagraph!.getBoundingClientRect().height}px`
-    seoBlock.classList.remove('seo-block_open')
-  })
-
   const calcSeoBlockTextHeight = (seoBlock: any) => {
     let height = 0
     seoBlock.querySelectorAll('p').forEach((text: HTMLElement) => {

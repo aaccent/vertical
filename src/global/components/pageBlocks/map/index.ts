@@ -29,7 +29,6 @@ function createScrollTrigger() {
 }
 
 function createSwitcher(mapView: Map) {
-  console.log('check')
   const targetContainer = document.querySelector(':is(.map-block, .project)')
   if (!targetContainer) return
 
@@ -96,7 +95,6 @@ void function () {
     },
   })
   map.on('load', () => {
-    console.log('check1')
     loadHandler(map, mapContainer)
     createSwitcher(map)
   })
@@ -163,7 +161,6 @@ function createInitMarker(map: Map) {
 }
 
 const structureList = document.querySelectorAll<HTMLElement>('.infrastructure-list__item')
-console.log(structureList)
 
 const renderStructureList = () => {
   if (document.querySelectorAll('.infrastructure-list__item_active').length === 0) {

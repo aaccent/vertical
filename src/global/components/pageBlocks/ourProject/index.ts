@@ -8,7 +8,7 @@ void function() {
 
   const parallax = gsap.timeline()
     .to('.our-projects__middle-image', { yPercent: 8 }, 0)
-    .to('.our-projects__right', { yPercent: .5 }, 0)
+    .to('.our-projects__right', { y: 250 }, 0)
 
   const fadeUp = gsap.timeline()
     .pause()

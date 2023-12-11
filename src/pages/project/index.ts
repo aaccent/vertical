@@ -9,6 +9,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { createCircleSVG, renderArc } from 'features/arcProgress'
 import { afterLoader } from 'features/animations/page-loader'
 
+import {scroll} from "features/animations/scroll" 
+
 // animations of project-header
 void function () {
   const projectHeader = document.querySelector('.project-header')
@@ -58,8 +60,8 @@ void function () {
   })
 
   const parallax = gsap.timeline()
-    .to('.idea__left', { yPercent: .1 }, 0)
-    .to('.idea__middle', { yPercent: 17 }, 0)
+    .to('.idea__left', { y: 280 }, 0)
+    .to('.idea__middle', { yPercent: 15 }, 0)
 
   const fadeUp = gsap.timeline()
     .pause()
@@ -326,7 +328,15 @@ function mouseMoveHandler(e: MouseEvent) {
   cursorLabel.style.left = `${e.clientX - cursorLabel.offsetWidth / 2}px`
 }
 
-document.querySelector(".project-header__actions__item")?.addEventListener("click", () => {
-  document.querySelector("#location")?.scrollIntoView();
-})
+
+const buttonMapScroll = document.querySelectorAll(".project-header__actions__item");
+const map = document.querySelector<HTMLElement>('#location');
+
+if (buttonMapScroll && map) {
+  buttonMapScroll.forEach(btn => {
+    btn.addEventListener('click', () => {
+      scroll.scrollTo(map.getBoundingClientRect().top - 25)
+    })
+  })
+}
 

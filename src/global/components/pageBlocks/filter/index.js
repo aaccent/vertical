@@ -5,7 +5,6 @@ function buildFilter(text) {
 
     const itemSelected = Array.from(document.querySelectorAll(".dropdown__list__item__selected")).find((el) => el.textContent === text);
     const filterSelectedRight = filterSelected.querySelector(".filter__selected__right");
-    console.log(itemSelected)
 
     if (itemSelected) {
         const newSelected = document.createElement("div");

@@ -4,6 +4,15 @@ export interface Slide extends HTMLElement {
   position: number
 }
 
+export interface SliderEvents<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
+  beforeInitSlide?: (slide: TRawSlide, index: number) => void
+  beforeInit?: (slider: Slider<TRawSlide, TSlide>) => void
+  afterInit?: (slider: Slider<TRawSlide, TSlide>) => void
+  onSlideChange?: (slider: Slider<TRawSlide, TSlide>) => void
+  afterSlideChange?: (slider: Slider<TRawSlide, TSlide>, relativeNextSlide: TSlide) => void
+  onProgress?: (slider: Slider<TRawSlide, TSlide>) => void
+}
+
 export interface Slider<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
   options: SliderOptions<TRawSlide, TSlide>
   container: HTMLElement | null
@@ -11,6 +20,9 @@ export interface Slider<TRawSlide extends HTMLElement = HTMLElement, TSlide exte
   currentSlide: TSlide | null
   slideProgress: number
   slides: TSlide[]
+  _intervalId: number
+  pagination: SliderPagination | null
+  
   init: () => void
   initSlide: (rawSlide: TRawSlide, index: number) => void
   calcIndex: (newIndex: number) => number
@@ -19,16 +31,6 @@ export interface Slider<TRawSlide extends HTMLElement = HTMLElement, TSlide exte
   slideBack: () => void
   clearAutoplay: () => void
   startAutoplay: () => void
-  _intervalId: number
-  pagination: SliderPagination | null
-}
-
-export interface SliderEvents<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
-  beforeInitSlide?: (slide: TRawSlide) => void
-  afterInit?: (slider: Slider<TRawSlide, TSlide>) => void
-  onSlideChange?: (slider: Slider<TRawSlide, TSlide>) => void
-  afterSlideChange?: (slider: Slider<TRawSlide, TSlide>, relativeNextSlide: TSlide) => void
-  onProgress?: (slider: Slider<TRawSlide, TSlide>) => void
 }
 
 export interface SliderOptions<TRawSlide extends HTMLElement = HTMLElement, TSlide extends Slide = Slide> {
@@ -53,7 +55,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
     pagination: null,
 
     initSlide(rawSlide, index) {
-      options.handlers?.beforeInitSlide?.(rawSlide)
+      options.handlers?.beforeInitSlide?.(rawSlide, index)
 
       const slide: TSlide = rawSlide as unknown as TSlide
       slide.position = index
@@ -63,6 +65,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
 
     init() {
       const slider = this
+
       const _container = options.container instanceof HTMLElement
         ? options.container
         : document.querySelector<HTMLElement>(options.container)
@@ -79,7 +82,9 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
 
       _container
         .querySelectorAll<TRawSlide>('.slider-slide')
-        .forEach((rawSlide, i) => this.initSlide.call(slider, rawSlide, i))
+        .forEach((rawSlide, i) => this.initSlide(rawSlide, i))
+
+      options.handlers?.beforeInit?.(slider)
 
       if (options.pagination) this.pagination = createSliderPagination(slider)
 
@@ -106,6 +111,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
       setTimeout(() => this.startAutoplay.call(slider), options.transitionTime || 0)
 
       this.currentSlide.classList.add('active-slide')
+      
       this.container.querySelector('.previous-slide')?.classList.remove('previous-slide')
       this.previousSlide?.classList.add('previous-slide')
       this.previousSlide?.classList.remove('active-slide')
@@ -120,6 +126,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
       relativePrevSlide.classList.add('relative-prev-slide')
 
       this.previousSlide = this.slides[index]
+      
       options.handlers?.afterSlideChange?.(slider, relativeNextSlide)
     },
 

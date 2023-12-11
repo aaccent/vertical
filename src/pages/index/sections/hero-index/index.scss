@@ -7,6 +7,10 @@
   min-height: 100vh;
   display: flex;
 
+  &._init-state &__img-wrapper:first-child {
+    max-width: 100%;
+  }
+
   .container {
     position: relative;
     width: 100%;

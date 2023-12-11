@@ -14,13 +14,14 @@
 .cursor-label {
   position: fixed;
   z-index: 20;
-  opacity: .5;
-  color: #f7f7f7;
-  background: #2e2e2e;
-  border-radius: 1px;
-  padding: 5px;
-  translate: 20% 0;
-  font-size: 1.2em;
+  font-family: Manrope;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 500;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 90%;
 }
 
 .project-header {
