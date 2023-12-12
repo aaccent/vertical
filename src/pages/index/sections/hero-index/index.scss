@@ -7,10 +7,12 @@
   min-height: 100vh;
   display: flex;
 
-  &._init-state &__img-wrapper:first-child {
-    max-width: 100%;
+  &._init-state {
+    .relative-prev-slide {
+      transition-duration: 0ms !important;
+      transition-delay: 0ms !important;
+    }
   }
-
   .container {
     position: relative;
     width: 100%;
@@ -62,25 +64,26 @@
       &.relative-prev-slide {
         opacity: 1;
         max-width: 0 !important;
-        scale: 1.4;
-        transition-property: max-width, scale;
+        scale: 1;
+        transition-property: max-width;
         transition-duration: 1400ms, 0s;
         transition-delay: 0s, 1400ms;
         transition-timing-function: ease-in-out;
       }
 
       &.active-slide {
+        scale: 1.2;
+        animation: sliderScale 1200ms ease-in-out 1400ms forwards;
         opacity: 1;
-        scale: 1;
-        transition-property: scale;
-        transition-duration: 1200ms;
-        transition-delay: 1400ms;
-        transition-timing-function: ease-in-out;
       }
 
       &.relative-next-slide {
         opacity: 1;
-        scale: 1.4;
+        scale: 1.2;
+        transition-property: max-width, scale;
+        transition-duration: 1400ms, 0s;
+        transition-delay: 0s, 1400ms;
+        transition-timing-function: ease-in-out;
       }
     }
 
@@ -132,7 +135,18 @@
     @include manrope-38;
   }
 }
-
+@keyframes sliderScale {
+  0% {
+    scale: 1.2;
+  }
+  100% {
+    scale: 1;
+    // transition-property: scale;
+    // transition-duration: 1200ms;
+    // transition-delay: 1400ms;
+    // transition-timing-function: ease-in-out;
+  }
+}
 @media only screen and (max-width: 1200px) {
   .hero-index {
     .container {

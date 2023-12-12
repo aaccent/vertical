@@ -81,7 +81,7 @@ void function () {
       },
       handlers: {
         beforeInit () {
-          document.querySelector('hero-index__images')?.classList.add('_init-state')
+          document.querySelector('.hero-index')?.classList.add('_init-state')
         },
         beforeInitSlide(rawSlide, index) {
           (rawSlide as ImgSlide).dataset.maxWidth = `${rawSlide.offsetWidth}px`
@@ -90,6 +90,9 @@ void function () {
         },
         afterInit(slider) {
           setSlideText(slider.slides[0])
+        },
+        afterFirstInitSlide() {
+          setTimeout(() => document.querySelector('.hero-index')?.classList.remove('_init-state'), 100)
         },
         onSlideChange(slider) {
           setSlideText(slider.currentSlide!)

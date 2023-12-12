@@ -8,6 +8,7 @@ export interface SliderEvents<TRawSlide extends HTMLElement = HTMLElement, TSlid
   beforeInitSlide?: (slide: TRawSlide, index: number) => void
   beforeInit?: (slider: Slider<TRawSlide, TSlide>) => void
   afterInit?: (slider: Slider<TRawSlide, TSlide>) => void
+  afterFirstInitSlide?: (slider: Slider<TRawSlide, TSlide>) => void
   onSlideChange?: (slider: Slider<TRawSlide, TSlide>) => void
   afterSlideChange?: (slider: Slider<TRawSlide, TSlide>, relativeNextSlide: TSlide) => void
   onProgress?: (slider: Slider<TRawSlide, TSlide>) => void
@@ -66,6 +67,8 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
     init() {
       const slider = this
 
+      options.handlers?.beforeInit?.(slider)
+
       const _container = options.container instanceof HTMLElement
         ? options.container
         : document.querySelector<HTMLElement>(options.container)
@@ -84,12 +87,11 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
         .querySelectorAll<TRawSlide>('.slider-slide')
         .forEach((rawSlide, i) => this.initSlide(rawSlide, i))
 
-      options.handlers?.beforeInit?.(slider)
-
       if (options.pagination) this.pagination = createSliderPagination(slider)
 
       options.handlers?.afterInit?.(slider)
       this.setSlide(0)
+      options.handlers?.afterFirstInitSlide?.(slider)
     },
 
     calcIndex(newIndex: number) {
