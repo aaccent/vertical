@@ -31,7 +31,7 @@ void function () {
   const slides = document.querySelectorAll<HTMLElement>('.offer__slide')
   const step = 400
 
-  let bol = true;
+  let addStartText = true;
   const firstAppearAnimation = gsap.timeline({paused: true})
     .fadeUp('.offer__pagination', { yPercent: 100, delay: .5 }, 0)
     .textAppearing(titleContainer, {  delay: .3 }, 0)
@@ -43,10 +43,10 @@ void function () {
     start: `top center`,
     end: `top center`,
     onEnter: () =>  { 
+      if (!addStartText) return
       changeText(0)
       firstAppearAnimation.play()
-      bol = false
-      return
+      addStartText = false
     }
   })
   Array.from(slides).map((slide, i) => {

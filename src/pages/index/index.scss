@@ -89,7 +89,7 @@
   &__text {
     @include manrope-17();
     transition: height 250ms ease;
-    height: min-content;
+    height: 135px;
     padding-top: 20px;
     color: #6d6d6d;
     overflow: hidden;
@@ -108,6 +108,12 @@
     p + p {
       padding-top: 20px;
       margin-top: 0;
+    }
+    &._seoShow {
+      p:not(:first-child) {
+        position: static;
+        visibility: visible;
+      }
     }
   }
 
@@ -132,22 +138,42 @@
     img:last-child {
       transform: rotate(90deg);
     }
-  }
+    
+    button#seoShow {
+      display: inline-flex;
+      align-items: center;
+      
+      &::before {
+        display: inline-block;
+        content: "Развернуть";
 
-  &_open {
-    p {
-      position: static;
-      visibility: visible;
-    }
+        @include manrope-14();        
+        text-transform: uppercase;
 
-    .seo-block__expand {
-      img:first-child {
-        transform: rotate(-180deg);
+        transition: content 0.3s ease;
+      }
+      
+      &::after {
+        margin-left: 6px;
+        display: inline-block;
+        content: "";
+        bottom: 0;
+        left: 50%;
+        transform: rotate(180deg);
+        border-width: 0 5px 5px 5px; /* Adjust the size of the triangle */
+        border-style: solid;
+        border-color: transparent transparent #0B3882 transparent;
+
+        transition: transform 0.3s ease;
       }
 
-      img:last-child {
-        transform: rotate(-90deg);
-
+      &._seoHide{
+        &::before {
+          content: "Свернуть";
+        }
+        &::after {
+          transform: rotate(0);
+        }
       }
     }
   }

@@ -4,11 +4,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 void function () {
   const contactForm = document.querySelector<HTMLElement>('.contact-form')
-  if (!contactForm || document.querySelector('.project')) return
+  const blog = document.querySelector<HTMLElement>('.blog')
+  if (!contactForm || !blog || document.querySelector('.project')) return
 
   const contactFormBg = contactForm.querySelector('.contact-form__bg') as HTMLElement
 
-  contactForm.style.translate = '0% -100%'
+  blog.style.marginBottom = `${contactForm.offsetHeight * -1}px`
   contactFormBg.style.scale = '1.1'
 
   window.addEventListener('load', () => {
@@ -36,12 +37,12 @@ void function () {
     const scrollContactForm = new ScrollTrigger({
       scroller: '[data-scroll-container]',
       trigger: contactForm,
-      start: `top top`,
-      end: `bottom top`,
+      start: `center center`,
+      end: `+=1000 center`,
+      pin: true,
       scrub: 0,
+      markers: true,
       onUpdate(self) {
-        contactForm.style.translate = `0% -${100 - 100 * self.progress}%`
-        contactFormBg.style.scale = String(1.1 - self.progress / 10)
         if (self.progress >= 0.84) animation.play()
       },
     })

@@ -1,6 +1,13 @@
 import { LngLatBounds, Map, Popup } from 'mapbox-gl'
 import { isDesktop } from 'features/adaptive'
 
+const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'price', 'date', 'link' ]
+
+export type ProjectPropKeys = keyof ProjectElement['dataset']
+export type ProjectProperties = Omit<ProjectElement['dataset'], 'coords' | 'id'> & {
+  id: number
+}
+
 export function createPopup(coordinates: [ number, number ], props: { [p: string]: string }) {
   const price = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
@@ -9,23 +16,25 @@ export function createPopup(coordinates: [ number, number ], props: { [p: string
     notation: 'compact',
   }).format(parseInt(props.price))
 
-  const name = props.name.toLowerCase().includes('жк')
+  const formattedName = props.name.toLowerCase().includes('жк')
     ? props.name.toLowerCase().replace('жк', 'ЖК')
     : `${props.name.at(0)?.toUpperCase()}${props.name.slice(1)}`
 
+  const htmlContent = `
+    <span class="label-title">${formattedName}</span>
+    <span> — </span>
+    <span class="label-price">от ${price}</span>
+  `;
+
   return new Popup({
-    closeButton: false,
-    className: 'project-list__map-popup',
-    offset: 35,
-    anchor: 'bottom',
-    closeOnClick: false,
-  })
+      closeButton: false,
+      className: 'project-list__map-popup',
+      offset: 45,
+      anchor: 'bottom',
+      closeOnClick: false,
+    })
     .setLngLat(coordinates)
-    .setHTML(`
-      <span class="label-title">${name}</span>
-      <span> — </span>
-      <span class="label-price">от ${price}</span>
-    `)
+    .setHTML(htmlContent)
 }
 
 export interface ProjectElement extends HTMLElement {
@@ -44,30 +53,10 @@ export interface ProjectElement extends HTMLElement {
   }
 }
 
-export type ProjectPropKeys = keyof ProjectElement['dataset']
-export type ProjectProperties = Omit<ProjectElement['dataset'], 'coords' | 'id'> & {
-  id: number
-}
-const propsList = [ 'img', 'name', 'address', 'coords', 'type', 'category', 'stage', 'price', 'date', 'link' ]
-
 export function getData() {
   const projectList = document.querySelectorAll<ProjectElement>('.map .project-list__item:not(.hidden)')
   const projects = Array.from(projectList).map((project, index) => {
-    const propsContainsList = propsList.map(prop => ({
-      prop,
-      exists: prop in project.dataset,
-    }))
-
-    if (propsContainsList.map(i => i.exists).includes(false)) {
-      console.error(
-        'One of [data-*] attributes doesnt exists or has no value in ".project-list__item"\n',
-        'Element:\n', project, '\n',
-        'Props list:\n', Object.fromEntries(propsContainsList.map(Object.values)),
-      )
-
-      throw new Error(
-        'One of [data-*] attributes doesnt exists or has no value in ".project-list__item". Details above')
-    }
+    checkDataAttributes(project);
 
     project.dataset.id = String(index)
 
@@ -100,6 +89,8 @@ export function getData() {
 
 export type GeoData = ReturnType<typeof getData>
 
+export const setBoundsToList = _setBoundsToList()
+
 function _setBoundsToList() {
   let calculatedBound: LngLatBounds | null = null
 
@@ -123,4 +114,21 @@ function _setBoundsToList() {
   }
 }
 
-export const setBoundsToList = _setBoundsToList()
+function checkDataAttributes(project: ProjectElement): void {
+  const propsContainsList = Object.keys(project.dataset).map(prop => ({
+    prop,
+    exists: prop in project.dataset,
+  }));
+
+  if (propsContainsList.some(i => !i.exists)) {
+    console.error(
+      'One of [data-*] attributes does not exist or has no value in ".project-list__item"\n',
+      'Element:\n', project, '\n',
+      'Props list:\n', Object.fromEntries(propsContainsList.map(Object.values)),
+    );
+
+    throw new Error(
+      'One of [data-*] attributes does not exist or has no value in ".project-list__item". Details above',
+    );
+  }
+}

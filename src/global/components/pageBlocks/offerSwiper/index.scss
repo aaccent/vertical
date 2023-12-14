@@ -7,6 +7,7 @@
 .offer {
   height: 810px;
   position: relative;
+  overflow: hidden;
 
   &__slides {
     height: 100%;

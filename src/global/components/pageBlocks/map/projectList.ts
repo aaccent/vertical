@@ -1,4 +1,10 @@
+// External Libraries
 import { GeoJSONSource, Map, Popup } from 'mapbox-gl'
+import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+
+// Internal Modules
+import { adaptiveValue } from 'features/adaptive'
 import {
   createPopup,
   GeoData,
@@ -10,8 +16,16 @@ import {
 } from 'components/pageBlocks/map/utils'
 import { isDesktop, isMobile } from 'features/adaptive'
 import { Point } from 'geojson'
-import { createMobilePointLabels, mobileClickHandler } from 'components/pageBlocks/map/mobile-map'
 import { scroll } from 'features/animations/scroll'
+
+import { 
+  createMobilePointLabels, 
+  mobileClickHandler 
+} from 'components/pageBlocks/map/mobile-map'
+
+const projectList = document.querySelector('.map .project-list')
+let activeProjectId: number = -1
+const mapContent = document.querySelector('.map__content')
 
 function createClusters(map: Map) {
   map.addLayer({
@@ -22,6 +36,17 @@ function createClusters(map: Map) {
     paint: {
       'circle-color': '#ffffff',
       'circle-radius': 44.5,
+    },
+  }).addLayer({
+    id: 'clusters-outline',
+    type: 'circle',
+    source: 'projects',
+    filter: [ 'has', 'point_count' ],
+    paint: {
+      'circle-color': 'transparent',
+      'circle-radius': 46,
+      'circle-stroke-color': '#fff', 
+      'circle-stroke-width': 1,
     },
   })
 
@@ -72,9 +97,6 @@ function createClusters(map: Map) {
   })
 }
 
-const projectList = document.querySelector('.map .project-list')
-let activeProjectId: number = -1
-
 function createProjectCard(map: Map, props: ProjectProperties, coordinates: [ number, number ]) {
   const price = new Intl.NumberFormat('ru-RU', {
     style: 'currency',
@@ -117,8 +139,6 @@ function createProjectCard(map: Map, props: ProjectProperties, coordinates: [ nu
 
   return card
 }
-
-const mapContent = document.querySelector('.map__content')
 
 function toggleProjectCard(map: Map, props: ProjectProperties, coordinates: [ number, number ]) {
   if (!mapContent || !projectList) return
@@ -314,9 +334,6 @@ export function createProjectsList(map: Map) {
   document.querySelector('.map .project-list__content')?.addEventListener('mouseenter', () => scroll.stop())
   document.querySelector('.map .project-list__content')?.addEventListener('mouseleave', () => scroll.start())
 }
-import gsap from 'gsap'
-import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import { adaptiveValue } from 'features/adaptive'
 
 void function () {
     const projects = document.querySelector('.project__list')
@@ -337,4 +354,4 @@ void function () {
       end: 'bottom+=25% center',
       scrub: 1,
     })
-  }()
+}()
