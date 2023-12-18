@@ -8,8 +8,10 @@ html(lang='ru')
             link(href=require('styles/styles.scss') rel="stylesheet")
     body
         .page-loader: img(src=require('media/static/loader-once.gif'))
-        include global/components/pageBlocks/seoPopup/template
         include global/components/pageBlocks/succesPopup/template
+
+        block popup
+
         div(data-scroll-container)
             include global/components/pageBlocks/map/popup/mapPopup
             include global/components/pageBlocks/map/popup/projectPopup

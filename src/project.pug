@@ -1,5 +1,8 @@
 extends layout/page
 
+block append popup
+  include global/components/pageBlocks/seoPopup/template
+
 block append main
   +header.header_border
   .project-header
@@ -193,25 +196,25 @@ block append main
       p жк меридиан
 
   include global/components/pageBlocks/filterPopup/template
-  include global/features/popup/template
-  +popup('gallery-popup', "gallery-popup")
-    .button-close.close-btn(data-action="close-popup")
-      img(src = require("media/static/icons/close/close_black.svg"))
-    .gallery-popup__body
-      .gallery-popup__desktop
-        .button.arrow-button.arrow-button_left.gallery-popup__left
-        .gallery-popup__swiper.swiper: .swiper-wrapper
-          each i in Array(4)
-            .swiper-slide.gallery-popup__slide
-              img(src = require("media/static/builders.webp"))
-        .button.arrow-button.gallery-popup__right
-      .gallery-popup__mobile
-        .gallery-popup__mobile-swiper.swiper: .swiper-wrapper
-          each i in Array(4)
-            .swiper-slide.gallery-popup__mobile-slide
-              img(src = require("media/static/builders.webp")).gallery-popup__mobile-slide-image
-              .gallery-popup__mobile-slide-bg
-                img(src = require("media/static/builders.webp"))
-    .gallery-popup__bottom
-      .gallery-popup__title Декабрь
-      .gallery-popup__text 1 квартал 2023 / 12 фото
+  //- include global/features/popup/template
+  //- +popup('gallery-popup', "gallery-popup")
+  //-   .button-close.close-btn(data-action="close-popup")
+  //-     img(src = require("media/static/icons/close/close_black.svg"))
+  //-   .gallery-popup__body
+  //-     .gallery-popup__desktop
+  //-       .button.arrow-button.arrow-button_left.gallery-popup__left
+  //-       .gallery-popup__swiper.swiper: .swiper-wrapper
+  //-         each i in Array(4)
+  //-           .swiper-slide.gallery-popup__slide
+  //-             img(src = require("media/static/builders.webp"))
+  //-       .button.arrow-button.gallery-popup__right
+  //-     .gallery-popup__mobile
+  //-       .gallery-popup__mobile-swiper.swiper: .swiper-wrapper
+  //-         each i in Array(4)
+  //-           .swiper-slide.gallery-popup__mobile-slide
+  //-             img(src = require("media/static/builders.webp")).gallery-popup__mobile-slide-image
+  //-             .gallery-popup__mobile-slide-bg
+  //-               img(src = require("media/static/builders.webp"))
+  //-   .gallery-popup__bottom
+  //-     .gallery-popup__title Декабрь
+  //-     .gallery-popup__text 1 квартал 2023 / 12 фото

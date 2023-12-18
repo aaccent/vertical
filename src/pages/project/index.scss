@@ -1136,17 +1136,17 @@
     display: none;
   }
 
+  .button-close {
+    &::before, &::after {
+      background-color: #000
+    }
+  }
   @media screen and (min-width: $tablet1200) {
     .button-close {
       border: none;
       top: 28px;
       right: 69px;
       left: auto;
-
-      img {
-        width: 15px;
-        height: 15px;
-      }
     }
   }
 
