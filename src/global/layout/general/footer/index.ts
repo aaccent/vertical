@@ -41,7 +41,6 @@ void function () {
       end: `+=1000 center`,
       pin: true,
       scrub: 0,
-      markers: true,
       onUpdate(self) {
         if (self.progress >= 0.84) animation.play()
       },

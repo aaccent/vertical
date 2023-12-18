@@ -41,6 +41,5 @@ void function () {
     start: 'center center', 
     end: '+=500 center', 
     scrub: 2,
-    markers: true
   })
 }
