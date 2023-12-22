@@ -98,7 +98,7 @@ function generateInfrastructureList(map: Map) {
     itemEl.className = 'project-list__item infrastructure-list__item'
     itemEl.innerHTML = `
       <div class="infrastructure-list__item-icon">
-        <img src="${category.features[0].properties.icon}" alt="" />
+        <img src="${category.features[0].properties.icon}" alt="" loading="lazy"/>
       </div>
       <div class="infrastructure-list__item__content project-list__item__content">
         <span class="infrastructure-list__item-title">${category.features[0].properties.type}</span>

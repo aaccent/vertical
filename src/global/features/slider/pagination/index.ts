@@ -1,10 +1,10 @@
-import { createCircleSVG, renderArc, renderFilledArc } from 'features/arcProgress'
+import { createCircleSVG, renderArc,renderArcNew, animateSvgArc, renderFilledArc, createCircleSVGNews } from 'features/arcProgress'
 import { adaptiveValue } from 'features/adaptive'
 import { Slider } from 'features/slider'
 import { CustomSwiper } from 'features/slider/customSwiper'
 
 export interface SliderPagination extends HTMLElement {
-  changeCircle: (angle: number) => void
+  changeCircle: (angle: number, autoplayTime: number) => void
   setCount: (num: number) => void
   setCurrentNum: (value: number) => void
 }
@@ -35,17 +35,18 @@ function createInner() {
 
 function createDesktopPagination(slidesCount: number) {
   const { inner, count, current } = createInner()
-  const circle = createCircleSVG('slider-pagination__svg')
+  const circle = createCircleSVGNews('slider-pagination__svg')
 
   inner.prepend(circle.svg)
-  renderArc(circle.path, 0, adaptiveValue(63))
+  // renderArc(circle.path, 0, adaptiveValue(63))
+  // renderArcNew(circle.path, 0)
 
   count.innerText = String(slidesCount)
   current.innerText = '1'
 
-  function circleHandler(angle: number) {
+  function circleHandler(angle: number, time: number) {
     requestAnimationFrame(() => {
-      renderArc(circle.path, angle, adaptiveValue(63))
+      animateSvgArc(circle.path,'stroke-dashoffset', angle.toString()+";0", time, "1")
     })
   }
 
@@ -168,14 +169,20 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
   const pagination = container as SliderPagination
   const desktopPagination = createDesktopPagination(slider.slides.length)
   const mobilePagination = createMobilePagination(slider.slides)
-
+  const slidePrev = createBtn('slide-prev', () => slider.slideBack())
+  const slideNext = createBtn('slide-next', () => slider.slideNext())
+  function Device () {
+    return window.innerWidth <= 1200
+  }
   function updatePaginationView() {
-    if (window.innerWidth <= 1200) {
+    if (window.innerWidth < 1201) {
       // Если мобильная пагинация еще не вставлена в DOM
       if (!pagination.contains(mobilePagination.mobileContainer)) {
           // Удаляем десктопную пагинацию из DOM
           if (pagination.contains(desktopPagination.inner)) {
-              pagination.removeChild(desktopPagination.inner);
+            pagination.removeChild(desktopPagination.inner);
+            pagination.removeChild(createBtn('slide-prev', () => slider.slideBack()))
+            pagination.removeChild(createBtn('slide-next', () => slider.slideNext()))
           }
           // Добавляем мобильную пагинацию в DOM
           pagination.appendChild(mobilePagination.mobileContainer);
@@ -188,7 +195,9 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
               pagination.removeChild(mobilePagination.mobileContainer);
           }
           // Добавляем десктопную пагинацию в DOM
+          pagination.appendChild(slidePrev);
           pagination.appendChild(desktopPagination.inner);
+          pagination.appendChild(slideNext);
       }
     }
   }
@@ -199,9 +208,9 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
   // Обработчик изменения размера экрана
   window.addEventListener('resize', updatePaginationView);
 
-  pagination.changeCircle = function (angle: number) {
-    desktopPagination.circleHandler(angle)
+  pagination.changeCircle = function (angle: number, autoplayTime: number) {
     mobilePagination.circleHandler(angle, slider.currentSlidePos)
+    desktopPagination.circleHandler(angle, autoplayTime)
   }
 
   pagination.setCount = function (num: number) {
@@ -209,13 +218,9 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
   }
 
   pagination.setCurrentNum = function (value: number) {
-    desktopPagination.numHandler(value)
     mobilePagination.numHandler(value, slider.previousSlidePos)
-    
+    desktopPagination.numHandler(value)
   }
-
-  pagination.prepend(createBtn('slide-prev', () => slider.slideBack()))
-  pagination.append(createBtn('slide-next', () => slider.slideNext()))
 
   return pagination
 }
@@ -250,6 +255,7 @@ export function createSliderPagination(slider: Slider<any, any>) {
 }
 
 export function createSwiperPagination(container: HTMLElement | null, swiper: CustomSwiper) {
+  
   if (!container) return
 
   const sliderForPagination: SliderForPagination = {
@@ -263,14 +269,12 @@ export function createSwiperPagination(container: HTMLElement | null, swiper: Cu
     slideBack: () => swiper.slidePrev.call(swiper),
     slideNext: () => swiper.slideNext.call(swiper),
   }
-
   const pagination = createPagination(container, sliderForPagination)
-
+  
   swiper.on('slideChange', (swiper) => {
     pagination.setCurrentNum(swiper.realIndex + 1)
   })
-
-  swiper.on('autoplayTimeLeft', (swiper, _, percent) => {
-    pagination.changeCircle(360 - 360 * percent)
+  swiper.on('autoplayTimeLeft', (_, percent) => {
+    pagination.changeCircle(360, swiper.autoplay.timeLeft)
   })
 }

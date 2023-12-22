@@ -124,7 +124,7 @@ function createProjectCard(map: Map, props: ProjectProperties, coordinates: [ nu
         <button class="button-close" type="button"></button>
       </div>
       <div class="project-card__image">
-        <img src="${props.img}" alt="">
+        <img src="${props.img}" alt="" loading="lazy">
       </div>
     </div>
     <div class="project-card__content">

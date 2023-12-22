@@ -137,7 +137,7 @@ function createInitMarker(map: Map) {
   markerEl.className = 'map__init-marker'
   markerEl.innerHTML = `
     <div class="map__init-marker-inner">
-        <img src="${dataEl.dataset.img}" alt="">
+        <img src="${dataEl.dataset.img}" alt="" loading="lazy">
     </div>
   `
 
