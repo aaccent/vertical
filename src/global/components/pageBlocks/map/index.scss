@@ -309,6 +309,14 @@
   }
 }
 
+@media only screen and (max-width: 800px) {
+  .mapboxgl-ctrl-group {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
 .project-card {
   @include basic-card();
   display: flex;

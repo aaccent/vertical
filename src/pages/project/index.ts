@@ -268,8 +268,11 @@ void function () {
   const nextProject = document.querySelector<HTMLElement>('.next-project')
   if (!nextProject) return
 
-  const link = nextProject.querySelector('a')
-
+  const link = nextProject.querySelector<HTMLLinkElement>('a')
+  link!.addEventListener('click', (event) => {
+    // Предотвращаем переход по ссылке при клике
+    event.preventDefault();
+  });
   const animation = gsap.timeline()
     .pause()
     .fromTo(nextProject, {
@@ -278,7 +281,7 @@ void function () {
       duration: 5,
       '--after-height': '100%',
       onComplete() {
-        link?.click()
+        window.location.href = link!.href;
       }
     })
     .pause()

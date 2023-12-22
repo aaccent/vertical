@@ -36,6 +36,10 @@
     left: 20px;
     position: absolute;
   }
+  .filter-popup__header .close-btn{
+    top: 0;
+    left: 0;
+  }
   @media screen and (min-width: $tablet1200) {
     &__inner {
       margin: auto;
