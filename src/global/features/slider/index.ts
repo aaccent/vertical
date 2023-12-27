@@ -107,7 +107,7 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
 
       this.currentSlide = this.slides[index]
 
-      this.pagination?.setCurrentNum(index + 1)
+      this.pagination?.setCurrentNum(index + 1, this.options.autoplayTime || 0)
       options.handlers?.onSlideChange?.(slider)
       
       setTimeout(() => this.startAutoplay.call(slider), options.transitionTime || 0)
@@ -150,25 +150,13 @@ export function createSlider<TRawSlide extends HTMLElement = HTMLElement, TSlide
       if (!this.options.autoplayTime) return
       const STEP = 1 / this.options.autoplayTime * 3
       this.clearAutoplay()
-      // console.log(this.options.autoplayTime)
-      
       this._intervalId = setInterval(()=> {
         this.slideNext()
         setInterval(() => {
           this.options.handlers?.onProgress?.(this)
         }, 1)
       }, this.options.autoplayTime)
-      this.pagination?.changeCircle(360, this.options.autoplayTime || 0)
-      // this._intervalId = setInterval(() => {
-        // if (this.slideProgress >= 1) {
-        //   this.clearAutoplay()
-        //   this.slideNext()
-        // }
-        // this.pagination?.changeCircle(Math.ceil(360 * this.slideProgress), this.options.autoplayTime)
-        // 
-        // this.options.handlers?.onProgress?.(this)
-        // this.slideProgress += STEP
-      // }, 1)
+      this.pagination?.changeCircle(this.options.autoplayTime || 0)
     },
   }
   slider.init()

@@ -1,4 +1,5 @@
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+import { scroll } from 'features/animations/scroll'
 import gsap from 'gsap';
 
 
@@ -51,6 +52,8 @@ function toggleTextShow() {
         animateText();
         seoBlockText.classList.toggle('_seoShow', seoShow)
         button.classList.toggle('_seoHide', seoShow)
+        scroll.stop();
+        setTimeout(()=>{scroll.start()}, 500);
         seoShow = !seoShow;
     });
 }

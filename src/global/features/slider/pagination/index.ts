@@ -4,9 +4,9 @@ import { Slider } from 'features/slider'
 import { CustomSwiper } from 'features/slider/customSwiper'
 
 export interface SliderPagination extends HTMLElement {
-  changeCircle: (angle: number, autoplayTime: number) => void
+  changeCircle: (autoplayTime: number) => void
   setCount: (num: number) => void
-  setCurrentNum: (value: number) => void
+  setCurrentNum: (value: number, autoplayTime: number) => void
 }
 
 function createBtn(action: string, handler: () => void) {
@@ -44,9 +44,9 @@ function createDesktopPagination(slidesCount: number) {
   count.innerText = String(slidesCount)
   current.innerText = '1'
 
-  function circleHandler(angle: number, time: number) {
+  function circleHandler(time: number) {
     requestAnimationFrame(() => {
-      animateSvgArc(circle.path,'stroke-dashoffset', angle.toString()+";0", time, "1")
+      animateSvgArc(circle.path,'stroke-dashoffset', "360;0", time, "1")
     })
   }
 
@@ -76,8 +76,10 @@ function createMobilePagination(slides: any[]) {
   
   // Добавляет точки
   function createDot(isEndPosition = true) {
-    const circle = createCircleSVG('slider-pagination__mobile-dot');
-    renderFilledArc(circle.path, 0, adaptiveValue(1.75))
+    
+    const circle = createCircleSVGNews('slider-pagination__mobile-dot', 0, 30);
+    // const circle = createCircleSVG('slider-pagination__mobile-dot');
+    // renderFilledArc(circle.path, 0, adaptiveValue(1.75))
     
     isEndPosition ? mobileContainer.append(circle.svg)
                   : mobileContainer.prepend(circle.svg);
@@ -91,18 +93,17 @@ function createMobilePagination(slides: any[]) {
     if(item) { mobileContainer.removeChild(item); }
   }
 
-  function circleHandler(angle: number, currentSlidePos: number) {
+  function circleHandler(currentSlidePos: number, speedSlide: number) {
     const currentIsLast = currentSlidePos + 1 > DOTS_LIMIT
     const currentIndex = currentIsLast ? DOTS_LIMIT - 1 : currentSlidePos
     const targetItem = mobileContainer.children.item(currentIndex)
 
     if (!targetItem) return
-
-    renderFilledArc(targetItem.firstElementChild as HTMLElement, angle, 1.75)
-
+    
+    
   }
 
-  function updateCircleClass(previousIndex: number, currentIndex: number) {
+  function updateCircleClass(previousIndex: number, currentIndex: number, speedSlide: number) {
     const targetItem = mobileContainer.children.item(currentIndex) as HTMLElement;
     const prevItem = mobileContainer.children.item(previousIndex) as HTMLElement;
 
@@ -111,16 +112,19 @@ function createMobilePagination(slides: any[]) {
     targetItem.classList.add('_white');
     
     if (prevItem !== targetItem) {
-        prevItem.classList.remove('_white');
-        renderFilledArc(prevItem.firstElementChild as HTMLElement, 0, 1.75);
+      prevItem.classList.remove('_white');
     }
-
-    renderFilledArc(targetItem.firstElementChild as HTMLElement, 0, 1.75);
+    
+    animateSvgArc(targetItem.firstElementChild as HTMLElement,'stroke-dashoffset', "50;360", speedSlide, "1")
   }
 
-  function numHandler(value: number, previousPos: number) {
+  function numHandler(value: number, previousPos: number, speedSlide: number) {
     const previousIndex = Math.min(previousPos, DOTS_LIMIT-2);
     const currentIndex = Math.min(value, DOTS_LIMIT) - 1
+    console.log({
+      currentIndex: currentIndex,
+      previousIndex: previousIndex
+    });
     
     if (slides.length >= DOTS_LIMIT) {
       const isFirstPageWithOverflow = value === 1
@@ -131,7 +135,7 @@ function createMobilePagination(slides: any[]) {
       isRemoveLast = manageDot(isFirstPageWithOverflow, isRemoveCircleLast, mobileContainer.children.length-1, isRemoveLast)
     }
 
-    updateCircleClass(previousIndex, currentIndex);
+    updateCircleClass(previousIndex, currentIndex, speedSlide);
   }
 
   function manageDot(shouldAdd: boolean, shouldRemove: boolean, position: number, currentState: boolean) : boolean {
@@ -208,18 +212,19 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
   // Обработчик изменения размера экрана
   window.addEventListener('resize', updatePaginationView);
 
-  pagination.changeCircle = function (angle: number, autoplayTime: number) {
-    mobilePagination.circleHandler(angle, slider.currentSlidePos)
-    desktopPagination.circleHandler(angle, autoplayTime)
+  pagination.changeCircle = function (autoplayTime: number) {
+    desktopPagination.circleHandler(autoplayTime)
+    mobilePagination.circleHandler(slider.currentSlidePos, autoplayTime)
   }
 
   pagination.setCount = function (num: number) {
     desktopPagination.countHandler(num)
   }
 
-  pagination.setCurrentNum = function (value: number) {
-    mobilePagination.numHandler(value, slider.previousSlidePos)
+  pagination.setCurrentNum = function (value: number, autoplayTime: number) {
     desktopPagination.numHandler(value)
+    mobilePagination.numHandler(value, slider.previousSlidePos, autoplayTime)
+    console.log(value, slider.previousSlidePos);
   }
 
   return pagination
@@ -261,10 +266,11 @@ export function createSwiperPagination(container: HTMLElement | null, swiper: Cu
   const sliderForPagination: SliderForPagination = {
     slides: swiper.slides,
     get currentSlidePos() {
-      return swiper.realIndex + 1
+      return swiper.realIndex
     },
     get previousSlidePos() {
-      return swiper.realPreviousIndex + 1
+      // return swiper.realIndex > 0 ? swiper.realIndex - 1 : swiper.slides.length - 1;
+      return swiper.realPreviousIndex >= 0 ? swiper.realPreviousIndex : swiper.slides.length;
     },
     slideBack: () => swiper.slidePrev.call(swiper),
     slideNext: () => swiper.slideNext.call(swiper),
@@ -272,9 +278,9 @@ export function createSwiperPagination(container: HTMLElement | null, swiper: Cu
   const pagination = createPagination(container, sliderForPagination)
   
   swiper.on('slideChange', (swiper) => {
-    pagination.setCurrentNum(swiper.realIndex + 1)
-  })
-  swiper.on('autoplayTimeLeft', (_, percent) => {
-    pagination.changeCircle(360, swiper.autoplay.timeLeft)
+    // @ts-ignore
+    pagination.setCurrentNum(swiper.realIndex+1, swiper.params.autoplay.delay || 5000)
+    // @ts-ignore
+    pagination.changeCircle(swiper.params.autoplay.delay || 5000)
   })
 }

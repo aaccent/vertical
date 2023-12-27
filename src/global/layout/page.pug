@@ -11,11 +11,10 @@ html(lang='ru')
         include global/components/pageBlocks/succesPopup/template
 
         block popup
-
-        div(data-scroll-container)
             include global/components/pageBlocks/map/popup/mapPopup
             include global/components/pageBlocks/map/popup/projectPopup
-
+        
+        div(data-scroll-container)
             include global/layout/general/header/template
             block main
             include general/footer/template

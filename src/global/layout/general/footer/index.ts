@@ -45,8 +45,7 @@ void function () {
         if (self.progress >= 0.84) animation.play()
       },
     })
-
-    const resizeObserver = new ResizeObserver(() => scrollContactForm.refresh())
+    const resizeObserver = new ResizeObserver(() => {scrollContactForm.refresh()})
     resizeObserver.observe(document.body)
   })
 }()

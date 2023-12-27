@@ -41,6 +41,7 @@ export function animateSvgArc(el: HTMLElement | SVGElement, attributeName: strin
     animate.setAttribute('dur', dur.toString() + 'ms');
     animate.setAttribute('repeatCount', repeatCount);
     el.append(animate)
+    animate.beginElement();
   }
 }
 
@@ -48,7 +49,7 @@ export function renderFilledArc(el: HTMLElement | SVGElement, angle: number, rad
   el.setAttribute('d', describeArc(radius * 2, radius * 2, radius, 0, 360 - angle))
 }
 
-export function createCircleSVGNews(className: string, dashoffset = 0) {
+export function createCircleSVGNews(className: string, dashoffset = 0, strokeWidth = 3.5) {
   const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg')
   svg.classList.add(className)
   svg.setAttribute('viewBox', '0 0 100 100')
@@ -57,7 +58,7 @@ export function createCircleSVGNews(className: string, dashoffset = 0) {
   // path.style.strokeWidth = '3.5'
   // circleElement.style.stroke = '#fff'
   // path.style.fill = 'none'
-  path.setAttribute('stroke-width', '3.5');
+  path.setAttribute('stroke-width', strokeWidth.toString());
   path.setAttribute('stroke', '#fff');
   path.setAttribute('fill', 'none');
   
@@ -65,7 +66,7 @@ export function createCircleSVGNews(className: string, dashoffset = 0) {
   path.setAttribute('stroke-dasharray', '360');
   path.setAttribute('cx', '50');
   path.setAttribute('cy', '50');
-  path.setAttribute('r', '48');
+  path.setAttribute('r', (52-strokeWidth).toString());
   path.setAttribute('stroke-linecap', 'round');
   path.setAttribute('transform', 'rotate(-90) translate(-100 0)')
   path.setAttribute('stroke-dashoffset', dashoffset.toString());

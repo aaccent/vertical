@@ -1,5 +1,6 @@
 import gsap from 'gsap'
 import { disableScroll, enableScroll } from 'features/scroll'
+import { scroll } from 'features/animations/scroll'
 
 disableScroll()
 window.addEventListener('load', () => {
@@ -12,6 +13,8 @@ window.addEventListener('load', () => {
     return
   }
 
+  
+    
   gsap.timeline()
     .to(pageLoader, {
       duration: 1.4,
@@ -25,8 +28,13 @@ window.addEventListener('load', () => {
         pageLoader.style.visibility = 'hidden'
         document.dispatchEvent(loaderEvent)
         enableScroll()
+        scroll.update();
       }
     })
+  document.addEventListener('keydown', (e) => {
+    if (e.code !== 'KeyY') return
+    console.log('scroll updated')
+  })
 })
 
 export function afterLoader(fn: (...props: any) => any) {
