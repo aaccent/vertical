@@ -62,7 +62,7 @@ void function () {
     resizeObserver.observe(targetElement);
     }
   })
-}()
+}
 
 void function () {
   const footer = document.querySelector('.footer')
