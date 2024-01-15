@@ -118,6 +118,7 @@
     }
 
     &__wrapper {
+
       margin-top: 60px;
       margin-bottom: 30px;
     }
@@ -232,7 +233,8 @@
     }
 
     &__list__wrapper {
-      margin-top: 32px;
+      margin: 32px -20px 0;
+      padding: 0 20px;
       overflow: auto;
     }
   }
