@@ -65,7 +65,7 @@ void function () {
         .to('.idea__left', { y: 100 }, 0)
         .to('.idea__middle', { yPercent: 5 }, 0)
       : gsap.timeline()
-        .to('.idea__left', { y: 280 }, 0)
+        .to('.idea__left', { yPercent: 8 }, 0)
         .to('.idea__middle', { yPercent: 15 }, 0)
   }
 
