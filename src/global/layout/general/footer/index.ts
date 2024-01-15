@@ -1,4 +1,6 @@
 import 'features/popup/index'
+import {  isMobile } from 'features/adaptive'
+import { scroll } from 'features/animations/scroll'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -8,11 +10,13 @@ void function () {
   if (!contactForm || !blog || document.querySelector('.project')) return
 
   const contactFormBg = contactForm.querySelector('.contact-form__bg') as HTMLElement
-
-  blog.style.marginBottom = `${contactForm.offsetHeight * -1}px`
-  contactFormBg.style.scale = '1.1'
+  if(!isMobile) {
+    blog.style.marginBottom = `${contactForm.offsetHeight * -1}px`
+    contactFormBg.style.scale = '1.1'
+  }
 
   window.addEventListener('load', () => {
+    if (isMobile) return
     const animation = gsap.timeline()
       .pause()
       .textAppearing('.contact-form__title', {
@@ -33,20 +37,30 @@ void function () {
         },
       }, '<+=0.1')
       .fadeUp('.contact-form__bottom', {}, '<.6')
-
-    const scrollContactForm = new ScrollTrigger({
-      scroller: '[data-scroll-container]',
-      trigger: contactForm,
-      start: `center center`,
-      end: `+=1000 center`,
-      pin: true,
-      scrub: 0,
-      onUpdate(self) {
-        if (self.progress >= 0.84) animation.play()
-      },
+      const scrollContactForm = new ScrollTrigger({
+        scroller: '[data-scroll-container]',
+        trigger: contactForm,
+        start: `center center`,
+        end: `+=1000 center`,
+        pin: true,
+        scrub: 0,
+        onUpdate(self) {
+          if (self.progress >= 0.84) animation.play()
+        },
     })
-    const resizeObserver = new ResizeObserver(() => {scrollContactForm.refresh()})
-    resizeObserver.observe(document.body)
+    
+    const targetElement = document.querySelector('[data-scroll-container]');
+
+    if (targetElement) {
+    const resizeObserver = new ResizeObserver(entries => {
+        for (let entry of entries) {
+          //       scrollContactForm.refresh();
+            ScrollTrigger.refresh();
+        }
+    });
+
+    resizeObserver.observe(targetElement);
+    }
   })
 }()
 

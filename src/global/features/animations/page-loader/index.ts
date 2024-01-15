@@ -10,6 +10,7 @@ window.addEventListener('load', () => {
     document.dispatchEvent(loaderEvent)
     enableScroll()
 
+    scroll.update();
     return
   }
 

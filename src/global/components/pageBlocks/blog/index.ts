@@ -43,7 +43,7 @@ function toggleTextShow() {
             duration: 0.8,
             delay: 0.1,
             onComplete: () => {
-                ScrollTrigger.refresh();
+                // ScrollTrigger.refresh();
             },
         });
     }
@@ -52,9 +52,15 @@ function toggleTextShow() {
         animateText();
         seoBlockText.classList.toggle('_seoShow', seoShow)
         button.classList.toggle('_seoHide', seoShow)
-        scroll.stop();
-        setTimeout(()=>{scroll.start()}, 500);
         seoShow = !seoShow;
+        
+        // ScrollTrigger.refresh();
+
+        // scroll.stop();
+        // setTimeout(()=> {
+        //     scroll.start()
+        //     scroll.update();
+        // }, 800)
     });
 }
 

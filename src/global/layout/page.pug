@@ -9,10 +9,10 @@ html(lang='ru')
     body
         .page-loader: img(src=require('media/static/loader-once.gif'))
         include global/components/pageBlocks/succesPopup/template
+        include global/components/pageBlocks/map/popup/mapPopup
+        include global/components/pageBlocks/map/popup/projectPopup
 
         block popup
-            include global/components/pageBlocks/map/popup/mapPopup
-            include global/components/pageBlocks/map/popup/projectPopup
         
         div(data-scroll-container)
             include global/layout/general/header/template

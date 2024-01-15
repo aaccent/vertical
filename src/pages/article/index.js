@@ -37,8 +37,6 @@ links.forEach((link) => {
         // Добавьте активное состояние для текущего элемента
         link.closest(".article__outline__item").classList.add("article__outline__item_active");
 
-        console.log(link.getAttribute('href'));
-        console.log(event);
         // Используйте setScrollTo для прокрутки к нужному элементу или позиции
         scroll.scrollTo(event.screenX);
     });

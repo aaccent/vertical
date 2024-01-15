@@ -8,6 +8,7 @@ import { createSwiperPagination } from 'features/slider/pagination'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { createCircleSVG, renderArc } from 'features/arcProgress'
 import { afterLoader } from 'features/animations/page-loader'
+import { isMobile } from 'features/adaptive'
 
 import {scroll} from "features/animations/scroll" 
 
@@ -58,10 +59,15 @@ void function () {
     trigger: aboutProject,
     start: 'top+=20% bottom',
   })
-
-  const parallax = gsap.timeline()
-    .to('.idea__left', { y: 280 }, 0)
-    .to('.idea__middle', { yPercent: 15 }, 0)
+  function parallax() {
+    return isMobile ?
+      gsap.timeline()
+        .to('.idea__left', { y: 100 }, 0)
+        .to('.idea__middle', { yPercent: 5 }, 0)
+      : gsap.timeline()
+        .to('.idea__left', { y: 280 }, 0)
+        .to('.idea__middle', { yPercent: 15 }, 0)
+  }
 
   const fadeUp = gsap.timeline()
     .pause()
@@ -72,7 +78,7 @@ void function () {
     .fadeUp('.quote__quotation', { yPercent: 150 }, 0)
 
   new ScrollTrigger({
-    animation: parallax,
+    animation: parallax(),
     scroller: '[data-scroll-container]',
     trigger: aboutProject,
     scrub: 1.8,
@@ -269,10 +275,10 @@ void function () {
   if (!nextProject) return
 
   const link = nextProject.querySelector<HTMLLinkElement>('a')
-  link!.addEventListener('click', (event) => {
-    // Предотвращаем переход по ссылке при клике
-    event.preventDefault();
-  });
+  // link!.addEventListener('click', (event) => {
+  //   // Предотвращаем переход по ссылке при клике
+  //   event.preventDefault();
+  // });
   const animation = gsap.timeline()
     .pause()
     .fromTo(nextProject, {

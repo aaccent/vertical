@@ -121,10 +121,6 @@ function createMobilePagination(slides: any[]) {
   function numHandler(value: number, previousPos: number, speedSlide: number) {
     const previousIndex = Math.min(previousPos, DOTS_LIMIT-2);
     const currentIndex = Math.min(value, DOTS_LIMIT) - 1
-    console.log({
-      currentIndex: currentIndex,
-      previousIndex: previousIndex
-    });
     
     if (slides.length >= DOTS_LIMIT) {
       const isFirstPageWithOverflow = value === 1
@@ -183,11 +179,13 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
       // Если мобильная пагинация еще не вставлена в DOM
       if (!pagination.contains(mobilePagination.mobileContainer)) {
           // Удаляем десктопную пагинацию из DOM
-          if (pagination.contains(desktopPagination.inner)) {
+          if (pagination.contains(desktopPagination.inner))
             pagination.removeChild(desktopPagination.inner);
-            pagination.removeChild(createBtn('slide-prev', () => slider.slideBack()))
-            pagination.removeChild(createBtn('slide-next', () => slider.slideNext()))
-          }
+          if (pagination.contains(slidePrev))
+            pagination.removeChild(slidePrev);
+          if (pagination.contains(slideNext))
+            pagination.removeChild(slideNext);
+          
           // Добавляем мобильную пагинацию в DOM
           pagination.appendChild(mobilePagination.mobileContainer);
       }
@@ -224,7 +222,6 @@ export function createPagination(container: HTMLElement, slider: SliderForPagina
   pagination.setCurrentNum = function (value: number, autoplayTime: number) {
     desktopPagination.numHandler(value)
     mobilePagination.numHandler(value, slider.previousSlidePos, autoplayTime)
-    console.log(value, slider.previousSlidePos);
   }
 
   return pagination

@@ -3,6 +3,29 @@
 @use 'src/styles/utils/mixins' as *;
 @use 'components/ui/container' as *;
 
+.header_dark {
+  .header__phone__button  {
+    background-color: $black;
+    color: $white;
+    &:hover{
+      background-color: rgba($black, 0.9);
+    }
+  }
+  .dropdown {
+    .dropdown__title {
+      color: $black;
+  
+      .black {
+        display: block;
+      }
+  
+      .white {
+        display: none;
+      }
+    }
+  }
+}
+
 .dropdown {
   position: relative;
   cursor: pointer;

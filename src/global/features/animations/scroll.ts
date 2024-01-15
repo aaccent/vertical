@@ -40,8 +40,7 @@ ScrollTrigger.scrollerProxy('[data-scroll-container]',  {
 
 scroll.on('scroll', ScrollTrigger.update)
 
-// @ts-ignore
-ScrollTrigger.addEventListener('refresh', () => scroll.update())
+ScrollTrigger.addEventListener('refresh', () => {scroll.update()})
 
 window.onbeforeunload = function () {
   scroll.scrollTo(0,
@@ -52,14 +51,14 @@ window.onbeforeunload = function () {
   window.scrollTo({ top: 0, behavior: 'instant' })
 }
 
-const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .header__mobile__phone');
+const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .mobile-header__button');
 const form = document.querySelector<HTMLElement>('#contact-form');
 
 
 if (buttonScrollToForm && form) {
   buttonScrollToForm.forEach(btn => {
     btn.addEventListener('click', () => {
-      scroll.scrollTo(form.getBoundingClientRect().bottom)
+      scroll.scrollTo(form, { disableLerp: true })
     })
   })
 }

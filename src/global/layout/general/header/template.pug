@@ -3,7 +3,7 @@ mixin mobile-header
   +popup('mobile-menu-popup', "mobile-header")
     .mobile-header__content
       .mobile-header__top
-        .mobile-header__close.close-btn(data-action='close-popup')
+        .mobile-header__close.close-btn(data-action="close-popup")
           img(src=require('media/static/icons/close/close_white.svg'))
 
         .mobile-header__title меню
@@ -27,7 +27,7 @@ mixin mobile-header
         .mobile-header__item Контакты
       .mobile-header__bottom
         span 8 800 580-98-59
-        .mobile-header__button.button.button_transparent заказать звонок
+        .mobile-header__button.button.button_transparent(data-action="close-popup") заказать звонок
 mixin header
   .header_white
     header.header&attributes(attributes)
