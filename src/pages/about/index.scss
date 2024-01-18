@@ -148,7 +148,6 @@
 
 .company-worth {
   position: relative;
-  margin-top: 130px;
   &__image {
     top: 0;
     height: 100%;
@@ -223,7 +222,6 @@
     }
   }
   @media screen and (max-width: $tablet1200) {
-    margin-top: 64px;
     &__content {
       padding-top: 40px;
       padding-bottom: 40px;

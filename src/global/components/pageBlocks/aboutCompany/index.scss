@@ -5,9 +5,18 @@
 @use 'components/ui/container' as *;
 @use 'components/pageBlocks/numbers' as *;
 
+.about-company:has(+ .company-worth) {
+  padding-bottom: 130px;
+
+  @media screen and (max-width: $tablet1200) {
+    padding-bottom: 64px;
+  }
+}
+
 .about-company {
   @include container-x();
   padding-top: 94px;
+  background: #fff;
 
   &__title {
     @include tenor-48();
@@ -69,6 +78,8 @@
   }
   @media screen and (max-width: $tablet1200) {
     padding-top: 40px;
+    padding-bottom: 80px;
+
     &__title {
       @include tenor-30();
       margin-top: 0;

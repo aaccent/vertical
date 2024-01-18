@@ -249,11 +249,9 @@
 
 .idea {
   @include container-x();
+  background-color: #fff;
   padding-bottom: 160px;
-
-  &__subtitle {
-    margin-top: 96px;
-  }
+  padding-top: 96px;
 
   &__title {
     @include tenor-248();
@@ -1067,8 +1065,6 @@
   }
 
   @media screen and (max-width: $tablet1200) {
-    margin-top: 80px;
-
     &__wrapper {
       padding-top: 32px;
       padding-bottom: 32px;
