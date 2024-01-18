@@ -22,7 +22,7 @@ void function () {
         })
 
         new ScrollTrigger({
-          scroller: '[data-scroll-container]',
+          
           animation,
           trigger: contacts,
           start: 'top top',

@@ -38,7 +38,7 @@ void function () {
       }, '<+=0.1')
       .fadeUp('.contact-form__bottom', {}, '<.6')
       const scrollContactForm = new ScrollTrigger({
-        scroller: '[data-scroll-container]',
+        
         trigger: contactForm,
         start: `center center`,
         end: `+=1000 center`,
@@ -83,7 +83,7 @@ void function () {
     }, '<0')
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: footer,
     start: `top+=35% bottom`,

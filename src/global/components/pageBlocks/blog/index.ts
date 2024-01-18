@@ -59,7 +59,7 @@ function toggleTextShow() {
         // scroll.stop();
         // setTimeout(()=> {
         //     scroll.start()
-        //     scroll.update();
+        //     scroll.resize();
         // }, 800)
     });
 }

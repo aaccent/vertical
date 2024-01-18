@@ -31,7 +31,7 @@ void function () {
 
     new ScrollTrigger({
       animation,
-      scroller: '[data-scroll-container]',
+      
       trigger: partners,
       start: 'top+=35% bottom',
     })

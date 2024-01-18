@@ -54,7 +54,7 @@ void function () {
     .fade('.idea__left', {}, '<0.7')
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: aboutProject,
     start: 'top+=20% bottom',
@@ -79,7 +79,7 @@ void function () {
 
   new ScrollTrigger({
     animation: parallax(),
-    scroller: '[data-scroll-container]',
+    
     trigger: aboutProject,
     scrub: 1.8,
     start: 'center center',
@@ -98,7 +98,7 @@ void function () {
 
   new ScrollTrigger({
     animation: listAnimation,
-    scroller: '[data-scroll-container]',
+    
     trigger: '.idea__list',
     start: 'top center',
   })
@@ -114,7 +114,7 @@ void function () {
     .fadeUp('.gallery .slider-pagination', {}, 0)
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: gallery,
     start: 'top+=30% center',
@@ -166,7 +166,7 @@ void function () {
     .fade('.location .map', { duration: 1 }, '<0.4')
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: location,
     start: 'top+=20% bottom',
@@ -175,7 +175,7 @@ void function () {
   const benefitsFadeUp = gsap.timeline().fadeUp('.location .benefits', {})
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation: benefitsFadeUp,
     trigger: '.location .benefits',
     start: 'center bottom',
@@ -195,7 +195,7 @@ void function () {
     }, 0)
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: summary,
     start: 'top+=20% bottom',
@@ -232,7 +232,7 @@ void function () {
 
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation: animationCenter,
     trigger: '.building-summary__title',
     start: 'center+=5% center',
@@ -262,7 +262,7 @@ void function () {
   })
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: docs,
     start: 'top+=30% center',

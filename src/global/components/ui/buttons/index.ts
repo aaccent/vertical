@@ -18,7 +18,7 @@ void function() {
         item.classList.toggle('active');
       });
       buttonSwitch.classList.toggle('_active');
-      setTimeout(() => {scroll.update()}, 100)
+      setTimeout(() => {scroll.resize()}, 100)
       scroll.start()
     }
   });

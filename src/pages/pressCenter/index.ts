@@ -42,7 +42,7 @@ void function () {
 
     afterLoader(() => {
       new ScrollTrigger({
-        scroller: '[data-scroll-container]',
+        
         animation,
         trigger: item,
         start: 'top+=10% center+=25%',

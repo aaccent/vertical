@@ -10,12 +10,10 @@ window.addEventListener('load', () => {
     document.dispatchEvent(loaderEvent)
     enableScroll()
 
-    scroll.update();
+    scroll.resize();
     return
   }
-
   
-    
   gsap.timeline()
     .to(pageLoader, {
       duration: 1.4,
@@ -29,7 +27,7 @@ window.addEventListener('load', () => {
         pageLoader.style.visibility = 'hidden'
         document.dispatchEvent(loaderEvent)
         enableScroll()
-        scroll.update();
+        scroll.resize();
       }
     })
   document.addEventListener('keydown', (e) => {

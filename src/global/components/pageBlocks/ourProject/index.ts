@@ -24,7 +24,7 @@ void function() {
 
   ScrollTrigger.create({
     animation: createParallaxAnimation(),
-    scroller: '[data-scroll-container]',
+    
     trigger: ourProjects,
     scrub: 1.8,
     start: 'center center',
@@ -52,7 +52,7 @@ void function() {
       }, '<0.3')
 
     new ScrollTrigger({
-      scroller: '[data-scroll-container]',
+      
       animation,
       trigger: ourProjects,
       start: 'top+=35% bottom',

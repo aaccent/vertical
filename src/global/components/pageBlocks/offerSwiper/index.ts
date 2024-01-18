@@ -37,7 +37,7 @@ void function () {
     .textAppearing(titleContainer, {  delay: .3 }, 0)
     .textAppearing(textContainer, {  delay: .3 }, 0)
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation: firstAppearAnimation,
     trigger: offerBody,
     start: `top center`,
@@ -64,7 +64,7 @@ void function () {
       '--after-width': '100%',
     })
     new ScrollTrigger({
-      scroller: '[data-scroll-container]',
+      
       animation,
       trigger: offerBody,
       start: `+=${offerBody.offsetHeight / 2 + i * step} center`,
@@ -109,7 +109,7 @@ void function () {
     gsap.timeline().textAppearing(textContainer, { delay: 0.8 });
   }
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     trigger: offer,
     animation: lineAnimation,
     scrub: 1,

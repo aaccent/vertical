@@ -347,7 +347,7 @@ void function () {
       }, 0)
   
     new ScrollTrigger({
-      scroller: '[data-scroll-container]',
+      
       animation,
       trigger: projects,
       start: 'top center',

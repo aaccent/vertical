@@ -46,7 +46,7 @@ void function () {
     }, '<0')
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: companyWorth,
     start: 'top+=35% center',
@@ -131,7 +131,7 @@ void function () {
     .fadeUp('.history__year-view', {}, '<0')
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: history,
     start: 'top+=30% center',
@@ -157,7 +157,7 @@ void function () {
     }, '<0.2')
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: awards,
     start: 'top+=35% bottom',

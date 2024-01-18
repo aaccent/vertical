@@ -25,7 +25,7 @@ void function () {
     }, 1)
 
   new ScrollTrigger({
-    scroller: '[data-scroll-container]',
+    
     animation,
     trigger: aboutSection,
     start: 'top+=35% bottom',
@@ -33,7 +33,7 @@ void function () {
 
   gsap.from('.about-company .benefits', {
     scrollTrigger: {
-      scroller: '[data-scroll-container]',
+      
       trigger: '.about-company .benefits',
       start: 'top+=35% bottom',
     },
