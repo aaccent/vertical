@@ -42,16 +42,6 @@ scroll.on('scroll', ScrollTrigger.update)
 
 ScrollTrigger.addEventListener('refresh', () => {scroll.update()})
 
-document.addEventListener('DOMContentLoaded', function () {
-  scroll.scrollTo(0,
-    {
-      disableLerp: true,
-      duration: 0,
-    })
-  window.scrollTo({ top: 0, behavior: 'instant' });
-});
-
-
 const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .mobile-header__button');
 const form = document.querySelector<HTMLElement>('#contact-form');
 
