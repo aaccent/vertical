@@ -6,6 +6,7 @@ import './mobile-map'
 import { adaptiveValue, isDesktop } from 'features/adaptive'
 import { createProjectsList } from 'components/pageBlocks/map/projectList'
 import { createInfrastructureList } from 'components/pageBlocks/map/infrastructureList'
+import { toggleScroll } from 'features/scroll'
 
 function createScrollTrigger() {
   const projects = document.querySelector('.project__list')
@@ -120,6 +121,18 @@ function loadHandler(map: Map, mapContainer: HTMLElement) {
   if (document.querySelector('.map .project-list:not(.infrastructure-list)')) createProjectsList(map)
   if (document.querySelector('.map .project-list.infrastructure-list')) createInfrastructureList(map)
   createInitMarker(map)
+
+  function mapToggle() {
+    const mapWrapper = document.querySelector<HTMLElement>('.map')
+    if (!mapWrapper) return
+
+    mapWrapper.classList.toggle('visible')
+    mapWrapper.style.display = mapWrapper.classList.contains('visible') ? 'block' : 'none'
+    map.resize()
+    toggleScroll()
+  }
+
+  document.querySelectorAll('[data-action="map"]').forEach(i => i.addEventListener('click', mapToggle))
 }
 
 interface MainPointElement extends HTMLElement {

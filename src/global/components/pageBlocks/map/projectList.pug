@@ -76,7 +76,7 @@
 
 .project-list(data-mark-icon=require('media/static/map-mark.png'))
   .project-list__title
-  .project-list__content
+  .project-list__content(data-lenis-prevent)
     each project in list
       .project-list__item(
         data-type=project.type,

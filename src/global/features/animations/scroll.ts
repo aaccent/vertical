@@ -5,7 +5,6 @@ import gsap from 'gsap'
 gsap.registerPlugin(ScrollTrigger)
 
 export const scroll = new Lenis({
-  // content: document.querySelector<HTMLElement>('[data-scroll-container]') || document.documentElement
 })
 
 function raf(time: number) {

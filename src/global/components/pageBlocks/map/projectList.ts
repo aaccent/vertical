@@ -331,8 +331,6 @@ export function createProjectsList(map: Map) {
       item.addEventListener('click', filter)
     })
 
-  document.querySelector('.map .project-list__content')?.addEventListener('mouseenter', () => scroll.stop())
-  document.querySelector('.map .project-list__content')?.addEventListener('mouseleave', () => scroll.start())
 }
 
 void function () {

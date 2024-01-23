@@ -1,18 +1,8 @@
-import { toggleScroll } from 'features/scroll'
 import { Map, Popup } from 'mapbox-gl'
 import { Point } from 'geojson'
 import { isDesktop } from 'features/adaptive'
 import { createPopup, ProjectProperties, setBoundsToList } from 'components/pageBlocks/map/utils'
 import { openPopup } from 'features/popup'
-
-const map = document.querySelector('.map')
-
-function mapToggle() {
-  if (!map) return
-
-  map.classList.toggle('visible')
-  toggleScroll()
-}
 
 const popups: { [index: number]: Popup } = {}
 let currentList: { [index: number]: Popup } = {}
@@ -126,5 +116,3 @@ export function mobileClickHandler(map: Map, props: ProjectProperties, coordinat
   setTimeout(() => openPopup('project-popup'), 450)
   document.querySelector('.project-popup')?.addEventListener('closed', () => setBoundsToList(map), { once: true })
 }
-
-document.querySelectorAll('[data-action="map"]').forEach(i => i.addEventListener('click', mapToggle))

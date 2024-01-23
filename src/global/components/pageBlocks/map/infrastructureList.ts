@@ -221,13 +221,6 @@ function createLayers(map: Map) {
 }
 
 export function createInfrastructureList(map: Map) {
-  document.querySelector('.infrastructure-list')?.addEventListener('scroll', (e) => {
-    scroll.stop()
-    e.preventDefault()
-  }, true)
-
-
-
   document.querySelector('.infrastructure-list button[data-action="reset-infrastructure"]')?.addEventListener(
     'click',
     () => {
