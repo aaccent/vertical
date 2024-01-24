@@ -91,6 +91,24 @@ function generateInfrastructureList(map: Map) {
 
   const filterList: { [index: string]: boolean } = {}
 
+  const resetButton = document.querySelector('.infrastructure-list button[data-action="reset-infrastructure"]')
+  resetButton?.addEventListener('click', function () {
+    const activeItems = document.querySelectorAll('.infrastructure-list__item._active')
+
+    for (const item in filterList) {
+      filterList[item] = false
+    }
+
+    activeItems.forEach(item => {
+      item.classList.remove('_active')
+    })
+
+    getData().forEach(category => {
+      map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
+      map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'visible')
+    })
+  })
+
   getData().forEach(category => {
     filterList[category.features[0].properties.type] = false
 
@@ -119,12 +137,12 @@ function generateInfrastructureList(map: Map) {
         })
       }
 
-      Object.entries(filterList).filter(([_, value]) => !value).forEach(([layoutId]) => {
+      Object.entries(filterList).filter(([ _, value ]) => !value).forEach(([ layoutId ]) => {
         map.setLayoutProperty(`${layoutId}`, 'visibility', 'none')
         map.setLayoutProperty(`${layoutId} bg`, 'visibility', 'none')
       })
 
-      Object.entries(filterList).filter(([_, value]) => value).forEach(([layoutId]) => {
+      Object.entries(filterList).filter(([ _, value ]) => value).forEach(([ layoutId ]) => {
         map.setLayoutProperty(`${layoutId}`, 'visibility', 'visible')
         map.setLayoutProperty(`${layoutId} bg`, 'visibility', 'visible')
       })
@@ -221,23 +239,6 @@ function createLayers(map: Map) {
 }
 
 export function createInfrastructureList(map: Map) {
-  document.querySelector('.infrastructure-list button[data-action="reset-infrastructure"]')?.addEventListener(
-    'click',
-    () => {
-      const activeItems = document.querySelectorAll('.infrastructure-list__item._active');
-
-      // Удаляем класс _active у каждого найденного элемента
-      activeItems.forEach(item => {
-        item.classList.remove('_active');
-      });
-
-      getData().forEach(category => {
-        map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
-        map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'visible')
-      })
-    },
-  )
-
   generateInfrastructureList(map)
   createLayers(map)
 }
