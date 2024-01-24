@@ -1,5 +1,4 @@
 import { LngLatBounds, Map, Marker, Popup } from 'mapbox-gl'
-import { scroll } from 'features/animations/scroll'
 import { isDesktop, isMobile } from 'features/adaptive'
 import { Point } from 'geojson'
 
@@ -85,8 +84,35 @@ function _getData() {
 
 const getData = _getData()
 
+function setInfrastructureCount() {
+  const items = document.querySelectorAll('.infrastructure-list__content .infrastructure-list__item')
+  const activeItems = document.querySelectorAll('.infrastructure-list__content .infrastructure-list__item._active')
+  const textContainer = document.querySelector<HTMLElement>(isMobile ? '.popup[data-popup="infrastructure-popup"] .filter-popup__project-count' : '.project-list__title')
+
+  if (!textContainer) return
+
+  const isFilterSelected = !!activeItems.length
+
+  let count = 0
+
+  items.forEach(item => {
+    const countEl = item.querySelector<HTMLDivElement>('.infrastructure-list__item-num')
+    const itemCount = Number(countEl?.innerText)
+
+    if (isFilterSelected) {
+      count += item.classList.contains('_active') ? itemCount : 0
+    } else {
+      count += itemCount
+    }
+  })
+
+  textContainer.innerText = isMobile ? `показать ${count} объектов` : `${count} объектов найдено`
+}
+
 function generateInfrastructureList(map: Map) {
   const listContainer = document.querySelector('.infrastructure-list__content')
+  const popupListContainer = document.querySelector('.popup[data-popup="infrastructure-popup"] [data-filter-name="infrastructure"]')
+
   if (!listContainer) return
 
   const filterList: { [index: string]: boolean } = {}
@@ -112,6 +138,14 @@ function generateInfrastructureList(map: Map) {
   getData().forEach(category => {
     filterList[category.features[0].properties.type] = false
 
+    const checkbox = document.createElement('div')
+    checkbox.className = 'checkbox'
+    checkbox.innerHTML = `
+      <div class="checkbox">
+        <div class="checkbox__mark"></div><span>${category.features[0].properties.type} (${category.features.length})</span><input hidden="">
+      </div>
+    `
+
     const itemEl = document.createElement('div')
     itemEl.className = 'project-list__item infrastructure-list__item'
     itemEl.innerHTML = `
@@ -124,9 +158,11 @@ function generateInfrastructureList(map: Map) {
       </div>
     `
 
-    itemEl.onclick = () => {
+    function clickHandler() {
       itemEl.classList.toggle('_active')
+      checkbox.classList.toggle('checkbox_active')
 
+      setInfrastructureCount()
       filterList[category.features[0].properties.type] = !filterList[category.features[0].properties.type]
       const isNoActiveEls = !Object.values(filterList).includes(true)
 
@@ -146,10 +182,17 @@ function generateInfrastructureList(map: Map) {
         map.setLayoutProperty(`${layoutId}`, 'visibility', 'visible')
         map.setLayoutProperty(`${layoutId} bg`, 'visibility', 'visible')
       })
+
     }
 
+    itemEl.onclick = clickHandler
+    checkbox.onclick = clickHandler
+
+    popupListContainer?.append(checkbox)
     listContainer.append(itemEl)
   })
+
+  setInfrastructureCount()
 }
 
 function createLayers(map: Map) {
