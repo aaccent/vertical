@@ -1,5 +1,5 @@
 import 'features/popup/index'
-import {  isMobile } from 'features/adaptive'
+import { isMobile } from 'features/adaptive'
 import { scroll } from 'features/animations/scroll'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -10,13 +10,10 @@ void function () {
   if (!contactForm || !blog || document.querySelector('.project')) return
 
   const contactFormBg = contactForm.querySelector('.contact-form__bg') as HTMLElement
-  if(!isMobile) {
-    blog.style.marginBottom = `${contactForm.offsetHeight * -1}px`
-    contactFormBg.style.scale = '1.1'
-  }
+  blog.style.marginBottom = `${contactForm.offsetHeight * -1}px`
+  contactFormBg.style.scale = '1.1'
 
   window.addEventListener('load', () => {
-    if (isMobile) return
     const animation = gsap.timeline()
       .pause()
       .textAppearing('.contact-form__title', {
@@ -37,29 +34,31 @@ void function () {
         },
       }, '<+=0.1')
       .fadeUp('.contact-form__bottom', {}, '<.6')
-      const scrollContactForm = new ScrollTrigger({
-        
-        trigger: contactForm,
-        start: `center center`,
-        end: `+=1000 center`,
-        pin: true,
-        scrub: 0,
-        onUpdate(self) {
-          if (self.progress >= 0.84) animation.play()
-        },
+
+    new ScrollTrigger({
+      trigger: contactForm,
+      start: `center center`,
+      end: `+=${contactForm.offsetHeight} center`,
+      pin: true,
+      scrub: 0,
+      markers: true,
+      onUpdate(self) {
+        if (self.progress >= 0.84) animation.play()
+      },
     })
-    
-    const targetElement = document.querySelector('[data-scroll-container]');
+
+    const targetElement = document.querySelector('[data-scroll-container]')
 
     if (targetElement) {
-    const resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-          //       scrollContactForm.refresh();
-            ScrollTrigger.refresh();
-        }
-    });
+      const resizeObserver = new ResizeObserver(entries => {
+        requestAnimationFrame(() => {
+          for (let entry of entries) {
+            ScrollTrigger.refresh()
+          }
+        })
+      })
 
-    resizeObserver.observe(targetElement);
+      resizeObserver.observe(targetElement)
     }
   })
 }
@@ -83,7 +82,7 @@ void function () {
     }, '<0')
 
   new ScrollTrigger({
-    
+
     animation,
     trigger: footer,
     start: `top+=35% bottom`,
