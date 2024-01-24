@@ -87,7 +87,9 @@ const getData = _getData()
 function setInfrastructureCount() {
   const items = document.querySelectorAll('.infrastructure-list__content .infrastructure-list__item')
   const activeItems = document.querySelectorAll('.infrastructure-list__content .infrastructure-list__item._active')
-  const textContainer = document.querySelector<HTMLElement>(isMobile ? '.popup[data-popup="infrastructure-popup"] .filter-popup__project-count' : '.project-list__title')
+  const textContainer = document.querySelector<HTMLElement>(isMobile
+    ? '.popup[data-popup="infrastructure-popup"] .filter-popup__project-count'
+    : '.project-list__title')
 
   if (!textContainer) return
 
@@ -111,28 +113,35 @@ function setInfrastructureCount() {
 
 function generateInfrastructureList(map: Map) {
   const listContainer = document.querySelector('.infrastructure-list__content')
-  const popupListContainer = document.querySelector('.popup[data-popup="infrastructure-popup"] [data-filter-name="infrastructure"]')
+  const popupListContainer = document.querySelector(
+    '.popup[data-popup="infrastructure-popup"] [data-filter-name="infrastructure"]')
 
   if (!listContainer) return
 
   const filterList: { [index: string]: boolean } = {}
 
-  const resetButton = document.querySelector('.infrastructure-list button[data-action="reset-infrastructure"]')
+  const resetButton = document.querySelector(isMobile
+    ? '.popup[data-popup="infrastructure-popup"] .filter-popup__reset'
+    : '.infrastructure-list button[data-action="reset-infrastructure"]'
+  )
+
   resetButton?.addEventListener('click', function () {
-    const activeItems = document.querySelectorAll('.infrastructure-list__item._active')
+    const activeItems = document.querySelectorAll('.infrastructure-list__item._active, [data-filter-name="infrastructure"] .checkbox_active')
 
     for (const item in filterList) {
       filterList[item] = false
     }
 
     activeItems.forEach(item => {
-      item.classList.remove('_active')
+      item.classList.remove('_active', 'checkbox_active')
     })
 
     getData().forEach(category => {
       map.setLayoutProperty(`${category.features[0].properties.type}`, 'visibility', 'visible')
       map.setLayoutProperty(`${category.features[0].properties.type} bg`, 'visibility', 'visible')
     })
+
+    setInfrastructureCount()
   })
 
   getData().forEach(category => {
@@ -141,9 +150,7 @@ function generateInfrastructureList(map: Map) {
     const checkbox = document.createElement('div')
     checkbox.className = 'checkbox'
     checkbox.innerHTML = `
-      <div class="checkbox">
-        <div class="checkbox__mark"></div><span>${category.features[0].properties.type} (${category.features.length})</span><input hidden="">
-      </div>
+      <div class="checkbox__mark"></div><span>${category.features[0].properties.type} (${category.features.length})</span><input hidden="">
     `
 
     const itemEl = document.createElement('div')
