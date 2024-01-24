@@ -1,7 +1,7 @@
 // External Libraries
 import { GeoJSONSource, Map, Popup } from 'mapbox-gl'
 import gsap from 'gsap'
-import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 // Internal Modules
 import { adaptiveValue } from 'features/adaptive'
@@ -18,9 +18,9 @@ import { isDesktop, isMobile } from 'features/adaptive'
 import { Point } from 'geojson'
 import { scroll } from 'features/animations/scroll'
 
-import { 
-  createMobilePointLabels, 
-  mobileClickHandler 
+import {
+  createMobilePointLabels,
+  mobileClickHandler,
 } from 'components/pageBlocks/map/mobile-map'
 
 const projectList = document.querySelector('.map .project-list')
@@ -45,7 +45,7 @@ function createClusters(map: Map) {
     paint: {
       'circle-color': 'transparent',
       'circle-radius': 46,
-      'circle-stroke-color': '#fff', 
+      'circle-stroke-color': '#fff',
       'circle-stroke-width': 1,
     },
   })
@@ -310,7 +310,10 @@ export function createProjectsList(map: Map) {
         return activeItem === null || activeItem.dataset.value === project.dataset[name]
       }) : []
 
-      const categoryResult = activeCategoryId === 'all' || project.dataset.category === activeCategoryId
+      const categoryResult =
+        activeCategoryId === 'all'
+        || activeCategoryId === '0'
+        || project.dataset.category === activeCategoryId
 
       if (
         radioResult.includes(false)
@@ -334,22 +337,27 @@ export function createProjectsList(map: Map) {
 }
 
 void function () {
-    const projects = document.querySelector('.project__list')
-    if (!projects) return
-  
-    const animation = gsap.timeline()
-      .fromTo('.project__list__row:nth-child(odd) .project__list__item:last-child, .project__list__row:nth-child(even) .project__list__item:first-child', {
+  const projects = document.querySelector('.project__list')
+  if (!projects) return
+
+  const animation = gsap.timeline()
+    .fromTo(
+      '.project__list__row:nth-child(odd) .project__list__item:last-child, .project__list__row:nth-child(even) .project__list__item:first-child',
+      {
         y: adaptiveValue(30) * -1,
-      }, {
+      },
+      {
         y: adaptiveValue(30),
-      }, 0)
-  
-    new ScrollTrigger({
-      
-      animation,
-      trigger: projects,
-      start: 'top center',
-      end: 'bottom+=25% center',
-      scrub: 1,
-    })
+      },
+      0,
+    )
+
+  new ScrollTrigger({
+
+    animation,
+    trigger: projects,
+    start: 'top center',
+    end: 'bottom+=25% center',
+    scrub: 1,
+  })
 }()
