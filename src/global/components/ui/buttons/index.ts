@@ -1,5 +1,4 @@
-// Import statements
-import { scroll } from 'features/animations/scroll'
+import { lenis } from 'features/animations/scroll'
 
 // Add loading class to button_circle elements
 document.querySelectorAll<HTMLElement>('.button_circle').forEach(btn => {
@@ -18,8 +17,7 @@ void function() {
         item.classList.toggle('active');
       });
       buttonSwitch.classList.toggle('_active');
-      setTimeout(() => {scroll.resize()}, 100)
-      scroll.start()
+      setTimeout(() => {lenis.resize()}, 100)
     }
   });
 

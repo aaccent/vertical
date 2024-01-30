@@ -16,7 +16,6 @@ import {
 } from 'components/pageBlocks/map/utils'
 import { isDesktop, isMobile } from 'features/adaptive'
 import { Point } from 'geojson'
-import { scroll } from 'features/animations/scroll'
 
 import {
   createMobilePointLabels,

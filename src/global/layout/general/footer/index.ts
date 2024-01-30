@@ -1,6 +1,4 @@
 import 'features/popup/index'
-import { isMobile } from 'features/adaptive'
-import { scroll } from 'features/animations/scroll'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 

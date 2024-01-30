@@ -1,7 +1,7 @@
 import { Map, Marker, NavigationControl } from 'mapbox-gl'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import gsap from 'gsap'
-import { scroll } from 'features/animations/scroll'
+import { lenis } from 'features/animations/scroll'
 import './mobile-map'
 import { adaptiveValue, isDesktop } from 'features/adaptive'
 import { createProjectsList } from 'components/pageBlocks/map/projectList'
@@ -111,10 +111,10 @@ void function () {
 
 function loadHandler(map: Map, mapContainer: HTMLElement) {
   mapContainer.addEventListener('wheel', (e) => {
-    scroll.start()
+    lenis.start()
     if (!e.ctrlKey) return
 
-    scroll.stop()
+    lenis.stop()
     e.preventDefault()
   }, true)
 

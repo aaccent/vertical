@@ -4,32 +4,26 @@ import gsap from 'gsap'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export const scroll = new Lenis({
+export const lenis = new Lenis({
+  duration: 2.5,
 })
 
-function raf(time: number) {
-  scroll.raf(time)
-  requestAnimationFrame(raf)
-}
-
-requestAnimationFrame(raf)
-
-scroll.on('scroll', ScrollTrigger.update)
+lenis.on('scroll', ScrollTrigger.update)
 
 gsap.ticker.add((time)=>{
-  scroll.raf(time * 1000)
+  lenis.raf(time * 1000)
 })
 
 gsap.ticker.lagSmoothing(0)
 
-const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .mobile-header__button');
-const form = document.querySelector<HTMLElement>('#contact-form');
+const buttonScrollToForm = document.querySelectorAll<HTMLElement>('.header__phone__button, .mobile-header__button')
+const form = document.querySelector<HTMLElement>('#contact-form')
 
 
 if (buttonScrollToForm && form) {
   buttonScrollToForm.forEach(btn => {
     btn.addEventListener('click', () => {
-      scroll.scrollTo(form, { immediate: true })
+      lenis.scrollTo(form, { immediate: true })
     })
   })
 }

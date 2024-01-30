@@ -3,7 +3,7 @@ import { Autoplay, Navigation } from 'swiper/modules'
 import 'components/ui/buttons'
 import 'components/pageBlocks/mapBlock'
 import gsap from 'gsap'
-import { scroll } from 'features/animations/scroll'
+import { lenis } from 'features/animations/scroll'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { afterLoader } from 'features/animations/page-loader'
 import { isDesktop } from 'features/adaptive'
@@ -26,7 +26,7 @@ void function () {
 
   const nextSection = document.querySelector<HTMLElement>('.about-header + *')
   document.querySelector('.about-header [data-action="scroll"]')?.addEventListener('click', () => {
-    if (nextSection) scroll.scrollTo(nextSection)
+    if (nextSection) lenis.scrollTo(nextSection)
   })
 }()
 

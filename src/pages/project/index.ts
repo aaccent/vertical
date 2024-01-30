@@ -10,7 +10,7 @@ import { createCircleSVG, renderArc } from 'features/arcProgress'
 import { afterLoader } from 'features/animations/page-loader'
 import { isMobile } from 'features/adaptive'
 
-import {scroll} from "features/animations/scroll" 
+import {lenis} from "features/animations/scroll"
 
 // animations of project-header
 void function () {
@@ -344,7 +344,7 @@ const map = document.querySelector<HTMLElement>('#location');
 if (buttonMapScroll && map) {
   buttonMapScroll.forEach(btn => {
     btn.addEventListener('click', () => {
-      scroll.scrollTo(map.getBoundingClientRect().top - 25)
+      lenis.scrollTo(map.getBoundingClientRect().top - 25)
     })
   })
 }

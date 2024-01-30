@@ -1,4 +1,4 @@
-import { scroll } from 'features/animations/scroll'
+import { lenis } from 'features/animations/scroll'
 
 const outlines = Array.from(document.querySelectorAll(".article__outline__item"));
 const header = document.querySelector(".header__container");
@@ -38,7 +38,7 @@ links.forEach((link) => {
         link.closest(".article__outline__item").classList.add("article__outline__item_active");
 
         // Используйте setScrollTo для прокрутки к нужному элементу или позиции
-        scroll.scrollTo(event.screenX);
+        lenis.scrollTo(event.screenX);
     });
 });
 

@@ -1,5 +1,3 @@
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
-import { scroll } from 'features/animations/scroll'
 import gsap from 'gsap';
 
 

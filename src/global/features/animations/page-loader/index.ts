@@ -1,6 +1,6 @@
 import gsap from 'gsap'
 import { disableScroll, enableScroll } from 'features/scroll'
-import { scroll } from 'features/animations/scroll'
+import { lenis } from 'features/animations/scroll'
 
 disableScroll()
 window.addEventListener('load', () => {
@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
     document.dispatchEvent(loaderEvent)
     enableScroll()
 
-    scroll.resize();
+    lenis.resize();
     return
   }
   
@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
         pageLoader.style.visibility = 'hidden'
         document.dispatchEvent(loaderEvent)
         enableScroll()
-        scroll.resize();
+        lenis.resize();
       }
     })
   document.addEventListener('keydown', (e) => {

@@ -29,20 +29,20 @@ void function () {
   const lineAnimation = gsap.timeline()
 
   const slides = document.querySelectorAll<HTMLElement>('.offer__slide')
-  const step = 400
+  const step = 850
 
   let addStartText = true;
   const firstAppearAnimation = gsap.timeline({paused: true})
     .fadeUp('.offer__pagination', { yPercent: 100, delay: .5 }, 0)
     .textAppearing(titleContainer, {  delay: .3 }, 0)
     .textAppearing(textContainer, {  delay: .3 }, 0)
+
   new ScrollTrigger({
-    
     animation: firstAppearAnimation,
     trigger: offerBody,
     start: `top center`,
     end: `top center`,
-    onEnter: () =>  { 
+    onEnter: () =>  {
       if (!addStartText) return
       changeText(0)
       firstAppearAnimation.play()
@@ -63,26 +63,28 @@ void function () {
     lineAnimation.to(pagination.line, {
       '--after-width': '100%',
     })
-    new ScrollTrigger({
-      
+
+    return new ScrollTrigger({
       animation,
       trigger: offerBody,
-      start: `+=${offerBody.offsetHeight / 2 + i * step} center`,
-      end: `+=${offerBody.offsetHeight / 2 + i * step} center`,
-      onEnter: () =>  { 
+      start: `${offerBody.offsetHeight / 2 + i * step} center`,
+      end: `+=${step} center`,
+      toggleClass: `active-${i}`,
+      onEnter: () =>  {
         if (i === 0) return
-        
+
         togglePaginationActive(i)
 
         changeText(i)
       },
       onEnterBack() {
         animation.reverse()
-        
+
         if (i === 0) return
         togglePaginationActive(i-1)
         changeText(i-1)
       }
+
     })
   })
 
