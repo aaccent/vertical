@@ -5,7 +5,7 @@ import gsap from 'gsap'
 gsap.registerPlugin(ScrollTrigger)
 
 export const lenis = new Lenis({
-  duration: 2.5,
+  duration: 2,
 })
 
 lenis.on('scroll', ScrollTrigger.update)

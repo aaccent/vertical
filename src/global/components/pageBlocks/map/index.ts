@@ -111,12 +111,22 @@ void function () {
 
 function loadHandler(map: Map, mapContainer: HTMLElement) {
   mapContainer.addEventListener('wheel', (e) => {
-    lenis.start()
     if (!e.ctrlKey) return
 
     lenis.stop()
     e.preventDefault()
   }, true)
+
+  mapContainer.addEventListener('mouseout', () => {
+
+    lenis.start()
+  })
+
+  document.addEventListener('keyup', (e) => {
+    if (e.key !== 'Control') return
+
+    lenis.start()
+  })
 
   if (document.querySelector('.map .project-list:not(.infrastructure-list)')) createProjectsList(map)
   if (document.querySelector('.map .project-list.infrastructure-list')) createInfrastructureList(map)
