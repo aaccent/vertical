@@ -38,8 +38,12 @@ links.forEach((link) => {
         link.closest(".article__outline__item").classList.add("article__outline__item_active");
 
         // Используйте setScrollTo для прокрутки к нужному элементу или позиции
-        lenis.scrollTo(event.screenX);
+        const id = event.currentTarget.getAttribute('href');
+        const offset = document.querySelector('header').offsetHeight * -1;
+
+        lenis.scrollTo(id, { offset });
     });
+
 });
 
 
