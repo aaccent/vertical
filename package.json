@@ -13,8 +13,10 @@
   "devDependencies": {
     "@fancyapps/ui": "^4.0.31",
     "@types/fancybox": "^3.5.3",
+    "@types/geojson": "^7946.0.15",
     "@types/mapbox-gl": "^2.7.17",
     "css-loader": "^6.7.1",
+    "geojson": "^0.5.0",
     "gsap": "^3.12.2",
     "html-webpack-plugin": "^5.5.0",
     "image-minimizer-webpack-plugin": "^3.8.3",

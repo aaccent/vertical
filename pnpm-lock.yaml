@@ -18,12 +18,18 @@ importers:
       '@types/fancybox':
         specifier: ^3.5.3
         version: 3.5.7
+      '@types/geojson':
+        specifier: ^7946.0.15
+        version: 7946.0.15
       '@types/mapbox-gl':
         specifier: ^2.7.17
         version: 2.7.21
       css-loader:
         specifier: ^6.7.1
         version: 6.11.0(webpack@5.97.1)
+      geojson:
+        specifier: ^0.5.0
+        version: 0.5.0
       gsap:
         specifier: ^3.12.2
         version: 3.12.5
@@ -1046,6 +1052,10 @@ packages:
 
   geojson-vt@3.2.1:
     resolution: {integrity: sha512-EvGQQi/zPrDA6zr6BnJD/YhwAkBP8nnJ9emh3EnHQKVMfg/MRVtPbMYdgVy/IaEmn4UfagD2a6fafPDL5hbtwg==}
+
+  geojson@0.5.0:
+    resolution: {integrity: sha512-/Bx5lEn+qRF4TfQ5aLu6NH+UKtvIv7Lhc487y/c8BdludrCTpiWf9wyI0RTyqg49MFefIAvFDuEi5Dfd/zgNxQ==}
+    engines: {node: '>= 0.10'}
 
   get-intrinsic@1.2.7:
     resolution: {integrity: sha512-VW6Pxhsrk0KAOqs3WEd0klDiF/+V7gQOpAvY1jVU/LHmaD/kQO4523aiJuikX/QAKYiW6x8Jh+RJej1almdtCA==}
@@ -3283,6 +3293,8 @@ snapshots:
   function-bind@1.1.2: {}
 
   geojson-vt@3.2.1: {}
+
+  geojson@0.5.0: {}
 
   get-intrinsic@1.2.7:
     dependencies:
